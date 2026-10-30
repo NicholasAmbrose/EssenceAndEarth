@@ -42,7 +42,7 @@ function write(file, data) {
 // ---------- textures ----------
 // 16x16 masks, shaded automatically in the tint colour:
 //   # body (outlined, lit from the top-left)   * highlight   ~ shadow   + sparkle   : faint haze
-//   g/G light/dark stem green   s stone   . transparent
+//   g/G/l stem green, dark green, leaf green   s stone   . transparent
 
 // Tier essence: a cut gem. Higher tiers get more sparkles around it.
 const GEM = [
@@ -138,24 +138,35 @@ const STEMS = [
   "...G..G...G...G.",
   "...G..G...G...G.",
 ];
+// Ripe crop: crystal shards in the crop's colour growing out of a bed of leaves.
+const CRYSTALS = [
+  "................",
+  ".......#........",
+  "......#*#.......",
+  "......#*#...#...",
+  "..#...#~#..#*#..",
+  ".#*#..#*#..#*#..",
+  ".#*#..#~#..#~#..",
+  ".#~#..#*#..#*#..",
+  ".#*#..#~#..#~#..",
+  ".#~#..###..#*#..",
+  "l#gl..lg..gl#l.l",
+  "lgGgllgGlgGglgGl",
+  ".gGGgGGgGGgGGGg.",
+  "..G.gG.GG.Gg.G..",
+  "..G..G..G..G..G.",
+  "..G..G..G..G..G.",
+];
 const STAGES = [
   [...blank(12), "..g....g....g...", "..gg..gG...gG...", "...G...G...G....", "...G...G...G...."],
   [...blank(8), ".g.........g....", ".gg...g...gg....", ...STEMS.slice(4)],
-  [...blank(4), "..g.......g.....", ".gg...g...gg....", ...STEMS],
-  [
-    "..##.......##...",
-    ".#*##.....#*##..",
-    ".####..##.####..",
-    "..##..#*##.##...",
-    "..g...####..g...",
-    ".gg....##..gg...",
-    ...STEMS,
-  ],
+  CRYSTALS.map((r) => r.replace(/#/g, "G").replace(/[*~]/g, "g")), // the shards, still green
+  CRYSTALS,
 ];
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const shade = (rgb, f) => rgb.map((v) => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)));
-const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28") };
+const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28"), l: hex("#7cc44e") };
 
 function render(mask, color) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
