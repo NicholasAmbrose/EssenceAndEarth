@@ -1,5 +1,5 @@
 // Builds the add-on: copies packs/ into build/, generates every tier, crop, recipe, loot table and
-// texture from crops.json, zips dist/<Name>_v<version>.mcaddon.
+// texture from crops.json, zips addon/<Name>_v<version>.mcaddon (replacing older versions there).
 // --deploy also copies the packs into Minecraft's development pack folders.
 // A PNG in art/ (e.g. art/textures/items/iron_seeds.png) replaces the generated placeholder.
 import fs from "node:fs";
@@ -423,7 +423,10 @@ write(path.join(RP, "pack_icon.png"), icon);
 const files = fs.readdirSync(BUILD, { recursive: true })
   .filter((f) => fs.statSync(path.join(BUILD, f)).isFile())
   .map((f) => ({ name: f.replaceAll("\\", "/"), data: fs.readFileSync(path.join(BUILD, f)) }));
-const out = path.join(ROOT, "dist", `${SLUG}_v${cfg.version.join(".")}.mcaddon`);
+const addonDir = path.join(ROOT, "addon");
+fs.mkdirSync(addonDir, { recursive: true });
+for (const f of fs.readdirSync(addonDir)) if (f.endsWith(".mcaddon")) fs.rmSync(path.join(addonDir, f));
+const out = path.join(addonDir, `${SLUG}_v${cfg.version.join(".")}.mcaddon`);
 write(out, zip(files));
 console.log(`built ${path.relative(ROOT, out)} (${files.length} files)`);
 

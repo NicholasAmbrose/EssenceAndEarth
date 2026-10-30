@@ -8,7 +8,7 @@ iron, gold, diamonds and more.
 Needs Node 22+. No packages to install.
 
 ```sh
-node tools/build.mjs            # writes dist/EssenceAndEarth_v<version>.mcaddon
+node tools/build.mjs            # writes addon/EssenceAndEarth_v<version>.mcaddon
 node tools/build.mjs --deploy   # also copies the packs into your local Minecraft dev pack folders
 ```
 
@@ -17,7 +17,7 @@ re-enter the world.
 
 ## Installing on a server
 
-Upload `dist/*.mcaddon` (most hosts accept it as-is), or unzip it and copy `EssenceAndEarth_BP` into the
+Upload `addon/*.mcaddon` (most hosts accept it as-is), or unzip it and copy `EssenceAndEarth_BP` into the
 server's `behavior_packs/` and `EssenceAndEarth_RP` into `resource_packs/`, then enable them for the world
 (`worlds/<world>/world_behavior_packs.json` and `world_resource_packs.json`, using the `uuid` and `version`
 from each `manifest.json`). Bump `version` in `crops.json` on every release so clients download the new
@@ -32,7 +32,7 @@ resource pack.
 | `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`. |
 | `art/` | Optional hand-drawn textures. `art/textures/items/iron_seeds.png` replaces the generated placeholder at that path. |
 
-`build/` and `dist/` are generated and not committed.
+`build/` is generated and not committed. `addon/` holds the latest `.mcaddon` and is committed so it can be downloaded from GitHub.
 
 ## Adding a crop
 
