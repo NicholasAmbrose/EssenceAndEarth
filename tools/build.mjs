@@ -32,7 +32,7 @@ for (const c of cfg.crops) {
   if (c.alt && !(Number.isInteger(c.alt.count) && c.alt.count >= 1 && c.alt.count <= 64)) problems.push(`${c.id}: alt.count must be 1-64`);
 }
 const BAL = cfg.balance;
-for (const k of ["boneMealChance", "grassEssenceChance", "cropEssenceChance", "secondSeedChance"])
+for (const k of ["boneMealChance", "grassEssenceChance", "cropEssenceChance", "logEssenceChance", "secondSeedChance"])
   if (!(BAL[k] >= 0 && BAL[k] <= 1)) problems.push(`balance.${k} must be 0-1`);
 if (!(BAL.growChance > 0 && BAL.growChance <= 1)) problems.push("balance.growChance must be above 0, up to 1");
 for (const k of ["harvestEssence", "oreEssence"]) {

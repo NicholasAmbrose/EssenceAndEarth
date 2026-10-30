@@ -4,6 +4,13 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Terra Essence from grass and Loggers (v0.7.4)
+
+- [ ] Hand-cut grass drops Terra Essence about 5% of the time.
+- [ ] A Wildbloom Logger cutting trees drops Terra Essence for about 5% of logs, including logs high up a tall tree.
+- [ ] Chopping logs far from any Logger never drops essence.
+- [ ] Felling a tree causes no noticeable lag.
+
 ## Terra Essence from vanilla crops (v0.7.3)
 
 - [ ] Ripe vanilla crops, harvested by hand or by the reaper, drop Terra Essence about 15% of the time (roughly 15 per 100 harvests).

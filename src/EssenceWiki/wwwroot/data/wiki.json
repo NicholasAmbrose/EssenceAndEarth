@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.7.3",
-  "file": "EssenceAndEarth_v0.7.3.mcaddon",
+  "version": "0.7.4",
+  "file": "EssenceAndEarth_v0.7.4.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.7.3.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.7.4.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -51,12 +51,17 @@
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
-         "sub": "Grass and ferns: 2% chance"
+         "sub": "Grass and ferns: 5% chance"
         },
         {
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
+        },
+        {
+         "name": "Oak Log",
+         "icon": "img/vanilla/oak_log.png",
+         "sub": "Each log cut by a Wildbloom Logger: 5% chance"
         }
        ]
       },
@@ -286,12 +291,17 @@
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
-         "sub": "Grass and ferns: 2% chance"
+         "sub": "Grass and ferns: 5% chance"
         },
         {
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
+        },
+        {
+         "name": "Oak Log",
+         "icon": "img/vanilla/oak_log.png",
+         "sub": "Each log cut by a Wildbloom Logger: 5% chance"
         }
        ]
       },

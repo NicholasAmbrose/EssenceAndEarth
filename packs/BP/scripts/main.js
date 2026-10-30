@@ -1,4 +1,4 @@
-import { system, world, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
+import { system, world, BlockVolume, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 
 // __NS__, __ESSENCE__ (the tier-1 essence), __BALANCE__, __FARMLAND_BONUS__ and __ACCELERATOR_ROLLS__ are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
@@ -8,6 +8,7 @@ const {
   boneMealChance: BONE_MEAL_CHANCE,
   grassEssenceChance: GRASS_CHANCE,
   cropEssenceChance: CROP_CHANCE,
+  logEssenceChance: LOG_CHANCE,
   maxAccelerators: MAX_ACCELERATORS,
 } = __BALANCE__;
 
@@ -41,11 +42,32 @@ function drop(dimension, item, location) {
   ours.add(dimension.spawnItem(new ItemStack(item), location).id);
 }
 
+// Wildbloom's Logger flower breaks logs with `setblock ... destroy`, and reaches 6 blocks out and up a whole tree.
+// Nothing marks who broke a log, so any log item dropping near a Logger counts.
+// ponytail: logs a player chops near a Logger roll too; needs Wildbloom to send a script event to tell them apart.
+function nearLogger(dimension, { x, y, z }) {
+  const { min, max } = dimension.heightRange;
+  const volume = new BlockVolume(
+    { x: Math.floor(x) - 8, y: Math.max(min, Math.floor(y) - 32), z: Math.floor(z) - 8 },
+    { x: Math.floor(x) + 8, y: Math.min(max - 1, Math.floor(y) + 8), z: Math.floor(z) + 8 },
+  );
+  try {
+    return !dimension.getBlocks(volume, { includeTypes: ["wb:fn_logger"] }, true).getBlockLocationIterator().next().done;
+  } catch {
+    return false; // Wildbloom isn't installed
+  }
+}
+
 world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
   if (cause !== EntityInitializationCause.Spawned || entity.typeId !== "minecraft:item") return;
   if (ours.delete(entity.id) || !entity.isValid) return; // picked up or merged in the same tick
   const stack = entity.getComponent("minecraft:item")?.itemStack;
   if (!stack) return;
+  if (stack.typeId.startsWith("minecraft:") && stack.typeId.endsWith("_log")) {
+    // Rolled first so the search only runs on the logs that win.
+    if (Math.random() < LOG_CHANCE && nearLogger(entity.dimension, entity.location)) drop(entity.dimension, "__ESSENCE__", entity.location);
+    return;
+  }
   const { x, y, z } = entity.location;
   let soil;
   try {

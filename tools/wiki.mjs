@@ -114,6 +114,7 @@ const list = (items) => ({ t: "items", items });
 const grassDrops = list([
   { ...vanilla("minecraft:short_grass"), sub: `Grass and ferns: ${pct(BAL.grassEssenceChance)} chance` },
   { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
+  { ...vanilla("minecraft:oak_log"), sub: `Each log cut by a Wildbloom Logger: ${pct(BAL.logEssenceChance)} chance` },
 ]);
 
 const guide = {

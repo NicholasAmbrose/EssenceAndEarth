@@ -86,7 +86,7 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 |---|---|
 | `growChance` | Chance per growth roll to advance a stage |
 | `boneMealChance` | Chance per bone meal to advance a stage. A miss still uses it |
-| `grassEssenceChance`, `cropEssenceChance` | Chance of Terra Essence from grass and ripe vanilla crops |
+| `grassEssenceChance`, `cropEssenceChance`, `logEssenceChance` | Chance of Terra Essence from grass, ripe vanilla crops, and each log dropped near a Wildbloom Logger |
 | `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from an ore |
 | `secondSeedChance` | Chance a ripe crop drops a second seed |
 | `farmlandBonus` | Per tier: chance of one extra essence from a ripe crop |
