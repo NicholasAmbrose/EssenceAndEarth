@@ -1,0 +1,54 @@
+@page "/roadmap"
+
+<PageTitle>Roadmap · Essence &amp; Earth</PageTitle>
+<Breadcrumbs Here="Roadmap" />
+<h1>Roadmap</h1>
+<p class="lead">What has shipped and what is planned. Plans can change as the add-on gets played.</p>
+
+@foreach (var phase in Phases)
+{
+    <h2 class="section-title">@phase.Title</h2>
+    <div class="card-grid">
+        @foreach (var item in phase.Items)
+        {
+            <div class="card">
+                <div class="card-top">
+                    <div class="card-title">@item.Name</div>
+                    <span class="pill">@item.Status</span>
+                </div>
+                <div class="card-text">@item.Text</div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    record Item(string Name, string Status, string Text);
+    record Phase(string Title, Item[] Items);
+
+    static readonly Phase[] Phases =
+    [
+        new("Phase 1: Content and look",
+        [
+            new("More crops", "Done", "Resource crops across the essence tiers, from coal to netherite."),
+            new("Better textures", "Done", "Gem-shaped essence tiers, gas-puff crop essence and crystal sprout crops."),
+        ]),
+        new("Phase 2: Better farming",
+        [
+            new("Essence farmland", "Done", "Five tiers of farmland that never dries out and gives bonus essence."),
+            new("Growth accelerators", "Next", "A block under the farmland that speeds up the crops above it."),
+            new("Balance settings", "Planned", "Growth speed, drop chances and harvest amounts in one place, so they are easy to tune."),
+        ]),
+        new("Phase 3: Progression",
+        [
+            new("Mob crops", "Planned", "Crops for mob drops such as string, slime, gunpowder and ender pearls."),
+            new("Essence tools", "Planned", "A 3×3 harvesting sickle and a replanting hoe, with armor to follow."),
+        ]),
+        new("Phase 4: Polish and sharing",
+        [
+            new("Wiki", "Done", "This site, rebuilt from the add-on's own files on every update."),
+            new("Machine support", "In progress", "Essence drops work with harvesting machines. Support for replanting our crops depends on other add-ons."),
+            new("In-game guide book", "Planned", "The basics of the add-on, readable without leaving the game."),
+        ]),
+    ];
+}

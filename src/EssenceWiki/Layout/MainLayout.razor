@@ -19,6 +19,7 @@
             <NavLink href="recipes">Recipes</NavLink>
             <NavLink href="gallery">Gallery</NavLink>
             <NavLink href="download">Download</NavLink>
+            <NavLink href="roadmap">Roadmap</NavLink>
         </nav>
         <div class="topbar-right">
             <button class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode" @onclick="ToggleTheme">
@@ -78,6 +79,7 @@ else
                     <NavLink href="recipes" @onclick="Close">All recipes</NavLink>
                     <NavLink href="gallery" @onclick="Close">Gallery</NavLink>
                     <NavLink href="download" @onclick="Close">Download</NavLink>
+                    <NavLink href="roadmap" @onclick="Close">Roadmap</NavLink>
                 </div>
                 @foreach (var g in Data.Groups)
                 {
