@@ -389,7 +389,8 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__NS__", NS));
 }
 
-const terrain = {}, itemTextures = {}, sounds = {};
+const terrain = {}, itemTextures = {}, sounds = {}, lang = [];
+const TAG = "§9@ESSENCE&EARTH"; // second tooltip line on everything in the inventory, like Deepcore's @DEEPCORE
 
 function item(id, mask, color, components = {}, palette) {
   texture(`textures/items/${id}`, mask, color, palette);
@@ -398,7 +399,7 @@ function item(id, mask, color, components = {}, palette) {
     format_version: FMT,
     "minecraft:item": {
       description: { identifier: `${NS}:${id}`, menu_category: { category: "items" } },
-      components: { "minecraft:icon": `${NS}_${id}`, "minecraft:display_name": { value: title(id) }, ...components },
+      components: { "minecraft:icon": `${NS}_${id}`, "minecraft:display_name": { value: `${title(id)}\n${TAG}` }, ...components },
     },
   });
 }
@@ -408,8 +409,9 @@ function blockTexture(id, mask, color) {
   terrain[`${NS}_${id}`] = { textures: `textures/blocks/${id}` };
 }
 
-function block(id, sound, description, components, permutations) {
+function block(id, sound, description, { "minecraft:display_name": name, ...components }, permutations) {
   sounds[`${NS}:${id}`] = { sound };
+  if (name) lang.push(`tile.${NS}:${id}.name=${name}\\n${TAG}`); // block names go in the lang file, as Deepcore's do
   write(path.join(BP, "blocks", `${id}.json`), {
     format_version: FMT,
     "minecraft:block": { description: { identifier: `${NS}:${id}`, ...description }, components, permutations },
@@ -593,6 +595,8 @@ write(path.join(RP, "models", "blocks", "crop.geo.json"), {
 write(path.join(RP, "textures", "terrain_texture.json"), { resource_pack_name: NS, texture_name: "atlas.terrain", padding: 8, num_mip_levels: 4, texture_data: terrain });
 write(path.join(RP, "textures", "item_texture.json"), { resource_pack_name: NS, texture_name: "atlas.items", texture_data: itemTextures });
 write(path.join(RP, "blocks.json"), { format_version: [1, 1, 0], ...sounds });
+write(path.join(RP, "texts", "en_US.lang"), lang.join("\n") + "\n");
+write(path.join(RP, "texts", "languages.json"), ["en_US"]);
 
 const icon = png(128, scale(render(withSparkles(GEM, 4), cfg.tiers[0].color), 8));
 write(path.join(BP, "pack_icon.png"), icon);
