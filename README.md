@@ -49,4 +49,5 @@ Add an entry to `crops.json`:
 ## Known limits
 
 - Unwatered farmland under a custom crop still turns back to dirt, which pops the crop. Keep farmland hydrated.
-- Essence ore only generates in newly generated chunks.
+- Essence ore only generates in newly generated chunks. Terra essence (tier 1) also drops from grass (2%) and ripe
+  wheat, carrots, potatoes and beetroot (5%), so existing worlds can still get started.

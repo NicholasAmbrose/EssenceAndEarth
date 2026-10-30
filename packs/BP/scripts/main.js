@@ -1,9 +1,23 @@
-import { system, EquipmentSlot, GameMode } from "@minecraft/server";
+import { system, world, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 
-// __NS__ is replaced with the namespace from crops.json at build time.
+// __NS__ and __ESSENCE__ (the tier-1 essence) are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const GROW_CHANCE = 0.5; // per random tick
+
+// Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
+// so older worlds without essence ore in their explored chunks can still get started.
+const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecraft:fern", "minecraft:large_fern"]);
+const CROPS = new Set(["minecraft:wheat", "minecraft:carrots", "minecraft:potatoes", "minecraft:beetroot"]);
+const GRASS_CHANCE = 0.02;
+const CROP_CHANCE = 0.05;
+
+world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: broken, player, dimension }) => {
+  if (player.getGameMode() === GameMode.Creative) return;
+  const id = broken.type.id;
+  const chance = GRASS.has(id) ? GRASS_CHANCE : CROPS.has(id) && broken.getState("growth") === 7 ? CROP_CHANCE : 0;
+  if (Math.random() < chance) dimension.spawnItem(new ItemStack("__ESSENCE__"), block.center());
+});
 
 function grow(block) {
   const stage = block.permutation.getState(GROWTH);

@@ -253,7 +253,8 @@ for (const dir of [BP, RP]) {
 }
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
-  if (f.endsWith(".js")) write(f, fs.readFileSync(f, "utf8").replaceAll("__NS__", NS));
+  if (f.endsWith(".js"))
+    write(f, fs.readFileSync(f, "utf8").replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`).replaceAll("__NS__", NS));
 }
 
 const terrain = {}, itemTextures = {}, sounds = {};

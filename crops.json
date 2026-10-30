@@ -3,7 +3,7 @@
   "namespace": "ee",
   "version": [0, 1, 0],
   "tiers": [
-    { "id": "verdant", "color": "#5fbf3f" },
+    { "id": "terra", "color": "#5fbf3f" },
     { "id": "azure", "color": "#3f8fdf" },
     { "id": "amber", "color": "#e0a030" },
     { "id": "crimson", "color": "#d03a3a" },
