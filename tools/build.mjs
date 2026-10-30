@@ -571,7 +571,7 @@ for (const c of cfg.crops) {
     }, essence);
 }
 
-// Crop geometry: four planes in a # shape, like vanilla wheat.
+// Crop geometry: four planes in a # shape, like vanilla wheat. One face each: alpha_test draws both sides, and a second face would z-fight.
 const plane = (origin, size, faces) => ({ origin, size, uv: Object.fromEntries(faces.map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });
 write(path.join(RP, "models", "blocks", "crop.geo.json"), {
   format_version: "1.21.0",
@@ -581,10 +581,10 @@ write(path.join(RP, "models", "blocks", "crop.geo.json"), {
       name: "crop",
       pivot: [0, 0, 0],
       cubes: [
-        plane([-8, 0, -4], [16, 16, 0], ["north", "south"]),
-        plane([-8, 0, 4], [16, 16, 0], ["north", "south"]),
-        plane([-4, 0, -8], [0, 16, 16], ["east", "west"]),
-        plane([4, 0, -8], [0, 16, 16], ["east", "west"]),
+        plane([-8, 0, -4], [16, 16, 0], ["north"]),
+        plane([-8, 0, 4], [16, 16, 0], ["north"]),
+        plane([-4, 0, -8], [0, 16, 16], ["east"]),
+        plane([4, 0, -8], [0, 16, 16], ["east"]),
       ],
     }],
   }],

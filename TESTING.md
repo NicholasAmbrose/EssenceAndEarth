@@ -4,6 +4,11 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Crop rendering (v0.7.1)
+
+- [ ] Crops no longer flicker or show hatching when you walk around them, at every growth stage.
+- [ ] Crop planes show from both sides, with no invisible angles.
+
 ## Farmland (v0.5.0)
 
 - [ ] Seeds won't plant on vanilla farmland, dirt or grass.
