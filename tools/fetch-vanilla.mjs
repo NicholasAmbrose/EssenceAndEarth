@@ -9,7 +9,10 @@ const OUT = path.join(ROOT, "tools", "vanilla");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
 
 const wanted = new Set(["minecraft:wheat_seeds", "minecraft:farmland", "minecraft:short_grass", "minecraft:bone_meal", "minecraft:wheat", "minecraft:dirt"]);
-for (const c of cfg.crops) wanted.add(c.ingredient).add(c.output);
+for (const c of cfg.crops) {
+  wanted.add(c.ingredient).add(c.output);
+  if (c.alt) wanted.add(c.alt.output);
+}
 
 const manifest = await (await fetch(`${PKG}/manifest/26.3.json`)).json();
 const byId = new Map(manifest.items.map((i) => [i.id, i]));

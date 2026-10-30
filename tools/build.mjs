@@ -26,6 +26,10 @@ for (const c of cfg.crops) {
   if (!/^#[0-9a-f]{6}$/i.test(c.color)) problems.push(`${c.id}: color must look like #a1b2c3`);
   for (const k of ["ingredient", "output"]) if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c[k] ?? "")) problems.push(`${c.id}: ${k} must be an item id like minecraft:iron_ingot`);
   if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
+  if (c.essenceColor && !/^#[0-9a-f]{6}$/i.test(c.essenceColor)) problems.push(`${c.id}: essenceColor must look like #a1b2c3`);
+  if (c.face && !(c.face.length === 8 && c.face.every((r) => r.length === 8) && [...c.face.join("")].every((ch) => ch === "." || c.faceColors?.[ch]))) problems.push(`${c.id}: face must be 8 rows of 8, using . or a faceColors key`);
+  if (c.alt && !/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c.alt.output ?? "")) problems.push(`${c.id}: alt.output must be an item id like minecraft:iron_ingot`);
+  if (c.alt && !(Number.isInteger(c.alt.count) && c.alt.count >= 1 && c.alt.count <= 64)) problems.push(`${c.id}: alt.count must be 1-64`);
 }
 const BAL = cfg.balance;
 for (const k of ["boneMealChance", "grassEssenceChance", "cropEssenceChance", "secondSeedChance"])
@@ -56,6 +60,7 @@ function write(file, data) {
 // 16x16 masks, shaded automatically in the tint colour:
 //   # body (outlined, lit from the top-left)   * highlight   ~ shadow   + sparkle   : faint haze
 //   g/G/l stem green, dark green, leaf green   s stone   v vein   w white   . transparent
+//   any key of the palette passed to render(): that exact colour, counted as body
 
 // Tier essence: a cut gem. Higher tiers get more sparkles around it.
 const GEM = [
@@ -99,6 +104,9 @@ const WISP = [
   "................",
   "................",
 ];
+
+// Mob essence: the plain puff with a mob's 8x8 face in the middle.
+const faceMask = (face) => WISP.map((row, y) => [...row].map((ch, x) => (y >= 4 && y < 12 && x >= 4 && x < 12 && face[y - 4][x - 4] !== "." ? face[y - 4][x - 4] : ch === "*" || ch === "~" ? "#" : ch)).join(""));
 
 const SEEDS = [
   "................",
@@ -221,13 +229,13 @@ const FARMLAND_SIDE = grid((x, y) => (y === 0 ? "T" : y === 1 ? "k" : noise(x, y
 
 const grain = (x, y) => ((x * 31 + y * 17) * 2654435761 >>> 0) % 40;
 
-function render(mask, color) {
+function render(mask, color, palette = {}) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
   mask.forEach((row, y) => {
     if (row.length !== 16) throw new Error(`mask row ${y} is ${row.length} wide: ${row}`);
   });
   const c = color && hex(color);
-  const isBody = (x, y) => "#*~".includes(mask[y]?.[x] ?? ".");
+  const isBody = (x, y) => "#*~".includes(mask[y]?.[x] ?? ".") || (mask[y]?.[x] ?? ".") in palette;
   let lo = Infinity, hi = -Infinity; // range of x+y over the body, for the light gradient
   mask.forEach((row, y) => [...row].forEach((ch, x) => isBody(x, y) && ((lo = Math.min(lo, x + y)), (hi = Math.max(hi, x + y)))));
 
@@ -236,6 +244,7 @@ function render(mask, color) {
     [...row].forEach((ch, x) => {
       let rgb, alpha = 255;
       if (ch === ".") return;
+      else if (ch in palette) rgb = hex(palette[ch]);
       else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
       else if (ch === "s") rgb = Array(3).fill(105 + grain(x, y));
       else if (ch === "v") rgb = shade(c, (grain(x, y) - 20) / 150);
@@ -290,10 +299,10 @@ function png(w, px, h = w) {
 
 const previews = []; // generated textures, laid out in build/preview.png
 
-function texture(rel, mask, color) {
+function texture(rel, mask, color, palette) {
   const art = path.join(ROOT, "art", `${rel}.png`);
   if (fs.existsSync(art)) return write(path.join(RP, `${rel}.png`), fs.readFileSync(art));
-  const px = render(mask, color);
+  const px = render(mask, color, palette);
   previews.push(px);
   write(path.join(RP, `${rel}.png`), png(16, px));
 }
@@ -382,8 +391,8 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
 
 const terrain = {}, itemTextures = {}, sounds = {};
 
-function item(id, mask, color, components = {}) {
-  texture(`textures/items/${id}`, mask, color);
+function item(id, mask, color, components = {}, palette) {
+  texture(`textures/items/${id}`, mask, color, palette);
   itemTextures[`${NS}_${id}`] = { textures: `textures/items/${id}` };
   write(path.join(BP, "items", `${id}.json`), {
     format_version: FMT,
@@ -539,18 +548,27 @@ for (const c of cfg.crops) {
   );
 
   item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: FARMLANDS } });
-  item(`${c.id}_essence`, WISP, c.color);
+  item(`${c.id}_essence`, c.face ? faceMask(c.face) : WISP, c.essenceColor ?? c.color, {}, c.faceColors);
 
-  recipe(`${c.id}_seeds`, "shaped", {
-    pattern: ["ERE", "RSR", "ERE"],
-    key: { E: { item: tierEssence(c.tier) }, R: { item: c.ingredient }, S: { item: "minecraft:wheat_seeds" } },
-    result: { item: seeds },
-  }, tierEssence(c.tier));
+  // A retired crop can't be started any more, but what's already planted keeps working.
+  if (!c.retired)
+    recipe(`${c.id}_seeds`, "shaped", {
+      pattern: ["ERE", "RSR", "ERE"],
+      key: { E: { item: tierEssence(c.tier) }, R: { item: c.ingredient }, S: { item: "minecraft:wheat_seeds" } },
+      result: { item: seeds },
+    }, tierEssence(c.tier));
   recipe(`${c.id}_from_essence`, "shaped", {
     pattern: ["EEE", "E E", "EEE"],
     key: { E: { item: essence } },
     result: { item: c.output, count: c.count },
   }, essence);
+  // A second drop needs its own shape: the ring with its gap at the top instead of the middle.
+  if (c.alt)
+    recipe(`${c.id}_alt_from_essence`, "shaped", {
+      pattern: ["E E", "EEE", "EEE"],
+      key: { E: { item: essence } },
+      result: { item: c.alt.output, count: c.alt.count },
+    }, essence);
 }
 
 // Crop geometry: four planes in a # shape, like vanilla wheat.

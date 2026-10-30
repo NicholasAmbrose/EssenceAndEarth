@@ -68,11 +68,13 @@ Add an entry to `crops.json`:
 { "id": "lapis", "tier": 2, "color": "#2a4fbf", "ingredient": "minecraft:lapis_lazuli", "output": "minecraft:lapis_lazuli", "count": 8 }
 ```
 
-Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks.
+Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks. To take a crop out of the game, add `"retired": true`: its seeds can no longer be crafted and it leaves the wiki, but planted crops keep working.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
 - **Crop:** plant on essence farmland (vanilla farmland won't take it); grows in 4 stages. Ripe crops drop crop essence and a seed, with a chance of a second.
 - **Output:** 8 crop essence in a ring crafts `count` × `output`.
+- **Face (optional):** `face` is 8 rows of 8 characters drawn on the essence, and `faceColors` gives each character's colour. `essenceColor` optionally gives the essence a different body colour from its seeds and crop. Mob crops use these. See [the fallbacks](reference/mob-essence-fallbacks/README.md) for the plain versions.
+- **Second output (optional):** add `"alt": { "output": "minecraft:arrow", "count": 4 }`. 8 essence with the gap in the top middle crafts it.
 
 Growth accelerators (`ee:<tier>_accelerator`) go directly under essence farmland, up to 4 deep with no gaps. Each adds its tier's `acceleratorRolls` value to the crop's growth rolls per random tick.
 
@@ -102,6 +104,10 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 - **Replant:** `setType("ee:<id>_crop")` gives a fresh stage-1 crop. Crops grow only on `ee:<tier>_farmland`. A crop
   placed on anything else by script never grows.
 - **Seeds:** `ee:<id>_seeds` places `ee:<id>_crop`.
+
+## Testing
+
+[TESTING.md](TESTING.md) lists what still needs checking in-game.
 
 ## Known limits
 

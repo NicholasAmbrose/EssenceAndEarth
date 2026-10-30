@@ -26,5 +26,15 @@
   "minecraft:dirt": "Dirt",
   "minecraft:raw_copper": "Raw Copper",
   "minecraft:raw_iron": "Raw Iron",
-  "minecraft:raw_gold": "Raw Gold"
+  "minecraft:raw_gold": "Raw Gold",
+  "minecraft:rotten_flesh": "Rotten Flesh",
+  "minecraft:string": "String",
+  "minecraft:spider_eye": "Spider Eye",
+  "minecraft:arrow": "Arrow",
+  "minecraft:gunpowder": "Gunpowder",
+  "minecraft:slime_ball": "Slimeball",
+  "minecraft:blaze_rod": "Blaze Rod",
+  "minecraft:ender_pearl": "Ender Pearl",
+  "minecraft:wither_skeleton_skull": "Wither Skeleton Skull",
+  "minecraft:nether_star": "Nether Star"
 }

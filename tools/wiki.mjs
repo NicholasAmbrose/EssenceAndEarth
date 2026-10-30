@@ -11,6 +11,7 @@ const MIN_BEDROCK = "1.21.90";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
 const BAL = cfg.balance;
+cfg.crops = cfg.crops.filter((c) => !c.retired);
 const SLUG = cfg.name.replaceAll("&", "And").replace(/\W/g, "");
 const RP = path.join(ROOT, "build", `${SLUG}_RP`);
 const WWW = path.join(ROOT, "src", "EssenceWiki", "wwwroot");
@@ -89,6 +90,11 @@ const outputRecipe = (c) => {
   const e = essenceItem(c);
   return recipe({ ...vanilla(c.output) }, c.count, [[e, e, e], [e, null, e], [e, e, e]]);
 };
+const altRecipe = (c) => {
+  const e = essenceItem(c);
+  return recipe({ ...vanilla(c.alt.output) }, c.alt.count, [[e, null, e], [e, e, e], [e, e, e]], "The gap goes in the top middle");
+};
+const makes = (c) => [c, c.alt].filter(Boolean).map((o) => `${o.count} × ${vanilla(o.output).name}`).join(" or ");
 const farmlandRecipe = (t, i) => {
   const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
   return recipe(farmlandItem(t), BAL.farmlandYield, [[b, e, b], [e, b, e], [b, e, b]]);
@@ -171,7 +177,7 @@ const essence = {
           h2("How to get it"),
           ...(i === 0 ? [list([{ ...oreItem, sub: `${oreDrop} per ore` }, ...grassDrops.items])] : [upgrade(t, i)]),
           h2("Seeds that need it"),
-          crops.length ? list(crops.map((c) => ({ ...seedsItem(c), sub: `8 essence → ${c.count} × ${vanilla(c.output).name}` }))) : p("No crops use this tier yet."),
+          crops.length ? list(crops.map((c) => ({ ...seedsItem(c), sub: `8 essence → ${makes(c)}` }))) : p("No crops use this tier yet."),
         ],
       };
     }),
@@ -221,9 +227,9 @@ const cropCategories = cfg.tiers
       const out = vanilla(c.output);
       return {
         slug: slug(c.id), name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`,
-        summary: `8 essence → ${c.count} × ${out.name}`,
+        summary: `8 essence → ${makes(c)}`,
         blocks: [
-          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Seeds use", vanilla(c.ingredient).name], ["Makes", `${c.count} × ${out.name} per 8 essence`]]),
+          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Seeds use", vanilla(c.ingredient).name], ["Makes", `${makes(c)} per 8 essence`]]),
           list(stages(c)),
           h2("Seeds"),
           seedsRecipe(c),
@@ -231,6 +237,7 @@ const cropCategories = cfg.tiers
           list([{ ...essenceItem(c), sub: `${harvest} when ripe` }, { ...seedsItem(c), sub: `1, plus a ${secondSeed} chance of a second` }]),
           h2(out.name),
           outputRecipe(c),
+          ...(c.alt ? [h2(vanilla(c.alt.output).name), altRecipe(c)] : []),
         ],
       };
     }),
