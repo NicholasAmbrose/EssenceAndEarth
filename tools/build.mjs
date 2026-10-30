@@ -27,6 +27,7 @@ for (const c of cfg.crops) {
   for (const k of ["ingredient", "output"]) if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c[k] ?? "")) problems.push(`${c.id}: ${k} must be an item id like minecraft:iron_ingot`);
   if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
 }
+for (const t of cfg.tiers) if (!(t.accelerator > 0)) problems.push(`${t.id}: accelerator must be above 0`);
 if (problems.length) {
   console.error(`crops.json has problems:\n  ${problems.join("\n  ")}`);
   process.exit(1);
@@ -42,7 +43,7 @@ function write(file, data) {
 // ---------- textures ----------
 // 16x16 masks, shaded automatically in the tint colour:
 //   # body (outlined, lit from the top-left)   * highlight   ~ shadow   + sparkle   : faint haze
-//   g/G/l stem green, dark green, leaf green   s stone   . transparent
+//   g/G/l stem green, dark green, leaf green   s stone   v vein   w white   . transparent
 
 // Tier essence: a cut gem. Higher tiers get more sparkles around it.
 const GEM = [
@@ -125,6 +126,26 @@ const ORE = [
   "ssssssss###sssss",
 ];
 
+// Growth accelerator: essence roots climbing through stone, with white sparks around them.
+const ACCELERATOR = [
+  "sssvsssssvsssvss",
+  "sswvssssvvsssvss",
+  "ssssvsssvswsvvss",
+  "ssssvvsvvssvvsss",
+  "sssssvvvwsvsssss",
+  "svssssvssvvsssss",
+  "svvwssvsvvssssvs",
+  "ssvvssvvvssswvvs",
+  "sssvvvvvssvvvvss",
+  "sssswsvvsvvsssss",
+  "sssssvvvvvssssss",
+  "ssssssvvvwssssss",
+  "ssssssvvvsssssss",
+  "sssssvvvwsssssss",
+  "ssswsvvsssssssss",
+  "ssssvvvsssssssss",
+];
+
 const blank = (n) => Array(n).fill("................");
 const STEMS = [
   "..G..gg....G..g.",
@@ -186,6 +207,8 @@ const FARMLAND_TOP = grid((x, y) => {
 });
 const FARMLAND_SIDE = grid((x, y) => (y === 0 ? "T" : y === 1 ? "k" : noise(x, y, 4) < 0.07 ? "k" : noise(x, y, 6) > 0.88 ? "T" : "t"));
 
+const grain = (x, y) => ((x * 31 + y * 17) * 2654435761 >>> 0) % 40;
+
 function render(mask, color) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
   mask.forEach((row, y) => {
@@ -202,7 +225,9 @@ function render(mask, color) {
       let rgb, alpha = 255;
       if (ch === ".") return;
       else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
-      else if (ch === "s") rgb = Array(3).fill(105 + ((((x * 31 + y * 17) * 2654435761) >>> 0) % 40));
+      else if (ch === "s") rgb = Array(3).fill(105 + grain(x, y));
+      else if (ch === "v") rgb = shade(c, (grain(x, y) - 20) / 150);
+      else if (ch === "w") rgb = [255, 255, 255];
       else if (ch in GREEN) rgb = GREEN[ch];
       else if (ch === "T") rgb = shade(shade(soilTint(c), 0.18), (noise(x, y) - 0.5) * 0.2);
       else if (ch === "t") rgb = shade(soilTint(c), (noise(x, y) - 0.5) * 0.25);
@@ -338,6 +363,7 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
   if (f.endsWith(".js"))
     write(f, fs.readFileSync(f, "utf8")
       .replaceAll("__FARMLAND_BONUS__", JSON.stringify(bonus))
+      .replaceAll("__ACCELERATOR_ROLLS__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t) => [`${NS}:${t.id}_accelerator`, t.accelerator]))))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
       .replaceAll("__NS__", NS));
 }
@@ -412,6 +438,25 @@ cfg.tiers.forEach((t, i) => {
   recipe(id, "shaped", {
     pattern: ["BEB", "EBE", "BEB"],
     key: { B: { item: i ? FARMLANDS[i - 1] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
+    result: { item: `${NS}:${id}` },
+  }, tierEssence(i + 1));
+});
+
+// Growth accelerators: go under essence farmland and add growth rolls to the crop above (see scripts/main.js).
+// 5 cobblestone + 4 Terra make 1 Terra accelerator; 5 of the tier below + 4 of its essence make 1 of each later tier.
+cfg.tiers.forEach((t, i) => {
+  const id = `${t.id}_accelerator`;
+  blockTexture(id, ACCELERATOR, t.color);
+  block(id, "stone", { menu_category: { category: "items" } }, {
+    "minecraft:display_name": `${title(t.id)} Growth Accelerator`,
+    "minecraft:geometry": "minecraft:geometry.full_block",
+    "minecraft:destructible_by_mining": { seconds_to_destroy: 1.5 },
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}` } },
+    "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
+  });
+  recipe(id, "shaped", {
+    pattern: ["BEB", "EBE", "BEB"],
+    key: { B: { item: i ? `${NS}:${cfg.tiers[i - 1].id}_accelerator` : "minecraft:cobblestone" }, E: { item: tierEssence(i + 1) } },
     result: { item: `${NS}:${id}` },
   }, tierEssence(i + 1));
 });

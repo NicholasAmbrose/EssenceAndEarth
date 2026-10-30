@@ -1,12 +1,16 @@
 import { system, world, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 
-// __NS__, __ESSENCE__ (the tier-1 essence) and __FARMLAND_BONUS__ are filled in from crops.json at build time.
+// __NS__, __ESSENCE__ (the tier-1 essence), __FARMLAND_BONUS__ and __ACCELERATOR_ROLLS__ are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const GROW_CHANCE = 0.5; // per random tick
 
 // Essence farmland id -> chance that a ripe crop on it drops one extra essence.
 const FARMLAND_BONUS = __FARMLAND_BONUS__;
+
+// Accelerator id -> growth rolls it adds per random tick, for an unbroken stack under the farmland.
+const ACCELERATOR_ROLLS = __ACCELERATOR_ROLLS__;
+const MAX_ACCELERATORS = 4;
 
 // Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
 // so older worlds without essence ore in their explored chunks can still get started.
@@ -65,10 +69,25 @@ function grow(block) {
   return true;
 }
 
+function growthRolls(block) {
+  let rolls = 1;
+  try {
+    for (let i = 0; i < MAX_ACCELERATORS; i++) {
+      const extra = ACCELERATOR_ROLLS[block.below(i + 2)?.typeId]; // +2 skips the farmland
+      if (!extra) break;
+      rolls += extra;
+    }
+  } catch {
+    // below the world or in an unloaded chunk
+  }
+  return rolls;
+}
+
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent("__NS__:crop", {
     onRandomTick({ block }) {
-      if (Math.random() < GROW_CHANCE) grow(block);
+      // A fraction of a roll is a last roll at that fraction of the chance.
+      for (let rolls = growthRolls(block); rolls > 0; rolls--) if (Math.random() < GROW_CHANCE * Math.min(rolls, 1)) grow(block);
     },
     onPlayerInteract({ block, player, dimension }) {
       const equip = player?.getComponent("minecraft:equippable");

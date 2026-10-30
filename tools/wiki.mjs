@@ -50,7 +50,20 @@ const ripeItem = (c) => ({ name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}
 const oreItem = { name: "Essence Ore", icon: "img/icons/essence_ore.png", href: essenceHref("essence_ore") };
 const farmlandItem = (t) => ({ name: `${title(t.id)} Farmland`, icon: `img/icons/${t.id}_farmland_top.png`, href: `wiki/farmland/${slug(`${t.id}_farmland`)}` });
 const bonusPct = (i) => Math.round(((i + 1) / cfg.tiers.length) * 100); // matches the bonus in build.mjs
-const stages = (c) => [0, 1, 2].map((s) => ({ name: `Stage ${s + 1}`, icon: `img/icons/crop_${s}.png` })).concat({ name: "Ripe", icon: `img/icons/${c.id}_crop.png` });
+const acceleratorItem = (t) => ({ name: `${title(t.id)} Growth Accelerator`, icon: `img/icons/${t.id}_accelerator.png`, href: `wiki/accelerators/${slug(`${t.id}_accelerator`)}` });
+// Average random ticks for a crop to ripen with this many rolls per tick, as in scripts/main.js.
+const ripenTicks = (rolls) => {
+  let chance = [1]; // chance[k]: one tick advances k stages
+  for (let r = rolls; r > 0; r--) {
+    const q = 0.5 * Math.min(r, 1);
+    chance = [...chance, 0].map((v, k) => v * (1 - q) + (chance[k - 1] ?? 0) * q);
+  }
+  const left = [0]; // left[n]: average ticks with n stages to go
+  for (let n = 1; n <= 3; n++) left[n] = (1 + chance.reduce((sum, v, k) => sum + (k ? v * left[Math.max(n - k, 0)] : 0), 0)) / (1 - chance[0]);
+  return left[3];
+};
+const speed = (rolls) => `×${(ripenTicks(1) / ripenTicks(rolls)).toFixed(1)}`;
+const stages = (c) =>[0, 1, 2].map((s) => ({ name: `Stage ${s + 1}`, icon: `img/icons/crop_${s}.png` })).concat({ name: "Ripe", icon: `img/icons/${c.id}_crop.png` });
 
 // ---------- recipes ----------
 
@@ -75,6 +88,11 @@ const outputRecipe = (c) => {
 const farmlandRecipe = (t, i) => {
   const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
   return recipe(farmlandItem(t), 1, [[b, e, b], [e, b, e], [b, e, b]]);
+};
+
+const acceleratorRecipe = (t, i) => {
+  const b = i ? acceleratorItem(cfg.tiers[i - 1]) : vanilla("minecraft:cobblestone"), e = tierItem(t);
+  return recipe(acceleratorItem(t), 1, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 // ---------- pages ----------
@@ -119,6 +137,8 @@ const guide = {
         h2("Essence farmland"),
         p("Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."),
         list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)}% chance of +1 essence` }))),
+        h2("Growth accelerators"),
+        p(`Stack up to four <a href="wiki/accelerators">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack.`),
       ],
     },
   ],
@@ -170,6 +190,23 @@ const farmland = {
   })),
 };
 
+const accelerators = {
+  slug: "accelerators", title: "Growth accelerators", group: "Getting started", icon: acceleratorItem(cfg.tiers[0]).icon,
+  blurb: "Blocks that go under essence farmland and make the crop above grow faster.",
+  entries: cfg.tiers.map((t, i) => ({
+    slug: slug(`${t.id}_accelerator`), name: `${title(t.id)} Growth Accelerator`, icon: acceleratorItem(t).icon,
+    summary: `Up to ${speed(1 + t.accelerator * 4)} crop speed with a stack of four.`,
+    blocks: [
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Speed with 1", speed(1 + t.accelerator)], ["Speed with 4", speed(1 + t.accelerator * 4)], ["Growth rolls", `+${t.accelerator} per random tick`], ["Place", "Directly under essence farmland, up to 4 deep, with no gaps"]]),
+      list([acceleratorItem(t)]),
+      p("Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."),
+      h2("Recipe"),
+      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Growth Accelerators and four ${tierName(t)} make one.` : "Five cobblestone and four Terra Essence make one."),
+      acceleratorRecipe(t, i),
+    ],
+  })),
+};
+
 const cropCategories = cfg.tiers
   .map((t, i) => ({ t, i, crops: cfg.crops.filter((c) => c.tier === i + 1) }))
   .filter((g) => g.crops.length)
@@ -195,7 +232,7 @@ const cropCategories = cfg.tiers
     }),
   }));
 
-const categories = [guide, essence, farmland, ...cropCategories];
+const categories = [guide, essence, farmland, accelerators, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -204,6 +241,7 @@ const gallery = [
   { title: "Seeds", items: cfg.crops.map(seedsItem) },
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
+  { title: "Growth accelerators", items: cfg.tiers.map(acceleratorItem) },
   { title: "Growth stages and ore", items: [...stages(cfg.crops[0]).slice(0, 3), oreItem] },
 ];
 
@@ -214,8 +252,8 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: essence + farmland per tier, seeds + essence per crop, and the ore
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 2 + cfg.crops.length * 2 + 1, recipes: recipes.length },
+  // items: essence + farmland + accelerator per tier, seeds + essence per crop, and the ore
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 + 1, recipes: recipes.length },
   categories,
   recipes,
   gallery,

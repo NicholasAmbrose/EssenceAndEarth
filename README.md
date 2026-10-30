@@ -74,6 +74,8 @@ Never rename or remove a crop `id` once it is on a server: crops already planted
 - **Crop:** plant on essence farmland (vanilla farmland won't take it); grows in 4 stages (bone meal works). Ripe crops drop 1–2 crop essence and a seed (10% chance of a second).
 - **Output:** 8 crop essence in a ring crafts `count` × `output`.
 
+Growth accelerators (`ee:<tier>_accelerator`) go directly under essence farmland, up to 4 deep with no gaps. Each adds its tier's `accelerator` value from `crops.json` to the crop's growth rolls per random tick.
+
 ## For other add-ons
 
 Machines that harvest, grow or replant crops can support Essence & Earth like this:

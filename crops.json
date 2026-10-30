@@ -1,13 +1,13 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 5, 1],
+  "version": [0, 6, 0],
   "tiers": [
-    { "id": "terra", "color": "#5fbf3f" },
-    { "id": "aqua", "color": "#3f8fdf" },
-    { "id": "ignis", "color": "#e8602c" },
-    { "id": "aether", "color": "#9fe3f0" },
-    { "id": "astra", "color": "#b47cf0" }
+    { "id": "terra", "color": "#5fbf3f", "accelerator": 0.25 },
+    { "id": "aqua", "color": "#3f8fdf", "accelerator": 0.5 },
+    { "id": "ignis", "color": "#e8602c", "accelerator": 1 },
+    { "id": "aether", "color": "#9fe3f0", "accelerator": 1.5 },
+    { "id": "astra", "color": "#b47cf0", "accelerator": 2 }
   ],
   "crops": [
     { "id": "coal", "tier": 1, "color": "#3a3a3a", "ingredient": "minecraft:coal", "output": "minecraft:coal", "count": 2 },

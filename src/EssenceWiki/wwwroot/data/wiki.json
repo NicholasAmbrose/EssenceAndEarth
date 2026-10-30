@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.5.1",
-  "file": "EssenceAndEarth_v0.5.1.mcaddon",
+  "version": "0.6.0",
+  "file": "EssenceAndEarth_v0.6.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.5.1.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.6.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 19,
   "tiers": 5,
-  "items": 49,
-  "recipes": 47
+  "items": 54,
+  "recipes": 52
  },
  "categories": [
   {
@@ -189,6 +189,14 @@
          "sub": "100% chance of +1 essence"
         }
        ]
+      },
+      {
+       "t": "h2",
+       "text": "Growth accelerators"
+      },
+      {
+       "t": "p",
+       "html": "Stack up to four <a href=\"wiki/accelerators\">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack."
       }
      ],
      "href": "wiki/guide/growing-crops"
@@ -1303,6 +1311,600 @@
       }
      ],
      "href": "wiki/farmland/astra-farmland"
+    }
+   ]
+  },
+  {
+   "slug": "accelerators",
+   "title": "Growth accelerators",
+   "group": "Getting started",
+   "icon": "img/icons/terra_accelerator.png",
+   "blurb": "Blocks that go under essence farmland and make the crop above grow faster.",
+   "entries": [
+    {
+     "slug": "terra-accelerator",
+     "name": "Terra Growth Accelerator",
+     "icon": "img/icons/terra_accelerator.png",
+     "summary": "Up to ×1.8 crop speed with a stack of four.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 of 5"
+        ],
+        [
+         "Speed with 1",
+         "×1.2"
+        ],
+        [
+         "Speed with 4",
+         "×1.8"
+        ],
+        [
+         "Growth rolls",
+         "+0.25 per random tick"
+        ],
+        [
+         "Place",
+         "Directly under essence farmland, up to 4 deep, with no gaps"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Terra Growth Accelerator",
+         "icon": "img/icons/terra_accelerator.png",
+         "href": "wiki/accelerators/terra-accelerator"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five cobblestone and four Terra Essence make one."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Growth Accelerator",
+        "icon": "img/icons/terra_accelerator.png",
+        "href": "wiki/accelerators/terra-accelerator",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/accelerators/terra-accelerator"
+    },
+    {
+     "slug": "aqua-accelerator",
+     "name": "Aqua Growth Accelerator",
+     "icon": "img/icons/aqua_accelerator.png",
+     "summary": "Up to ×2.6 crop speed with a stack of four.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 of 5"
+        ],
+        [
+         "Speed with 1",
+         "×1.4"
+        ],
+        [
+         "Speed with 4",
+         "×2.6"
+        ],
+        [
+         "Growth rolls",
+         "+0.5 per random tick"
+        ],
+        [
+         "Place",
+         "Directly under essence farmland, up to 4 deep, with no gaps"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Aqua Growth Accelerator",
+         "icon": "img/icons/aqua_accelerator.png",
+         "href": "wiki/accelerators/aqua-accelerator"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five Terra Growth Accelerators and four Aqua Essence make one."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Growth Accelerator",
+        "icon": "img/icons/aqua_accelerator.png",
+        "href": "wiki/accelerators/aqua-accelerator",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Growth Accelerator",
+          "icon": "img/icons/terra_accelerator.png",
+          "href": "wiki/accelerators/terra-accelerator"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Growth Accelerator",
+          "icon": "img/icons/terra_accelerator.png",
+          "href": "wiki/accelerators/terra-accelerator"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Growth Accelerator",
+          "icon": "img/icons/terra_accelerator.png",
+          "href": "wiki/accelerators/terra-accelerator"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Terra Growth Accelerator",
+          "icon": "img/icons/terra_accelerator.png",
+          "href": "wiki/accelerators/terra-accelerator"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Growth Accelerator",
+          "icon": "img/icons/terra_accelerator.png",
+          "href": "wiki/accelerators/terra-accelerator"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/accelerators/aqua-accelerator"
+    },
+    {
+     "slug": "ignis-accelerator",
+     "name": "Ignis Growth Accelerator",
+     "icon": "img/icons/ignis_accelerator.png",
+     "summary": "Up to ×3.8 crop speed with a stack of four.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "3 of 5"
+        ],
+        [
+         "Speed with 1",
+         "×1.8"
+        ],
+        [
+         "Speed with 4",
+         "×3.8"
+        ],
+        [
+         "Growth rolls",
+         "+1 per random tick"
+        ],
+        [
+         "Place",
+         "Directly under essence farmland, up to 4 deep, with no gaps"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Ignis Growth Accelerator",
+         "icon": "img/icons/ignis_accelerator.png",
+         "href": "wiki/accelerators/ignis-accelerator"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five Aqua Growth Accelerators and four Ignis Essence make one."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Growth Accelerator",
+        "icon": "img/icons/ignis_accelerator.png",
+        "href": "wiki/accelerators/ignis-accelerator",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Growth Accelerator",
+          "icon": "img/icons/aqua_accelerator.png",
+          "href": "wiki/accelerators/aqua-accelerator"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Growth Accelerator",
+          "icon": "img/icons/aqua_accelerator.png",
+          "href": "wiki/accelerators/aqua-accelerator"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Growth Accelerator",
+          "icon": "img/icons/aqua_accelerator.png",
+          "href": "wiki/accelerators/aqua-accelerator"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Growth Accelerator",
+          "icon": "img/icons/aqua_accelerator.png",
+          "href": "wiki/accelerators/aqua-accelerator"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Growth Accelerator",
+          "icon": "img/icons/aqua_accelerator.png",
+          "href": "wiki/accelerators/aqua-accelerator"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/accelerators/ignis-accelerator"
+    },
+    {
+     "slug": "aether-accelerator",
+     "name": "Aether Growth Accelerator",
+     "icon": "img/icons/aether_accelerator.png",
+     "summary": "Up to ×4.9 crop speed with a stack of four.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "4 of 5"
+        ],
+        [
+         "Speed with 1",
+         "×2.2"
+        ],
+        [
+         "Speed with 4",
+         "×4.9"
+        ],
+        [
+         "Growth rolls",
+         "+1.5 per random tick"
+        ],
+        [
+         "Place",
+         "Directly under essence farmland, up to 4 deep, with no gaps"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Aether Growth Accelerator",
+         "icon": "img/icons/aether_accelerator.png",
+         "href": "wiki/accelerators/aether-accelerator"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five Ignis Growth Accelerators and four Aether Essence make one."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Growth Accelerator",
+        "icon": "img/icons/aether_accelerator.png",
+        "href": "wiki/accelerators/aether-accelerator",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Growth Accelerator",
+          "icon": "img/icons/ignis_accelerator.png",
+          "href": "wiki/accelerators/ignis-accelerator"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Growth Accelerator",
+          "icon": "img/icons/ignis_accelerator.png",
+          "href": "wiki/accelerators/ignis-accelerator"
+         }
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Growth Accelerator",
+          "icon": "img/icons/ignis_accelerator.png",
+          "href": "wiki/accelerators/ignis-accelerator"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Growth Accelerator",
+          "icon": "img/icons/ignis_accelerator.png",
+          "href": "wiki/accelerators/ignis-accelerator"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Growth Accelerator",
+          "icon": "img/icons/ignis_accelerator.png",
+          "href": "wiki/accelerators/ignis-accelerator"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/accelerators/aether-accelerator"
+    },
+    {
+     "slug": "astra-accelerator",
+     "name": "Astra Growth Accelerator",
+     "icon": "img/icons/astra_accelerator.png",
+     "summary": "Up to ×5.5 crop speed with a stack of four.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "5 of 5"
+        ],
+        [
+         "Speed with 1",
+         "×2.6"
+        ],
+        [
+         "Speed with 4",
+         "×5.5"
+        ],
+        [
+         "Growth rolls",
+         "+2 per random tick"
+        ],
+        [
+         "Place",
+         "Directly under essence farmland, up to 4 deep, with no gaps"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Astra Growth Accelerator",
+         "icon": "img/icons/astra_accelerator.png",
+         "href": "wiki/accelerators/astra-accelerator"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five Aether Growth Accelerators and four Astra Essence make one."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Growth Accelerator",
+        "icon": "img/icons/astra_accelerator.png",
+        "href": "wiki/accelerators/astra-accelerator",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Growth Accelerator",
+          "icon": "img/icons/aether_accelerator.png",
+          "href": "wiki/accelerators/aether-accelerator"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Growth Accelerator",
+          "icon": "img/icons/aether_accelerator.png",
+          "href": "wiki/accelerators/aether-accelerator"
+         }
+        ],
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Growth Accelerator",
+          "icon": "img/icons/aether_accelerator.png",
+          "href": "wiki/accelerators/aether-accelerator"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aether Growth Accelerator",
+          "icon": "img/icons/aether_accelerator.png",
+          "href": "wiki/accelerators/aether-accelerator"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Growth Accelerator",
+          "icon": "img/icons/aether_accelerator.png",
+          "href": "wiki/accelerators/aether-accelerator"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/accelerators/astra-accelerator"
     }
    ]
   },
@@ -5433,6 +6035,306 @@
   },
   {
    "result": {
+    "name": "Terra Growth Accelerator",
+    "icon": "img/icons/terra_accelerator.png",
+    "href": "wiki/accelerators/terra-accelerator",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aqua Growth Accelerator",
+    "icon": "img/icons/aqua_accelerator.png",
+    "href": "wiki/accelerators/aqua-accelerator",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Growth Accelerator",
+      "icon": "img/icons/terra_accelerator.png",
+      "href": "wiki/accelerators/terra-accelerator"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Growth Accelerator",
+      "icon": "img/icons/terra_accelerator.png",
+      "href": "wiki/accelerators/terra-accelerator"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Growth Accelerator",
+      "icon": "img/icons/terra_accelerator.png",
+      "href": "wiki/accelerators/terra-accelerator"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Terra Growth Accelerator",
+      "icon": "img/icons/terra_accelerator.png",
+      "href": "wiki/accelerators/terra-accelerator"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Growth Accelerator",
+      "icon": "img/icons/terra_accelerator.png",
+      "href": "wiki/accelerators/terra-accelerator"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Ignis Growth Accelerator",
+    "icon": "img/icons/ignis_accelerator.png",
+    "href": "wiki/accelerators/ignis-accelerator",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Growth Accelerator",
+      "icon": "img/icons/aqua_accelerator.png",
+      "href": "wiki/accelerators/aqua-accelerator"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Growth Accelerator",
+      "icon": "img/icons/aqua_accelerator.png",
+      "href": "wiki/accelerators/aqua-accelerator"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Growth Accelerator",
+      "icon": "img/icons/aqua_accelerator.png",
+      "href": "wiki/accelerators/aqua-accelerator"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Growth Accelerator",
+      "icon": "img/icons/aqua_accelerator.png",
+      "href": "wiki/accelerators/aqua-accelerator"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Growth Accelerator",
+      "icon": "img/icons/aqua_accelerator.png",
+      "href": "wiki/accelerators/aqua-accelerator"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aether Growth Accelerator",
+    "icon": "img/icons/aether_accelerator.png",
+    "href": "wiki/accelerators/aether-accelerator",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Growth Accelerator",
+      "icon": "img/icons/ignis_accelerator.png",
+      "href": "wiki/accelerators/ignis-accelerator"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Growth Accelerator",
+      "icon": "img/icons/ignis_accelerator.png",
+      "href": "wiki/accelerators/ignis-accelerator"
+     }
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Growth Accelerator",
+      "icon": "img/icons/ignis_accelerator.png",
+      "href": "wiki/accelerators/ignis-accelerator"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Growth Accelerator",
+      "icon": "img/icons/ignis_accelerator.png",
+      "href": "wiki/accelerators/ignis-accelerator"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Growth Accelerator",
+      "icon": "img/icons/ignis_accelerator.png",
+      "href": "wiki/accelerators/ignis-accelerator"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Astra Growth Accelerator",
+    "icon": "img/icons/astra_accelerator.png",
+    "href": "wiki/accelerators/astra-accelerator",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Growth Accelerator",
+      "icon": "img/icons/aether_accelerator.png",
+      "href": "wiki/accelerators/aether-accelerator"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Growth Accelerator",
+      "icon": "img/icons/aether_accelerator.png",
+      "href": "wiki/accelerators/aether-accelerator"
+     }
+    ],
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Growth Accelerator",
+      "icon": "img/icons/aether_accelerator.png",
+      "href": "wiki/accelerators/aether-accelerator"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aether Growth Accelerator",
+      "icon": "img/icons/aether_accelerator.png",
+      "href": "wiki/accelerators/aether-accelerator"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Growth Accelerator",
+      "icon": "img/icons/aether_accelerator.png",
+      "href": "wiki/accelerators/aether-accelerator"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
     "name": "Coal Seeds",
     "icon": "img/icons/coal_seeds.png",
     "href": "wiki/terra-crops/coal",
@@ -7918,6 +8820,36 @@
      "name": "Astra Farmland",
      "icon": "img/icons/astra_farmland_top.png",
      "href": "wiki/farmland/astra-farmland"
+    }
+   ]
+  },
+  {
+   "title": "Growth accelerators",
+   "items": [
+    {
+     "name": "Terra Growth Accelerator",
+     "icon": "img/icons/terra_accelerator.png",
+     "href": "wiki/accelerators/terra-accelerator"
+    },
+    {
+     "name": "Aqua Growth Accelerator",
+     "icon": "img/icons/aqua_accelerator.png",
+     "href": "wiki/accelerators/aqua-accelerator"
+    },
+    {
+     "name": "Ignis Growth Accelerator",
+     "icon": "img/icons/ignis_accelerator.png",
+     "href": "wiki/accelerators/ignis-accelerator"
+    },
+    {
+     "name": "Aether Growth Accelerator",
+     "icon": "img/icons/aether_accelerator.png",
+     "href": "wiki/accelerators/aether-accelerator"
+    },
+    {
+     "name": "Astra Growth Accelerator",
+     "icon": "img/icons/astra_accelerator.png",
+     "href": "wiki/accelerators/astra-accelerator"
     }
    ]
   },
