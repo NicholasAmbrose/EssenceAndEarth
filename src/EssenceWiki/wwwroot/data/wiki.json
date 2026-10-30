@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.4.2",
-  "file": "EssenceAndEarth_v0.4.2.mcaddon",
+  "version": "0.4.3",
+  "file": "EssenceAndEarth_v0.4.3.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.2.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.3.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -782,7 +782,7 @@
       },
       {
        "t": "p",
-       "html": "Five dirt and four Terra Essence."
+       "html": "Five dirt and four Terra Essence make five."
       },
       {
        "t": "grid",
@@ -892,7 +892,7 @@
       },
       {
        "t": "p",
-       "html": "Upgrade five Terra Farmland with four Aqua Essence."
+       "html": "Five Terra Farmland and four Aqua Essence make one."
       },
       {
        "t": "grid",
@@ -900,7 +900,7 @@
         "name": "Aqua Farmland",
         "icon": "img/icons/aqua_farmland_top.png",
         "href": "wiki/farmland/aqua-farmland",
-        "count": 5
+        "count": 1
        },
        "rows": [
         [
@@ -1007,7 +1007,7 @@
       },
       {
        "t": "p",
-       "html": "Upgrade five Aqua Farmland with four Ignis Essence."
+       "html": "Five Aqua Farmland and four Ignis Essence make one."
       },
       {
        "t": "grid",
@@ -1015,7 +1015,7 @@
         "name": "Ignis Farmland",
         "icon": "img/icons/ignis_farmland_top.png",
         "href": "wiki/farmland/ignis-farmland",
-        "count": 5
+        "count": 1
        },
        "rows": [
         [
@@ -1122,7 +1122,7 @@
       },
       {
        "t": "p",
-       "html": "Upgrade five Ignis Farmland with four Aether Essence."
+       "html": "Five Ignis Farmland and four Aether Essence make one."
       },
       {
        "t": "grid",
@@ -1130,7 +1130,7 @@
         "name": "Aether Farmland",
         "icon": "img/icons/aether_farmland_top.png",
         "href": "wiki/farmland/aether-farmland",
-        "count": 5
+        "count": 1
        },
        "rows": [
         [
@@ -1237,7 +1237,7 @@
       },
       {
        "t": "p",
-       "html": "Upgrade five Aether Farmland with four Astra Essence."
+       "html": "Five Aether Farmland and four Astra Essence make one."
       },
       {
        "t": "grid",
@@ -1245,7 +1245,7 @@
         "name": "Astra Farmland",
         "icon": "img/icons/astra_farmland_top.png",
         "href": "wiki/farmland/astra-farmland",
-        "count": 5
+        "count": 1
        },
        "rows": [
         [
@@ -5192,7 +5192,7 @@
     "name": "Aqua Farmland",
     "icon": "img/icons/aqua_farmland_top.png",
     "href": "wiki/farmland/aqua-farmland",
-    "count": 5
+    "count": 1
    },
    "rows": [
     [
@@ -5253,7 +5253,7 @@
     "name": "Ignis Farmland",
     "icon": "img/icons/ignis_farmland_top.png",
     "href": "wiki/farmland/ignis-farmland",
-    "count": 5
+    "count": 1
    },
    "rows": [
     [
@@ -5314,7 +5314,7 @@
     "name": "Aether Farmland",
     "icon": "img/icons/aether_farmland_top.png",
     "href": "wiki/farmland/aether-farmland",
-    "count": 5
+    "count": 1
    },
    "rows": [
     [
@@ -5375,7 +5375,7 @@
     "name": "Astra Farmland",
     "icon": "img/icons/astra_farmland_top.png",
     "href": "wiki/farmland/astra-farmland",
-    "count": 5
+    "count": 1
    },
    "rows": [
     [

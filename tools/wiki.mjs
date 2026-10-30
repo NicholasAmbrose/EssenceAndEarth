@@ -74,7 +74,7 @@ const outputRecipe = (c) => {
 };
 const farmlandRecipe = (t, i) => {
   const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
-  return recipe(farmlandItem(t), 5, [[b, e, b], [e, b, e], [b, e, b]]);
+  return recipe(farmlandItem(t), i ? 1 : 5, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 // ---------- pages ----------
@@ -164,7 +164,7 @@ const farmland = {
       facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)}% chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop, like vanilla farmland"]]),
       list([{ ...farmlandItem(t), name: "Top", sub: "" }, { name: "Side", icon: `img/icons/${t.id}_farmland_side.png` }]),
       h2("Recipe"),
-      p(i ? `Upgrade five ${title(cfg.tiers[i - 1].id)} Farmland with four ${tierName(t)}.` : "Five dirt and four Terra Essence."),
+      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)} make one.` : "Five dirt and four Terra Essence make five."),
       farmlandRecipe(t, i),
     ],
   })),

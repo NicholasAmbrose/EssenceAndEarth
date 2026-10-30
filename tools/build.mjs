@@ -396,7 +396,7 @@ cfg.tiers.forEach((t, i) => {
 });
 
 // Essence farmland: never dries out, and gives ripe crops a chance of extra essence (see scripts/main.js).
-// 5 dirt + 4 Terra make 5 Terra farmland; each later tier is 5 of the tier below + 4 of its essence.
+// 5 dirt + 4 Terra make 5 Terra farmland; 5 of the tier below + 4 of its essence make 1 of each later tier.
 const FARMLANDS = ["minecraft:farmland", ...cfg.tiers.map((t) => `${NS}:${t.id}_farmland`)];
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_farmland`;
@@ -412,7 +412,7 @@ cfg.tiers.forEach((t, i) => {
   recipe(id, "shaped", {
     pattern: ["BEB", "EBE", "BEB"],
     key: { B: { item: i ? FARMLANDS[i] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
-    result: { item: `${NS}:${id}`, count: 5 },
+    result: { item: `${NS}:${id}`, count: i ? 1 : 5 },
   }, tierEssence(i + 1));
 });
 
