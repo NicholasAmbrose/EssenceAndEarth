@@ -314,6 +314,7 @@ cfg.tiers.forEach((t, i) => {
 blockTexture("essence_ore", ORE, palette(cfg.tiers[0].color));
 block("essence_ore", "stone", { menu_category: { category: "nature" } }, {
   "minecraft:display_name": "Essence Ore",
+  "minecraft:geometry": "minecraft:geometry.full_block",
   "minecraft:destructible_by_mining": { seconds_to_destroy: 3 },
   "minecraft:material_instances": { "*": { texture: `${NS}_essence_ore` } },
   "minecraft:loot": loot("essence_ore", [drop(tierEssence(1), 1, 3)]),
