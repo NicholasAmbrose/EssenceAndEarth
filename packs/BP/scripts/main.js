@@ -1,4 +1,4 @@
-import { system, world, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
+import { system, world, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 
 // __NS__, __ESSENCE__ (the tier-1 essence) and __FARMLAND_BONUS__ are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
@@ -11,21 +11,49 @@ const FARMLAND_BONUS = __FARMLAND_BONUS__;
 // Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
 // so older worlds without essence ore in their explored chunks can still get started.
 const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecraft:fern", "minecraft:large_fern"]);
-const CROPS = new Set(["minecraft:wheat", "minecraft:carrots", "minecraft:potatoes", "minecraft:beetroot"]);
 const GRASS_CHANCE = 0.02;
 const CROP_CHANCE = 0.05;
+// Item a harvested vanilla crop drops -> smallest stack that means it was ripe.
+// Unripe wheat and beetroot drop only seeds; unripe carrots and potatoes drop exactly 1.
+const RIPE_DROP = { "minecraft:wheat": 1, "minecraft:beetroot": 1, "minecraft:carrot": 2, "minecraft:potato": 2 };
+const FARMLAND = new Set(["minecraft:farmland", ...Object.keys(FARMLAND_BONUS)]);
 
+// Grass: only players cut it, and it often drops nothing, so this one stays a player event.
 world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: broken, player, dimension }) => {
   if (player.getGameMode() === GameMode.Creative) return;
-  const id = broken.type.id;
-  if (id.startsWith("__NS__:") && id.endsWith("_crop")) {
-    const bonus = FARMLAND_BONUS[block.below()?.typeId] ?? 0;
-    if (broken.getState(GROWTH) === MAX_STAGE && Math.random() < bonus)
-      dimension.spawnItem(new ItemStack(id.replace(/_crop$/, "_essence")), block.center());
-    return;
+  if (GRASS.has(broken.type.id) && Math.random() < GRASS_CHANCE) drop(dimension, "__ESSENCE__", block.center());
+});
+
+// Crops are judged by what they drop rather than who broke them, so harvesting machines
+// (anything that breaks blocks with drops, like `setblock ... destroy`) roll the same chances as players.
+// A harvest drop appears inside the crop's block, right above the farmland; items a player throws appear
+// at head height, so they never match.
+const ours = new Set(); // ids of item entities this script spawned, so they don't roll again
+
+function drop(dimension, item, location) {
+  ours.add(dimension.spawnItem(new ItemStack(item), location).id);
+}
+
+world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
+  if (cause !== EntityInitializationCause.Spawned || entity.typeId !== "minecraft:item") return;
+  if (ours.delete(entity.id)) return;
+  const stack = entity.getComponent("minecraft:item")?.itemStack;
+  if (!stack) return;
+  const { x, y, z } = entity.location;
+  let soil;
+  try {
+    soil = entity.dimension.getBlock({ x: Math.floor(x), y: Math.floor(y) - 1, z: Math.floor(z) })?.typeId;
+  } catch {
+    return; // unloaded chunk
   }
-  const chance = GRASS.has(id) ? GRASS_CHANCE : CROPS.has(id) && broken.getState("growth") === 7 ? CROP_CHANCE : 0;
-  if (Math.random() < chance) dimension.spawnItem(new ItemStack("__ESSENCE__"), block.center());
+  if (!FARMLAND.has(soil)) return;
+
+  if (stack.amount >= (RIPE_DROP[stack.typeId] ?? Infinity)) {
+    if (Math.random() < CROP_CHANCE) drop(entity.dimension, "__ESSENCE__", entity.location);
+  } else if (stack.typeId.startsWith("__NS__:") && stack.typeId.endsWith("_essence")) {
+    // Our crops only drop essence when ripe, so its appearance on farmland is a ripe harvest.
+    if (Math.random() < (FARMLAND_BONUS[soil] ?? 0)) drop(entity.dimension, stack.typeId, entity.location);
+  }
 });
 
 function grow(block) {

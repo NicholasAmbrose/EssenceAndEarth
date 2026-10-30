@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.4.0",
-  "file": "EssenceAndEarth_v0.4.0.mcaddon",
+  "version": "0.4.1",
+  "file": "EssenceAndEarth_v0.4.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
