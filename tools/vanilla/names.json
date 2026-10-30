@@ -23,5 +23,8 @@
   "minecraft:amethyst_shard": "Amethyst Shard",
   "minecraft:obsidian": "Obsidian",
   "minecraft:netherite_scrap": "Netherite Scrap",
-  "minecraft:dirt": "Dirt"
+  "minecraft:dirt": "Dirt",
+  "minecraft:raw_copper": "Raw Copper",
+  "minecraft:raw_iron": "Raw Iron",
+  "minecraft:raw_gold": "Raw Gold"
 }

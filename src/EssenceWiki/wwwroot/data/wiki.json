@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.5.0",
-  "file": "EssenceAndEarth_v0.5.0.mcaddon",
+  "version": "0.5.1",
+  "file": "EssenceAndEarth_v0.5.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.5.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.5.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -304,7 +304,7 @@
          "name": "Copper Seeds",
          "icon": "img/icons/copper_seeds.png",
          "href": "wiki/terra-crops/copper",
-         "sub": "8 essence → 2 × Copper Ingot"
+         "sub": "8 essence → 2 × Raw Copper"
         },
         {
          "name": "Cobblestone Seeds",
@@ -412,7 +412,7 @@
          "name": "Iron Seeds",
          "icon": "img/icons/iron_seeds.png",
          "href": "wiki/aqua-crops/iron",
-         "sub": "8 essence → 2 × Iron Ingot"
+         "sub": "8 essence → 2 × Raw Iron"
         },
         {
          "name": "Redstone Seeds",
@@ -538,7 +538,7 @@
          "name": "Gold Seeds",
          "icon": "img/icons/gold_seeds.png",
          "href": "wiki/ignis-crops/gold",
-         "sub": "8 essence → 1 × Gold Ingot"
+         "sub": "8 essence → 1 × Raw Gold"
         },
         {
          "name": "Obsidian Seeds",
@@ -1507,7 +1507,7 @@
      "slug": "copper",
      "name": "Copper Crop",
      "icon": "img/icons/copper_crop.png",
-     "summary": "8 essence → 2 × Copper Ingot",
+     "summary": "8 essence → 2 × Raw Copper",
      "blocks": [
       {
        "t": "facts",
@@ -1522,7 +1522,7 @@
         ],
         [
          "Makes",
-         "2 × Copper Ingot per 8 essence"
+         "2 × Raw Copper per 8 essence"
         ]
        ]
       },
@@ -1631,13 +1631,13 @@
       },
       {
        "t": "h2",
-       "text": "Copper Ingot"
+       "text": "Raw Copper"
       },
       {
        "t": "grid",
        "result": {
-        "name": "Copper Ingot",
-        "icon": "img/vanilla/copper_ingot.png",
+        "name": "Raw Copper",
+        "icon": "img/vanilla/raw_copper.png",
         "count": 2
        },
        "rows": [
@@ -2466,7 +2466,7 @@
      "slug": "iron",
      "name": "Iron Crop",
      "icon": "img/icons/iron_crop.png",
-     "summary": "8 essence → 2 × Iron Ingot",
+     "summary": "8 essence → 2 × Raw Iron",
      "blocks": [
       {
        "t": "facts",
@@ -2481,7 +2481,7 @@
         ],
         [
          "Makes",
-         "2 × Iron Ingot per 8 essence"
+         "2 × Raw Iron per 8 essence"
         ]
        ]
       },
@@ -2590,13 +2590,13 @@
       },
       {
        "t": "h2",
-       "text": "Iron Ingot"
+       "text": "Raw Iron"
       },
       {
        "t": "grid",
        "result": {
-        "name": "Iron Ingot",
-        "icon": "img/vanilla/iron_ingot.png",
+        "name": "Raw Iron",
+        "icon": "img/vanilla/raw_iron.png",
         "count": 2
        },
        "rows": [
@@ -3995,7 +3995,7 @@
      "slug": "gold",
      "name": "Gold Crop",
      "icon": "img/icons/gold_crop.png",
-     "summary": "8 essence → 1 × Gold Ingot",
+     "summary": "8 essence → 1 × Raw Gold",
      "blocks": [
       {
        "t": "facts",
@@ -4010,7 +4010,7 @@
         ],
         [
          "Makes",
-         "1 × Gold Ingot per 8 essence"
+         "1 × Raw Gold per 8 essence"
         ]
        ]
       },
@@ -4119,13 +4119,13 @@
       },
       {
        "t": "h2",
-       "text": "Gold Ingot"
+       "text": "Raw Gold"
       },
       {
        "t": "grid",
        "result": {
-        "name": "Gold Ingot",
-        "icon": "img/vanilla/gold_ingot.png",
+        "name": "Raw Gold",
+        "icon": "img/vanilla/raw_gold.png",
         "count": 1
        },
        "rows": [
@@ -5601,8 +5601,8 @@
   },
   {
    "result": {
-    "name": "Copper Ingot",
-    "icon": "img/vanilla/copper_ingot.png",
+    "name": "Raw Copper",
+    "icon": "img/vanilla/raw_copper.png",
     "count": 2
    },
    "rows": [
@@ -6161,8 +6161,8 @@
   },
   {
    "result": {
-    "name": "Iron Ingot",
-    "icon": "img/vanilla/iron_ingot.png",
+    "name": "Raw Iron",
+    "icon": "img/vanilla/raw_iron.png",
     "count": 2
    },
    "rows": [
@@ -7057,8 +7057,8 @@
   },
   {
    "result": {
-    "name": "Gold Ingot",
-    "icon": "img/vanilla/gold_ingot.png",
+    "name": "Raw Gold",
+    "icon": "img/vanilla/raw_gold.png",
     "count": 1
    },
    "rows": [

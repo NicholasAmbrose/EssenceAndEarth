@@ -1,7 +1,7 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 5, 0],
+  "version": [0, 5, 1],
   "tiers": [
     { "id": "terra", "color": "#5fbf3f" },
     { "id": "aqua", "color": "#3f8fdf" },
@@ -11,10 +11,10 @@
   ],
   "crops": [
     { "id": "coal", "tier": 1, "color": "#3a3a3a", "ingredient": "minecraft:coal", "output": "minecraft:coal", "count": 2 },
-    { "id": "copper", "tier": 1, "color": "#c8673f", "ingredient": "minecraft:copper_ingot", "output": "minecraft:copper_ingot", "count": 2 },
-    { "id": "iron", "tier": 2, "color": "#d8d8d8", "ingredient": "minecraft:iron_ingot", "output": "minecraft:iron_ingot", "count": 2 },
+    { "id": "copper", "tier": 1, "color": "#c8673f", "ingredient": "minecraft:copper_ingot", "output": "minecraft:raw_copper", "count": 2 },
+    { "id": "iron", "tier": 2, "color": "#d8d8d8", "ingredient": "minecraft:iron_ingot", "output": "minecraft:raw_iron", "count": 2 },
     { "id": "redstone", "tier": 2, "color": "#c81010", "ingredient": "minecraft:redstone", "output": "minecraft:redstone", "count": 2 },
-    { "id": "gold", "tier": 3, "color": "#f5d63c", "ingredient": "minecraft:gold_ingot", "output": "minecraft:gold_ingot", "count": 1 },
+    { "id": "gold", "tier": 3, "color": "#f5d63c", "ingredient": "minecraft:gold_ingot", "output": "minecraft:raw_gold", "count": 1 },
     { "id": "emerald", "tier": 4, "color": "#2fd060", "ingredient": "minecraft:emerald", "output": "minecraft:emerald", "count": 1 },
     { "id": "diamond", "tier": 5, "color": "#4ee6d8", "ingredient": "minecraft:diamond", "output": "minecraft:diamond", "count": 1 },
     { "id": "bone_meal", "tier": 2, "color": "#e8e4d4", "ingredient": "minecraft:bone", "output": "minecraft:bone_meal", "count": 3 },
