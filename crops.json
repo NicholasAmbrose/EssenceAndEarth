@@ -1,0 +1,21 @@
+{
+  "name": "Essence Fields",
+  "namespace": "ef",
+  "version": [0, 1, 0],
+  "tiers": [
+    { "id": "verdant", "color": "#5fbf3f" },
+    { "id": "azure", "color": "#3f8fdf" },
+    { "id": "amber", "color": "#e0a030" },
+    { "id": "crimson", "color": "#d03a3a" },
+    { "id": "radiant", "color": "#f0e8ff" }
+  ],
+  "crops": [
+    { "id": "coal", "tier": 1, "color": "#3a3a3a", "ingredient": "minecraft:coal", "output": "minecraft:coal", "count": 6 },
+    { "id": "copper", "tier": 1, "color": "#c8673f", "ingredient": "minecraft:copper_ingot", "output": "minecraft:copper_ingot", "count": 6 },
+    { "id": "iron", "tier": 2, "color": "#d8d8d8", "ingredient": "minecraft:iron_ingot", "output": "minecraft:iron_ingot", "count": 4 },
+    { "id": "redstone", "tier": 2, "color": "#c81010", "ingredient": "minecraft:redstone", "output": "minecraft:redstone", "count": 8 },
+    { "id": "gold", "tier": 3, "color": "#f5d63c", "ingredient": "minecraft:gold_ingot", "output": "minecraft:gold_ingot", "count": 4 },
+    { "id": "emerald", "tier": 4, "color": "#2fd060", "ingredient": "minecraft:emerald", "output": "minecraft:emerald", "count": 2 },
+    { "id": "diamond", "tier": 5, "color": "#4ee6d8", "ingredient": "minecraft:diamond", "output": "minecraft:diamond", "count": 1 }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Essence Fields BP",
+    "description": "Grow your resources.",
+    "uuid": "607d91c7-ef92-42a5-8ad2-760ae37c4352",
+    "version": [0, 1, 0],
+    "min_engine_version": [1, 21, 90]
+  },
+  "modules": [
+    { "type": "data", "uuid": "cd2b6d7f-e303-4cdc-88ed-c3e54e67d5fd", "version": [0, 1, 0] },
+    { "type": "script", "language": "javascript", "uuid": "1a0c8695-333f-4eed-8b5b-2ecc42fc1524", "entry": "scripts/main.js", "version": [0, 1, 0] }
+  ],
+  "dependencies": [
+    { "module_name": "@minecraft/server", "version": "2.0.0" },
+    { "uuid": "cc26652b-c6aa-4b91-b725-9be64ab4cd3f", "version": [0, 1, 0] }
+  ]
+}
