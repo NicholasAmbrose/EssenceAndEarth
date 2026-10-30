@@ -23,13 +23,23 @@ server's `behavior_packs/` and `EssenceAndEarth_RP` into `resource_packs/`, then
 from each `manifest.json`). Bump `version` in `crops.json` on every release so clients download the new
 resource pack.
 
+## Backing up the server world
+
+```sh
+node tools/backup.mjs           # needs EXAROTON_TOKEN; writes backups/world_<date>.zip
+```
+
+Run it before uploading a new version. Saving is paused during the download so the copy is consistent.
+`backups/` is git-ignored. To restore, upload the zip's `world` folder in the exaroton panel.
+
 ## Layout
 
 | Path | What |
 |---|---|
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
 | `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth and bone meal). |
-| `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`. |
+| `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
+| `tools/backup.mjs` | Downloads the server world into `backups/`. |
 | `art/` | Optional hand-drawn textures. `art/textures/items/iron_seeds.png` replaces the generated placeholder at that path. |
 
 `build/` is generated and not committed. `addon/` holds the latest `.mcaddon` and is committed so it can be downloaded from GitHub.
@@ -41,6 +51,8 @@ Add an entry to `crops.json`:
 ```json
 { "id": "lapis", "tier": 2, "color": "#2a4fbf", "ingredient": "minecraft:lapis_lazuli", "output": "minecraft:lapis_lazuli", "count": 8 }
 ```
+
+Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
 - **Crop:** plant on farmland; grows in 4 stages (bone meal works). Ripe crops drop 1–2 crop essence and a seed (10% chance of a second).

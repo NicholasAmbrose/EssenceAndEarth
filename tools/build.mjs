@@ -15,6 +15,23 @@ const BUILD = path.join(ROOT, "build");
 const BP = path.join(BUILD, `${SLUG}_BP`);
 const RP = path.join(BUILD, `${SLUG}_RP`);
 
+// Catch crops.json mistakes here instead of as silent failures in-game.
+const problems = [];
+const seen = new Set();
+for (const c of cfg.crops) {
+  if (seen.has(c.id)) problems.push(`duplicate crop id "${c.id}"`);
+  seen.add(c.id);
+  if (!/^[a-z0-9_]+$/.test(c.id)) problems.push(`${c.id}: id must be lowercase letters, digits and _`);
+  if (!(c.tier >= 1 && c.tier <= cfg.tiers.length)) problems.push(`${c.id}: tier must be 1-${cfg.tiers.length}`);
+  if (!/^#[0-9a-f]{6}$/i.test(c.color)) problems.push(`${c.id}: color must look like #a1b2c3`);
+  for (const k of ["ingredient", "output"]) if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c[k] ?? "")) problems.push(`${c.id}: ${k} must be an item id like minecraft:iron_ingot`);
+  if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
+}
+if (problems.length) {
+  console.error(`crops.json has problems:\n  ${problems.join("\n  ")}`);
+  process.exit(1);
+}
+
 const title = (id) => id.replace(/(^|_)(\w)/g, (_, sep, c) => (sep ? " " : "") + c.toUpperCase());
 
 function write(file, data) {
@@ -23,23 +40,49 @@ function write(file, data) {
 }
 
 // ---------- textures ----------
-// 16x16 masks. a/b/c/d = light/base/dark/darker of the tint colour, g/G = stem greens, s = stone.
+// 16x16 masks, shaded automatically in the tint colour:
+//   # body (outlined, lit from the top-left)   * highlight   + sparkle
+//   g/G light/dark stem green   s stone   . transparent
 
-const ESSENCE = [
+// Tier essence: a cut gem. Higher tiers get more sparkles around it.
+const GEM = [
+  "................",
+  ".......##.......",
+  "......####......",
+  ".....######.....",
+  ".....#*####.....",
+  "....#*######....",
+  "....#*######....",
+  "....##*#####....",
+  "....########....",
+  "....########....",
+  "....########....",
+  ".....######.....",
+  ".....######.....",
+  "......####......",
+  ".......##.......",
+  "................",
+];
+const SPARKLES = [[2, 2], [13, 3], [13, 12], [2, 12]];
+const withSparkles = (mask, n) =>
+  mask.map((row, y) => [...row].map((ch, x) => (SPARKLES.slice(0, n).some(([sx, sy]) => sx === x && sy === y) ? "+" : ch)).join(""));
+
+// Crop essence: a droplet, so it reads differently from the tier gems.
+const DROP = [
   "................",
   "................",
-  ".......cc.......",
-  "......cabc......",
-  ".....cabbbc.....",
-  "....cabbbbbc....",
-  "....cabbbbbc....",
-  "...cabbbbbbbc...",
-  "...cbbbbbbbbc...",
-  "...cbbbbbbbdc...",
-  "...cbbbbbbbdc...",
-  "....cbbbbbdc....",
-  ".....cbbddc.....",
-  "......cccc......",
+  ".......##.......",
+  "......####......",
+  ".....######.....",
+  "....##*#####....",
+  "...##*#######...",
+  "...#*########...",
+  "...##########...",
+  "...##########...",
+  "...##########...",
+  "....########....",
+  ".....######.....",
+  "......####......",
   "................",
   "................",
 ];
@@ -48,111 +91,94 @@ const SEEDS = [
   "................",
   "................",
   "................",
-  "................",
-  ".....ab.........",
-  "....abbc...ab...",
-  "....bbcc..abbc..",
-  ".....cc...bbcc..",
-  "...........cc...",
-  "......ab........",
-  ".....abbc.......",
-  ".....bbcc.......",
-  "......cc........",
-  "................",
-  "................",
+  "..##............",
+  ".####.....##....",
+  ".#*###...####...",
+  ".#####..#*###...",
+  "..###...#####...",
+  "........#####...",
+  ".........###....",
+  "....##..........",
+  "...####.........",
+  "...#*###........",
+  "...#####........",
+  "....###.........",
   "................",
 ];
 
 const ORE = [
   "ssssssssssssssss",
-  "sssabsssssssssss",
-  "ssabbcssssssabss",
-  "sssbccsssssabbcs",
-  "ssssssssssssbccs",
-  "sssssssabsssssss",
-  "ssssssabbcssssss",
-  "sssssssbccssssss",
-  "ssabssssssssssss",
-  "sabbcsssssssabss",
-  "ssbccssssssabbcs",
-  "sssssssssssbbccs",
-  "ssssssabssssccss",
-  "sssssabbcsssssss",
-  "ssssssbccsssssss",
-  "ssssssssssssssss",
+  "ss###sssssssssss",
+  "s#*###sssss###ss",
+  "s#####ssss#*###s",
+  "ss###sssss#####s",
+  "sssssss###s###ss",
+  "ssssss#*###sssss",
+  "ssssss#####sssss",
+  "sss###s###ssssss",
+  "ss#*###sssss###s",
+  "ss#####ssss#*###",
+  "sss###sssss#####",
+  "ssssssss###s###s",
+  "sssssss#*###ssss",
+  "sssssss#####ssss",
+  "ssssssss###sssss",
 ];
 
 const blank = (n) => Array(n).fill("................");
+const STEMS = [
+  "..G..gg....G..g.",
+  "..Gg..G...gG.gg.",
+  ".gG...Gg..G...G.",
+  "..G..gG...Gg.gG.",
+  "..gg..G..gG...G.",
+  "...G..Gg..G..gG.",
+  "..gG..G...Gg..G.",
+  "...G.gG...G..gG.",
+  "...G..G...G...G.",
+  "...G..G...G...G.",
+];
 const STAGES = [
+  [...blank(12), "..g....g....g...", "..gg..gG...gG...", "...G...G...G....", "...G...G...G...."],
+  [...blank(8), ".g.........g....", ".gg...g...gg....", ...STEMS.slice(4)],
+  [...blank(4), "..g.......g.....", ".gg...g...gg....", ...STEMS],
   [
-    ...blank(12),
-    "..g....g....g...",
-    "..gg..gG...gG...",
-    "...G...G...G....",
-    "...G...G...G....",
-  ],
-  [
-    ...blank(8),
-    ".g.........g....",
-    ".gg...g...gg....",
-    "..G..gg....G..g.",
-    "..G...G...gG.gg.",
-    "..gg..Gg..G...G.",
-    "...G..G...G..gG.",
-    "...G..G...G...G.",
-    "...G..G...G...G.",
-  ],
-  [
-    ...blank(4),
-    "..g.......g.....",
-    ".gg...g...gg....",
-    "..G..gg....G..g.",
-    "..Gg..G...gG.gg.",
-    ".gG...Gg..G...G.",
-    "..G..gG...Gg.gG.",
-    "..gg..G..gG...G.",
-    "...G..Gg..G..gG.",
-    "..gG..G...Gg..G.",
-    "...G.gG...G..gG.",
-    "...G..G...G...G.",
-    "...G..G...G...G.",
-  ],
-  [
-    ".ab.......ab....",
-    "abbc..ab.abbc.ab",
-    ".bcc.abbc.bcc.bb",
-    "..g...bcc..g..cc",
-    "..g....g...g..g.",
-    ".gg...gg..gg..g.",
-    "..G..gg....G..g.",
-    "..Gg..G...gG.gg.",
-    ".gG...Gg..G...G.",
-    "..G..gG...Gg.gG.",
-    "..gg..G..gG...G.",
-    "...G..Gg..G..gG.",
-    "..gG..G...Gg..G.",
-    "...G.gG...G..gG.",
-    "...G..G...G...G.",
-    "...G..G...G...G.",
+    "..##.......##...",
+    ".#*##.....#*##..",
+    ".####..##.####..",
+    "..##..#*##.##...",
+    "..g...####..g...",
+    ".gg....##..gg...",
+    ...STEMS,
   ],
 ];
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const shade = (rgb, f) => rgb.map((v) => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)));
-function palette(color) {
-  const c = hex(color);
-  return { a: shade(c, 0.4), b: c, c: shade(c, -0.35), d: shade(c, -0.55), g: hex("#5aa83a"), G: hex("#3d7a28") };
-}
+const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28") };
 
-function render(mask, pal) {
+function render(mask, color) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
-  const px = Buffer.alloc(16 * 16 * 4);
   mask.forEach((row, y) => {
     if (row.length !== 16) throw new Error(`mask row ${y} is ${row.length} wide: ${row}`);
+  });
+  const c = color && hex(color);
+  const isBody = (x, y) => "#*".includes(mask[y]?.[x] ?? ".");
+  let lo = Infinity, hi = -Infinity; // range of x+y over the body, for the light gradient
+  mask.forEach((row, y) => [...row].forEach((ch, x) => isBody(x, y) && ((lo = Math.min(lo, x + y)), (hi = Math.max(hi, x + y)))));
+
+  const px = Buffer.alloc(16 * 16 * 4);
+  mask.forEach((row, y) => {
     [...row].forEach((ch, x) => {
+      let rgb;
       if (ch === ".") return;
-      const v = 105 + (((x * 31 + y * 17) * 2654435761) >>> 0) % 40;
-      px.set([...(ch === "s" ? [v, v, v] : pal[ch]), 255], (y * 16 + x) * 4);
+      else if (ch === "s") rgb = Array(3).fill(105 + ((((x * 31 + y * 17) * 2654435761) >>> 0) % 40));
+      else if (ch in GREEN) rgb = GREEN[ch];
+      else if (ch === "+") rgb = shade(c, 0.7);
+      else if (ch === "*") rgb = shade(c, 0.8);
+      else if (!isBody(x - 1, y) || !isBody(x + 1, y) || !isBody(x, y - 1) || !isBody(x, y + 1)) rgb = shade(c, -0.55);
+      else rgb = shade(c, 0.3 - (0.6 * (x + y - lo)) / (hi - lo || 1));
+      px.set([...rgb, 255], (y * 16 + x) * 4);
     });
   });
   return px;
@@ -168,7 +194,7 @@ function scale(px, k) {
   return out;
 }
 
-function png(w, px) {
+function png(w, px, h = w) {
   const chunk = (type, data) => {
     const body = Buffer.concat([Buffer.from(type), data]);
     const out = Buffer.alloc(body.length + 8);
@@ -179,10 +205,10 @@ function png(w, px) {
   };
   const ihdr = Buffer.alloc(13);
   ihdr.writeUInt32BE(w, 0);
-  ihdr.writeUInt32BE(w, 4);
+  ihdr.writeUInt32BE(h, 4);
   ihdr.set([8, 6], 8); // 8-bit RGBA
-  const raw = Buffer.alloc((w * 4 + 1) * w);
-  for (let y = 0; y < w; y++) px.copy(raw, y * (w * 4 + 1) + 1, y * w * 4, (y + 1) * w * 4);
+  const raw = Buffer.alloc((w * 4 + 1) * h);
+  for (let y = 0; y < h; y++) px.copy(raw, y * (w * 4 + 1) + 1, y * w * 4, (y + 1) * w * 4);
   return Buffer.concat([
     Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
     chunk("IHDR", ihdr),
@@ -191,9 +217,29 @@ function png(w, px) {
   ]);
 }
 
-function texture(rel, mask, pal) {
+const previews = []; // generated textures, laid out in build/preview.png
+
+function texture(rel, mask, color) {
   const art = path.join(ROOT, "art", `${rel}.png`);
-  write(path.join(RP, `${rel}.png`), fs.existsSync(art) ? fs.readFileSync(art) : png(16, render(mask, pal)));
+  if (fs.existsSync(art)) return write(path.join(RP, `${rel}.png`), fs.readFileSync(art));
+  const px = render(mask, color);
+  previews.push(px);
+  write(path.join(RP, `${rel}.png`), png(16, px));
+}
+
+function previewSheet(file, k = 4, cols = 12) {
+  const cell = 16 * k + 4, w = cols * cell, h = Math.ceil(previews.length / cols) * cell;
+  const out = Buffer.alloc(w * h * 4);
+  for (let i = 0; i < w * h; i++) out.set([150, 150, 150, 255], i * 4);
+  previews.forEach((px, i) => {
+    const big = scale(px, k), ox = (i % cols) * cell + 2, oy = ((i / cols) | 0) * cell + 2;
+    for (let y = 0; y < 16 * k; y++)
+      for (let x = 0; x < 16 * k; x++) {
+        const s = (y * 16 * k + x) * 4;
+        if (big[s + 3]) big.copy(out, ((oy + y) * w + ox + x) * 4, s, s + 4);
+      }
+  });
+  write(file, png(w, out, h));
 }
 
 // ---------- zip ----------
@@ -259,8 +305,8 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
 
 const terrain = {}, itemTextures = {}, sounds = {};
 
-function item(id, mask, pal, components = {}) {
-  texture(`textures/items/${id}`, mask, pal);
+function item(id, mask, color, components = {}) {
+  texture(`textures/items/${id}`, mask, color);
   itemTextures[`${NS}_${id}`] = { textures: `textures/items/${id}` };
   write(path.join(BP, "items", `${id}.json`), {
     format_version: FMT,
@@ -271,8 +317,8 @@ function item(id, mask, pal, components = {}) {
   });
 }
 
-function blockTexture(id, mask, pal) {
-  texture(`textures/blocks/${id}`, mask, pal);
+function blockTexture(id, mask, color) {
+  texture(`textures/blocks/${id}`, mask, color);
   terrain[`${NS}_${id}`] = { textures: `textures/blocks/${id}` };
 }
 
@@ -305,13 +351,13 @@ function recipe(id, type, body, unlock) {
 // Essence tiers: 4 of the previous tier make 1 of the next.
 const tierEssence = (n) => `${NS}:${cfg.tiers[n - 1].id}_essence`;
 cfg.tiers.forEach((t, i) => {
-  item(`${t.id}_essence`, ESSENCE, palette(t.color));
+  item(`${t.id}_essence`, withSparkles(GEM, i), t.color);
   if (i > 0)
     recipe(`${t.id}_essence`, "shapeless", { ingredients: [{ item: tierEssence(i), count: 4 }], result: { item: tierEssence(i + 1) } }, tierEssence(i));
 });
 
 // Essence ore: the only source of tier-1 essence.
-blockTexture("essence_ore", ORE, palette(cfg.tiers[0].color));
+blockTexture("essence_ore", ORE, cfg.tiers[0].color);
 block("essence_ore", "stone", { menu_category: { category: "nature" } }, {
   "minecraft:display_name": "Essence Ore",
   "minecraft:geometry": "minecraft:geometry.full_block",
@@ -343,13 +389,12 @@ write(path.join(BP, "feature_rules", "essence_ore_rule.json"), {
 });
 
 // Crops. Stages 0-2 share green textures; the ripe stage is tinted per crop.
-[0, 1, 2].forEach((s) => blockTexture(`crop_${s}`, STAGES[s], palette("#000000")));
+[0, 1, 2].forEach((s) => blockTexture(`crop_${s}`, STAGES[s]));
 const cropMaterial = (tex) => ({ "*": { texture: `${NS}_${tex}`, render_method: "alpha_test", ambient_occlusion: false, face_dimming: false } });
 
 for (const c of cfg.crops) {
-  const pal = palette(c.color);
   const seeds = `${NS}:${c.id}_seeds`, essence = `${NS}:${c.id}_essence`, growth = `${NS}:growth`;
-  blockTexture(`${c.id}_crop`, STAGES[3], pal);
+  blockTexture(`${c.id}_crop`, STAGES[3], c.color);
 
   block(
     `${c.id}_crop`,
@@ -376,8 +421,8 @@ for (const c of cfg.crops) {
     })),
   );
 
-  item(`${c.id}_seeds`, SEEDS, pal, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: ["minecraft:farmland"] } });
-  item(`${c.id}_essence`, ESSENCE, pal);
+  item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: ["minecraft:farmland"] } });
+  item(`${c.id}_essence`, DROP, c.color);
 
   recipe(`${c.id}_seeds`, "shaped", {
     pattern: ["ERE", "RSR", "ERE"],
@@ -414,7 +459,7 @@ write(path.join(RP, "textures", "terrain_texture.json"), { resource_pack_name: N
 write(path.join(RP, "textures", "item_texture.json"), { resource_pack_name: NS, texture_name: "atlas.items", texture_data: itemTextures });
 write(path.join(RP, "blocks.json"), { format_version: [1, 1, 0], ...sounds });
 
-const icon = png(128, scale(render(ESSENCE, palette(cfg.tiers[0].color)), 8));
+const icon = png(128, scale(render(withSparkles(GEM, 4), cfg.tiers[0].color), 8));
 write(path.join(BP, "pack_icon.png"), icon);
 write(path.join(RP, "pack_icon.png"), icon);
 
@@ -429,6 +474,7 @@ for (const f of fs.readdirSync(addonDir)) if (f.endsWith(".mcaddon")) fs.rmSync(
 const out = path.join(addonDir, `${SLUG}_v${cfg.version.join(".")}.mcaddon`);
 write(out, zip(files));
 console.log(`built ${path.relative(ROOT, out)} (${files.length} files)`);
+previewSheet(path.join(BUILD, "preview.png")); // after zipping, so it stays out of the add-on
 
 if (process.argv.includes("--deploy")) {
   const mojang = [
