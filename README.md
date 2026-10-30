@@ -112,4 +112,4 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 ## Known limits
 
 - Essence ore only generates in newly generated chunks. Terra essence (tier 1) also has a small chance to drop from
-  grass and ripe wheat, carrots, potatoes and beetroot, so existing worlds can still get started.
+  grass, ripe wheat, carrots, potatoes and beetroot, and logs cut by a Wildbloom Logger, so existing worlds can still get started.
