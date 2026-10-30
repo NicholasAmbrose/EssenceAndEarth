@@ -1,22 +1,25 @@
 import { system, world, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 
-// __NS__, __ESSENCE__ (the tier-1 essence), __FARMLAND_BONUS__ and __ACCELERATOR_ROLLS__ are filled in from crops.json at build time.
+// __NS__, __ESSENCE__ (the tier-1 essence), __BALANCE__, __FARMLAND_BONUS__ and __ACCELERATOR_ROLLS__ are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
-const GROW_CHANCE = 0.5; // per random tick
+const {
+  growChance: GROW_CHANCE, // per random tick
+  boneMealChance: BONE_MEAL_CHANCE,
+  grassEssenceChance: GRASS_CHANCE,
+  cropEssenceChance: CROP_CHANCE,
+  maxAccelerators: MAX_ACCELERATORS,
+} = __BALANCE__;
 
 // Essence farmland id -> chance that a ripe crop on it drops one extra essence.
 const FARMLAND_BONUS = __FARMLAND_BONUS__;
 
 // Accelerator id -> growth rolls it adds per random tick, for an unbroken stack under the farmland.
 const ACCELERATOR_ROLLS = __ACCELERATOR_ROLLS__;
-const MAX_ACCELERATORS = 4;
 
 // Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
 // so older worlds without essence ore in their explored chunks can still get started.
 const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecraft:fern", "minecraft:large_fern"]);
-const GRASS_CHANCE = 0.02;
-const CROP_CHANCE = 0.05;
 // Item a harvested vanilla crop drops -> smallest stack that means it was ripe.
 // Unripe wheat and beetroot drop only seeds; unripe carrots and potatoes drop exactly 1.
 const RIPE_DROP = { "minecraft:wheat": 1, "minecraft:beetroot": 1, "minecraft:carrot": 2, "minecraft:potato": 2 };
@@ -60,13 +63,13 @@ world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
   }
 });
 
-function grow(block) {
+function canGrow(block) {
   // Machines can setType a crop onto any soil, past the placement filter. It just won't grow there.
-  if (!(block.below()?.typeId in FARMLAND_BONUS)) return false;
-  const stage = block.permutation.getState(GROWTH);
-  if (stage >= MAX_STAGE) return false;
-  block.setPermutation(block.permutation.withState(GROWTH, stage + 1));
-  return true;
+  return block.below()?.typeId in FARMLAND_BONUS && block.permutation.getState(GROWTH) < MAX_STAGE;
+}
+
+function grow(block) {
+  if (canGrow(block)) block.setPermutation(block.permutation.withState(GROWTH, block.permutation.getState(GROWTH) + 1));
 }
 
 function growthRolls(block) {
@@ -92,7 +95,9 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
     onPlayerInteract({ block, player, dimension }) {
       const equip = player?.getComponent("minecraft:equippable");
       const item = equip?.getEquipment(EquipmentSlot.Mainhand);
-      if (item?.typeId !== "minecraft:bone_meal" || !grow(block)) return;
+      if (item?.typeId !== "minecraft:bone_meal" || !canGrow(block)) return;
+      // A failed roll still uses the bone meal, like vanilla saplings.
+      if (Math.random() < BONE_MEAL_CHANCE) grow(block);
       dimension.spawnParticle("minecraft:crop_growth_emitter", block.center());
       if (player.getGameMode() === GameMode.Creative) return;
       if (item.amount > 1) {

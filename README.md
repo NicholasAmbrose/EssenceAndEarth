@@ -71,10 +71,26 @@ Add an entry to `crops.json`:
 Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
-- **Crop:** plant on essence farmland (vanilla farmland won't take it); grows in 4 stages (bone meal works). Ripe crops drop 1–2 crop essence and a seed (10% chance of a second).
+- **Crop:** plant on essence farmland (vanilla farmland won't take it); grows in 4 stages. Ripe crops drop crop essence and a seed, with a chance of a second.
 - **Output:** 8 crop essence in a ring crafts `count` × `output`.
 
-Growth accelerators (`ee:<tier>_accelerator`) go directly under essence farmland, up to 4 deep with no gaps. Each adds its tier's `accelerator` value from `crops.json` to the crop's growth rolls per random tick.
+Growth accelerators (`ee:<tier>_accelerator`) go directly under essence farmland, up to 4 deep with no gaps. Each adds its tier's `acceleratorRolls` value to the crop's growth rolls per random tick.
+
+## Balance
+
+Every tuning number lives in the `balance` block of `crops.json`. Change one, rebuild and upload the add-on; the wiki picks it up from the same place.
+
+| Setting | What it does |
+|---|---|
+| `growChance` | Chance per growth roll to advance a stage |
+| `boneMealChance` | Chance per bone meal to advance a stage. A miss still uses it |
+| `grassEssenceChance`, `cropEssenceChance` | Chance of Terra Essence from grass and ripe vanilla crops |
+| `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from an ore |
+| `secondSeedChance` | Chance a ripe crop drops a second seed |
+| `farmlandBonus` | Per tier: chance of one extra essence from a ripe crop |
+| `acceleratorRolls` | Per tier: growth rolls each accelerator adds |
+| `maxAccelerators` | How deep a stack counts |
+| `farmlandYield`, `acceleratorYield` | How many blocks one craft makes |
 
 ## For other add-ons
 
@@ -89,5 +105,5 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 
 ## Known limits
 
-- Essence ore only generates in newly generated chunks. Terra essence (tier 1) also drops from grass (2%) and ripe
-  wheat, carrots, potatoes and beetroot (5%), so existing worlds can still get started.
+- Essence ore only generates in newly generated chunks. Terra essence (tier 1) also has a small chance to drop from
+  grass and ripe wheat, carrots, potatoes and beetroot, so existing worlds can still get started.

@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.6.0",
-  "file": "EssenceAndEarth_v0.6.0.mcaddon",
+  "version": "0.6.1",
+  "file": "EssenceAndEarth_v0.6.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.6.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.6.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -74,7 +74,7 @@
       },
       {
        "t": "p",
-       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait, or use bone meal to speed them up."
+       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait. Bone meal can help: each use has a 25% chance to advance a stage."
       },
       {
        "t": "h2",
@@ -106,7 +106,7 @@
         ],
         [
          "Bone meal",
-         "Advances one stage per use"
+         "25% chance to advance one stage per use"
         ],
         [
          "Ripe drops",
@@ -196,7 +196,7 @@
       },
       {
        "t": "p",
-       "html": "Stack up to four <a href=\"wiki/accelerators\">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack."
+       "html": "Stack up to 4 <a href=\"wiki/accelerators\">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack."
       }
      ],
      "href": "wiki/guide/growing-crops"
@@ -790,7 +790,7 @@
       },
       {
        "t": "p",
-       "html": "Five dirt and four Terra Essence make one."
+       "html": "Five dirt and four Terra Essence make 1."
       },
       {
        "t": "grid",
@@ -900,7 +900,7 @@
       },
       {
        "t": "p",
-       "html": "Five Terra Farmland and four Aqua Essence make one."
+       "html": "Five Terra Farmland and four Aqua Essence make 1."
       },
       {
        "t": "grid",
@@ -1015,7 +1015,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aqua Farmland and four Ignis Essence make one."
+       "html": "Five Aqua Farmland and four Ignis Essence make 1."
       },
       {
        "t": "grid",
@@ -1130,7 +1130,7 @@
       },
       {
        "t": "p",
-       "html": "Five Ignis Farmland and four Aether Essence make one."
+       "html": "Five Ignis Farmland and four Aether Essence make 1."
       },
       {
        "t": "grid",
@@ -1245,7 +1245,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aether Farmland and four Astra Essence make one."
+       "html": "Five Aether Farmland and four Astra Essence make 1."
       },
       {
        "t": "grid",
@@ -1325,7 +1325,7 @@
      "slug": "terra-accelerator",
      "name": "Terra Growth Accelerator",
      "icon": "img/icons/terra_accelerator.png",
-     "summary": "Up to ×1.8 crop speed with a stack of four.",
+     "summary": "Up to ×1.8 crop speed with a full stack.",
      "blocks": [
       {
        "t": "facts",
@@ -1372,7 +1372,7 @@
       },
       {
        "t": "p",
-       "html": "Five cobblestone and four Terra Essence make one."
+       "html": "Five cobblestone and four Terra Essence make 1."
       },
       {
        "t": "grid",
@@ -1438,7 +1438,7 @@
      "slug": "aqua-accelerator",
      "name": "Aqua Growth Accelerator",
      "icon": "img/icons/aqua_accelerator.png",
-     "summary": "Up to ×2.6 crop speed with a stack of four.",
+     "summary": "Up to ×2.6 crop speed with a full stack.",
      "blocks": [
       {
        "t": "facts",
@@ -1485,7 +1485,7 @@
       },
       {
        "t": "p",
-       "html": "Five Terra Growth Accelerators and four Aqua Essence make one."
+       "html": "Five Terra Growth Accelerators and four Aqua Essence make 1."
       },
       {
        "t": "grid",
@@ -1556,7 +1556,7 @@
      "slug": "ignis-accelerator",
      "name": "Ignis Growth Accelerator",
      "icon": "img/icons/ignis_accelerator.png",
-     "summary": "Up to ×3.8 crop speed with a stack of four.",
+     "summary": "Up to ×3.8 crop speed with a full stack.",
      "blocks": [
       {
        "t": "facts",
@@ -1603,7 +1603,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aqua Growth Accelerators and four Ignis Essence make one."
+       "html": "Five Aqua Growth Accelerators and four Ignis Essence make 1."
       },
       {
        "t": "grid",
@@ -1674,7 +1674,7 @@
      "slug": "aether-accelerator",
      "name": "Aether Growth Accelerator",
      "icon": "img/icons/aether_accelerator.png",
-     "summary": "Up to ×4.9 crop speed with a stack of four.",
+     "summary": "Up to ×4.9 crop speed with a full stack.",
      "blocks": [
       {
        "t": "facts",
@@ -1721,7 +1721,7 @@
       },
       {
        "t": "p",
-       "html": "Five Ignis Growth Accelerators and four Aether Essence make one."
+       "html": "Five Ignis Growth Accelerators and four Aether Essence make 1."
       },
       {
        "t": "grid",
@@ -1792,7 +1792,7 @@
      "slug": "astra-accelerator",
      "name": "Astra Growth Accelerator",
      "icon": "img/icons/astra_accelerator.png",
-     "summary": "Up to ×5.5 crop speed with a stack of four.",
+     "summary": "Up to ×5.5 crop speed with a full stack.",
      "blocks": [
       {
        "t": "facts",
@@ -1839,7 +1839,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aether Growth Accelerators and four Astra Essence make one."
+       "html": "Five Aether Growth Accelerators and four Astra Essence make 1."
       },
       {
        "t": "grid",

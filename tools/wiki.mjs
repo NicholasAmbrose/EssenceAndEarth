@@ -10,6 +10,7 @@ const MIN_BEDROCK = "1.21.90";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
+const BAL = cfg.balance;
 const SLUG = cfg.name.replaceAll("&", "And").replace(/\W/g, "");
 const RP = path.join(ROOT, "build", `${SLUG}_RP`);
 const WWW = path.join(ROOT, "src", "EssenceWiki", "wwwroot");
@@ -20,6 +21,9 @@ const file = `${SLUG}_v${version}.mcaddon`;
 
 const title = (id) => id.replace(/(^|_)(\w)/g, (_, sep, c) => (sep ? " " : "") + c.toUpperCase());
 const slug = (id) => id.replaceAll("_", "-");
+const pct = (v) => `${+(v * 100).toFixed(1)}%`;
+const range = ([min, max]) => (min === max ? `${min}` : `${min}–${max}`);
+const harvest = range(BAL.harvestEssence), oreDrop = range(BAL.oreEssence), secondSeed = pct(BAL.secondSeedChance), boneMeal = pct(BAL.boneMealChance);
 
 // ---------- images ----------
 
@@ -49,13 +53,13 @@ const essenceItem = (c) => ({ name: `${title(c.id)} Essence`, icon: `img/icons/$
 const ripeItem = (c) => ({ name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`, href: cropHref(c) });
 const oreItem = { name: "Essence Ore", icon: "img/icons/essence_ore.png", href: essenceHref("essence_ore") };
 const farmlandItem = (t) => ({ name: `${title(t.id)} Farmland`, icon: `img/icons/${t.id}_farmland_top.png`, href: `wiki/farmland/${slug(`${t.id}_farmland`)}` });
-const bonusPct = (i) => Math.round(((i + 1) / cfg.tiers.length) * 100); // matches the bonus in build.mjs
+const bonusPct = (i) => pct(BAL.farmlandBonus[i]);
 const acceleratorItem = (t) => ({ name: `${title(t.id)} Growth Accelerator`, icon: `img/icons/${t.id}_accelerator.png`, href: `wiki/accelerators/${slug(`${t.id}_accelerator`)}` });
 // Average random ticks for a crop to ripen with this many rolls per tick, as in scripts/main.js.
 const ripenTicks = (rolls) => {
   let chance = [1]; // chance[k]: one tick advances k stages
   for (let r = rolls; r > 0; r--) {
-    const q = 0.5 * Math.min(r, 1);
+    const q = BAL.growChance * Math.min(r, 1);
     chance = [...chance, 0].map((v, k) => v * (1 - q) + (chance[k - 1] ?? 0) * q);
   }
   const left = [0]; // left[n]: average ticks with n stages to go
@@ -87,12 +91,12 @@ const outputRecipe = (c) => {
 };
 const farmlandRecipe = (t, i) => {
   const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
-  return recipe(farmlandItem(t), 1, [[b, e, b], [e, b, e], [b, e, b]]);
+  return recipe(farmlandItem(t), BAL.farmlandYield, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 const acceleratorRecipe = (t, i) => {
   const b = i ? acceleratorItem(cfg.tiers[i - 1]) : vanilla("minecraft:cobblestone"), e = tierItem(t);
-  return recipe(acceleratorItem(t), 1, [[b, e, b], [e, b, e], [b, e, b]]);
+  return recipe(acceleratorItem(t), BAL.acceleratorYield, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 // ---------- pages ----------
@@ -102,8 +106,8 @@ const h2 = (text) => ({ t: "h2", text });
 const facts = (rows) => ({ t: "facts", facts: rows });
 const list = (items) => ({ t: "items", items });
 const grassDrops = list([
-  { ...vanilla("minecraft:short_grass"), sub: "Grass and ferns: 2% chance" },
-  { ...vanilla("minecraft:wheat"), sub: "Ripe wheat, carrots, potatoes, beetroot: 5% chance" },
+  { ...vanilla("minecraft:short_grass"), sub: `Grass and ferns: ${pct(BAL.grassEssenceChance)} chance` },
+  { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
 ]);
 
 const guide = {
@@ -117,28 +121,28 @@ const guide = {
         p("Essence & Earth lets you grow resources. Every crop starts as essence: you combine essence with the resource you want, plant the seeds, and harvest essence that crafts back into that resource."),
         h2("1. Collect Terra Essence"),
         p(`Mine <a href="${oreItem.href}">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world.`),
-        list([{ ...oreItem, sub: "1–3 Terra Essence per ore" }, ...grassDrops.items]),
+        list([{ ...oreItem, sub: `${oreDrop} Terra Essence per ore` }, ...grassDrops.items]),
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
-        p("Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait, or use bone meal to speed them up."),
+        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait. Bone meal can help: each use has a ${boneMeal} chance to advance a stage.`),
         h2("4. Harvest and craft"),
-        p("A ripe crop drops 1–2 of its essence and its seed back. Eight essence in a ring craft the resource."),
+        p(`A ripe crop drops ${harvest} of its essence and its seed back. Eight essence in a ring craft the resource.`),
       ],
     },
     {
       slug: "growing-crops", name: "Growing crops", icon: "img/icons/crop_2.png",
       summary: "Planting, growth stages, bone meal and harvesting.",
       blocks: [
-        facts([["Plant on", "Essence farmland only"], ["Growth", "4 stages, about 50% chance per random tick"], ["Bone meal", "Advances one stage per use"], ["Ripe drops", "1–2 essence, 1 seed, 10% chance of a second seed"], ["Unripe drops", "The seed back"]]),
+        facts([["Plant on", "Essence farmland only"], ["Growth", `4 stages, about ${pct(BAL.growChance)} chance per random tick`], ["Bone meal", `${boneMeal} chance to advance one stage per use`], ["Ripe drops", `${harvest} essence, 1 seed, ${secondSeed} chance of a second seed`], ["Unripe drops", "The seed back"]]),
         list(stages(cfg.crops.find((c) => c.id === "iron") ?? cfg.crops[0])),
         h2("Plant on essence farmland"),
         p(`Seeds won't plant on vanilla farmland. Every crop needs <a href="wiki/farmland">essence farmland</a>, of any tier, so each plot in your garden has to be crafted. It never dries out and can't be trampled.`),
         h2("Essence farmland"),
         p("Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."),
-        list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)}% chance of +1 essence` }))),
+        list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)} chance of +1 essence` }))),
         h2("Growth accelerators"),
-        p(`Stack up to four <a href="wiki/accelerators">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack.`),
+        p(`Stack up to ${BAL.maxAccelerators} <a href="wiki/accelerators">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack.`),
       ],
     },
   ],
@@ -152,9 +156,9 @@ const essence = {
       slug: "essence-ore", name: "Essence Ore", icon: oreItem.icon,
       summary: "The main source of Terra Essence.",
       blocks: [
-        facts([["Found", "Overworld, y −48 to 48"], ["Drops", "1–3 Terra Essence"], ["Tool", "Any; mining takes about 3 seconds by hand"]]),
+        facts([["Found", "Overworld, y −48 to 48"], ["Drops", `${oreDrop} Terra Essence`], ["Tool", "Any; mining takes about 3 seconds by hand"]]),
         p("Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."),
-        list([{ ...tierItem(cfg.tiers[0]), sub: "1–3 per ore" }]),
+        list([{ ...tierItem(cfg.tiers[0]), sub: `${oreDrop} per ore` }]),
       ],
     },
     ...cfg.tiers.map((t, i) => {
@@ -165,7 +169,7 @@ const essence = {
         blocks: [
           facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Crops", `${crops.length}`]]),
           h2("How to get it"),
-          ...(i === 0 ? [list([{ ...oreItem, sub: "1–3 per ore" }, ...grassDrops.items])] : [upgrade(t, i)]),
+          ...(i === 0 ? [list([{ ...oreItem, sub: `${oreDrop} per ore` }, ...grassDrops.items])] : [upgrade(t, i)]),
           h2("Seeds that need it"),
           crops.length ? list(crops.map((c) => ({ ...seedsItem(c), sub: `8 essence → ${c.count} × ${vanilla(c.output).name}` }))) : p("No crops use this tier yet."),
         ],
@@ -179,12 +183,12 @@ const farmland = {
   blurb: "Farmland that never dries out and gives ripe crops a chance of extra essence.",
   entries: cfg.tiers.map((t, i) => ({
     slug: slug(`${t.id}_farmland`), name: `${title(t.id)} Farmland`, icon: farmlandItem(t).icon,
-    summary: `${bonusPct(i)}% chance of +1 essence from ripe crops.`,
+    summary: `${bonusPct(i)} chance of +1 essence from ripe crops.`,
     blocks: [
-      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)}% chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop"]]),
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)} chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop"]]),
       list([{ ...farmlandItem(t), name: "Top", sub: "" }, { name: "Side", icon: `img/icons/${t.id}_farmland_side.png` }]),
       h2("Recipe"),
-      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)} make one.` : "Five dirt and four Terra Essence make one."),
+      p(`${i ? `Five ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)}` : "Five dirt and four Terra Essence"} make ${BAL.farmlandYield}.`),
       farmlandRecipe(t, i),
     ],
   })),
@@ -195,13 +199,13 @@ const accelerators = {
   blurb: "Blocks that go under essence farmland and make the crop above grow faster.",
   entries: cfg.tiers.map((t, i) => ({
     slug: slug(`${t.id}_accelerator`), name: `${title(t.id)} Growth Accelerator`, icon: acceleratorItem(t).icon,
-    summary: `Up to ${speed(1 + t.accelerator * 4)} crop speed with a stack of four.`,
+    summary: `Up to ${speed(1 + BAL.acceleratorRolls[i] * BAL.maxAccelerators)} crop speed with a full stack.`,
     blocks: [
-      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Speed with 1", speed(1 + t.accelerator)], ["Speed with 4", speed(1 + t.accelerator * 4)], ["Growth rolls", `+${t.accelerator} per random tick`], ["Place", "Directly under essence farmland, up to 4 deep, with no gaps"]]),
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Speed with 1", speed(1 + BAL.acceleratorRolls[i])], [`Speed with ${BAL.maxAccelerators}`, speed(1 + BAL.acceleratorRolls[i] * BAL.maxAccelerators)], ["Growth rolls", `+${BAL.acceleratorRolls[i]} per random tick`], ["Place", `Directly under essence farmland, up to ${BAL.maxAccelerators} deep, with no gaps`]]),
       list([acceleratorItem(t)]),
       p("Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."),
       h2("Recipe"),
-      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Growth Accelerators and four ${tierName(t)} make one.` : "Five cobblestone and four Terra Essence make one."),
+      p(`${i ? `Five ${title(cfg.tiers[i - 1].id)} Growth Accelerators and four ${tierName(t)}` : "Five cobblestone and four Terra Essence"} make ${BAL.acceleratorYield}.`),
       acceleratorRecipe(t, i),
     ],
   })),
@@ -224,7 +228,7 @@ const cropCategories = cfg.tiers
           h2("Seeds"),
           seedsRecipe(c),
           h2("Harvest"),
-          list([{ ...essenceItem(c), sub: "1–2 when ripe" }, { ...seedsItem(c), sub: "1, plus a 10% chance of a second" }]),
+          list([{ ...essenceItem(c), sub: `${harvest} when ripe` }, { ...seedsItem(c), sub: `1, plus a ${secondSeed} chance of a second` }]),
           h2(out.name),
           outputRecipe(c),
         ],

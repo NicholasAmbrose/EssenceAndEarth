@@ -27,7 +27,19 @@ for (const c of cfg.crops) {
   for (const k of ["ingredient", "output"]) if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c[k] ?? "")) problems.push(`${c.id}: ${k} must be an item id like minecraft:iron_ingot`);
   if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
 }
-for (const t of cfg.tiers) if (!(t.accelerator > 0)) problems.push(`${t.id}: accelerator must be above 0`);
+const BAL = cfg.balance;
+for (const k of ["boneMealChance", "grassEssenceChance", "cropEssenceChance", "secondSeedChance"])
+  if (!(BAL[k] >= 0 && BAL[k] <= 1)) problems.push(`balance.${k} must be 0-1`);
+if (!(BAL.growChance > 0 && BAL.growChance <= 1)) problems.push("balance.growChance must be above 0, up to 1");
+for (const k of ["harvestEssence", "oreEssence"]) {
+  const [min, max] = BAL[k] ?? [];
+  if (!(Number.isInteger(min) && Number.isInteger(max) && min >= 1 && min <= max)) problems.push(`balance.${k} must be [min, max], whole numbers from 1`);
+}
+if (BAL.farmlandBonus?.length !== cfg.tiers.length || !BAL.farmlandBonus.every((v) => v >= 0 && v <= 1)) problems.push(`balance.farmlandBonus needs ${cfg.tiers.length} values, each 0-1`);
+if (BAL.acceleratorRolls?.length !== cfg.tiers.length || !BAL.acceleratorRolls.every((v) => v > 0)) problems.push(`balance.acceleratorRolls needs ${cfg.tiers.length} values, each above 0`);
+if (!(Number.isInteger(BAL.maxAccelerators) && BAL.maxAccelerators >= 1)) problems.push("balance.maxAccelerators must be a whole number from 1");
+for (const k of ["farmlandYield", "acceleratorYield"])
+  if (!(Number.isInteger(BAL[k]) && BAL[k] >= 1 && BAL[k] <= 64)) problems.push(`balance.${k} must be 1-64`);
 if (problems.length) {
   console.error(`crops.json has problems:\n  ${problems.join("\n  ")}`);
   process.exit(1);
@@ -358,12 +370,12 @@ for (const dir of [BP, RP]) {
 }
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
-  // Tier n farmland gives a ripe crop an n/5 chance of one extra essence.
-  const bonus = Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, (i + 1) / cfg.tiers.length]));
+  const bonus = Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, BAL.farmlandBonus[i]]));
   if (f.endsWith(".js"))
     write(f, fs.readFileSync(f, "utf8")
+      .replaceAll("__BALANCE__", JSON.stringify(BAL))
       .replaceAll("__FARMLAND_BONUS__", JSON.stringify(bonus))
-      .replaceAll("__ACCELERATOR_ROLLS__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t) => [`${NS}:${t.id}_accelerator`, t.accelerator]))))
+      .replaceAll("__ACCELERATOR_ROLLS__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_accelerator`, BAL.acceleratorRolls[i]]))))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
       .replaceAll("__NS__", NS));
 }
@@ -402,7 +414,7 @@ function loot(id, pools) {
 
 const drop = (name, min = 1, max = min, chance) => ({
   rolls: 1,
-  ...(chance && { conditions: [{ condition: "random_chance", chance }] }),
+  ...(chance !== undefined && { conditions: [{ condition: "random_chance", chance }] }),
   entries: [{ type: "item", name, weight: 1, ...(max > 1 && { functions: [{ function: "set_count", count: { min, max } }] }) }],
 });
 
@@ -438,7 +450,7 @@ cfg.tiers.forEach((t, i) => {
   recipe(id, "shaped", {
     pattern: ["BEB", "EBE", "BEB"],
     key: { B: { item: i ? FARMLANDS[i - 1] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
-    result: { item: `${NS}:${id}` },
+    result: { item: `${NS}:${id}`, count: BAL.farmlandYield },
   }, tierEssence(i + 1));
 });
 
@@ -457,7 +469,7 @@ cfg.tiers.forEach((t, i) => {
   recipe(id, "shaped", {
     pattern: ["BEB", "EBE", "BEB"],
     key: { B: { item: i ? `${NS}:${cfg.tiers[i - 1].id}_accelerator` : "minecraft:cobblestone" }, E: { item: tierEssence(i + 1) } },
-    result: { item: `${NS}:${id}` },
+    result: { item: `${NS}:${id}`, count: BAL.acceleratorYield },
   }, tierEssence(i + 1));
 });
 
@@ -468,7 +480,7 @@ block("essence_ore", "stone", { menu_category: { category: "nature" } }, {
   "minecraft:geometry": "minecraft:geometry.full_block",
   "minecraft:destructible_by_mining": { seconds_to_destroy: 3 },
   "minecraft:material_instances": { "*": { texture: `${NS}_essence_ore` } },
-  "minecraft:loot": loot("essence_ore", [drop(tierEssence(1), 1, 3)]),
+  "minecraft:loot": loot("essence_ore", [drop(tierEssence(1), ...BAL.oreEssence)]),
 });
 write(path.join(BP, "features", "essence_ore_feature.json"), {
   format_version: "1.13.0",
@@ -521,7 +533,7 @@ for (const c of cfg.crops) {
       condition: `q.block_state('${growth}') == ${s}`,
       components: {
         "minecraft:material_instances": cropMaterial(s < 3 ? `crop_${s}` : `${c.id}_crop`),
-        ...(s === 3 && { "minecraft:loot": loot(`${c.id}_crop_ripe`, [drop(essence, 1, 2), drop(seeds), drop(seeds, 1, 1, 0.1)]) }),
+        ...(s === 3 && { "minecraft:loot": loot(`${c.id}_crop_ripe`, [drop(essence, ...BAL.harvestEssence), drop(seeds), drop(seeds, 1, 1, BAL.secondSeedChance)]) }),
       },
     })),
   );
