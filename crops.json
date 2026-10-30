@@ -17,7 +17,7 @@
     { "id": "gold", "tier": 3, "color": "#f5d63c", "ingredient": "minecraft:gold_ingot", "output": "minecraft:gold_ingot", "count": 4 },
     { "id": "emerald", "tier": 4, "color": "#2fd060", "ingredient": "minecraft:emerald", "output": "minecraft:emerald", "count": 2 },
     { "id": "diamond", "tier": 5, "color": "#4ee6d8", "ingredient": "minecraft:diamond", "output": "minecraft:diamond", "count": 1 },
-    { "id": "bone_meal", "tier": 1, "color": "#e8e4d4", "ingredient": "minecraft:bone", "output": "minecraft:bone_meal", "count": 12 },
+    { "id": "bone_meal", "tier": 2, "color": "#e8e4d4", "ingredient": "minecraft:bone", "output": "minecraft:bone_meal", "count": 12 },
     { "id": "cobblestone", "tier": 1, "color": "#8a8a8a", "ingredient": "minecraft:cobblestone", "output": "minecraft:cobblestone", "count": 16 },
     { "id": "wood", "tier": 1, "color": "#a0743c", "ingredient": "minecraft:oak_log", "output": "minecraft:oak_log", "count": 8 },
     { "id": "sand", "tier": 1, "color": "#e3d59c", "ingredient": "minecraft:sand", "output": "minecraft:sand", "count": 12 },
