@@ -48,6 +48,8 @@ const seedsItem = (c) => ({ name: `${title(c.id)} Seeds`, icon: `img/icons/${c.i
 const essenceItem = (c) => ({ name: `${title(c.id)} Essence`, icon: `img/icons/${c.id}_essence.png`, href: cropHref(c) });
 const ripeItem = (c) => ({ name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`, href: cropHref(c) });
 const oreItem = { name: "Essence Ore", icon: "img/icons/essence_ore.png", href: essenceHref("essence_ore") };
+const farmlandItem = (t) => ({ name: `${title(t.id)} Farmland`, icon: `img/icons/${t.id}_farmland_top.png`, href: `wiki/farmland/${slug(`${t.id}_farmland`)}` });
+const bonusPct = (i) => Math.round(((i + 1) / cfg.tiers.length) * 100); // matches the bonus in build.mjs
 const stages = (c) => [0, 1, 2].map((s) => ({ name: `Stage ${s + 1}`, icon: `img/icons/crop_${s}.png` })).concat({ name: "Ripe", icon: `img/icons/${c.id}_crop.png` });
 
 // ---------- recipes ----------
@@ -69,6 +71,10 @@ const seedsRecipe = (c) => {
 const outputRecipe = (c) => {
   const e = essenceItem(c);
   return recipe({ ...vanilla(c.output) }, c.count, [[e, e, e], [e, null, e], [e, e, e]]);
+};
+const farmlandRecipe = (t, i) => {
+  const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
+  return recipe(farmlandItem(t), 5, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 // ---------- pages ----------
@@ -106,10 +112,13 @@ const guide = {
       slug: "growing-crops", name: "Growing crops", icon: "img/icons/crop_2.png",
       summary: "Planting, growth stages, bone meal and harvesting.",
       blocks: [
-        facts([["Plant on", "Farmland only"], ["Growth", "4 stages, about 50% chance per random tick"], ["Bone meal", "Advances one stage per use"], ["Ripe drops", "1–2 essence, 1 seed, 10% chance of a second seed"], ["Unripe drops", "The seed back"]]),
+        facts([["Plant on", "Farmland or essence farmland"], ["Growth", "4 stages, about 50% chance per random tick"], ["Bone meal", "Advances one stage per use"], ["Ripe drops", "1–2 essence, 1 seed, 10% chance of a second seed"], ["Unripe drops", "The seed back"]]),
         list(stages(cfg.crops.find((c) => c.id === "iron") ?? cfg.crops[0])),
         h2("Keep farmland watered"),
-        p("Dry farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields."),
+        p(`Dry vanilla farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields. <a href="wiki/farmland">Essence farmland</a> never dries out and can't be trampled.`),
+        h2("Essence farmland"),
+        p("Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."),
+        list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)}% chance of +1 essence` }))),
       ],
     },
   ],
@@ -145,6 +154,22 @@ const essence = {
   ],
 };
 
+const farmland = {
+  slug: "farmland", title: "Essence farmland", group: "Getting started", icon: farmlandItem(cfg.tiers[0]).icon,
+  blurb: "Farmland that never dries out and gives ripe crops a chance of extra essence.",
+  entries: cfg.tiers.map((t, i) => ({
+    slug: slug(`${t.id}_farmland`), name: `${title(t.id)} Farmland`, icon: farmlandItem(t).icon,
+    summary: `${bonusPct(i)}% chance of +1 essence from ripe crops.`,
+    blocks: [
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)}% chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop, like vanilla farmland"]]),
+      list([{ ...farmlandItem(t), name: "Top", sub: "" }, { name: "Side", icon: `img/icons/${t.id}_farmland_side.png` }]),
+      h2("Recipe"),
+      p(i ? `Upgrade five ${title(cfg.tiers[i - 1].id)} Farmland with four ${tierName(t)}.` : "Five dirt and four Terra Essence."),
+      farmlandRecipe(t, i),
+    ],
+  })),
+};
+
 const cropCategories = cfg.tiers
   .map((t, i) => ({ t, i, crops: cfg.crops.filter((c) => c.tier === i + 1) }))
   .filter((g) => g.crops.length)
@@ -170,7 +195,7 @@ const cropCategories = cfg.tiers
     }),
   }));
 
-const categories = [guide, essence, ...cropCategories];
+const categories = [guide, essence, farmland, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -178,6 +203,7 @@ const gallery = [
   { title: "Crop essence", items: cfg.crops.map(essenceItem) },
   { title: "Seeds", items: cfg.crops.map(seedsItem) },
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
+  { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
   { title: "Growth stages and ore", items: [...stages(cfg.crops[0]).slice(0, 3), oreItem] },
 ];
 
@@ -188,7 +214,8 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length + cfg.crops.length * 2, recipes: recipes.length },
+  // items: essence + farmland per tier, seeds + essence per crop, and the ore
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 2 + cfg.crops.length * 2 + 1, recipes: recipes.length },
   categories,
   recipes,
   gallery,

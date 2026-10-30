@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.3.1",
-  "file": "EssenceAndEarth_v0.3.1.mcaddon",
+  "version": "0.4.0",
+  "file": "EssenceAndEarth_v0.4.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.3.1.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 19,
   "tiers": 5,
-  "items": 43,
-  "recipes": 42
+  "items": 49,
+  "recipes": 47
  },
  "categories": [
   {
@@ -98,7 +98,7 @@
        "facts": [
         [
          "Plant on",
-         "Farmland only"
+         "Farmland or essence farmland"
         ],
         [
          "Growth",
@@ -145,7 +145,50 @@
       },
       {
        "t": "p",
-       "html": "Dry farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields."
+       "html": "Dry vanilla farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields. <a href=\"wiki/farmland\">Essence farmland</a> never dries out and can't be trampled."
+      },
+      {
+       "t": "h2",
+       "text": "Essence farmland"
+      },
+      {
+       "t": "p",
+       "html": "Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Terra Farmland",
+         "icon": "img/icons/terra_farmland_top.png",
+         "href": "wiki/farmland/terra-farmland",
+         "sub": "20% chance of +1 essence"
+        },
+        {
+         "name": "Aqua Farmland",
+         "icon": "img/icons/aqua_farmland_top.png",
+         "href": "wiki/farmland/aqua-farmland",
+         "sub": "40% chance of +1 essence"
+        },
+        {
+         "name": "Ignis Farmland",
+         "icon": "img/icons/ignis_farmland_top.png",
+         "href": "wiki/farmland/ignis-farmland",
+         "sub": "60% chance of +1 essence"
+        },
+        {
+         "name": "Aether Farmland",
+         "icon": "img/icons/aether_farmland_top.png",
+         "href": "wiki/farmland/aether-farmland",
+         "sub": "80% chance of +1 essence"
+        },
+        {
+         "name": "Astra Farmland",
+         "icon": "img/icons/astra_farmland_top.png",
+         "href": "wiki/farmland/astra-farmland",
+         "sub": "100% chance of +1 essence"
+        }
+       ]
       }
      ],
      "href": "wiki/guide/growing-crops"
@@ -681,6 +724,585 @@
       }
      ],
      "href": "wiki/essence/astra-essence"
+    }
+   ]
+  },
+  {
+   "slug": "farmland",
+   "title": "Essence farmland",
+   "group": "Getting started",
+   "icon": "img/icons/terra_farmland_top.png",
+   "blurb": "Farmland that never dries out and gives ripe crops a chance of extra essence.",
+   "entries": [
+    {
+     "slug": "terra-farmland",
+     "name": "Terra Farmland",
+     "icon": "img/icons/terra_farmland_top.png",
+     "summary": "20% chance of +1 essence from ripe crops.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 of 5"
+        ],
+        [
+         "Bonus",
+         "20% chance of 1 extra essence per ripe harvest"
+        ],
+        [
+         "Water",
+         "Not needed; never dries out"
+        ],
+        [
+         "Grows",
+         "Every crop, like vanilla farmland"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Top",
+         "icon": "img/icons/terra_farmland_top.png",
+         "href": "wiki/farmland/terra-farmland",
+         "sub": ""
+        },
+        {
+         "name": "Side",
+         "icon": "img/icons/terra_farmland_side.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Five dirt and four Terra Essence."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Farmland",
+        "icon": "img/icons/terra_farmland_top.png",
+        "href": "wiki/farmland/terra-farmland",
+        "count": 5
+       },
+       "rows": [
+        [
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/farmland/terra-farmland"
+    },
+    {
+     "slug": "aqua-farmland",
+     "name": "Aqua Farmland",
+     "icon": "img/icons/aqua_farmland_top.png",
+     "summary": "40% chance of +1 essence from ripe crops.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 of 5"
+        ],
+        [
+         "Bonus",
+         "40% chance of 1 extra essence per ripe harvest"
+        ],
+        [
+         "Water",
+         "Not needed; never dries out"
+        ],
+        [
+         "Grows",
+         "Every crop, like vanilla farmland"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Top",
+         "icon": "img/icons/aqua_farmland_top.png",
+         "href": "wiki/farmland/aqua-farmland",
+         "sub": ""
+        },
+        {
+         "name": "Side",
+         "icon": "img/icons/aqua_farmland_side.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Upgrade five Terra Farmland with four Aqua Essence."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Farmland",
+        "icon": "img/icons/aqua_farmland_top.png",
+        "href": "wiki/farmland/aqua-farmland",
+        "count": 5
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Farmland",
+          "icon": "img/icons/terra_farmland_top.png",
+          "href": "wiki/farmland/terra-farmland"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Farmland",
+          "icon": "img/icons/terra_farmland_top.png",
+          "href": "wiki/farmland/terra-farmland"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Farmland",
+          "icon": "img/icons/terra_farmland_top.png",
+          "href": "wiki/farmland/terra-farmland"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Terra Farmland",
+          "icon": "img/icons/terra_farmland_top.png",
+          "href": "wiki/farmland/terra-farmland"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Terra Farmland",
+          "icon": "img/icons/terra_farmland_top.png",
+          "href": "wiki/farmland/terra-farmland"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/farmland/aqua-farmland"
+    },
+    {
+     "slug": "ignis-farmland",
+     "name": "Ignis Farmland",
+     "icon": "img/icons/ignis_farmland_top.png",
+     "summary": "60% chance of +1 essence from ripe crops.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "3 of 5"
+        ],
+        [
+         "Bonus",
+         "60% chance of 1 extra essence per ripe harvest"
+        ],
+        [
+         "Water",
+         "Not needed; never dries out"
+        ],
+        [
+         "Grows",
+         "Every crop, like vanilla farmland"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Top",
+         "icon": "img/icons/ignis_farmland_top.png",
+         "href": "wiki/farmland/ignis-farmland",
+         "sub": ""
+        },
+        {
+         "name": "Side",
+         "icon": "img/icons/ignis_farmland_side.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Upgrade five Aqua Farmland with four Ignis Essence."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Farmland",
+        "icon": "img/icons/ignis_farmland_top.png",
+        "href": "wiki/farmland/ignis-farmland",
+        "count": 5
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Farmland",
+          "icon": "img/icons/aqua_farmland_top.png",
+          "href": "wiki/farmland/aqua-farmland"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Farmland",
+          "icon": "img/icons/aqua_farmland_top.png",
+          "href": "wiki/farmland/aqua-farmland"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Farmland",
+          "icon": "img/icons/aqua_farmland_top.png",
+          "href": "wiki/farmland/aqua-farmland"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Farmland",
+          "icon": "img/icons/aqua_farmland_top.png",
+          "href": "wiki/farmland/aqua-farmland"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Aqua Farmland",
+          "icon": "img/icons/aqua_farmland_top.png",
+          "href": "wiki/farmland/aqua-farmland"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/farmland/ignis-farmland"
+    },
+    {
+     "slug": "aether-farmland",
+     "name": "Aether Farmland",
+     "icon": "img/icons/aether_farmland_top.png",
+     "summary": "80% chance of +1 essence from ripe crops.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "4 of 5"
+        ],
+        [
+         "Bonus",
+         "80% chance of 1 extra essence per ripe harvest"
+        ],
+        [
+         "Water",
+         "Not needed; never dries out"
+        ],
+        [
+         "Grows",
+         "Every crop, like vanilla farmland"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Top",
+         "icon": "img/icons/aether_farmland_top.png",
+         "href": "wiki/farmland/aether-farmland",
+         "sub": ""
+        },
+        {
+         "name": "Side",
+         "icon": "img/icons/aether_farmland_side.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Upgrade five Ignis Farmland with four Aether Essence."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Farmland",
+        "icon": "img/icons/aether_farmland_top.png",
+        "href": "wiki/farmland/aether-farmland",
+        "count": 5
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Farmland",
+          "icon": "img/icons/ignis_farmland_top.png",
+          "href": "wiki/farmland/ignis-farmland"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Farmland",
+          "icon": "img/icons/ignis_farmland_top.png",
+          "href": "wiki/farmland/ignis-farmland"
+         }
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Farmland",
+          "icon": "img/icons/ignis_farmland_top.png",
+          "href": "wiki/farmland/ignis-farmland"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Farmland",
+          "icon": "img/icons/ignis_farmland_top.png",
+          "href": "wiki/farmland/ignis-farmland"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Ignis Farmland",
+          "icon": "img/icons/ignis_farmland_top.png",
+          "href": "wiki/farmland/ignis-farmland"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/farmland/aether-farmland"
+    },
+    {
+     "slug": "astra-farmland",
+     "name": "Astra Farmland",
+     "icon": "img/icons/astra_farmland_top.png",
+     "summary": "100% chance of +1 essence from ripe crops.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "5 of 5"
+        ],
+        [
+         "Bonus",
+         "100% chance of 1 extra essence per ripe harvest"
+        ],
+        [
+         "Water",
+         "Not needed; never dries out"
+        ],
+        [
+         "Grows",
+         "Every crop, like vanilla farmland"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Top",
+         "icon": "img/icons/astra_farmland_top.png",
+         "href": "wiki/farmland/astra-farmland",
+         "sub": ""
+        },
+        {
+         "name": "Side",
+         "icon": "img/icons/astra_farmland_side.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "p",
+       "html": "Upgrade five Aether Farmland with four Astra Essence."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Farmland",
+        "icon": "img/icons/astra_farmland_top.png",
+        "href": "wiki/farmland/astra-farmland",
+        "count": 5
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Farmland",
+          "icon": "img/icons/aether_farmland_top.png",
+          "href": "wiki/farmland/aether-farmland"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Farmland",
+          "icon": "img/icons/aether_farmland_top.png",
+          "href": "wiki/farmland/aether-farmland"
+         }
+        ],
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Farmland",
+          "icon": "img/icons/aether_farmland_top.png",
+          "href": "wiki/farmland/aether-farmland"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aether Farmland",
+          "icon": "img/icons/aether_farmland_top.png",
+          "href": "wiki/farmland/aether-farmland"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Aether Farmland",
+          "icon": "img/icons/aether_farmland_top.png",
+          "href": "wiki/farmland/aether-farmland"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/farmland/astra-farmland"
     }
    ]
   },
@@ -4511,6 +5133,306 @@
   },
   {
    "result": {
+    "name": "Terra Farmland",
+    "icon": "img/icons/terra_farmland_top.png",
+    "href": "wiki/farmland/terra-farmland",
+    "count": 5
+   },
+   "rows": [
+    [
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aqua Farmland",
+    "icon": "img/icons/aqua_farmland_top.png",
+    "href": "wiki/farmland/aqua-farmland",
+    "count": 5
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Farmland",
+      "icon": "img/icons/terra_farmland_top.png",
+      "href": "wiki/farmland/terra-farmland"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Farmland",
+      "icon": "img/icons/terra_farmland_top.png",
+      "href": "wiki/farmland/terra-farmland"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Farmland",
+      "icon": "img/icons/terra_farmland_top.png",
+      "href": "wiki/farmland/terra-farmland"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Terra Farmland",
+      "icon": "img/icons/terra_farmland_top.png",
+      "href": "wiki/farmland/terra-farmland"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Terra Farmland",
+      "icon": "img/icons/terra_farmland_top.png",
+      "href": "wiki/farmland/terra-farmland"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Ignis Farmland",
+    "icon": "img/icons/ignis_farmland_top.png",
+    "href": "wiki/farmland/ignis-farmland",
+    "count": 5
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Farmland",
+      "icon": "img/icons/aqua_farmland_top.png",
+      "href": "wiki/farmland/aqua-farmland"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Farmland",
+      "icon": "img/icons/aqua_farmland_top.png",
+      "href": "wiki/farmland/aqua-farmland"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Farmland",
+      "icon": "img/icons/aqua_farmland_top.png",
+      "href": "wiki/farmland/aqua-farmland"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Farmland",
+      "icon": "img/icons/aqua_farmland_top.png",
+      "href": "wiki/farmland/aqua-farmland"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Aqua Farmland",
+      "icon": "img/icons/aqua_farmland_top.png",
+      "href": "wiki/farmland/aqua-farmland"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aether Farmland",
+    "icon": "img/icons/aether_farmland_top.png",
+    "href": "wiki/farmland/aether-farmland",
+    "count": 5
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Farmland",
+      "icon": "img/icons/ignis_farmland_top.png",
+      "href": "wiki/farmland/ignis-farmland"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Farmland",
+      "icon": "img/icons/ignis_farmland_top.png",
+      "href": "wiki/farmland/ignis-farmland"
+     }
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Farmland",
+      "icon": "img/icons/ignis_farmland_top.png",
+      "href": "wiki/farmland/ignis-farmland"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Farmland",
+      "icon": "img/icons/ignis_farmland_top.png",
+      "href": "wiki/farmland/ignis-farmland"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Ignis Farmland",
+      "icon": "img/icons/ignis_farmland_top.png",
+      "href": "wiki/farmland/ignis-farmland"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Astra Farmland",
+    "icon": "img/icons/astra_farmland_top.png",
+    "href": "wiki/farmland/astra-farmland",
+    "count": 5
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Farmland",
+      "icon": "img/icons/aether_farmland_top.png",
+      "href": "wiki/farmland/aether-farmland"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Farmland",
+      "icon": "img/icons/aether_farmland_top.png",
+      "href": "wiki/farmland/aether-farmland"
+     }
+    ],
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Farmland",
+      "icon": "img/icons/aether_farmland_top.png",
+      "href": "wiki/farmland/aether-farmland"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aether Farmland",
+      "icon": "img/icons/aether_farmland_top.png",
+      "href": "wiki/farmland/aether-farmland"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Aether Farmland",
+      "icon": "img/icons/aether_farmland_top.png",
+      "href": "wiki/farmland/aether-farmland"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
     "name": "Coal Seeds",
     "icon": "img/icons/coal_seeds.png",
     "href": "wiki/terra-crops/coal",
@@ -6966,6 +7888,36 @@
      "name": "Netherite Crop",
      "icon": "img/icons/netherite_crop.png",
      "href": "wiki/astra-crops/netherite"
+    }
+   ]
+  },
+  {
+   "title": "Essence farmland",
+   "items": [
+    {
+     "name": "Terra Farmland",
+     "icon": "img/icons/terra_farmland_top.png",
+     "href": "wiki/farmland/terra-farmland"
+    },
+    {
+     "name": "Aqua Farmland",
+     "icon": "img/icons/aqua_farmland_top.png",
+     "href": "wiki/farmland/aqua-farmland"
+    },
+    {
+     "name": "Ignis Farmland",
+     "icon": "img/icons/ignis_farmland_top.png",
+     "href": "wiki/farmland/ignis-farmland"
+    },
+    {
+     "name": "Aether Farmland",
+     "icon": "img/icons/aether_farmland_top.png",
+     "href": "wiki/farmland/aether-farmland"
+    },
+    {
+     "name": "Astra Farmland",
+     "icon": "img/icons/astra_farmland_top.png",
+     "href": "wiki/farmland/astra-farmland"
     }
    ]
   },

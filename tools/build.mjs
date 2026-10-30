@@ -167,6 +167,14 @@ const STAGES = [
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const shade = (rgb, f) => rgb.map((v) => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)));
 const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28"), l: hex("#7cc44e") };
+const SOIL = { d: hex("#866043"), D: hex("#6b4a32"), w: hex("#4a3222") };
+const noise = (x, y, seed = 0) => ((((x * 31 + y * 17 + seed * 7) * 2654435761) >>> 0) % 1000) / 1000;
+
+// Essence farmland: tilled rows with essence glowing in the channels; the side is dirt under a tilled band.
+const grid = (fn) => Array.from({ length: 16 }, (_, y) => Array.from({ length: 16 }, (_, x) => fn(x, y)).join(""));
+const dirt = (x, y) => (noise(x, y, 3) < 0.25 ? "D" : "d");
+const FARMLAND_TOP = grid((x, y) => (y % 4 === 2 ? (noise(x, y, 1) < 0.3 ? "*" : "~") : y % 4 === 3 ? "w" : dirt(x, y)));
+const FARMLAND_SIDE = grid((x, y) => (y === 2 ? "~" : y < 2 ? "w" : dirt(x, y)));
 
 function render(mask, color) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
@@ -186,6 +194,7 @@ function render(mask, color) {
       else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
       else if (ch === "s") rgb = Array(3).fill(105 + ((((x * 31 + y * 17) * 2654435761) >>> 0) % 40));
       else if (ch in GREEN) rgb = GREEN[ch];
+      else if (ch in SOIL) rgb = shade(SOIL[ch], (noise(x, y) - 0.5) * 0.25);
       else if (ch === "+") rgb = shade(c, 0.7);
       else if (ch === "*") rgb = shade(c, 0.8);
       else if (ch === "~") rgb = shade(c, -0.3);
@@ -312,8 +321,13 @@ for (const dir of [BP, RP]) {
 }
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
+  // Tier n farmland gives a ripe crop an n/5 chance of one extra essence.
+  const bonus = Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, (i + 1) / cfg.tiers.length]));
   if (f.endsWith(".js"))
-    write(f, fs.readFileSync(f, "utf8").replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`).replaceAll("__NS__", NS));
+    write(f, fs.readFileSync(f, "utf8")
+      .replaceAll("__FARMLAND_BONUS__", JSON.stringify(bonus))
+      .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
+      .replaceAll("__NS__", NS));
 }
 
 const terrain = {}, itemTextures = {}, sounds = {};
@@ -369,6 +383,27 @@ cfg.tiers.forEach((t, i) => {
     recipe(`${t.id}_essence`, "shapeless", { ingredients: [{ item: tierEssence(i), count: 4 }], result: { item: tierEssence(i + 1) } }, tierEssence(i));
 });
 
+// Essence farmland: never dries out, and gives ripe crops a chance of extra essence (see scripts/main.js).
+// 5 dirt + 4 Terra make 5 Terra farmland; each later tier is 5 of the tier below + 4 of its essence.
+const FARMLANDS = ["minecraft:farmland", ...cfg.tiers.map((t) => `${NS}:${t.id}_farmland`)];
+cfg.tiers.forEach((t, i) => {
+  const id = `${t.id}_farmland`;
+  blockTexture(`${id}_top`, FARMLAND_TOP, t.color);
+  blockTexture(`${id}_side`, FARMLAND_SIDE, t.color);
+  block(id, "gravel", { menu_category: { category: "nature" } }, {
+    "minecraft:display_name": `${title(t.id)} Farmland`,
+    "minecraft:geometry": "minecraft:geometry.full_block",
+    "minecraft:destructible_by_mining": { seconds_to_destroy: 0.6 },
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}_side` }, up: { texture: `${NS}_${id}_top` } },
+    "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
+  });
+  recipe(id, "shaped", {
+    pattern: ["BEB", "EBE", "BEB"],
+    key: { B: { item: i ? FARMLANDS[i] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
+    result: { item: `${NS}:${id}`, count: 5 },
+  }, tierEssence(i + 1));
+});
+
 // Essence ore: the only source of tier-1 essence.
 blockTexture("essence_ore", ORE, cfg.tiers[0].color);
 block("essence_ore", "stone", { menu_category: { category: "nature" } }, {
@@ -420,8 +455,8 @@ for (const c of cfg.crops) {
       "minecraft:selection_box": { origin: [-8, 0, -8], size: [16, 6, 16] },
       "minecraft:destructible_by_mining": { seconds_to_destroy: 0 },
       "minecraft:light_dampening": 0,
-      // Also pops the crop when the farmland under it is broken or trampled.
-      "minecraft:placement_filter": { conditions: [{ allowed_faces: ["up"], block_filter: ["minecraft:farmland"] }] },
+      // Also pops the crop when the farmland under it is broken, trampled or dries out.
+      "minecraft:placement_filter": { conditions: [{ allowed_faces: ["up"], block_filter: FARMLANDS }] },
       "minecraft:loot": loot(`${c.id}_crop`, [drop(seeds)]),
       [`${NS}:crop`]: {},
     },
@@ -434,7 +469,7 @@ for (const c of cfg.crops) {
     })),
   );
 
-  item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: ["minecraft:farmland"] } });
+  item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: FARMLANDS } });
   item(`${c.id}_essence`, WISP, c.color);
 
   recipe(`${c.id}_seeds`, "shaped", {
