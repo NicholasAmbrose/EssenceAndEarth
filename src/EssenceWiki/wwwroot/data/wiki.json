@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.4.3",
-  "file": "EssenceAndEarth_v0.4.3.mcaddon",
+  "version": "0.5.0",
+  "file": "EssenceAndEarth_v0.5.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.4.3.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.5.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -74,7 +74,7 @@
       },
       {
        "t": "p",
-       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on watered farmland and wait, or use bone meal to speed them up."
+       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait, or use bone meal to speed them up."
       },
       {
        "t": "h2",
@@ -98,7 +98,7 @@
        "facts": [
         [
          "Plant on",
-         "Farmland or essence farmland"
+         "Essence farmland only"
         ],
         [
          "Growth",
@@ -141,11 +141,11 @@
       },
       {
        "t": "h2",
-       "text": "Keep farmland watered"
+       "text": "Plant on essence farmland"
       },
       {
        "t": "p",
-       "html": "Dry vanilla farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields. <a href=\"wiki/farmland\">Essence farmland</a> never dries out and can't be trampled."
+       "html": "Seeds won't plant on vanilla farmland. Every crop needs <a href=\"wiki/farmland\">essence farmland</a>, of any tier, so each plot in your garden has to be crafted. It never dries out and can't be trampled."
       },
       {
        "t": "h2",
@@ -757,7 +757,7 @@
         ],
         [
          "Grows",
-         "Every crop, like vanilla farmland"
+         "Every crop"
         ]
        ]
       },
@@ -782,7 +782,7 @@
       },
       {
        "t": "p",
-       "html": "Five dirt and four Terra Essence make five."
+       "html": "Five dirt and four Terra Essence make one."
       },
       {
        "t": "grid",
@@ -790,7 +790,7 @@
         "name": "Terra Farmland",
         "icon": "img/icons/terra_farmland_top.png",
         "href": "wiki/farmland/terra-farmland",
-        "count": 5
+        "count": 1
        },
        "rows": [
         [
@@ -867,7 +867,7 @@
         ],
         [
          "Grows",
-         "Every crop, like vanilla farmland"
+         "Every crop"
         ]
        ]
       },
@@ -982,7 +982,7 @@
         ],
         [
          "Grows",
-         "Every crop, like vanilla farmland"
+         "Every crop"
         ]
        ]
       },
@@ -1097,7 +1097,7 @@
         ],
         [
          "Grows",
-         "Every crop, like vanilla farmland"
+         "Every crop"
         ]
        ]
       },
@@ -1212,7 +1212,7 @@
         ],
         [
          "Grows",
-         "Every crop, like vanilla farmland"
+         "Every crop"
         ]
        ]
       },
@@ -5136,7 +5136,7 @@
     "name": "Terra Farmland",
     "icon": "img/icons/terra_farmland_top.png",
     "href": "wiki/farmland/terra-farmland",
-    "count": 5
+    "count": 1
    },
    "rows": [
     [

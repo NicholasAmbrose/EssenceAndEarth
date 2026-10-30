@@ -57,6 +57,8 @@ world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
 });
 
 function grow(block) {
+  // Machines can setType a crop onto any soil, past the placement filter. It just won't grow there.
+  if (!(block.below()?.typeId in FARMLAND_BONUS)) return false;
   const stage = block.permutation.getState(GROWTH);
   if (stage >= MAX_STAGE) return false;
   block.setPermutation(block.permutation.withState(GROWTH, stage + 1));

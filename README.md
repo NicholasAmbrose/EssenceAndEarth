@@ -71,7 +71,7 @@ Add an entry to `crops.json`:
 Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
-- **Crop:** plant on farmland; grows in 4 stages (bone meal works). Ripe crops drop 1–2 crop essence and a seed (10% chance of a second).
+- **Crop:** plant on essence farmland (vanilla farmland won't take it); grows in 4 stages (bone meal works). Ripe crops drop 1–2 crop essence and a seed (10% chance of a second).
 - **Output:** 8 crop essence in a ring crafts `count` × `output`.
 
 ## For other add-ons
@@ -81,12 +81,11 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 - **Growth:** each crop is `ee:<id>_crop` with a block state `ee:growth` from 0 to 3. Ripe is 3.
 - **Harvest:** break it with drops (for example `setblock x y z air destroy`). The ripe crop's loot table drops its essence
   and seeds; the farmland bonus essence is added by our script whatever broke the crop.
-- **Replant:** `setType("ee:<id>_crop")` gives a fresh stage-1 crop. Crops grow on `minecraft:farmland` and
-  `ee:<tier>_farmland`.
+- **Replant:** `setType("ee:<id>_crop")` gives a fresh stage-1 crop. Crops grow only on `ee:<tier>_farmland`. A crop
+  placed on anything else by script never grows.
 - **Seeds:** `ee:<id>_seeds` places `ee:<id>_crop`.
 
 ## Known limits
 
-- Unwatered farmland under a custom crop still turns back to dirt, which pops the crop. Keep farmland hydrated.
 - Essence ore only generates in newly generated chunks. Terra essence (tier 1) also drops from grass (2%) and ripe
   wheat, carrots, potatoes and beetroot (5%), so existing worlds can still get started.

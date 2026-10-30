@@ -396,8 +396,8 @@ cfg.tiers.forEach((t, i) => {
 });
 
 // Essence farmland: never dries out, and gives ripe crops a chance of extra essence (see scripts/main.js).
-// 5 dirt + 4 Terra make 5 Terra farmland; 5 of the tier below + 4 of its essence make 1 of each later tier.
-const FARMLANDS = ["minecraft:farmland", ...cfg.tiers.map((t) => `${NS}:${t.id}_farmland`)];
+// Our crops grow on nothing else. 5 dirt + 4 Terra make 1 Terra farmland; 5 of the tier below + 4 of its essence make 1 of each later tier.
+const FARMLANDS = cfg.tiers.map((t) => `${NS}:${t.id}_farmland`);
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_farmland`;
   blockTexture(`${id}_top`, FARMLAND_TOP, t.color);
@@ -411,8 +411,8 @@ cfg.tiers.forEach((t, i) => {
   });
   recipe(id, "shaped", {
     pattern: ["BEB", "EBE", "BEB"],
-    key: { B: { item: i ? FARMLANDS[i] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
-    result: { item: `${NS}:${id}`, count: i ? 1 : 5 },
+    key: { B: { item: i ? FARMLANDS[i - 1] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
+    result: { item: `${NS}:${id}` },
   }, tierEssence(i + 1));
 });
 
@@ -467,7 +467,7 @@ for (const c of cfg.crops) {
       "minecraft:selection_box": { origin: [-8, 0, -8], size: [16, 6, 16] },
       "minecraft:destructible_by_mining": { seconds_to_destroy: 0 },
       "minecraft:light_dampening": 0,
-      // Also pops the crop when the farmland under it is broken, trampled or dries out.
+      // Also pops the crop when the farmland under it is broken.
       "minecraft:placement_filter": { conditions: [{ allowed_faces: ["up"], block_filter: FARMLANDS }] },
       "minecraft:loot": loot(`${c.id}_crop`, [drop(seeds)]),
       [`${NS}:crop`]: {},

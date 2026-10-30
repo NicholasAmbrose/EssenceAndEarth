@@ -74,7 +74,7 @@ const outputRecipe = (c) => {
 };
 const farmlandRecipe = (t, i) => {
   const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
-  return recipe(farmlandItem(t), i ? 1 : 5, [[b, e, b], [e, b, e], [b, e, b]]);
+  return recipe(farmlandItem(t), 1, [[b, e, b], [e, b, e], [b, e, b]]);
 };
 
 // ---------- pages ----------
@@ -103,7 +103,7 @@ const guide = {
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
-        p("Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on watered farmland and wait, or use bone meal to speed them up."),
+        p("Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait, or use bone meal to speed them up."),
         h2("4. Harvest and craft"),
         p("A ripe crop drops 1–2 of its essence and its seed back. Eight essence in a ring craft the resource."),
       ],
@@ -112,10 +112,10 @@ const guide = {
       slug: "growing-crops", name: "Growing crops", icon: "img/icons/crop_2.png",
       summary: "Planting, growth stages, bone meal and harvesting.",
       blocks: [
-        facts([["Plant on", "Farmland or essence farmland"], ["Growth", "4 stages, about 50% chance per random tick"], ["Bone meal", "Advances one stage per use"], ["Ripe drops", "1–2 essence, 1 seed, 10% chance of a second seed"], ["Unripe drops", "The seed back"]]),
+        facts([["Plant on", "Essence farmland only"], ["Growth", "4 stages, about 50% chance per random tick"], ["Bone meal", "Advances one stage per use"], ["Ripe drops", "1–2 essence, 1 seed, 10% chance of a second seed"], ["Unripe drops", "The seed back"]]),
         list(stages(cfg.crops.find((c) => c.id === "iron") ?? cfg.crops[0])),
-        h2("Keep farmland watered"),
-        p(`Dry vanilla farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields. <a href="wiki/farmland">Essence farmland</a> never dries out and can't be trampled.`),
+        h2("Plant on essence farmland"),
+        p(`Seeds won't plant on vanilla farmland. Every crop needs <a href="wiki/farmland">essence farmland</a>, of any tier, so each plot in your garden has to be crafted. It never dries out and can't be trampled.`),
         h2("Essence farmland"),
         p("Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."),
         list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)}% chance of +1 essence` }))),
@@ -161,10 +161,10 @@ const farmland = {
     slug: slug(`${t.id}_farmland`), name: `${title(t.id)} Farmland`, icon: farmlandItem(t).icon,
     summary: `${bonusPct(i)}% chance of +1 essence from ripe crops.`,
     blocks: [
-      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)}% chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop, like vanilla farmland"]]),
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)}% chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", "Every crop"]]),
       list([{ ...farmlandItem(t), name: "Top", sub: "" }, { name: "Side", icon: `img/icons/${t.id}_farmland_side.png` }]),
       h2("Recipe"),
-      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)} make one.` : "Five dirt and four Terra Essence make five."),
+      p(i ? `Five ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)} make one.` : "Five dirt and four Terra Essence make one."),
       farmlandRecipe(t, i),
     ],
   })),
