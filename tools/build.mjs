@@ -167,14 +167,24 @@ const STAGES = [
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const shade = (rgb, f) => rgb.map((v) => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)));
 const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28"), l: hex("#7cc44e") };
-const SOIL = { d: hex("#866043"), D: hex("#6b4a32"), w: hex("#4a3222") };
-const noise = (x, y, seed = 0) => ((((x * 31 + y * 17 + seed * 7) * 2654435761) >>> 0) % 1000) / 1000;
+const noise = (x, y, seed = 0) => {
+  let h = (x * 374761393 + y * 668265263 + seed * 2246822519) >>> 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0;
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+};
+// Tinted soil (T lit soil, t soil, k groove): the tier colour mixed half and half with brown, darkened a little.
+const soilTint = (c) => shade(c.map((v, i) => Math.round(v * 0.5 + [107, 74, 50][i] * 0.5)), -0.25);
 
-// Essence farmland: tilled rows with essence glowing in the channels; the side is dirt under a tilled band.
+// Essence farmland: tinted tilled soil. The top has long furrows (lit ridge, soil, groove) with the odd break;
+// the side is speckled soil under a tilled edge.
 const grid = (fn) => Array.from({ length: 16 }, (_, y) => Array.from({ length: 16 }, (_, x) => fn(x, y)).join(""));
-const dirt = (x, y) => (noise(x, y, 3) < 0.25 ? "D" : "d");
-const FARMLAND_TOP = grid((x, y) => (y % 4 === 2 ? (noise(x, y, 1) < 0.3 ? "*" : "~") : y % 4 === 3 ? "w" : dirt(x, y)));
-const FARMLAND_SIDE = grid((x, y) => (y === 2 ? "~" : y < 2 ? "w" : dirt(x, y)));
+const FARMLAND_TOP = grid((x, y) => {
+  const row = y % 4;
+  if (row === 3) return noise(x, y, 8) < 0.2 ? "t" : "k";
+  if (row !== 0 && noise(x, Math.floor(y / 4), 9) < 0.08) return "k";
+  return row === 0 ? "T" : "t";
+});
+const FARMLAND_SIDE = grid((x, y) => (y === 0 ? "T" : y === 1 ? "k" : noise(x, y, 4) < 0.07 ? "k" : noise(x, y, 6) > 0.88 ? "T" : "t"));
 
 function render(mask, color) {
   if (mask.length !== 16) throw new Error(`mask is ${mask.length} rows tall`);
@@ -194,7 +204,9 @@ function render(mask, color) {
       else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
       else if (ch === "s") rgb = Array(3).fill(105 + ((((x * 31 + y * 17) * 2654435761) >>> 0) % 40));
       else if (ch in GREEN) rgb = GREEN[ch];
-      else if (ch in SOIL) rgb = shade(SOIL[ch], (noise(x, y) - 0.5) * 0.25);
+      else if (ch === "T") rgb = shade(shade(soilTint(c), 0.18), (noise(x, y) - 0.5) * 0.2);
+      else if (ch === "t") rgb = shade(soilTint(c), (noise(x, y) - 0.5) * 0.25);
+      else if (ch === "k") rgb = shade(soilTint(c), -0.5 + (noise(x, y) - 0.5) * 0.15);
       else if (ch === "+") rgb = shade(c, 0.7);
       else if (ch === "*") rgb = shade(c, 0.8);
       else if (ch === "~") rgb = shade(c, -0.3);
