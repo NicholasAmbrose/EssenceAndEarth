@@ -41,7 +41,7 @@ function write(file, data) {
 
 // ---------- textures ----------
 // 16x16 masks, shaded automatically in the tint colour:
-//   # body (outlined, lit from the top-left)   * highlight   + sparkle
+//   # body (outlined, lit from the top-left)   * highlight   ~ shadow   + sparkle   : faint haze
 //   g/G light/dark stem green   s stone   . transparent
 
 // Tier essence: a cut gem. Higher tiers get more sparkles around it.
@@ -67,22 +67,22 @@ const SPARKLES = [[2, 2], [13, 3], [13, 12], [2, 12]];
 const withSparkles = (mask, n) =>
   mask.map((row, y) => [...row].map((ch, x) => (SPARKLES.slice(0, n).some(([sx, sy]) => sx === x && sy === y) ? "+" : ch)).join(""));
 
-// Crop essence: a droplet, so it reads differently from the tier gems.
-const DROP = [
+// Crop essence: a lumpy puff of gas with drifting motes and haze, so it reads differently from the tier gems.
+const WISP = [
   "................",
-  "................",
-  ".......##.......",
+  ".......:...+....",
   "......####......",
-  ".....######.....",
-  "....##*#####....",
-  "...##*#######...",
-  "...#*########...",
-  "...##########...",
-  "...##########...",
-  "...##########...",
-  "....########....",
-  ".....######.....",
-  "......####......",
+  "..+..######.:...",
+  "...##*######....",
+  "..####*##~####..",
+  ".###*###~~###.#.",
+  ".##*#####*####..",
+  ".###*##~##*####.",
+  "..###*####*~###.",
+  "..####~##*####..",
+  "...###*##~###...",
+  "....#########...",
+  "..:...#####..+..",
   "................",
   "................",
 ];
@@ -163,22 +163,24 @@ function render(mask, color) {
     if (row.length !== 16) throw new Error(`mask row ${y} is ${row.length} wide: ${row}`);
   });
   const c = color && hex(color);
-  const isBody = (x, y) => "#*".includes(mask[y]?.[x] ?? ".");
+  const isBody = (x, y) => "#*~".includes(mask[y]?.[x] ?? ".");
   let lo = Infinity, hi = -Infinity; // range of x+y over the body, for the light gradient
   mask.forEach((row, y) => [...row].forEach((ch, x) => isBody(x, y) && ((lo = Math.min(lo, x + y)), (hi = Math.max(hi, x + y)))));
 
   const px = Buffer.alloc(16 * 16 * 4);
   mask.forEach((row, y) => {
     [...row].forEach((ch, x) => {
-      let rgb;
+      let rgb, alpha = 255;
       if (ch === ".") return;
+      else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
       else if (ch === "s") rgb = Array(3).fill(105 + ((((x * 31 + y * 17) * 2654435761) >>> 0) % 40));
       else if (ch in GREEN) rgb = GREEN[ch];
       else if (ch === "+") rgb = shade(c, 0.7);
       else if (ch === "*") rgb = shade(c, 0.8);
+      else if (ch === "~") rgb = shade(c, -0.3);
       else if (!isBody(x - 1, y) || !isBody(x + 1, y) || !isBody(x, y - 1) || !isBody(x, y + 1)) rgb = shade(c, -0.55);
       else rgb = shade(c, 0.3 - (0.6 * (x + y - lo)) / (hi - lo || 1));
-      px.set([...rgb, 255], (y * 16 + x) * 4);
+      px.set([...rgb, alpha], (y * 16 + x) * 4);
     });
   });
   return px;
@@ -422,7 +424,7 @@ for (const c of cfg.crops) {
   );
 
   item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: ["minecraft:farmland"] } });
-  item(`${c.id}_essence`, DROP, c.color);
+  item(`${c.id}_essence`, WISP, c.color);
 
   recipe(`${c.id}_seeds`, "shaped", {
     pattern: ["ERE", "RSR", "ERE"],
