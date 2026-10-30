@@ -1,6 +1,6 @@
 {
-  "name": "Essence Fields",
-  "namespace": "ef",
+  "name": "Essence & Earth",
+  "namespace": "ee",
   "version": [0, 1, 0],
   "tiers": [
     { "id": "verdant", "color": "#5fbf3f" },
