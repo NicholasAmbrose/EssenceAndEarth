@@ -4,6 +4,17 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Essence tools (v0.8.0)
+
+- [ ] The sickle crafts from 3 Aqua Essence + 2 sticks, and the hoe from 2 Aqua Essence + 2 sticks. Both show their textures and hold as a tool in the hand.
+- [ ] Breaking a ripe crop with the sickle harvests only the ripe crops in the 3×3, on essence and vanilla crops (wheat, carrots, potatoes, beetroot).
+- [ ] The sickle refuses to break an unripe crop, and breaks other blocks normally.
+- [ ] Right-clicking a ripe crop with the hoe drops the harvest and replants it at stage 0, leaving one fewer seed in the drops, including on vanilla crops.
+- [ ] Right-clicking an unripe crop with the hoe does nothing, and bone meal still works.
+- [ ] Farmland bonus essence and vanilla crop Terra Essence still drop from tool harvests.
+- [ ] Durability falls by 1 per crop harvested and by nothing extra from the game itself. The tool breaks at zero with the sound, and creative mode uses none.
+- [ ] Aqua Essence repairs both tools in an anvil.
+
 ## Terra Essence from grass and Loggers (v0.7.4)
 
 - [ ] Hand-cut grass drops Terra Essence about 5% of the time.

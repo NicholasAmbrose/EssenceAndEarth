@@ -93,6 +93,7 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 | `acceleratorRolls` | Per tier: growth rolls each accelerator adds |
 | `maxAccelerators` | How deep a stack counts |
 | `farmlandYield`, `acceleratorYield` | How many blocks one craft makes |
+| `toolDurability` | Uses the Essence Sickle and Essence Hoe last. An anvil repair with Aqua Essence restores a quarter |
 
 ## For other add-ons
 

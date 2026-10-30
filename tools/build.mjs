@@ -44,6 +44,7 @@ if (BAL.acceleratorRolls?.length !== cfg.tiers.length || !BAL.acceleratorRolls.e
 if (!(Number.isInteger(BAL.maxAccelerators) && BAL.maxAccelerators >= 1)) problems.push("balance.maxAccelerators must be a whole number from 1");
 for (const k of ["farmlandYield", "acceleratorYield"])
   if (!(Number.isInteger(BAL[k]) && BAL[k] >= 1 && BAL[k] <= 64)) problems.push(`balance.${k} must be 1-64`);
+if (!(Number.isInteger(BAL.toolDurability) && BAL.toolDurability >= 1)) problems.push("balance.toolDurability must be a whole number from 1");
 if (problems.length) {
   console.error(`crops.json has problems:\n  ${problems.join("\n  ")}`);
   process.exit(1);
@@ -164,6 +165,44 @@ const ACCELERATOR = [
   "sssssvvvwsssssss",
   "ssswsvvsssssssss",
   "ssssvvvsssssssss",
+];
+
+// Tools: b blade and h handle are palette colours, * blade highlight.
+const SICKLE = [
+  "................",
+  ".....bbbbb......",
+  "...bb***bbbb....",
+  "..bbb....bbbb...",
+  "..b.......bbbb..",
+  "...........bbb..",
+  "...........bbb..",
+  "..........bbbb..",
+  ".........bbbb...",
+  "........hbbb....",
+  ".......hhb......",
+  "......hhh.......",
+  ".....hhh........",
+  "....hhh.........",
+  "...hh...........",
+  "................",
+];
+const HOE = [
+  "................",
+  "................",
+  "........bbbbbb..",
+  ".......b**bbbbb.",
+  ".......bbbbhhbb.",
+  "........bbhhhbb.",
+  "..........hhh.b.",
+  ".........hhh....",
+  "........hhh.....",
+  ".......hhh......",
+  "......hhh.......",
+  ".....hhh........",
+  "....hhh.........",
+  "...hhh..........",
+  "...h............",
+  "................",
 ];
 
 const blank = (n) => Array(n).fill("................");
@@ -483,6 +522,22 @@ cfg.tiers.forEach((t, i) => {
     result: { item: `${NS}:${id}`, count: BAL.acceleratorYield },
   }, tierEssence(i + 1));
 });
+
+// Essence tools: their behaviour and durability loss are in scripts/main.js.
+const TOOL_TIER = cfg.tiers[1];
+const toolEssence = tierEssence(2);
+for (const [id, mask, pattern] of [
+  ["essence_sickle", SICKLE, ["EE ", " SE", "S  "]],
+  ["essence_hoe", HOE, ["EE", " S", " S"]],
+]) {
+  item(id, mask, TOOL_TIER.color, {
+    "minecraft:max_stack_size": 1,
+    "minecraft:hand_equipped": true,
+    "minecraft:durability": { max_durability: BAL.toolDurability },
+    "minecraft:repairable": { repair_items: [{ items: [toolEssence], repair_amount: Math.ceil(BAL.toolDurability / 4) }] },
+  }, { b: TOOL_TIER.color, h: "#6b4a2f" });
+  recipe(id, "shaped", { pattern, key: { E: { item: toolEssence }, S: { item: "minecraft:stick" } }, result: { item: `${NS}:${id}` } }, toolEssence);
+}
 
 // Essence ore: the only source of tier-1 essence.
 blockTexture("essence_ore", ORE, cfg.tiers[0].color);

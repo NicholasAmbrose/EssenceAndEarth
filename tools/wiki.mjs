@@ -217,6 +217,43 @@ const accelerators = {
   })),
 };
 
+const toolTier = cfg.tiers[1];
+const toolFacts = [["Durability", `${BAL.toolDurability}`], ["Repair", `${tierName(toolTier)} in an anvil`], ["Works on", "Essence crops, wheat, carrots, potatoes and beetroot"]];
+const sickleItem = { name: "Essence Sickle", icon: "img/icons/essence_sickle.png", href: "wiki/tools/essence-sickle" };
+const hoeItem = { name: "Essence Hoe", icon: "img/icons/essence_hoe.png", href: "wiki/tools/essence-hoe" };
+const tools = {
+  slug: "tools", title: "Tools", group: "Getting started", icon: sickleItem.icon,
+  blurb: "A sickle that harvests 3×3 and a hoe that replants as it harvests.",
+  entries: [
+    {
+      slug: "essence-sickle", name: sickleItem.name, icon: sickleItem.icon,
+      summary: "Harvests every ripe crop in a 3×3.",
+      blocks: [
+        facts([["Use", "Break a ripe crop"], ["Area", "3×3, centred on that crop"], ["Wear", "1 durability per crop harvested"], ...toolFacts]),
+        p("Breaking a ripe crop also harvests every ripe crop around it. Unripe crops are left alone, and the sickle won't break one even if you hit it directly. Farmland bonus essence and second seeds work as normal."),
+        h2("Recipe"),
+        (() => {
+          const e = tierItem(toolTier), s = vanilla("minecraft:stick");
+          return recipe(sickleItem, 1, [[e, e, null], [null, s, e], [s, null, null]]);
+        })(),
+      ],
+    },
+    {
+      slug: "essence-hoe", name: hoeItem.name, icon: hoeItem.icon,
+      summary: "Right-click a ripe crop to harvest and replant it.",
+      blocks: [
+        facts([["Use", "Right-click a ripe crop"], ["Wear", "1 durability per crop"], ...toolFacts]),
+        p("The crop drops as normal and restarts at its first stage. The replant takes one seed from the drops, so it costs the same as replanting by hand. The hoe doesn't till dirt."),
+        h2("Recipe"),
+        (() => {
+          const e = tierItem(toolTier), s = vanilla("minecraft:stick");
+          return recipe(hoeItem, 1, [[e, e, null], [null, s, null], [null, s, null]]);
+        })(),
+      ],
+    },
+  ],
+};
+
 const cropCategories = cfg.tiers
   .map((t, i) => ({ t, i, crops: cfg.crops.filter((c) => c.tier === i + 1) }))
   .filter((g) => g.crops.length)
@@ -243,7 +280,7 @@ const cropCategories = cfg.tiers
     }),
   }));
 
-const categories = [guide, essence, farmland, accelerators, ...cropCategories];
+const categories = [guide, essence, farmland, accelerators, tools, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -253,6 +290,7 @@ const gallery = [
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
   { title: "Growth accelerators", items: cfg.tiers.map(acceleratorItem) },
+  { title: "Tools", items: [sickleItem, hoeItem] },
   { title: "Growth stages and ore", items: [...stages(cfg.crops[0]).slice(0, 3), oreItem] },
 ];
 
@@ -263,8 +301,8 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: essence + farmland + accelerator per tier, seeds + essence per crop, and the ore
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 + 1, recipes: recipes.length },
+  // items: essence + farmland + accelerator per tier, seeds + essence per crop, the ore and 2 tools
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 + 3, recipes: recipes.length },
   categories,
   recipes,
   gallery,

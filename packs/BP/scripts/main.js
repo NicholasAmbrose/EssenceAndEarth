@@ -26,8 +26,88 @@ const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecra
 const RIPE_DROP = { "minecraft:wheat": 1, "minecraft:beetroot": 1, "minecraft:carrot": 2, "minecraft:potato": 2 };
 const FARMLAND = new Set(["minecraft:farmland", ...Object.keys(FARMLAND_BONUS)]);
 
+const SICKLE = "__NS__:essence_sickle";
+const HOE = "__NS__:essence_hoe";
+// Vanilla crop block -> the item that replants it. Vanilla crops are ripe at growth 7.
+const VANILLA_SEEDS = { "minecraft:wheat": "minecraft:wheat_seeds", "minecraft:carrots": "minecraft:carrot", "minecraft:potatoes": "minecraft:potato", "minecraft:beetroot": "minecraft:beetroot_seeds" };
+const isOurCrop = (id) => id.startsWith("__NS__:") && id.endsWith("_crop");
+const isCrop = (id) => id in VANILLA_SEEDS || isOurCrop(id);
+const growthState = (id) => (isOurCrop(id) ? GROWTH : "growth");
+const isRipe = (permutation) => {
+  const id = permutation?.type.id;
+  return !!id && isCrop(id) && permutation.getState(growthState(id)) === (isOurCrop(id) ? MAX_STAGE : 7);
+};
+
+// Tools harvest with `destroy` so their drops take the same path as machines' (see entitySpawn below).
+function harvest(dimension, { x, y, z }) {
+  dimension.runCommand(`setblock ${x} ${y} ${z} air destroy`);
+}
+
+function wear(player, amount) {
+  if (player.getGameMode() === GameMode.Creative) return;
+  const equip = player.getComponent("minecraft:equippable");
+  const tool = equip?.getEquipment(EquipmentSlot.Mainhand);
+  const durability = tool?.getComponent("minecraft:durability");
+  if (!durability) return;
+  if (durability.damage + amount > durability.maxDurability) {
+    equip.setEquipment(EquipmentSlot.Mainhand);
+    player.playSound("random.break");
+    return;
+  }
+  durability.damage += amount;
+  equip.setEquipment(EquipmentSlot.Mainhand, tool);
+}
+
+function sweep(player, dimension, { x, y, z }) {
+  let harvested = 1; // the crop the player broke
+  for (let dx = -1; dx <= 1; dx++)
+    for (let dz = -1; dz <= 1; dz++) {
+      const location = { x: x + dx, y, z: z + dz };
+      if (!isRipe(dimension.getBlock(location)?.permutation)) continue;
+      harvest(dimension, location);
+      harvested++;
+    }
+  wear(player, harvested);
+}
+
+// The sickle never breaks an unripe crop.
+world.beforeEvents.playerBreakBlock.subscribe((event) => {
+  const { block, itemStack } = event;
+  if (itemStack?.typeId === SICKLE && isCrop(block.typeId) && !isRipe(block.permutation)) event.cancel = true;
+});
+
+// Takes one seed back out of a harvest's drops, so the hoe's replant costs what replanting by hand does.
+// ponytail: wheat and beetroot can drop no seeds, which makes that replant free; harmless, and vanilla already gives plenty.
+function takeSeed(dimension, location, seed) {
+  const center = { x: location.x + 0.5, y: location.y + 0.5, z: location.z + 0.5 };
+  for (const entity of dimension.getEntities({ location: center, maxDistance: 1.5, type: "minecraft:item" })) {
+    const stack = entity.getComponent("minecraft:item")?.itemStack;
+    if (stack?.typeId !== seed) continue;
+    entity.remove();
+    if (stack.amount > 1) drop(dimension, seed, entity.location, stack.amount - 1);
+    return;
+  }
+}
+
+world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
+  const { block, itemStack, player, isFirstEvent } = event;
+  if (itemStack?.typeId !== HOE || !isRipe(block.permutation)) return;
+  event.cancel = true;
+  if (!isFirstEvent) return; // holding the button repeats the event
+  const { dimension, location, permutation: ripe } = block;
+  const id = ripe.type.id;
+  const seed = VANILLA_SEEDS[id] ?? id.replace(/_crop$/, "_seeds");
+  system.run(() => {
+    harvest(dimension, location);
+    dimension.getBlock(location)?.setPermutation(ripe.withState(growthState(id), 0));
+    if (player.isValid) wear(player, 1);
+    system.run(() => takeSeed(dimension, location, seed)); // the drops exist from the next tick
+  });
+});
+
 // Grass: only players cut it, and it often drops nothing, so this one stays a player event.
-world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: broken, player, dimension }) => {
+world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: broken, itemStackBeforeBreak: tool, player, dimension }) => {
+  if (tool?.typeId === SICKLE && isRipe(broken)) sweep(player, dimension, block.location);
   if (player.getGameMode() === GameMode.Creative) return;
   if (GRASS.has(broken.type.id) && Math.random() < GRASS_CHANCE) drop(dimension, "__ESSENCE__", block.center());
 });
@@ -38,8 +118,8 @@ world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: b
 // at head height, so they never match.
 const ours = new Set(); // ids of item entities this script spawned, so they don't roll again
 
-function drop(dimension, item, location) {
-  ours.add(dimension.spawnItem(new ItemStack(item), location).id);
+function drop(dimension, item, location, amount = 1) {
+  ours.add(dimension.spawnItem(new ItemStack(item, amount), location).id);
 }
 
 // Wildbloom's Logger flower breaks logs with `setblock ... destroy`, and reaches 6 blocks out and up a whole tree.

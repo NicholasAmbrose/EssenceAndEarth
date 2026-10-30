@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.7.4",
-  "file": "EssenceAndEarth_v0.7.4.mcaddon",
+  "version": "0.8.0",
+  "file": "EssenceAndEarth_v0.8.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.7.4.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.8.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 27,
   "tiers": 5,
-  "items": 70,
-  "recipes": 70
+  "items": 72,
+  "recipes": 72
  },
  "categories": [
   {
@@ -1953,6 +1953,187 @@
       }
      ],
      "href": "wiki/accelerators/astra-accelerator"
+    }
+   ]
+  },
+  {
+   "slug": "tools",
+   "title": "Tools",
+   "group": "Getting started",
+   "icon": "img/icons/essence_sickle.png",
+   "blurb": "A sickle that harvests 3×3 and a hoe that replants as it harvests.",
+   "entries": [
+    {
+     "slug": "essence-sickle",
+     "name": "Essence Sickle",
+     "icon": "img/icons/essence_sickle.png",
+     "summary": "Harvests every ripe crop in a 3×3.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Use",
+         "Break a ripe crop"
+        ],
+        [
+         "Area",
+         "3×3, centred on that crop"
+        ],
+        [
+         "Wear",
+         "1 durability per crop harvested"
+        ],
+        [
+         "Durability",
+         "250"
+        ],
+        [
+         "Repair",
+         "Aqua Essence in an anvil"
+        ],
+        [
+         "Works on",
+         "Essence crops, wheat, carrots, potatoes and beetroot"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Breaking a ripe crop also harvests every ripe crop around it. Unripe crops are left alone, and the sickle won't break one even if you hit it directly. Farmland bonus essence and second seeds work as normal."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Essence Sickle",
+        "icon": "img/icons/essence_sickle.png",
+        "href": "wiki/tools/essence-sickle",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         null
+        ],
+        [
+         null,
+         {
+          "name": "Stick",
+          "icon": "img/vanilla/stick.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Stick",
+          "icon": "img/vanilla/stick.png"
+         },
+         null,
+         null
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/tools/essence-sickle"
+    },
+    {
+     "slug": "essence-hoe",
+     "name": "Essence Hoe",
+     "icon": "img/icons/essence_hoe.png",
+     "summary": "Right-click a ripe crop to harvest and replant it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Use",
+         "Right-click a ripe crop"
+        ],
+        [
+         "Wear",
+         "1 durability per crop"
+        ],
+        [
+         "Durability",
+         "250"
+        ],
+        [
+         "Repair",
+         "Aqua Essence in an anvil"
+        ],
+        [
+         "Works on",
+         "Essence crops, wheat, carrots, potatoes and beetroot"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "The crop drops as normal and restarts at its first stage. The replant takes one seed from the drops, so it costs the same as replanting by hand. The hoe doesn't till dirt."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Essence Hoe",
+        "icon": "img/icons/essence_hoe.png",
+        "href": "wiki/tools/essence-hoe",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         null
+        ],
+        [
+         null,
+         {
+          "name": "Stick",
+          "icon": "img/vanilla/stick.png"
+         },
+         null
+        ],
+        [
+         null,
+         {
+          "name": "Stick",
+          "icon": "img/vanilla/stick.png"
+         },
+         null
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/tools/essence-hoe"
     }
    ]
   },
@@ -8027,6 +8208,88 @@
   },
   {
    "result": {
+    "name": "Essence Sickle",
+    "icon": "img/icons/essence_sickle.png",
+    "href": "wiki/tools/essence-sickle",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     null
+    ],
+    [
+     null,
+     {
+      "name": "Stick",
+      "icon": "img/vanilla/stick.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Stick",
+      "icon": "img/vanilla/stick.png"
+     },
+     null,
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Essence Hoe",
+    "icon": "img/icons/essence_hoe.png",
+    "href": "wiki/tools/essence-hoe",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     null
+    ],
+    [
+     null,
+     {
+      "name": "Stick",
+      "icon": "img/vanilla/stick.png"
+     },
+     null
+    ],
+    [
+     null,
+     {
+      "name": "Stick",
+      "icon": "img/vanilla/stick.png"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
     "name": "Coal Seeds",
     "icon": "img/icons/coal_seeds.png",
     "href": "wiki/terra-crops/coal",
@@ -11672,6 +11935,21 @@
      "name": "Astra Growth Accelerator",
      "icon": "img/icons/astra_accelerator.png",
      "href": "wiki/accelerators/astra-accelerator"
+    }
+   ]
+  },
+  {
+   "title": "Tools",
+   "items": [
+    {
+     "name": "Essence Sickle",
+     "icon": "img/icons/essence_sickle.png",
+     "href": "wiki/tools/essence-sickle"
+    },
+    {
+     "name": "Essence Hoe",
+     "icon": "img/icons/essence_hoe.png",
+     "href": "wiki/tools/essence-hoe"
     }
    ]
   },

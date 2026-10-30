@@ -1,7 +1,7 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 7, 4],
+  "version": [0, 8, 0],
   "balance": {
     "growChance": 0.5,
     "boneMealChance": 0.25,
@@ -15,7 +15,8 @@
     "farmlandYield": 1,
     "acceleratorRolls": [0.25, 0.5, 1, 1.5, 2],
     "maxAccelerators": 4,
-    "acceleratorYield": 1
+    "acceleratorYield": 1,
+    "toolDurability": 250
   },
   "tiers": [
     { "id": "terra", "color": "#5fbf3f" },
