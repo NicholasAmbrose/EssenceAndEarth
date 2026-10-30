@@ -1,12 +1,12 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 7, 2],
+  "version": [0, 7, 3],
   "balance": {
     "growChance": 0.5,
     "boneMealChance": 0.25,
     "grassEssenceChance": 0.02,
-    "cropEssenceChance": 0.05,
+    "cropEssenceChance": 0.15,
     "harvestEssence": [1, 2],
     "secondSeedChance": 0.05,
     "oreEssence": [1, 3],

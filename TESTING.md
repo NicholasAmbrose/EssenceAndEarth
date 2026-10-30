@@ -4,6 +4,10 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Terra Essence from vanilla crops (v0.7.3)
+
+- [ ] Ripe vanilla crops, harvested by hand or by the reaper, drop Terra Essence about 15% of the time (roughly 15 per 100 harvests).
+
 ## Mod tag (v0.7.2)
 
 - [ ] Items and blocks (farmland, accelerators, essence ore) show a blue `@ESSENCE&EARTH` line under their name in the inventory.
