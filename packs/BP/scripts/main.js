@@ -36,7 +36,7 @@ function drop(dimension, item, location) {
 
 world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
   if (cause !== EntityInitializationCause.Spawned || entity.typeId !== "minecraft:item") return;
-  if (ours.delete(entity.id)) return;
+  if (ours.delete(entity.id) || !entity.isValid) return; // picked up or merged in the same tick
   const stack = entity.getComponent("minecraft:item")?.itemStack;
   if (!stack) return;
   const { x, y, z } = entity.location;

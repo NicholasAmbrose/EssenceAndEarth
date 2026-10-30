@@ -1,7 +1,7 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 4, 1],
+  "version": [0, 4, 2],
   "tiers": [
     { "id": "terra", "color": "#5fbf3f" },
     { "id": "aqua", "color": "#3f8fdf" },
