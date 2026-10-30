@@ -1,0 +1,32 @@
+@page "/gallery"
+@inject WikiService Data
+
+<PageTitle>Gallery · Essence &amp; Earth</PageTitle>
+<Breadcrumbs Here="Gallery" />
+<h1>Gallery</h1>
+<p class="lead">
+    Every texture in v@(Data.Release.Version), straight from the resource pack. The image files are in the repo under
+    <code>src/EssenceWiki/wwwroot/img/icons/</code>.
+</p>
+
+@foreach (var g in Data.Wiki.Gallery)
+{
+    <h2 class="section-title">@g.Title <span class="muted small">@g.Items.Count</span></h2>
+    <div class="gallery">
+        @foreach (var item in g.Items)
+        {
+            var inner = (RenderFragment)(@<text>
+                <span class="slot big"><Icon Src="@item.Icon" Name="@item.Name" Size="48" /></span>
+                <figcaption>@item.Name</figcaption>
+            </text>);
+            @if (item.Href is not null)
+            {
+                <a class="gallery-item" href="@item.Href">@inner</a>
+            }
+            else
+            {
+                <figure class="gallery-item">@inner</figure>
+            }
+        }
+    </div>
+}

@@ -1,0 +1,24 @@
+@* One inventory slot. Links to the item's page when it has one. *@
+@if (Item is null)
+{
+    <span class="slot @(Big ? "big" : "")"></span>
+}
+else if (Item.Href is not null)
+{
+    <a class="slot @(Big ? "big" : "")" href="@Item.Href" title="@Item.Name">
+        <Icon Src="@Item.Icon" Name="@Item.Name" Size="@(Big ? 44 : 32)" />
+        @if (Item.Count > 1) { <span class="count">@Item.Count</span> }
+    </a>
+}
+else
+{
+    <span class="slot @(Big ? "big" : "")" title="@Item.Name">
+        <Icon Src="@Item.Icon" Name="@Item.Name" Size="@(Big ? 44 : 32)" />
+        @if (Item.Count > 1) { <span class="count">@Item.Count</span> }
+    </span>
+}
+
+@code {
+    [Parameter] public Item? Item { get; set; }
+    [Parameter] public bool Big { get; set; }
+}

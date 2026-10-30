@@ -1,0 +1,6995 @@
+{
+ "name": "Essence & Earth",
+ "release": {
+  "version": "0.3.0",
+  "file": "EssenceAndEarth_v0.3.0.mcaddon",
+  "minBedrock": "1.21.90",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.3.0.mcaddon",
+  "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
+ },
+ "stats": {
+  "crops": 19,
+  "tiers": 5,
+  "items": 43,
+  "recipes": 42
+ },
+ "categories": [
+  {
+   "slug": "guide",
+   "title": "Guide",
+   "group": "Getting started",
+   "icon": "img/icons/terra_essence.png",
+   "blurb": "How Essence & Earth works, from your first essence to a farm of diamonds.",
+   "entries": [
+    {
+     "slug": "getting-started",
+     "name": "Getting started",
+     "icon": "img/icons/terra_essence.png",
+     "summary": "Find Terra Essence, upgrade it, and plant your first resource crop.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Essence & Earth lets you grow resources. Every crop starts as essence: you combine essence with the resource you want, plant the seeds, and harvest essence that crafts back into that resource."
+      },
+      {
+       "t": "h2",
+       "text": "1. Collect Terra Essence"
+      },
+      {
+       "t": "p",
+       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world."
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Essence Ore",
+         "icon": "img/icons/essence_ore.png",
+         "href": "wiki/essence/essence-ore",
+         "sub": "1–3 Terra Essence per ore"
+        },
+        {
+         "name": "Short Grass",
+         "icon": "img/vanilla/short_grass.png",
+         "sub": "Grass and ferns: 2% chance"
+        },
+        {
+         "name": "Wheat Crops",
+         "icon": "img/vanilla/wheat.png",
+         "sub": "Ripe wheat, carrots, potatoes, beetroot: 5% chance"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "2. Upgrade it"
+      },
+      {
+       "t": "p",
+       "html": "Four essence of one tier craft one of the next: <a href=\"wiki/essence/terra-essence\">Terra</a> → <a href=\"wiki/essence/aqua-essence\">Aqua</a> → <a href=\"wiki/essence/ignis-essence\">Ignis</a> → <a href=\"wiki/essence/aether-essence\">Aether</a> → <a href=\"wiki/essence/astra-essence\">Astra</a>. Each crop needs the essence of its tier."
+      },
+      {
+       "t": "h2",
+       "text": "3. Craft seeds and plant them"
+      },
+      {
+       "t": "p",
+       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on watered farmland and wait, or use bone meal to speed them up."
+      },
+      {
+       "t": "h2",
+       "text": "4. Harvest and craft"
+      },
+      {
+       "t": "p",
+       "html": "A ripe crop drops 1–2 of its essence and its seed back. Eight essence in a ring craft the resource."
+      }
+     ],
+     "href": "wiki/guide/getting-started"
+    },
+    {
+     "slug": "growing-crops",
+     "name": "Growing crops",
+     "icon": "img/icons/crop_2.png",
+     "summary": "Planting, growth stages, bone meal and harvesting.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Plant on",
+         "Farmland only"
+        ],
+        [
+         "Growth",
+         "4 stages, about 50% chance per random tick"
+        ],
+        [
+         "Bone meal",
+         "Advances one stage per use"
+        ],
+        [
+         "Ripe drops",
+         "1–2 essence, 1 seed, 10% chance of a second seed"
+        ],
+        [
+         "Unripe drops",
+         "The seed back"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/iron_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Keep farmland watered"
+      },
+      {
+       "t": "p",
+       "html": "Dry farmland turns back into dirt and the crop pops off. Keep water within four blocks, and don't jump on your fields."
+      }
+     ],
+     "href": "wiki/guide/growing-crops"
+    }
+   ]
+  },
+  {
+   "slug": "essence",
+   "title": "Essence",
+   "group": "Getting started",
+   "icon": "img/icons/ignis_essence.png",
+   "blurb": "Essence Ore and the five essence tiers every crop is made from.",
+   "entries": [
+    {
+     "slug": "essence-ore",
+     "name": "Essence Ore",
+     "icon": "img/icons/essence_ore.png",
+     "summary": "The main source of Terra Essence.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Found",
+         "Overworld, y −48 to 48"
+        ],
+        [
+         "Drops",
+         "1–3 Terra Essence"
+        ],
+        [
+         "Tool",
+         "Any; mining takes about 3 seconds by hand"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Terra Essence",
+         "icon": "img/icons/terra_essence.png",
+         "href": "wiki/essence/terra-essence",
+         "sub": "1–3 per ore"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/essence-ore"
+    },
+    {
+     "slug": "terra-essence",
+     "name": "Terra Essence",
+     "icon": "img/icons/terra_essence.png",
+     "summary": "Tier 1. 6 crops use it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 of 5"
+        ],
+        [
+         "Crops",
+         "6"
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "How to get it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Essence Ore",
+         "icon": "img/icons/essence_ore.png",
+         "href": "wiki/essence/essence-ore",
+         "sub": "1–3 per ore"
+        },
+        {
+         "name": "Short Grass",
+         "icon": "img/vanilla/short_grass.png",
+         "sub": "Grass and ferns: 2% chance"
+        },
+        {
+         "name": "Wheat Crops",
+         "icon": "img/vanilla/wheat.png",
+         "sub": "Ripe wheat, carrots, potatoes, beetroot: 5% chance"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds that need it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Coal Seeds",
+         "icon": "img/icons/coal_seeds.png",
+         "href": "wiki/terra-crops/coal",
+         "sub": "8 essence → 2 × Coal"
+        },
+        {
+         "name": "Copper Seeds",
+         "icon": "img/icons/copper_seeds.png",
+         "href": "wiki/terra-crops/copper",
+         "sub": "8 essence → 2 × Copper Ingot"
+        },
+        {
+         "name": "Cobblestone Seeds",
+         "icon": "img/icons/cobblestone_seeds.png",
+         "href": "wiki/terra-crops/cobblestone",
+         "sub": "8 essence → 4 × Cobblestone"
+        },
+        {
+         "name": "Wood Seeds",
+         "icon": "img/icons/wood_seeds.png",
+         "href": "wiki/terra-crops/wood",
+         "sub": "8 essence → 2 × Oak Log"
+        },
+        {
+         "name": "Sand Seeds",
+         "icon": "img/icons/sand_seeds.png",
+         "href": "wiki/terra-crops/sand",
+         "sub": "8 essence → 4 × Sand"
+        },
+        {
+         "name": "Clay Seeds",
+         "icon": "img/icons/clay_seeds.png",
+         "href": "wiki/terra-crops/clay",
+         "sub": "8 essence → 4 × Clay Ball"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/terra-essence"
+    },
+    {
+     "slug": "aqua-essence",
+     "name": "Aqua Essence",
+     "icon": "img/icons/aqua_essence.png",
+     "summary": "Tier 2. 8 crops use it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 of 5"
+        ],
+        [
+         "Crops",
+         "8"
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "How to get it"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Essence",
+        "icon": "img/icons/aqua_essence.png",
+        "href": "wiki/essence/aqua-essence",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: 4 in any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Seeds that need it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Iron Seeds",
+         "icon": "img/icons/iron_seeds.png",
+         "href": "wiki/aqua-crops/iron",
+         "sub": "8 essence → 2 × Iron Ingot"
+        },
+        {
+         "name": "Redstone Seeds",
+         "icon": "img/icons/redstone_seeds.png",
+         "href": "wiki/aqua-crops/redstone",
+         "sub": "8 essence → 2 × Redstone Dust"
+        },
+        {
+         "name": "Bone Meal Seeds",
+         "icon": "img/icons/bone_meal_seeds.png",
+         "href": "wiki/aqua-crops/bone-meal",
+         "sub": "8 essence → 3 × Bone Meal"
+        },
+        {
+         "name": "Lapis Seeds",
+         "icon": "img/icons/lapis_seeds.png",
+         "href": "wiki/aqua-crops/lapis",
+         "sub": "8 essence → 2 × Lapis Lazuli"
+        },
+        {
+         "name": "Nether Wart Seeds",
+         "icon": "img/icons/nether_wart_seeds.png",
+         "href": "wiki/aqua-crops/nether-wart",
+         "sub": "8 essence → 2 × Nether Wart"
+        },
+        {
+         "name": "Quartz Seeds",
+         "icon": "img/icons/quartz_seeds.png",
+         "href": "wiki/aqua-crops/quartz",
+         "sub": "8 essence → 2 × Nether Quartz"
+        },
+        {
+         "name": "Glowstone Seeds",
+         "icon": "img/icons/glowstone_seeds.png",
+         "href": "wiki/aqua-crops/glowstone",
+         "sub": "8 essence → 2 × Glowstone Dust"
+        },
+        {
+         "name": "Amethyst Seeds",
+         "icon": "img/icons/amethyst_seeds.png",
+         "href": "wiki/aqua-crops/amethyst",
+         "sub": "8 essence → 2 × Amethyst Shard"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/aqua-essence"
+    },
+    {
+     "slug": "ignis-essence",
+     "name": "Ignis Essence",
+     "icon": "img/icons/ignis_essence.png",
+     "summary": "Tier 3. 2 crops use it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "3 of 5"
+        ],
+        [
+         "Crops",
+         "2"
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "How to get it"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Essence",
+        "icon": "img/icons/ignis_essence.png",
+        "href": "wiki/essence/ignis-essence",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: 4 in any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Seeds that need it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Gold Seeds",
+         "icon": "img/icons/gold_seeds.png",
+         "href": "wiki/ignis-crops/gold",
+         "sub": "8 essence → 1 × Gold Ingot"
+        },
+        {
+         "name": "Obsidian Seeds",
+         "icon": "img/icons/obsidian_seeds.png",
+         "href": "wiki/ignis-crops/obsidian",
+         "sub": "8 essence → 1 × Obsidian"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/ignis-essence"
+    },
+    {
+     "slug": "aether-essence",
+     "name": "Aether Essence",
+     "icon": "img/icons/aether_essence.png",
+     "summary": "Tier 4. 1 crops use it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "4 of 5"
+        ],
+        [
+         "Crops",
+         "1"
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "How to get it"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Essence",
+        "icon": "img/icons/aether_essence.png",
+        "href": "wiki/essence/aether-essence",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: 4 in any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Seeds that need it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Emerald Seeds",
+         "icon": "img/icons/emerald_seeds.png",
+         "href": "wiki/aether-crops/emerald",
+         "sub": "8 essence → 1 × Emerald"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/aether-essence"
+    },
+    {
+     "slug": "astra-essence",
+     "name": "Astra Essence",
+     "icon": "img/icons/astra_essence.png",
+     "summary": "Tier 5. 2 crops use it.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "5 of 5"
+        ],
+        [
+         "Crops",
+         "2"
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "How to get it"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Essence",
+        "icon": "img/icons/astra_essence.png",
+        "href": "wiki/essence/astra-essence",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: 4 in any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Seeds that need it"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Diamond Seeds",
+         "icon": "img/icons/diamond_seeds.png",
+         "href": "wiki/astra-crops/diamond",
+         "sub": "8 essence → 1 × Diamond"
+        },
+        {
+         "name": "Netherite Seeds",
+         "icon": "img/icons/netherite_seeds.png",
+         "href": "wiki/astra-crops/netherite",
+         "sub": "8 essence → 1 × Netherite Scrap"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/essence/astra-essence"
+    }
+   ]
+  },
+  {
+   "slug": "terra-crops",
+   "title": "Terra crops",
+   "group": "Crops",
+   "icon": "img/icons/terra_essence.png",
+   "blurb": "Tier 1 crops. Their seeds are made with Terra Essence.",
+   "entries": [
+    {
+     "slug": "coal",
+     "name": "Coal Crop",
+     "icon": "img/icons/coal_crop.png",
+     "summary": "8 essence → 2 × Coal",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Coal"
+        ],
+        [
+         "Makes",
+         "2 × Coal per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/coal_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Coal Seeds",
+        "icon": "img/icons/coal_seeds.png",
+        "href": "wiki/terra-crops/coal",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Coal",
+          "icon": "img/vanilla/coal.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Coal",
+          "icon": "img/vanilla/coal.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Coal",
+          "icon": "img/vanilla/coal.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Coal",
+          "icon": "img/vanilla/coal.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Coal Essence",
+         "icon": "img/icons/coal_essence.png",
+         "href": "wiki/terra-crops/coal",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Coal Seeds",
+         "icon": "img/icons/coal_seeds.png",
+         "href": "wiki/terra-crops/coal",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Coal"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Coal",
+        "icon": "img/vanilla/coal.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         },
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         },
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         }
+        ],
+        [
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         },
+         null,
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         }
+        ],
+        [
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         },
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         },
+         {
+          "name": "Coal Essence",
+          "icon": "img/icons/coal_essence.png",
+          "href": "wiki/terra-crops/coal"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/coal"
+    },
+    {
+     "slug": "copper",
+     "name": "Copper Crop",
+     "icon": "img/icons/copper_crop.png",
+     "summary": "8 essence → 2 × Copper Ingot",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Copper Ingot"
+        ],
+        [
+         "Makes",
+         "2 × Copper Ingot per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/copper_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Copper Seeds",
+        "icon": "img/icons/copper_seeds.png",
+        "href": "wiki/terra-crops/copper",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Copper Ingot",
+          "icon": "img/vanilla/copper_ingot.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Copper Ingot",
+          "icon": "img/vanilla/copper_ingot.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Copper Ingot",
+          "icon": "img/vanilla/copper_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Copper Ingot",
+          "icon": "img/vanilla/copper_ingot.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Copper Essence",
+         "icon": "img/icons/copper_essence.png",
+         "href": "wiki/terra-crops/copper",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Copper Seeds",
+         "icon": "img/icons/copper_seeds.png",
+         "href": "wiki/terra-crops/copper",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Copper Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Copper Ingot",
+        "icon": "img/vanilla/copper_ingot.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         },
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         },
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         }
+        ],
+        [
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         },
+         null,
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         }
+        ],
+        [
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         },
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         },
+         {
+          "name": "Copper Essence",
+          "icon": "img/icons/copper_essence.png",
+          "href": "wiki/terra-crops/copper"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/copper"
+    },
+    {
+     "slug": "cobblestone",
+     "name": "Cobblestone Crop",
+     "icon": "img/icons/cobblestone_crop.png",
+     "summary": "8 essence → 4 × Cobblestone",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Cobblestone"
+        ],
+        [
+         "Makes",
+         "4 × Cobblestone per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/cobblestone_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Cobblestone Seeds",
+        "icon": "img/icons/cobblestone_seeds.png",
+        "href": "wiki/terra-crops/cobblestone",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Cobblestone",
+          "icon": "img/vanilla/cobblestone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Cobblestone Essence",
+         "icon": "img/icons/cobblestone_essence.png",
+         "href": "wiki/terra-crops/cobblestone",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Cobblestone Seeds",
+         "icon": "img/icons/cobblestone_seeds.png",
+         "href": "wiki/terra-crops/cobblestone",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Cobblestone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Cobblestone",
+        "icon": "img/vanilla/cobblestone.png",
+        "count": 4
+       },
+       "rows": [
+        [
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         },
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         },
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         }
+        ],
+        [
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         },
+         null,
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         }
+        ],
+        [
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         },
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         },
+         {
+          "name": "Cobblestone Essence",
+          "icon": "img/icons/cobblestone_essence.png",
+          "href": "wiki/terra-crops/cobblestone"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/cobblestone"
+    },
+    {
+     "slug": "wood",
+     "name": "Wood Crop",
+     "icon": "img/icons/wood_crop.png",
+     "summary": "8 essence → 2 × Oak Log",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Oak Log"
+        ],
+        [
+         "Makes",
+         "2 × Oak Log per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/wood_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Wood Seeds",
+        "icon": "img/icons/wood_seeds.png",
+        "href": "wiki/terra-crops/wood",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Oak Log",
+          "icon": "img/vanilla/oak_log.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Oak Log",
+          "icon": "img/vanilla/oak_log.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Oak Log",
+          "icon": "img/vanilla/oak_log.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Oak Log",
+          "icon": "img/vanilla/oak_log.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Wood Essence",
+         "icon": "img/icons/wood_essence.png",
+         "href": "wiki/terra-crops/wood",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Wood Seeds",
+         "icon": "img/icons/wood_seeds.png",
+         "href": "wiki/terra-crops/wood",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Oak Log"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Oak Log",
+        "icon": "img/vanilla/oak_log.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         },
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         },
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         }
+        ],
+        [
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         },
+         null,
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         }
+        ],
+        [
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         },
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         },
+         {
+          "name": "Wood Essence",
+          "icon": "img/icons/wood_essence.png",
+          "href": "wiki/terra-crops/wood"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/wood"
+    },
+    {
+     "slug": "sand",
+     "name": "Sand Crop",
+     "icon": "img/icons/sand_crop.png",
+     "summary": "8 essence → 4 × Sand",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Sand"
+        ],
+        [
+         "Makes",
+         "4 × Sand per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/sand_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Sand Seeds",
+        "icon": "img/icons/sand_seeds.png",
+        "href": "wiki/terra-crops/sand",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Sand",
+          "icon": "img/vanilla/sand.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Sand",
+          "icon": "img/vanilla/sand.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Sand",
+          "icon": "img/vanilla/sand.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Sand",
+          "icon": "img/vanilla/sand.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Sand Essence",
+         "icon": "img/icons/sand_essence.png",
+         "href": "wiki/terra-crops/sand",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Sand Seeds",
+         "icon": "img/icons/sand_seeds.png",
+         "href": "wiki/terra-crops/sand",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Sand"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Sand",
+        "icon": "img/vanilla/sand.png",
+        "count": 4
+       },
+       "rows": [
+        [
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         },
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         },
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         }
+        ],
+        [
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         },
+         null,
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         }
+        ],
+        [
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         },
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         },
+         {
+          "name": "Sand Essence",
+          "icon": "img/icons/sand_essence.png",
+          "href": "wiki/terra-crops/sand"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/sand"
+    },
+    {
+     "slug": "clay",
+     "name": "Clay Crop",
+     "icon": "img/icons/clay_crop.png",
+     "summary": "8 essence → 4 × Clay Ball",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Seeds use",
+         "Clay Ball"
+        ],
+        [
+         "Makes",
+         "4 × Clay Ball per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/clay_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Clay Seeds",
+        "icon": "img/icons/clay_seeds.png",
+        "href": "wiki/terra-crops/clay",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Clay Ball",
+          "icon": "img/vanilla/clay_ball.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Clay Ball",
+          "icon": "img/vanilla/clay_ball.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Clay Ball",
+          "icon": "img/vanilla/clay_ball.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Clay Ball",
+          "icon": "img/vanilla/clay_ball.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Clay Essence",
+         "icon": "img/icons/clay_essence.png",
+         "href": "wiki/terra-crops/clay",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Clay Seeds",
+         "icon": "img/icons/clay_seeds.png",
+         "href": "wiki/terra-crops/clay",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Clay Ball"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Clay Ball",
+        "icon": "img/vanilla/clay_ball.png",
+        "count": 4
+       },
+       "rows": [
+        [
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         },
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         },
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         }
+        ],
+        [
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         },
+         null,
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         }
+        ],
+        [
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         },
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         },
+         {
+          "name": "Clay Essence",
+          "icon": "img/icons/clay_essence.png",
+          "href": "wiki/terra-crops/clay"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/clay"
+    }
+   ]
+  },
+  {
+   "slug": "aqua-crops",
+   "title": "Aqua crops",
+   "group": "Crops",
+   "icon": "img/icons/aqua_essence.png",
+   "blurb": "Tier 2 crops. Their seeds are made with Aqua Essence.",
+   "entries": [
+    {
+     "slug": "iron",
+     "name": "Iron Crop",
+     "icon": "img/icons/iron_crop.png",
+     "summary": "8 essence → 2 × Iron Ingot",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Iron Ingot"
+        ],
+        [
+         "Makes",
+         "2 × Iron Ingot per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/iron_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Iron Seeds",
+        "icon": "img/icons/iron_seeds.png",
+        "href": "wiki/aqua-crops/iron",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Iron Essence",
+         "icon": "img/icons/iron_essence.png",
+         "href": "wiki/aqua-crops/iron",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Iron Seeds",
+         "icon": "img/icons/iron_seeds.png",
+         "href": "wiki/aqua-crops/iron",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Iron Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Iron Ingot",
+        "icon": "img/vanilla/iron_ingot.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         },
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         },
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         }
+        ],
+        [
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         },
+         null,
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         }
+        ],
+        [
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         },
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         },
+         {
+          "name": "Iron Essence",
+          "icon": "img/icons/iron_essence.png",
+          "href": "wiki/aqua-crops/iron"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/iron"
+    },
+    {
+     "slug": "redstone",
+     "name": "Redstone Crop",
+     "icon": "img/icons/redstone_crop.png",
+     "summary": "8 essence → 2 × Redstone Dust",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Redstone Dust"
+        ],
+        [
+         "Makes",
+         "2 × Redstone Dust per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/redstone_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Redstone Seeds",
+        "icon": "img/icons/redstone_seeds.png",
+        "href": "wiki/aqua-crops/redstone",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Redstone Essence",
+         "icon": "img/icons/redstone_essence.png",
+         "href": "wiki/aqua-crops/redstone",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Redstone Seeds",
+         "icon": "img/icons/redstone_seeds.png",
+         "href": "wiki/aqua-crops/redstone",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Redstone Dust"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Redstone Dust",
+        "icon": "img/vanilla/redstone.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         },
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         },
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         }
+        ],
+        [
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         },
+         null,
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         }
+        ],
+        [
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         },
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         },
+         {
+          "name": "Redstone Essence",
+          "icon": "img/icons/redstone_essence.png",
+          "href": "wiki/aqua-crops/redstone"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/redstone"
+    },
+    {
+     "slug": "bone-meal",
+     "name": "Bone Meal Crop",
+     "icon": "img/icons/bone_meal_crop.png",
+     "summary": "8 essence → 3 × Bone Meal",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Bone"
+        ],
+        [
+         "Makes",
+         "3 × Bone Meal per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/bone_meal_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Bone Meal Seeds",
+        "icon": "img/icons/bone_meal_seeds.png",
+        "href": "wiki/aqua-crops/bone-meal",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Bone",
+          "icon": "img/vanilla/bone.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Bone",
+          "icon": "img/vanilla/bone.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Bone",
+          "icon": "img/vanilla/bone.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Bone",
+          "icon": "img/vanilla/bone.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Bone Meal Essence",
+         "icon": "img/icons/bone_meal_essence.png",
+         "href": "wiki/aqua-crops/bone-meal",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Bone Meal Seeds",
+         "icon": "img/icons/bone_meal_seeds.png",
+         "href": "wiki/aqua-crops/bone-meal",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Bone Meal"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Bone Meal",
+        "icon": "img/vanilla/bone_meal.png",
+        "count": 3
+       },
+       "rows": [
+        [
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         },
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         },
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         }
+        ],
+        [
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         },
+         null,
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         }
+        ],
+        [
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         },
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         },
+         {
+          "name": "Bone Meal Essence",
+          "icon": "img/icons/bone_meal_essence.png",
+          "href": "wiki/aqua-crops/bone-meal"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/bone-meal"
+    },
+    {
+     "slug": "lapis",
+     "name": "Lapis Crop",
+     "icon": "img/icons/lapis_crop.png",
+     "summary": "8 essence → 2 × Lapis Lazuli",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Lapis Lazuli"
+        ],
+        [
+         "Makes",
+         "2 × Lapis Lazuli per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/lapis_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Lapis Seeds",
+        "icon": "img/icons/lapis_seeds.png",
+        "href": "wiki/aqua-crops/lapis",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Lapis Lazuli",
+          "icon": "img/vanilla/lapis_lazuli.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Lapis Lazuli",
+          "icon": "img/vanilla/lapis_lazuli.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Lapis Lazuli",
+          "icon": "img/vanilla/lapis_lazuli.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Lapis Lazuli",
+          "icon": "img/vanilla/lapis_lazuli.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Lapis Essence",
+         "icon": "img/icons/lapis_essence.png",
+         "href": "wiki/aqua-crops/lapis",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Lapis Seeds",
+         "icon": "img/icons/lapis_seeds.png",
+         "href": "wiki/aqua-crops/lapis",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Lapis Lazuli"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Lapis Lazuli",
+        "icon": "img/vanilla/lapis_lazuli.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         },
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         },
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         }
+        ],
+        [
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         },
+         null,
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         }
+        ],
+        [
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         },
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         },
+         {
+          "name": "Lapis Essence",
+          "icon": "img/icons/lapis_essence.png",
+          "href": "wiki/aqua-crops/lapis"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/lapis"
+    },
+    {
+     "slug": "nether-wart",
+     "name": "Nether Wart Crop",
+     "icon": "img/icons/nether_wart_crop.png",
+     "summary": "8 essence → 2 × Nether Wart",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Nether Wart"
+        ],
+        [
+         "Makes",
+         "2 × Nether Wart per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/nether_wart_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Nether Wart Seeds",
+        "icon": "img/icons/nether_wart_seeds.png",
+        "href": "wiki/aqua-crops/nether-wart",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Nether Wart",
+          "icon": "img/vanilla/nether_wart.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Nether Wart",
+          "icon": "img/vanilla/nether_wart.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Nether Wart",
+          "icon": "img/vanilla/nether_wart.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Nether Wart",
+          "icon": "img/vanilla/nether_wart.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Nether Wart Essence",
+         "icon": "img/icons/nether_wart_essence.png",
+         "href": "wiki/aqua-crops/nether-wart",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Nether Wart Seeds",
+         "icon": "img/icons/nether_wart_seeds.png",
+         "href": "wiki/aqua-crops/nether-wart",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Nether Wart"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Nether Wart",
+        "icon": "img/vanilla/nether_wart.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         },
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         },
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         }
+        ],
+        [
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         },
+         null,
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         }
+        ],
+        [
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         },
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         },
+         {
+          "name": "Nether Wart Essence",
+          "icon": "img/icons/nether_wart_essence.png",
+          "href": "wiki/aqua-crops/nether-wart"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/nether-wart"
+    },
+    {
+     "slug": "quartz",
+     "name": "Quartz Crop",
+     "icon": "img/icons/quartz_crop.png",
+     "summary": "8 essence → 2 × Nether Quartz",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Nether Quartz"
+        ],
+        [
+         "Makes",
+         "2 × Nether Quartz per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/quartz_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Quartz Seeds",
+        "icon": "img/icons/quartz_seeds.png",
+        "href": "wiki/aqua-crops/quartz",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Nether Quartz",
+          "icon": "img/vanilla/quartz.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Nether Quartz",
+          "icon": "img/vanilla/quartz.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Nether Quartz",
+          "icon": "img/vanilla/quartz.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Nether Quartz",
+          "icon": "img/vanilla/quartz.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Quartz Essence",
+         "icon": "img/icons/quartz_essence.png",
+         "href": "wiki/aqua-crops/quartz",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Quartz Seeds",
+         "icon": "img/icons/quartz_seeds.png",
+         "href": "wiki/aqua-crops/quartz",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Nether Quartz"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Nether Quartz",
+        "icon": "img/vanilla/quartz.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         },
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         },
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         }
+        ],
+        [
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         },
+         null,
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         }
+        ],
+        [
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         },
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         },
+         {
+          "name": "Quartz Essence",
+          "icon": "img/icons/quartz_essence.png",
+          "href": "wiki/aqua-crops/quartz"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/quartz"
+    },
+    {
+     "slug": "glowstone",
+     "name": "Glowstone Crop",
+     "icon": "img/icons/glowstone_crop.png",
+     "summary": "8 essence → 2 × Glowstone Dust",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Glowstone Dust"
+        ],
+        [
+         "Makes",
+         "2 × Glowstone Dust per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/glowstone_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Glowstone Seeds",
+        "icon": "img/icons/glowstone_seeds.png",
+        "href": "wiki/aqua-crops/glowstone",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Glowstone Dust",
+          "icon": "img/vanilla/glowstone_dust.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Glowstone Dust",
+          "icon": "img/vanilla/glowstone_dust.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Glowstone Dust",
+          "icon": "img/vanilla/glowstone_dust.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Glowstone Dust",
+          "icon": "img/vanilla/glowstone_dust.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Glowstone Essence",
+         "icon": "img/icons/glowstone_essence.png",
+         "href": "wiki/aqua-crops/glowstone",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Glowstone Seeds",
+         "icon": "img/icons/glowstone_seeds.png",
+         "href": "wiki/aqua-crops/glowstone",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Glowstone Dust"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Glowstone Dust",
+        "icon": "img/vanilla/glowstone_dust.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         },
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         },
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         }
+        ],
+        [
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         },
+         null,
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         }
+        ],
+        [
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         },
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         },
+         {
+          "name": "Glowstone Essence",
+          "icon": "img/icons/glowstone_essence.png",
+          "href": "wiki/aqua-crops/glowstone"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/glowstone"
+    },
+    {
+     "slug": "amethyst",
+     "name": "Amethyst Crop",
+     "icon": "img/icons/amethyst_crop.png",
+     "summary": "8 essence → 2 × Amethyst Shard",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "2 · Aqua Essence"
+        ],
+        [
+         "Seeds use",
+         "Amethyst Shard"
+        ],
+        [
+         "Makes",
+         "2 × Amethyst Shard per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/amethyst_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Amethyst Seeds",
+        "icon": "img/icons/amethyst_seeds.png",
+        "href": "wiki/aqua-crops/amethyst",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Amethyst Shard",
+          "icon": "img/vanilla/amethyst_shard.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Amethyst Shard",
+          "icon": "img/vanilla/amethyst_shard.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Amethyst Shard",
+          "icon": "img/vanilla/amethyst_shard.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Amethyst Shard",
+          "icon": "img/vanilla/amethyst_shard.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Amethyst Essence",
+         "icon": "img/icons/amethyst_essence.png",
+         "href": "wiki/aqua-crops/amethyst",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Amethyst Seeds",
+         "icon": "img/icons/amethyst_seeds.png",
+         "href": "wiki/aqua-crops/amethyst",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Amethyst Shard"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Amethyst Shard",
+        "icon": "img/vanilla/amethyst_shard.png",
+        "count": 2
+       },
+       "rows": [
+        [
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         },
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         },
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         }
+        ],
+        [
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         },
+         null,
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         }
+        ],
+        [
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         },
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         },
+         {
+          "name": "Amethyst Essence",
+          "icon": "img/icons/amethyst_essence.png",
+          "href": "wiki/aqua-crops/amethyst"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aqua-crops/amethyst"
+    }
+   ]
+  },
+  {
+   "slug": "ignis-crops",
+   "title": "Ignis crops",
+   "group": "Crops",
+   "icon": "img/icons/ignis_essence.png",
+   "blurb": "Tier 3 crops. Their seeds are made with Ignis Essence.",
+   "entries": [
+    {
+     "slug": "gold",
+     "name": "Gold Crop",
+     "icon": "img/icons/gold_crop.png",
+     "summary": "8 essence → 1 × Gold Ingot",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "3 · Ignis Essence"
+        ],
+        [
+         "Seeds use",
+         "Gold Ingot"
+        ],
+        [
+         "Makes",
+         "1 × Gold Ingot per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/gold_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Gold Seeds",
+        "icon": "img/icons/gold_seeds.png",
+        "href": "wiki/ignis-crops/gold",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Gold Essence",
+         "icon": "img/icons/gold_essence.png",
+         "href": "wiki/ignis-crops/gold",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Gold Seeds",
+         "icon": "img/icons/gold_seeds.png",
+         "href": "wiki/ignis-crops/gold",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Gold Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Gold Ingot",
+        "icon": "img/vanilla/gold_ingot.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         },
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         },
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         }
+        ],
+        [
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         },
+         null,
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         }
+        ],
+        [
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         },
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         },
+         {
+          "name": "Gold Essence",
+          "icon": "img/icons/gold_essence.png",
+          "href": "wiki/ignis-crops/gold"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/ignis-crops/gold"
+    },
+    {
+     "slug": "obsidian",
+     "name": "Obsidian Crop",
+     "icon": "img/icons/obsidian_crop.png",
+     "summary": "8 essence → 1 × Obsidian",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "3 · Ignis Essence"
+        ],
+        [
+         "Seeds use",
+         "Obsidian"
+        ],
+        [
+         "Makes",
+         "1 × Obsidian per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/obsidian_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Obsidian Seeds",
+        "icon": "img/icons/obsidian_seeds.png",
+        "href": "wiki/ignis-crops/obsidian",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Obsidian",
+          "icon": "img/vanilla/obsidian.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         {
+          "name": "Obsidian",
+          "icon": "img/vanilla/obsidian.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Obsidian",
+          "icon": "img/vanilla/obsidian.png"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Obsidian",
+          "icon": "img/vanilla/obsidian.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Obsidian Essence",
+         "icon": "img/icons/obsidian_essence.png",
+         "href": "wiki/ignis-crops/obsidian",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Obsidian Seeds",
+         "icon": "img/icons/obsidian_seeds.png",
+         "href": "wiki/ignis-crops/obsidian",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Obsidian"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Obsidian",
+        "icon": "img/vanilla/obsidian.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         },
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         },
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         }
+        ],
+        [
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         },
+         null,
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         }
+        ],
+        [
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         },
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         },
+         {
+          "name": "Obsidian Essence",
+          "icon": "img/icons/obsidian_essence.png",
+          "href": "wiki/ignis-crops/obsidian"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/ignis-crops/obsidian"
+    }
+   ]
+  },
+  {
+   "slug": "aether-crops",
+   "title": "Aether crops",
+   "group": "Crops",
+   "icon": "img/icons/aether_essence.png",
+   "blurb": "Tier 4 crops. Their seeds are made with Aether Essence.",
+   "entries": [
+    {
+     "slug": "emerald",
+     "name": "Emerald Crop",
+     "icon": "img/icons/emerald_crop.png",
+     "summary": "8 essence → 1 × Emerald",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "4 · Aether Essence"
+        ],
+        [
+         "Seeds use",
+         "Emerald"
+        ],
+        [
+         "Makes",
+         "1 × Emerald per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/emerald_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Emerald Seeds",
+        "icon": "img/icons/emerald_seeds.png",
+        "href": "wiki/aether-crops/emerald",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Emerald",
+          "icon": "img/vanilla/emerald.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         {
+          "name": "Emerald",
+          "icon": "img/vanilla/emerald.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Emerald",
+          "icon": "img/vanilla/emerald.png"
+         }
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Emerald",
+          "icon": "img/vanilla/emerald.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Emerald Essence",
+         "icon": "img/icons/emerald_essence.png",
+         "href": "wiki/aether-crops/emerald",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Emerald Seeds",
+         "icon": "img/icons/emerald_seeds.png",
+         "href": "wiki/aether-crops/emerald",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Emerald"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Emerald",
+        "icon": "img/vanilla/emerald.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         },
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         },
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         }
+        ],
+        [
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         },
+         null,
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         }
+        ],
+        [
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         },
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         },
+         {
+          "name": "Emerald Essence",
+          "icon": "img/icons/emerald_essence.png",
+          "href": "wiki/aether-crops/emerald"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aether-crops/emerald"
+    }
+   ]
+  },
+  {
+   "slug": "astra-crops",
+   "title": "Astra crops",
+   "group": "Crops",
+   "icon": "img/icons/astra_essence.png",
+   "blurb": "Tier 5 crops. Their seeds are made with Astra Essence.",
+   "entries": [
+    {
+     "slug": "diamond",
+     "name": "Diamond Crop",
+     "icon": "img/icons/diamond_crop.png",
+     "summary": "8 essence → 1 × Diamond",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "5 · Astra Essence"
+        ],
+        [
+         "Seeds use",
+         "Diamond"
+        ],
+        [
+         "Makes",
+         "1 × Diamond per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/diamond_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Diamond Seeds",
+        "icon": "img/icons/diamond_seeds.png",
+        "href": "wiki/astra-crops/diamond",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         }
+        ],
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Diamond Essence",
+         "icon": "img/icons/diamond_essence.png",
+         "href": "wiki/astra-crops/diamond",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Diamond Seeds",
+         "icon": "img/icons/diamond_seeds.png",
+         "href": "wiki/astra-crops/diamond",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Diamond"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Diamond",
+        "icon": "img/vanilla/diamond.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         },
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         },
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         }
+        ],
+        [
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         },
+         null,
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         }
+        ],
+        [
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         },
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         },
+         {
+          "name": "Diamond Essence",
+          "icon": "img/icons/diamond_essence.png",
+          "href": "wiki/astra-crops/diamond"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/astra-crops/diamond"
+    },
+    {
+     "slug": "netherite",
+     "name": "Netherite Crop",
+     "icon": "img/icons/netherite_crop.png",
+     "summary": "8 essence → 1 × Netherite Scrap",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "5 · Astra Essence"
+        ],
+        [
+         "Seeds use",
+         "Netherite Scrap"
+        ],
+        [
+         "Makes",
+         "1 × Netherite Scrap per 8 essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/netherite_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Netherite Seeds",
+        "icon": "img/icons/netherite_seeds.png",
+        "href": "wiki/astra-crops/netherite",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Netherite Scrap",
+          "icon": "img/vanilla/netherite_scrap.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Netherite Scrap",
+          "icon": "img/vanilla/netherite_scrap.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Netherite Scrap",
+          "icon": "img/vanilla/netherite_scrap.png"
+         }
+        ],
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Netherite Scrap",
+          "icon": "img/vanilla/netherite_scrap.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Netherite Essence",
+         "icon": "img/icons/netherite_essence.png",
+         "href": "wiki/astra-crops/netherite",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Netherite Seeds",
+         "icon": "img/icons/netherite_seeds.png",
+         "href": "wiki/astra-crops/netherite",
+         "sub": "1, plus a 10% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Netherite Scrap"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Netherite Scrap",
+        "icon": "img/vanilla/netherite_scrap.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         },
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         },
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         }
+        ],
+        [
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         },
+         null,
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         }
+        ],
+        [
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         },
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         },
+         {
+          "name": "Netherite Essence",
+          "icon": "img/icons/netherite_essence.png",
+          "href": "wiki/astra-crops/netherite"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/astra-crops/netherite"
+    }
+   ]
+  }
+ ],
+ "recipes": [
+  {
+   "result": {
+    "name": "Aqua Essence",
+    "icon": "img/icons/aqua_essence.png",
+    "href": "wiki/essence/aqua-essence",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: 4 in any slots"
+  },
+  {
+   "result": {
+    "name": "Ignis Essence",
+    "icon": "img/icons/ignis_essence.png",
+    "href": "wiki/essence/ignis-essence",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: 4 in any slots"
+  },
+  {
+   "result": {
+    "name": "Aether Essence",
+    "icon": "img/icons/aether_essence.png",
+    "href": "wiki/essence/aether-essence",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: 4 in any slots"
+  },
+  {
+   "result": {
+    "name": "Astra Essence",
+    "icon": "img/icons/astra_essence.png",
+    "href": "wiki/essence/astra-essence",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: 4 in any slots"
+  },
+  {
+   "result": {
+    "name": "Coal Seeds",
+    "icon": "img/icons/coal_seeds.png",
+    "href": "wiki/terra-crops/coal",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Coal",
+      "icon": "img/vanilla/coal.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Coal",
+      "icon": "img/vanilla/coal.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Coal",
+      "icon": "img/vanilla/coal.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Coal",
+      "icon": "img/vanilla/coal.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Coal",
+    "icon": "img/vanilla/coal.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     },
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     },
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     }
+    ],
+    [
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     },
+     null,
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     }
+    ],
+    [
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     },
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     },
+     {
+      "name": "Coal Essence",
+      "icon": "img/icons/coal_essence.png",
+      "href": "wiki/terra-crops/coal"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Copper Seeds",
+    "icon": "img/icons/copper_seeds.png",
+    "href": "wiki/terra-crops/copper",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Copper Ingot",
+      "icon": "img/vanilla/copper_ingot.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Copper Ingot",
+      "icon": "img/vanilla/copper_ingot.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Copper Ingot",
+      "icon": "img/vanilla/copper_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Copper Ingot",
+      "icon": "img/vanilla/copper_ingot.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Copper Ingot",
+    "icon": "img/vanilla/copper_ingot.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     },
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     },
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     }
+    ],
+    [
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     },
+     null,
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     }
+    ],
+    [
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     },
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     },
+     {
+      "name": "Copper Essence",
+      "icon": "img/icons/copper_essence.png",
+      "href": "wiki/terra-crops/copper"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Cobblestone Seeds",
+    "icon": "img/icons/cobblestone_seeds.png",
+    "href": "wiki/terra-crops/cobblestone",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Cobblestone",
+      "icon": "img/vanilla/cobblestone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Cobblestone",
+    "icon": "img/vanilla/cobblestone.png",
+    "count": 4
+   },
+   "rows": [
+    [
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     },
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     },
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     }
+    ],
+    [
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     },
+     null,
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     }
+    ],
+    [
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     },
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     },
+     {
+      "name": "Cobblestone Essence",
+      "icon": "img/icons/cobblestone_essence.png",
+      "href": "wiki/terra-crops/cobblestone"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Wood Seeds",
+    "icon": "img/icons/wood_seeds.png",
+    "href": "wiki/terra-crops/wood",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Oak Log",
+      "icon": "img/vanilla/oak_log.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Oak Log",
+      "icon": "img/vanilla/oak_log.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Oak Log",
+      "icon": "img/vanilla/oak_log.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Oak Log",
+      "icon": "img/vanilla/oak_log.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Oak Log",
+    "icon": "img/vanilla/oak_log.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     },
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     },
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     }
+    ],
+    [
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     },
+     null,
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     }
+    ],
+    [
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     },
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     },
+     {
+      "name": "Wood Essence",
+      "icon": "img/icons/wood_essence.png",
+      "href": "wiki/terra-crops/wood"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Sand Seeds",
+    "icon": "img/icons/sand_seeds.png",
+    "href": "wiki/terra-crops/sand",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Sand",
+      "icon": "img/vanilla/sand.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Sand",
+      "icon": "img/vanilla/sand.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Sand",
+      "icon": "img/vanilla/sand.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Sand",
+      "icon": "img/vanilla/sand.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Sand",
+    "icon": "img/vanilla/sand.png",
+    "count": 4
+   },
+   "rows": [
+    [
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     },
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     },
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     }
+    ],
+    [
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     },
+     null,
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     }
+    ],
+    [
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     },
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     },
+     {
+      "name": "Sand Essence",
+      "icon": "img/icons/sand_essence.png",
+      "href": "wiki/terra-crops/sand"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Clay Seeds",
+    "icon": "img/icons/clay_seeds.png",
+    "href": "wiki/terra-crops/clay",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Clay Ball",
+      "icon": "img/vanilla/clay_ball.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Clay Ball",
+      "icon": "img/vanilla/clay_ball.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Clay Ball",
+      "icon": "img/vanilla/clay_ball.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Clay Ball",
+      "icon": "img/vanilla/clay_ball.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Clay Ball",
+    "icon": "img/vanilla/clay_ball.png",
+    "count": 4
+   },
+   "rows": [
+    [
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     },
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     },
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     }
+    ],
+    [
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     },
+     null,
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     }
+    ],
+    [
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     },
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     },
+     {
+      "name": "Clay Essence",
+      "icon": "img/icons/clay_essence.png",
+      "href": "wiki/terra-crops/clay"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Iron Seeds",
+    "icon": "img/icons/iron_seeds.png",
+    "href": "wiki/aqua-crops/iron",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Iron Ingot",
+    "icon": "img/vanilla/iron_ingot.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     },
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     },
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     }
+    ],
+    [
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     },
+     null,
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     }
+    ],
+    [
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     },
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     },
+     {
+      "name": "Iron Essence",
+      "icon": "img/icons/iron_essence.png",
+      "href": "wiki/aqua-crops/iron"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Redstone Seeds",
+    "icon": "img/icons/redstone_seeds.png",
+    "href": "wiki/aqua-crops/redstone",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Redstone Dust",
+    "icon": "img/vanilla/redstone.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     },
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     },
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     }
+    ],
+    [
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     },
+     null,
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     }
+    ],
+    [
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     },
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     },
+     {
+      "name": "Redstone Essence",
+      "icon": "img/icons/redstone_essence.png",
+      "href": "wiki/aqua-crops/redstone"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Bone Meal Seeds",
+    "icon": "img/icons/bone_meal_seeds.png",
+    "href": "wiki/aqua-crops/bone-meal",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Bone",
+      "icon": "img/vanilla/bone.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Bone",
+      "icon": "img/vanilla/bone.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Bone",
+      "icon": "img/vanilla/bone.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Bone",
+      "icon": "img/vanilla/bone.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Bone Meal",
+    "icon": "img/vanilla/bone_meal.png",
+    "count": 3
+   },
+   "rows": [
+    [
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     },
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     },
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     }
+    ],
+    [
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     },
+     null,
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     }
+    ],
+    [
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     },
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     },
+     {
+      "name": "Bone Meal Essence",
+      "icon": "img/icons/bone_meal_essence.png",
+      "href": "wiki/aqua-crops/bone-meal"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Lapis Seeds",
+    "icon": "img/icons/lapis_seeds.png",
+    "href": "wiki/aqua-crops/lapis",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Lapis Lazuli",
+      "icon": "img/vanilla/lapis_lazuli.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Lapis Lazuli",
+      "icon": "img/vanilla/lapis_lazuli.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Lapis Lazuli",
+      "icon": "img/vanilla/lapis_lazuli.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Lapis Lazuli",
+      "icon": "img/vanilla/lapis_lazuli.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Lapis Lazuli",
+    "icon": "img/vanilla/lapis_lazuli.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     },
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     },
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     }
+    ],
+    [
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     },
+     null,
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     }
+    ],
+    [
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     },
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     },
+     {
+      "name": "Lapis Essence",
+      "icon": "img/icons/lapis_essence.png",
+      "href": "wiki/aqua-crops/lapis"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Nether Wart Seeds",
+    "icon": "img/icons/nether_wart_seeds.png",
+    "href": "wiki/aqua-crops/nether-wart",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Nether Wart",
+      "icon": "img/vanilla/nether_wart.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Nether Wart",
+      "icon": "img/vanilla/nether_wart.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Nether Wart",
+      "icon": "img/vanilla/nether_wart.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Nether Wart",
+      "icon": "img/vanilla/nether_wart.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Nether Wart",
+    "icon": "img/vanilla/nether_wart.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     },
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     },
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     }
+    ],
+    [
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     },
+     null,
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     }
+    ],
+    [
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     },
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     },
+     {
+      "name": "Nether Wart Essence",
+      "icon": "img/icons/nether_wart_essence.png",
+      "href": "wiki/aqua-crops/nether-wart"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Quartz Seeds",
+    "icon": "img/icons/quartz_seeds.png",
+    "href": "wiki/aqua-crops/quartz",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Nether Quartz",
+      "icon": "img/vanilla/quartz.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Nether Quartz",
+      "icon": "img/vanilla/quartz.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Nether Quartz",
+      "icon": "img/vanilla/quartz.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Nether Quartz",
+      "icon": "img/vanilla/quartz.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Nether Quartz",
+    "icon": "img/vanilla/quartz.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     },
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     },
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     }
+    ],
+    [
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     },
+     null,
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     }
+    ],
+    [
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     },
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     },
+     {
+      "name": "Quartz Essence",
+      "icon": "img/icons/quartz_essence.png",
+      "href": "wiki/aqua-crops/quartz"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Glowstone Seeds",
+    "icon": "img/icons/glowstone_seeds.png",
+    "href": "wiki/aqua-crops/glowstone",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Glowstone Dust",
+      "icon": "img/vanilla/glowstone_dust.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Glowstone Dust",
+      "icon": "img/vanilla/glowstone_dust.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Glowstone Dust",
+      "icon": "img/vanilla/glowstone_dust.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Glowstone Dust",
+      "icon": "img/vanilla/glowstone_dust.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Glowstone Dust",
+    "icon": "img/vanilla/glowstone_dust.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     },
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     },
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     }
+    ],
+    [
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     },
+     null,
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     }
+    ],
+    [
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     },
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     },
+     {
+      "name": "Glowstone Essence",
+      "icon": "img/icons/glowstone_essence.png",
+      "href": "wiki/aqua-crops/glowstone"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Amethyst Seeds",
+    "icon": "img/icons/amethyst_seeds.png",
+    "href": "wiki/aqua-crops/amethyst",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Amethyst Shard",
+      "icon": "img/vanilla/amethyst_shard.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Amethyst Shard",
+      "icon": "img/vanilla/amethyst_shard.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Amethyst Shard",
+      "icon": "img/vanilla/amethyst_shard.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Amethyst Shard",
+      "icon": "img/vanilla/amethyst_shard.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Amethyst Shard",
+    "icon": "img/vanilla/amethyst_shard.png",
+    "count": 2
+   },
+   "rows": [
+    [
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     },
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     },
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     }
+    ],
+    [
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     },
+     null,
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     }
+    ],
+    [
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     },
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     },
+     {
+      "name": "Amethyst Essence",
+      "icon": "img/icons/amethyst_essence.png",
+      "href": "wiki/aqua-crops/amethyst"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Gold Seeds",
+    "icon": "img/icons/gold_seeds.png",
+    "href": "wiki/ignis-crops/gold",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Gold Ingot",
+    "icon": "img/vanilla/gold_ingot.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     },
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     },
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     }
+    ],
+    [
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     },
+     null,
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     }
+    ],
+    [
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     },
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     },
+     {
+      "name": "Gold Essence",
+      "icon": "img/icons/gold_essence.png",
+      "href": "wiki/ignis-crops/gold"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Obsidian Seeds",
+    "icon": "img/icons/obsidian_seeds.png",
+    "href": "wiki/ignis-crops/obsidian",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Obsidian",
+      "icon": "img/vanilla/obsidian.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     {
+      "name": "Obsidian",
+      "icon": "img/vanilla/obsidian.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Obsidian",
+      "icon": "img/vanilla/obsidian.png"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Obsidian",
+      "icon": "img/vanilla/obsidian.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Obsidian",
+    "icon": "img/vanilla/obsidian.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     },
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     },
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     }
+    ],
+    [
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     },
+     null,
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     }
+    ],
+    [
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     },
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     },
+     {
+      "name": "Obsidian Essence",
+      "icon": "img/icons/obsidian_essence.png",
+      "href": "wiki/ignis-crops/obsidian"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Emerald Seeds",
+    "icon": "img/icons/emerald_seeds.png",
+    "href": "wiki/aether-crops/emerald",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Emerald",
+      "icon": "img/vanilla/emerald.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     {
+      "name": "Emerald",
+      "icon": "img/vanilla/emerald.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Emerald",
+      "icon": "img/vanilla/emerald.png"
+     }
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Emerald",
+      "icon": "img/vanilla/emerald.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Emerald",
+    "icon": "img/vanilla/emerald.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     },
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     },
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     }
+    ],
+    [
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     },
+     null,
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     }
+    ],
+    [
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     },
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     },
+     {
+      "name": "Emerald Essence",
+      "icon": "img/icons/emerald_essence.png",
+      "href": "wiki/aether-crops/emerald"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Diamond Seeds",
+    "icon": "img/icons/diamond_seeds.png",
+    "href": "wiki/astra-crops/diamond",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     }
+    ],
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Diamond",
+    "icon": "img/vanilla/diamond.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     },
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     },
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     }
+    ],
+    [
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     },
+     null,
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     }
+    ],
+    [
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     },
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     },
+     {
+      "name": "Diamond Essence",
+      "icon": "img/icons/diamond_essence.png",
+      "href": "wiki/astra-crops/diamond"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Netherite Seeds",
+    "icon": "img/icons/netherite_seeds.png",
+    "href": "wiki/astra-crops/netherite",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Netherite Scrap",
+      "icon": "img/vanilla/netherite_scrap.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Netherite Scrap",
+      "icon": "img/vanilla/netherite_scrap.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Netherite Scrap",
+      "icon": "img/vanilla/netherite_scrap.png"
+     }
+    ],
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Netherite Scrap",
+      "icon": "img/vanilla/netherite_scrap.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Netherite Scrap",
+    "icon": "img/vanilla/netherite_scrap.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     },
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     },
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     }
+    ],
+    [
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     },
+     null,
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     }
+    ],
+    [
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     },
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     },
+     {
+      "name": "Netherite Essence",
+      "icon": "img/icons/netherite_essence.png",
+      "href": "wiki/astra-crops/netherite"
+     }
+    ]
+   ]
+  }
+ ],
+ "gallery": [
+  {
+   "title": "Essence tiers",
+   "items": [
+    {
+     "name": "Terra Essence",
+     "icon": "img/icons/terra_essence.png",
+     "href": "wiki/essence/terra-essence"
+    },
+    {
+     "name": "Aqua Essence",
+     "icon": "img/icons/aqua_essence.png",
+     "href": "wiki/essence/aqua-essence"
+    },
+    {
+     "name": "Ignis Essence",
+     "icon": "img/icons/ignis_essence.png",
+     "href": "wiki/essence/ignis-essence"
+    },
+    {
+     "name": "Aether Essence",
+     "icon": "img/icons/aether_essence.png",
+     "href": "wiki/essence/aether-essence"
+    },
+    {
+     "name": "Astra Essence",
+     "icon": "img/icons/astra_essence.png",
+     "href": "wiki/essence/astra-essence"
+    }
+   ]
+  },
+  {
+   "title": "Crop essence",
+   "items": [
+    {
+     "name": "Coal Essence",
+     "icon": "img/icons/coal_essence.png",
+     "href": "wiki/terra-crops/coal"
+    },
+    {
+     "name": "Copper Essence",
+     "icon": "img/icons/copper_essence.png",
+     "href": "wiki/terra-crops/copper"
+    },
+    {
+     "name": "Iron Essence",
+     "icon": "img/icons/iron_essence.png",
+     "href": "wiki/aqua-crops/iron"
+    },
+    {
+     "name": "Redstone Essence",
+     "icon": "img/icons/redstone_essence.png",
+     "href": "wiki/aqua-crops/redstone"
+    },
+    {
+     "name": "Gold Essence",
+     "icon": "img/icons/gold_essence.png",
+     "href": "wiki/ignis-crops/gold"
+    },
+    {
+     "name": "Emerald Essence",
+     "icon": "img/icons/emerald_essence.png",
+     "href": "wiki/aether-crops/emerald"
+    },
+    {
+     "name": "Diamond Essence",
+     "icon": "img/icons/diamond_essence.png",
+     "href": "wiki/astra-crops/diamond"
+    },
+    {
+     "name": "Bone Meal Essence",
+     "icon": "img/icons/bone_meal_essence.png",
+     "href": "wiki/aqua-crops/bone-meal"
+    },
+    {
+     "name": "Cobblestone Essence",
+     "icon": "img/icons/cobblestone_essence.png",
+     "href": "wiki/terra-crops/cobblestone"
+    },
+    {
+     "name": "Wood Essence",
+     "icon": "img/icons/wood_essence.png",
+     "href": "wiki/terra-crops/wood"
+    },
+    {
+     "name": "Sand Essence",
+     "icon": "img/icons/sand_essence.png",
+     "href": "wiki/terra-crops/sand"
+    },
+    {
+     "name": "Clay Essence",
+     "icon": "img/icons/clay_essence.png",
+     "href": "wiki/terra-crops/clay"
+    },
+    {
+     "name": "Lapis Essence",
+     "icon": "img/icons/lapis_essence.png",
+     "href": "wiki/aqua-crops/lapis"
+    },
+    {
+     "name": "Nether Wart Essence",
+     "icon": "img/icons/nether_wart_essence.png",
+     "href": "wiki/aqua-crops/nether-wart"
+    },
+    {
+     "name": "Quartz Essence",
+     "icon": "img/icons/quartz_essence.png",
+     "href": "wiki/aqua-crops/quartz"
+    },
+    {
+     "name": "Glowstone Essence",
+     "icon": "img/icons/glowstone_essence.png",
+     "href": "wiki/aqua-crops/glowstone"
+    },
+    {
+     "name": "Amethyst Essence",
+     "icon": "img/icons/amethyst_essence.png",
+     "href": "wiki/aqua-crops/amethyst"
+    },
+    {
+     "name": "Obsidian Essence",
+     "icon": "img/icons/obsidian_essence.png",
+     "href": "wiki/ignis-crops/obsidian"
+    },
+    {
+     "name": "Netherite Essence",
+     "icon": "img/icons/netherite_essence.png",
+     "href": "wiki/astra-crops/netherite"
+    }
+   ]
+  },
+  {
+   "title": "Seeds",
+   "items": [
+    {
+     "name": "Coal Seeds",
+     "icon": "img/icons/coal_seeds.png",
+     "href": "wiki/terra-crops/coal"
+    },
+    {
+     "name": "Copper Seeds",
+     "icon": "img/icons/copper_seeds.png",
+     "href": "wiki/terra-crops/copper"
+    },
+    {
+     "name": "Iron Seeds",
+     "icon": "img/icons/iron_seeds.png",
+     "href": "wiki/aqua-crops/iron"
+    },
+    {
+     "name": "Redstone Seeds",
+     "icon": "img/icons/redstone_seeds.png",
+     "href": "wiki/aqua-crops/redstone"
+    },
+    {
+     "name": "Gold Seeds",
+     "icon": "img/icons/gold_seeds.png",
+     "href": "wiki/ignis-crops/gold"
+    },
+    {
+     "name": "Emerald Seeds",
+     "icon": "img/icons/emerald_seeds.png",
+     "href": "wiki/aether-crops/emerald"
+    },
+    {
+     "name": "Diamond Seeds",
+     "icon": "img/icons/diamond_seeds.png",
+     "href": "wiki/astra-crops/diamond"
+    },
+    {
+     "name": "Bone Meal Seeds",
+     "icon": "img/icons/bone_meal_seeds.png",
+     "href": "wiki/aqua-crops/bone-meal"
+    },
+    {
+     "name": "Cobblestone Seeds",
+     "icon": "img/icons/cobblestone_seeds.png",
+     "href": "wiki/terra-crops/cobblestone"
+    },
+    {
+     "name": "Wood Seeds",
+     "icon": "img/icons/wood_seeds.png",
+     "href": "wiki/terra-crops/wood"
+    },
+    {
+     "name": "Sand Seeds",
+     "icon": "img/icons/sand_seeds.png",
+     "href": "wiki/terra-crops/sand"
+    },
+    {
+     "name": "Clay Seeds",
+     "icon": "img/icons/clay_seeds.png",
+     "href": "wiki/terra-crops/clay"
+    },
+    {
+     "name": "Lapis Seeds",
+     "icon": "img/icons/lapis_seeds.png",
+     "href": "wiki/aqua-crops/lapis"
+    },
+    {
+     "name": "Nether Wart Seeds",
+     "icon": "img/icons/nether_wart_seeds.png",
+     "href": "wiki/aqua-crops/nether-wart"
+    },
+    {
+     "name": "Quartz Seeds",
+     "icon": "img/icons/quartz_seeds.png",
+     "href": "wiki/aqua-crops/quartz"
+    },
+    {
+     "name": "Glowstone Seeds",
+     "icon": "img/icons/glowstone_seeds.png",
+     "href": "wiki/aqua-crops/glowstone"
+    },
+    {
+     "name": "Amethyst Seeds",
+     "icon": "img/icons/amethyst_seeds.png",
+     "href": "wiki/aqua-crops/amethyst"
+    },
+    {
+     "name": "Obsidian Seeds",
+     "icon": "img/icons/obsidian_seeds.png",
+     "href": "wiki/ignis-crops/obsidian"
+    },
+    {
+     "name": "Netherite Seeds",
+     "icon": "img/icons/netherite_seeds.png",
+     "href": "wiki/astra-crops/netherite"
+    }
+   ]
+  },
+  {
+   "title": "Ripe crops",
+   "items": [
+    {
+     "name": "Coal Crop",
+     "icon": "img/icons/coal_crop.png",
+     "href": "wiki/terra-crops/coal"
+    },
+    {
+     "name": "Copper Crop",
+     "icon": "img/icons/copper_crop.png",
+     "href": "wiki/terra-crops/copper"
+    },
+    {
+     "name": "Iron Crop",
+     "icon": "img/icons/iron_crop.png",
+     "href": "wiki/aqua-crops/iron"
+    },
+    {
+     "name": "Redstone Crop",
+     "icon": "img/icons/redstone_crop.png",
+     "href": "wiki/aqua-crops/redstone"
+    },
+    {
+     "name": "Gold Crop",
+     "icon": "img/icons/gold_crop.png",
+     "href": "wiki/ignis-crops/gold"
+    },
+    {
+     "name": "Emerald Crop",
+     "icon": "img/icons/emerald_crop.png",
+     "href": "wiki/aether-crops/emerald"
+    },
+    {
+     "name": "Diamond Crop",
+     "icon": "img/icons/diamond_crop.png",
+     "href": "wiki/astra-crops/diamond"
+    },
+    {
+     "name": "Bone Meal Crop",
+     "icon": "img/icons/bone_meal_crop.png",
+     "href": "wiki/aqua-crops/bone-meal"
+    },
+    {
+     "name": "Cobblestone Crop",
+     "icon": "img/icons/cobblestone_crop.png",
+     "href": "wiki/terra-crops/cobblestone"
+    },
+    {
+     "name": "Wood Crop",
+     "icon": "img/icons/wood_crop.png",
+     "href": "wiki/terra-crops/wood"
+    },
+    {
+     "name": "Sand Crop",
+     "icon": "img/icons/sand_crop.png",
+     "href": "wiki/terra-crops/sand"
+    },
+    {
+     "name": "Clay Crop",
+     "icon": "img/icons/clay_crop.png",
+     "href": "wiki/terra-crops/clay"
+    },
+    {
+     "name": "Lapis Crop",
+     "icon": "img/icons/lapis_crop.png",
+     "href": "wiki/aqua-crops/lapis"
+    },
+    {
+     "name": "Nether Wart Crop",
+     "icon": "img/icons/nether_wart_crop.png",
+     "href": "wiki/aqua-crops/nether-wart"
+    },
+    {
+     "name": "Quartz Crop",
+     "icon": "img/icons/quartz_crop.png",
+     "href": "wiki/aqua-crops/quartz"
+    },
+    {
+     "name": "Glowstone Crop",
+     "icon": "img/icons/glowstone_crop.png",
+     "href": "wiki/aqua-crops/glowstone"
+    },
+    {
+     "name": "Amethyst Crop",
+     "icon": "img/icons/amethyst_crop.png",
+     "href": "wiki/aqua-crops/amethyst"
+    },
+    {
+     "name": "Obsidian Crop",
+     "icon": "img/icons/obsidian_crop.png",
+     "href": "wiki/ignis-crops/obsidian"
+    },
+    {
+     "name": "Netherite Crop",
+     "icon": "img/icons/netherite_crop.png",
+     "href": "wiki/astra-crops/netherite"
+    }
+   ]
+  },
+  {
+   "title": "Growth stages and ore",
+   "items": [
+    {
+     "name": "Stage 1",
+     "icon": "img/icons/crop_0.png"
+    },
+    {
+     "name": "Stage 2",
+     "icon": "img/icons/crop_1.png"
+    },
+    {
+     "name": "Stage 3",
+     "icon": "img/icons/crop_2.png"
+    },
+    {
+     "name": "Essence Ore",
+     "icon": "img/icons/essence_ore.png",
+     "href": "wiki/essence/essence-ore"
+    }
+   ]
+  }
+ ]
+}

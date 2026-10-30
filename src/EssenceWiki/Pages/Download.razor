@@ -1,0 +1,25 @@
+@page "/download"
+@inject WikiService Data
+
+<PageTitle>Download · Essence &amp; Earth</PageTitle>
+<Breadcrumbs Here="Download" />
+<h1>Download</h1>
+<p class="lead">One <code>.mcaddon</code> file holds both the behavior pack and the resource pack.</p>
+
+<DownloadPanel />
+
+<h2 class="section-title">Single player</h2>
+<ol class="steps">
+    <li><b>Import</b><span>Open the downloaded <code>@Data.Release.File</code>. Minecraft imports both packs.</span></li>
+    <li><b>Turn it on</b><span>When creating or editing a world, open <b>Behavior Packs</b> and activate <b>Essence &amp; Earth BP</b>. Accept the prompt to add the resource pack too.</span></li>
+    <li><b>Play</b><span>No experimental toggles are needed. Essence Ore only appears in newly explored chunks.</span></li>
+</ol>
+
+<h2 class="section-title">On a server</h2>
+<ol class="steps">
+    <li><b>Back up</b><span>Make a backup of the world before installing or updating any add-on.</span></li>
+    <li><b>Upload</b><span>Most hosts accept the <code>.mcaddon</code> directly. Otherwise unzip it and copy the <code>_BP</code> folder into <code>behavior_packs/</code> and the <code>_RP</code> folder into <code>resource_packs/</code>, then add both to the world's pack lists.</span></li>
+    <li><b>Restart</b><span>Players download the resource pack automatically when they join.</span></li>
+</ol>
+
+<p class="muted small">Source code and every past version: <a href="@Data.Release.Repo">@Data.Release.Repo</a></p>

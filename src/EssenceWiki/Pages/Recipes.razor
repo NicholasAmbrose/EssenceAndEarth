@@ -1,0 +1,33 @@
+@page "/recipes"
+@inject WikiService Data
+
+<PageTitle>Recipes · Essence &amp; Earth</PageTitle>
+<Breadcrumbs Here="Recipes" />
+<h1>All recipes</h1>
+<p class="lead">Every crafting table recipe in the add-on. Select an ingredient to open its page.</p>
+
+<div class="filter">
+    <input id="recipe-filter" type="search" placeholder="Filter by result or ingredient" @bind="filter" @bind:event="oninput" aria-label="Filter recipes" />
+    <span class="muted small">@shown.Count of @Data.Wiki.Recipes.Count</span>
+</div>
+
+<div class="recipe-grid">
+    @foreach (var r in shown)
+    {
+        <CraftGrid Result="r.Result" Rows="r.Rows" Note="r.Note" />
+    }
+</div>
+@if (shown.Count == 0)
+{
+    <p class="muted">No recipe uses “@filter”.</p>
+}
+
+@code {
+    string filter = "";
+
+    List<Recipe> shown => string.IsNullOrWhiteSpace(filter)
+        ? Data.Wiki.Recipes
+        : Data.Wiki.Recipes.Where(r =>
+            r.Result.Name.Contains(filter.Trim(), StringComparison.OrdinalIgnoreCase) ||
+            r.Rows.SelectMany(row => row).Any(i => i?.Name.Contains(filter.Trim(), StringComparison.OrdinalIgnoreCase) == true)).ToList();
+}

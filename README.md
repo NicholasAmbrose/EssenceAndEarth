@@ -23,6 +23,21 @@ server's `behavior_packs/` and `EssenceAndEarth_RP` into `resource_packs/`, then
 from each `manifest.json`). Bump `version` in `crops.json` on every release so clients download the new
 resource pack.
 
+## Wiki
+
+https://nicholasambrose.github.io/EssenceAndEarth/ is a Blazor WebAssembly site in `src/EssenceWiki`. Its pages aren't
+written by hand: every build runs `tools/wiki.mjs`, which writes `wwwroot/data/wiki.json` from `crops.json` and copies
+every texture into `wwwroot/img/icons/`. On every push to `main`, `.github/workflows/deploy.yml` rebuilds it and deploys
+it to GitHub Pages.
+
+```sh
+node tools/build.mjs
+cd src/EssenceWiki && dotnet run   # preview locally
+```
+
+Vanilla item icons (recipe ingredients) are cached in `tools/vanilla/`. After adding a crop that uses a new vanilla item,
+run `node tools/fetch-vanilla.mjs`.
+
 ## Backing up the server world
 
 ```sh
@@ -39,6 +54,7 @@ Run it before uploading a new version. Saving is paused during the download so t
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
 | `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth and bone meal). |
 | `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
+| `tools/wiki.mjs`, `src/EssenceWiki` | The wiki: data generator and Blazor site. |
 | `tools/backup.mjs` | Downloads the server world into `backups/`. |
 | `art/` | Optional hand-drawn textures. `art/textures/items/iron_seeds.png` replaces the generated placeholder at that path. |
 

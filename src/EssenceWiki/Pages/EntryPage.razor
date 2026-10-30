@@ -1,0 +1,82 @@
+@page "/wiki/{CatSlug}/{Slug}"
+@inject WikiService Data
+
+@if (entry is null || cat is null)
+{
+    <PageTitle>Not found · Essence &amp; Earth</PageTitle>
+    <Breadcrumbs Category="cat" />
+    <h1>Not found</h1>
+    <p>That page doesn't exist. Try the search box on the left.</p>
+}
+else
+{
+    <PageTitle>@entry.Name · Essence &amp; Earth</PageTitle>
+    <Breadcrumbs Category="cat" Entry="entry" />
+    <article class="entry">
+        <header class="entry-head">
+            <span class="slot big"><Icon Src="@entry.Icon" Name="@entry.Name" Size="48" /></span>
+            <div>
+                <h1>@entry.Name</h1>
+                <a class="pill" href="@($"wiki/{cat.Slug}")">@cat.Title</a>
+            </div>
+        </header>
+        @foreach (var b in entry.Blocks)
+        {
+            @switch (b.T)
+            {
+                case "h2":
+                    <h2>@b.Text</h2>
+                    break;
+                case "p":
+                    <p>@((MarkupString)(b.Html ?? ""))</p>
+                    break;
+                case "facts":
+                    <dl class="facts">
+                        @foreach (var row in b.Facts ?? new())
+                        {
+                            <dt>@row[0]</dt>
+                            <dd>@row[1]</dd>
+                        }
+                    </dl>
+                    break;
+                case "items":
+                    <ItemList Items="@(b.Items ?? new())" />
+                    break;
+                case "grid":
+                    <CraftGrid Result="@(b.Result ?? new())" Rows="@(b.Rows ?? new())" Note="@b.Note" />
+                    break;
+            }
+        }
+    </article>
+    <nav class="pager">
+        @if (prev is not null)
+        {
+            <a class="pager-link" href="@prev.Href"><small>Previous</small>« @prev.Name</a>
+        }
+        else
+        {
+            <span></span>
+        }
+        @if (next is not null)
+        {
+            <a class="pager-link next" href="@next.Href"><small>Next</small>@next.Name »</a>
+        }
+    </nav>
+}
+
+@code {
+    [Parameter] public string CatSlug { get; set; } = "";
+    [Parameter] public string Slug { get; set; } = "";
+    Category? cat;
+    Entry? entry, prev, next;
+
+    protected override void OnParametersSet()
+    {
+        cat = Data.FindCategory(CatSlug);
+        entry = cat?.Entries.FirstOrDefault(e => e.Slug == Slug);
+        var all = Data.AllEntries.ToList();
+        var i = entry is null ? -1 : all.IndexOf(entry);
+        prev = i > 0 ? all[i - 1] : null;
+        next = i >= 0 && i < all.Count - 1 ? all[i + 1] : null;
+    }
+}

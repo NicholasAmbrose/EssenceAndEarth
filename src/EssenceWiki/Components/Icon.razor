@@ -1,0 +1,7 @@
+<img class="px" src="@Src" alt="@Name" title="@Name" width="@Size" height="@Size" loading="lazy" />
+
+@code {
+    [Parameter] public string? Src { get; set; }
+    [Parameter] public string Name { get; set; } = "";
+    [Parameter] public int Size { get; set; } = 32;
+}

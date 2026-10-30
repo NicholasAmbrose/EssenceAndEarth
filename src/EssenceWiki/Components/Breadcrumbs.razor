@@ -1,0 +1,28 @@
+<nav class="crumbs" aria-label="Breadcrumbs">
+    <a href="">Home</a>
+    @if (Category is not null)
+    {
+        <span>/</span>
+        @if (Entry is null)
+        {
+            <span class="here">@Category.Title</span>
+        }
+        else
+        {
+            <a href="@($"wiki/{Category.Slug}")">@Category.Title</a>
+            <span>/</span>
+            <span class="here">@Entry.Name</span>
+        }
+    }
+    else if (Here is not null)
+    {
+        <span>/</span>
+        <span class="here">@Here</span>
+    }
+</nav>
+
+@code {
+    [Parameter] public Category? Category { get; set; }
+    [Parameter] public Entry? Entry { get; set; }
+    [Parameter] public string? Here { get; set; }
+}

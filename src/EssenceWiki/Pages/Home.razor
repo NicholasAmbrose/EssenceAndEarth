@@ -1,0 +1,76 @@
+﻿@page "/"
+@inject WikiService Data
+
+<PageTitle>Essence &amp; Earth Wiki</PageTitle>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Essence <i>&amp;</i> Earth</h1>
+        <p class="lead">
+            A Minecraft Bedrock add-on for growing your resources. Mine essence, upgrade it through five tiers,
+            and plant crops that grow coal, iron, diamonds and more. This wiki is generated from the add-on's own files,
+            so it always matches the latest release.
+        </p>
+        <div class="stats">
+            <div><b>@Data.Wiki.Stats.Crops</b><span>Crops</span></div>
+            <div><b>@Data.Wiki.Stats.Tiers</b><span>Essence tiers</span></div>
+            <div><b>@Data.Wiki.Stats.Items</b><span>Items</span></div>
+            <div><b>@Data.Wiki.Stats.Recipes</b><span>Recipes</span></div>
+        </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+        @foreach (var item in Data.Wiki.Gallery[0].Items)
+        {
+            <Icon Src="@item.Icon" Name="@item.Name" Size="56" />
+        }
+    </div>
+</section>
+
+<DownloadPanel />
+
+<h2 class="section-title">Browse the wiki</h2>
+<div class="card-grid">
+    @foreach (var c in Data.Wiki.Categories)
+    {
+        <a class="card" href="@($"wiki/{c.Slug}")">
+            <div class="card-top">
+                <Icon Src="@c.Icon" Name="@c.Title" Size="36" />
+                <span class="pill">@c.Entries.Count @(c.Entries.Count == 1 ? "page" : "pages")</span>
+            </div>
+            <div class="card-title">@c.Title</div>
+            <div class="card-text">@c.Blurb</div>
+        </a>
+    }
+    <a class="card" href="recipes">
+        <div class="card-top">
+            <Icon Src="@Data.Wiki.Recipes.LastOrDefault()?.Result.Icon" Name="Recipes" Size="36" />
+            <span class="pill">@Data.Wiki.Recipes.Count recipes</span>
+        </div>
+        <div class="card-title">All recipes</div>
+        <div class="card-text">Every crafting recipe in one searchable list.</div>
+    </a>
+    <a class="card" href="gallery">
+        <div class="card-top">
+            <Icon Src="@Data.Wiki.Gallery[1].Items.FirstOrDefault()?.Icon" Name="Gallery" Size="36" />
+            <span class="pill">@Data.Wiki.Gallery.Sum(g => g.Items.Count) images</span>
+        </div>
+        <div class="card-title">Gallery</div>
+        <div class="card-text">Every texture in the add-on: essence, seeds, crops and ore.</div>
+    </a>
+</div>
+
+<h2 class="section-title">Start here</h2>
+<ol class="steps">
+    <li>
+        <b>Collect Terra Essence</b>
+        <span>Mine <a href="wiki/essence/essence-ore">Essence Ore</a> underground, or break grass and ripe vanilla crops for a small chance of it.</span>
+    </li>
+    <li>
+        <b>Upgrade it</b>
+        <span>Four essence of one tier craft one of the next. See the <a href="wiki/essence">essence tiers</a>.</span>
+    </li>
+    <li>
+        <b>Plant and harvest</b>
+        <span>Craft seeds from essence and a resource, plant them on watered farmland, and craft the harvested essence back into the resource. <a href="wiki/guide/getting-started">Full guide</a>.</span>
+    </li>
+</ol>

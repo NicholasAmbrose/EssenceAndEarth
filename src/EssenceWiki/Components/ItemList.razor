@@ -1,0 +1,24 @@
+<div class="item-list">
+    @foreach (var item in Items)
+    {
+        var body = (RenderFragment)(@<text>
+            <Slot Item="item" />
+            <span class="item-text">
+                <span class="item-name">@item.Name</span>
+                @if (item.Sub is not null) { <small>@item.Sub</small> }
+            </span>
+        </text>);
+        @if (item.Href is not null)
+        {
+            <a class="item-row" href="@item.Href">@body</a>
+        }
+        else
+        {
+            <div class="item-row">@body</div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public List<Item> Items { get; set; } = new();
+}

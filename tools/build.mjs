@@ -477,6 +477,7 @@ const out = path.join(addonDir, `${SLUG}_v${cfg.version.join(".")}.mcaddon`);
 write(out, zip(files));
 console.log(`built ${path.relative(ROOT, out)} (${files.length} files)`);
 previewSheet(path.join(BUILD, "preview.png")); // after zipping, so it stays out of the add-on
+await import("./wiki.mjs"); // refreshes the wiki data and images from this build
 
 if (process.argv.includes("--deploy")) {
   const mojang = [

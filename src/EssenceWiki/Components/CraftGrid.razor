@@ -1,0 +1,25 @@
+<figure class="craft">
+    <div class="craft-table">
+        <div class="craft-grid">
+            @foreach (var row in Rows)
+            {
+                @foreach (var cell in row)
+                {
+                    <Slot Item="cell" />
+                }
+            }
+        </div>
+        <span class="craft-arrow" aria-hidden="true">→</span>
+        <Slot Item="Result" Big="true" />
+    </div>
+    <figcaption>
+        <b>@(Result.Count > 1 ? $"{Result.Count} × " : "")@Result.Name</b>
+        <span>@(Note ?? "Crafting table")</span>
+    </figcaption>
+</figure>
+
+@code {
+    [Parameter, EditorRequired] public Item Result { get; set; } = new();
+    [Parameter, EditorRequired] public List<List<Item?>> Rows { get; set; } = new();
+    [Parameter] public string? Note { get; set; }
+}

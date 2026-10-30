@@ -1,0 +1,25 @@
+@page "/wiki"
+@inject WikiService Data
+
+<PageTitle>Wiki · Essence &amp; Earth</PageTitle>
+<Breadcrumbs Here="Wiki" />
+<h1>Wiki</h1>
+<p class="lead">Every section of the wiki. Crops are grouped by the essence tier their seeds need.</p>
+
+@foreach (var g in Data.Groups)
+{
+    <h2 class="section-title">@g.Key</h2>
+    <div class="card-grid">
+        @foreach (var c in g)
+        {
+            <a class="card" href="@($"wiki/{c.Slug}")">
+                <div class="card-top">
+                    <Icon Src="@c.Icon" Name="@c.Title" Size="36" />
+                    <span class="pill">@c.Entries.Count @(c.Entries.Count == 1 ? "page" : "pages")</span>
+                </div>
+                <div class="card-title">@c.Title</div>
+                <div class="card-text">@c.Blurb</div>
+            </a>
+        }
+    </div>
+}

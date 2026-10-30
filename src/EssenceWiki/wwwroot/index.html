@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Essence &amp; Earth Wiki</title>
+    <meta name="description" content="Wiki for Essence &amp; Earth, a Minecraft Bedrock add-on for growing resources from essence crops." />
+    <base href="/" />
+    <link rel="icon" type="image/png" href="img/pack_icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Figtree:wght@400;600;700&display=swap" />
+    <link rel="preload" id="webassembly" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script>
+        // Theme: saved choice, else dark. Applied before Blazor starts so the page doesn't flash.
+        window.eeTheme = {
+            get: () => { try { return localStorage.getItem("ee-theme") || "dark"; } catch { return "dark"; } },
+            set: (t) => { document.documentElement.dataset.theme = t; try { localStorage.setItem("ee-theme", t); } catch { } }
+        };
+        document.documentElement.dataset.theme = window.eeTheme.get();
+    </script>
+    <script type="importmap"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="loading"><div class="spinner"></div>Loading the wiki…</div>
+    </div>
+
+    <div id="blazor-error-ui">
+        Something went wrong loading the wiki.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">✕</span>
+    </div>
+    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+</body>
+
+</html>
