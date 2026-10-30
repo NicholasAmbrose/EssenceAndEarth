@@ -132,7 +132,7 @@ const guide = {
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
-        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on essence farmland and wait. Bone meal can help: each use has a ${boneMeal} chance to advance a stage.`),
+        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on <a href="wiki/farmland">essence farmland</a> and wait. Bone meal can help: each use has a ${boneMeal} chance to advance a stage.`),
         h2("4. Harvest and craft"),
         p(`A ripe crop drops ${harvest} of its essence and its seed back. Eight essence in a ring craft the resource.`),
       ],
