@@ -114,7 +114,6 @@ const list = (items) => ({ t: "items", items });
 const grassDrops = list([
   { ...vanilla("minecraft:short_grass"), sub: `Grass and ferns: ${pct(BAL.grassEssenceChance)} chance` },
   { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
-  { ...vanilla("minecraft:oak_log"), sub: `Each log cut by a Wildbloom Logger: ${pct(BAL.logEssenceChance)} chance` },
 ]);
 
 const guide = {
@@ -127,7 +126,7 @@ const guide = {
       blocks: [
         p("Essence & Earth lets you grow resources. Every crop starts as essence: you combine essence with the resource you want, plant the seeds, and harvest essence that crafts back into that resource."),
         h2("1. Collect Terra Essence"),
-        p(`Mine <a href="${oreItem.href}">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass, ripe vanilla crops and logs cut by a <a href="https://baseballr.github.io/Wildbloom/">Wildbloom</a> Logger flower, so you can start in an old world. The Logger needs the Wildbloom add-on installed too.`),
+        p(`Mine <a href="${oreItem.href}">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world.`),
         list([{ ...oreItem, sub: `${oreDrop} Terra Essence per ore` }, ...grassDrops.items]),
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
@@ -164,7 +163,7 @@ const essence = {
       summary: "The main source of Terra Essence.",
       blocks: [
         facts([["Found", "Overworld, y −48 to 48"], ["Drops", `${oreDrop} Terra Essence`], ["Tool", "Any; mining takes about 3 seconds by hand"]]),
-        p("Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass, crops or a Wildbloom Logger."),
+        p("Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."),
         list([{ ...tierItem(cfg.tiers[0]), sub: `${oreDrop} per ore` }]),
       ],
     },

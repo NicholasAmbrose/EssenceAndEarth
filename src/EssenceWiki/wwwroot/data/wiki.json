@@ -37,7 +37,7 @@
       },
       {
        "t": "p",
-       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass, ripe vanilla crops and logs cut by a <a href=\"https://baseballr.github.io/Wildbloom/\">Wildbloom</a> Logger flower, so you can start in an old world. The Logger needs the Wildbloom add-on installed too."
+       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world."
       },
       {
        "t": "items",
@@ -57,11 +57,6 @@
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
-        },
-        {
-         "name": "Oak Log",
-         "icon": "img/vanilla/oak_log.png",
-         "sub": "Each log cut by a Wildbloom Logger: 5% chance"
         }
        ]
       },
@@ -240,7 +235,7 @@
       },
       {
        "t": "p",
-       "html": "Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass, crops or a Wildbloom Logger."
+       "html": "Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."
       },
       {
        "t": "items",
@@ -297,11 +292,6 @@
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
-        },
-        {
-         "name": "Oak Log",
-         "icon": "img/vanilla/oak_log.png",
-         "sub": "Each log cut by a Wildbloom Logger: 5% chance"
         }
        ]
       },
