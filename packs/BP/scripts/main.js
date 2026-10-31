@@ -20,7 +20,7 @@ const FARMLAND_BONUS = __FARMLAND_BONUS__;
 const ACCELERATOR_ROLLS = __ACCELERATOR_ROLLS__;
 
 // Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
-// so older worlds without essence ore in their explored chunks can still get started.
+// which is how every world gets started.
 const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecraft:fern", "minecraft:large_fern"]);
 // Item a harvested vanilla crop drops -> smallest stack that means it was ripe.
 // Unripe wheat and beetroot drop only seeds; unripe carrots and potatoes drop exactly 1.

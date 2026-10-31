@@ -442,7 +442,7 @@ const pct = (v) => `${+(v * 100).toFixed(1)}%`;
 const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
 const tierTitle = (t) => title(t.id);
 const GUIDE_PAGES = [
-  { title: "Getting Started", body: `Mine Essence Ore underground, between y -48 and 48, in newly explored chunks. Each ore drops ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence.\n\n${tierTitle(cfg.tiers[0])} Essence also drops now and then from grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
+  { title: "Getting Started", body: `${tierTitle(cfg.tiers[0])} Essence drops now and then from grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nOnce you have a little, plant the ${tierTitle(cfg.tiers[0])} crop for a steady supply.\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
   { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds only grow on essence farmland of their own tier or higher.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed, with a ${pct(BAL.secondSeedChance)} chance of a second seed.\n\nEight essence in a ring craft the resource. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly. Each use of bone meal has a ${pct(BAL.boneMealChance)} chance to advance a crop one stage.` },
   { title: "Essence Farmland", body: `A crop needs essence farmland of its own tier or higher. It never dries out and needs no water.\n\n1 dirt + 4 ${tierTitle(cfg.tiers[0])} Essence make ${tierTitle(cfg.tiers[0])} Farmland. Each later tier takes 1 of the tier below + 4 of its essence.\n\nChance of +1 essence per ripe harvest:\n${cfg.tiers.map((t, i) => `${tierTitle(t)} ${pct(BAL.farmlandBonus[i])}`).join("\n")}` },
   { title: "Growth Accelerators", body: `Stack up to ${BAL.maxAccelerators} directly under essence farmland to make the crop above grow faster.\n\nTiers can be mixed in any order. Any other block in the stack cuts off the accelerators below it.\n\n5 cobblestone + 4 ${tierTitle(cfg.tiers[0])} Essence make the first. Each later tier takes 5 of the tier below + 4 of its essence.` },
@@ -580,36 +580,14 @@ for (const [id, mask, pattern] of [
 item("essence_guide", BOOK, cfg.tiers[0].color, { "minecraft:max_stack_size": 1 }, { c: cfg.tiers[0].color, d: "#2f6e20", g: "#dff5d4", p: "#efe9d8" });
 recipe("essence_guide", "shapeless", { ingredients: [{ item: "minecraft:book" }, { item: tierEssence(1) }], result: { item: `${NS}:essence_guide` } }, tierEssence(1));
 
-// Essence ore: the only source of tier-1 essence.
+// Essence ore: no longer generates, but the block stays so veins already in worlds don't become unknown blocks.
 blockTexture("essence_ore", ORE, cfg.tiers[0].color);
-block("essence_ore", "stone", { menu_category: { category: "nature" } }, {
+block("essence_ore", "stone", { menu_category: { category: "none" } }, {
   "minecraft:display_name": "Essence Ore",
   "minecraft:geometry": "minecraft:geometry.full_block",
   "minecraft:destructible_by_mining": { seconds_to_destroy: 3 },
   "minecraft:material_instances": { "*": { texture: `${NS}_essence_ore` } },
   "minecraft:loot": loot("essence_ore", [drop(tierEssence(1), ...BAL.oreEssence)]),
-});
-write(path.join(BP, "features", "essence_ore_feature.json"), {
-  format_version: "1.13.0",
-  "minecraft:ore_feature": {
-    description: { identifier: `${NS}:essence_ore_feature` },
-    count: 6,
-    replace_rules: [{ places_block: `${NS}:essence_ore`, may_replace: ["minecraft:stone", "minecraft:deepslate", "minecraft:granite", "minecraft:diorite", "minecraft:andesite", "minecraft:tuff"] }],
-  },
-});
-write(path.join(BP, "feature_rules", "essence_ore_rule.json"), {
-  format_version: "1.13.0",
-  "minecraft:feature_rules": {
-    description: { identifier: `${NS}:essence_ore_rule`, places_feature: `${NS}:essence_ore_feature` },
-    conditions: { placement_pass: "underground_pass", "minecraft:biome_filter": [{ test: "has_biome_tag", operator: "==", value: "overworld" }] },
-    distribution: {
-      iterations: 8,
-      coordinate_eval_order: "zyx",
-      x: { distribution: "uniform", extent: [0, 16] },
-      y: { distribution: "uniform", extent: [-48, 48] },
-      z: { distribution: "uniform", extent: [0, 16] },
-    },
-  },
 });
 
 // Crops. Stages 0-2 share green textures; the ripe stage is tinted per crop.

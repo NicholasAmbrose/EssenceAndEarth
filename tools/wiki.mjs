@@ -24,7 +24,7 @@ const title = (id) => id.replace(/(^|_)(\w)/g, (_, sep, c) => (sep ? " " : "") +
 const slug = (id) => id.replaceAll("_", "-");
 const pct = (v) => `${+(v * 100).toFixed(1)}%`;
 const range = ([min, max]) => (min === max ? `${min}` : `${min}–${max}`);
-const harvest = range(BAL.harvestEssence), oreDrop = range(BAL.oreEssence), secondSeed = pct(BAL.secondSeedChance), boneMeal = pct(BAL.boneMealChance);
+const harvest = range(BAL.harvestEssence), secondSeed = pct(BAL.secondSeedChance), boneMeal = pct(BAL.boneMealChance);
 
 // ---------- images ----------
 
@@ -52,7 +52,6 @@ const tierItem = (t) => ({ name: tierName(t), icon: `img/icons/${t.id}_essence.p
 const seedsItem = (c) => ({ name: `${title(c.id)} Seeds`, icon: `img/icons/${c.id}_seeds.png`, href: cropHref(c) });
 const essenceItem = (c) => ({ name: `${title(c.id)} Essence`, icon: `img/icons/${c.id}_essence.png`, href: cropHref(c) });
 const ripeItem = (c) => ({ name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`, href: cropHref(c) });
-const oreItem = { name: "Essence Ore", icon: "img/icons/essence_ore.png", href: essenceHref("essence_ore") };
 const farmlandItem = (t) => ({ name: `${title(t.id)} Farmland`, icon: `img/icons/${t.id}_farmland_top.png`, href: `wiki/farmland/${slug(`${t.id}_farmland`)}` });
 const bonusPct = (i) => pct(BAL.farmlandBonus[i]);
 const acceleratorItem = (t) => ({ name: `${title(t.id)} Growth Accelerator`, icon: `img/icons/${t.id}_accelerator.png`, href: `wiki/accelerators/${slug(`${t.id}_accelerator`)}` });
@@ -130,8 +129,8 @@ const guide = {
       blocks: [
         p("Essence & Earth lets you grow resources. Every crop starts as essence: you combine essence with the resource you want, plant the seeds, and harvest essence that crafts back into that resource."),
         h2("1. Collect Terra Essence"),
-        p(`Mine <a href="${oreItem.href}">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world. Once you have a little, the <a href="${cropHref(terraCrop)}">Terra crop</a> gives you a steady supply.`),
-        list([{ ...oreItem, sub: `${oreDrop} Terra Essence per ore` }, ...grassDrops.items, terraCropDrop]),
+        p(`Terra Essence drops now and then from grass and ripe vanilla crops. Once you have a little, the <a href="${cropHref(terraCrop)}">Terra crop</a> gives you a steady supply.`),
+        list([...grassDrops.items, terraCropDrop]),
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
@@ -173,17 +172,8 @@ const guide = {
 
 const essence = {
   slug: "essence", title: "Essence", group: "Getting started", icon: tierItem(cfg.tiers[2]).icon,
-  blurb: "Essence Ore and the five essence tiers every crop is made from.",
+  blurb: "The five essence tiers every crop is made from.",
   entries: [
-    {
-      slug: "essence-ore", name: "Essence Ore", icon: oreItem.icon,
-      summary: "The main source of Terra Essence.",
-      blocks: [
-        facts([["Found", "Overworld, y −48 to 48"], ["Drops", `${oreDrop} Terra Essence`], ["Tool", "Any; mining takes about 3 seconds by hand"]]),
-        p("Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."),
-        list([{ ...tierItem(cfg.tiers[0]), sub: `${oreDrop} per ore` }]),
-      ],
-    },
     ...cfg.tiers.map((t, i) => {
       const crops = cfg.crops.filter((c) => c.tier === i + 1);
       return {
@@ -192,7 +182,7 @@ const essence = {
         blocks: [
           facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Crops", `${crops.length}`]]),
           h2("How to get it"),
-          ...(i === 0 ? [list([{ ...oreItem, sub: `${oreDrop} per ore` }, ...grassDrops.items, terraCropDrop])] : [upgrade(t, i)]),
+          ...(i === 0 ? [list([...grassDrops.items, terraCropDrop])] : [upgrade(t, i)]),
           h2("Seeds that need it"),
           crops.length ? list(crops.map((c) => ({ ...seedsItem(c), sub: yields(c) }))) : p("No crops use this tier yet."),
         ],
@@ -306,7 +296,7 @@ const gallery = [
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
   { title: "Growth accelerators", items: cfg.tiers.map(acceleratorItem) },
   { title: "Tools and guide", items: [sickleItem, hoeItem, guideItem] },
-  { title: "Growth stages and ore", items: [...stages(cfg.crops[0]).slice(0, 3), oreItem] },
+  { title: "Growth stages", items: stages(cfg.crops[0]).slice(0, 3) },
 ];
 
 const wiki = {
@@ -316,8 +306,8 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: essence + farmland + accelerator per tier, seeds + essence per crop (essence crops share their tier's essence), the ore, 2 tools and the guide
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 4, recipes: recipes.length },
+  // items: essence + farmland + accelerator per tier, seeds + essence per crop (essence crops share their tier's essence), 2 tools and the guide
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 3, recipes: recipes.length },
   categories,
   recipes,
   gallery,

@@ -1,6 +1,6 @@
 # Essence & Earth
 
-A Minecraft Bedrock add-on: mine essence, upgrade it through five tiers, and grow crops that produce coal,
+A Minecraft Bedrock add-on: gather essence, upgrade it through five tiers, and grow crops that produce coal,
 iron, gold, diamonds and more.
 
 ## Building
@@ -53,7 +53,7 @@ Run it before uploading a new version. Saving is paused during the download so t
 |---|---|
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
 | `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth, bone meal, tools and the Essence Guide menu). |
-| `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
+| `tools/build.mjs` | Generates blocks, items, recipes, loot tables and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
 | `tools/wiki.mjs`, `src/EssenceWiki` | The wiki: data generator and Blazor site. |
 | `tools/backup.mjs` | Downloads the server world into `backups/`. |
 | `art/` | Optional hand-drawn textures. `art/textures/items/iron_seeds.png` replaces the generated placeholder at that path. |
@@ -88,7 +88,7 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 | `growChance` | Chance per growth roll to advance a stage |
 | `boneMealChance` | Chance per bone meal to advance a stage. A miss still uses it |
 | `grassEssenceChance`, `cropEssenceChance`, `logEssenceChance` | Chance of Terra Essence from grass, ripe vanilla crops, and each log dropped near a Wildbloom Logger |
-| `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from an ore |
+| `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from old essence ore, which no longer generates |
 | `secondSeedChance` | Chance a ripe crop drops a second seed |
 | `farmlandBonus` | Per tier: chance of one extra essence from a ripe crop |
 | `acceleratorRolls` | Per tier: growth rolls each accelerator adds |
@@ -113,5 +113,6 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 
 ## Known limits
 
-- Essence ore only generates in newly generated chunks. Terra essence (tier 1) also has a small chance to drop from
-  grass, ripe wheat, carrots, potatoes and beetroot, and logs cut by a Wildbloom Logger, so existing worlds can still get started.
+- Essence ore no longer generates. Veins already in a world stay and can still be mined, because removing the block would
+  turn them into unknown blocks. New players get Terra essence (tier 1) as a chance drop from grass, ripe wheat, carrots,
+  potatoes and beetroot, and logs cut by a Wildbloom Logger.

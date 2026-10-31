@@ -4,6 +4,12 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Essence ore removed (v0.10.1)
+
+- [ ] Newly explored chunks have no essence ore.
+- [ ] Ore already in the world still shows properly and still drops Terra Essence when mined.
+- [ ] Getting the first 8 Terra Essence from grass and vanilla crops doesn't feel like too much of a grind.
+
 ## Terra crop and tier locking (v0.10.0)
 
 - [ ] **Before uploading:** check higher-tier farms on the server, because crops on too-low farmland stop growing and can pop off.
@@ -47,7 +53,7 @@ Before starting: upload the latest `addon/*.mcaddon` to the server, and use crea
 
 ## Mod tag (v0.7.2)
 
-- [ ] Items and blocks (farmland, accelerators, essence ore) show a blue `@ESSENCE&EARTH` line under their name in the inventory.
+- [ ] Items and blocks (farmland, accelerators) show a blue `@ESSENCE&EARTH` line under their name in the inventory.
 - [ ] Block names show properly, not as `tile.ee:...`.
 
 ## Crop rendering (v0.7.1)

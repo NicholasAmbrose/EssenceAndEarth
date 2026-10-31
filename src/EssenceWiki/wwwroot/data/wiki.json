@@ -1,16 +1,16 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.10.0",
-  "file": "EssenceAndEarth_v0.10.0.mcaddon",
+  "version": "0.10.1",
+  "file": "EssenceAndEarth_v0.10.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.10.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.10.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 28,
   "tiers": 5,
-  "items": 74,
+  "items": 73,
   "recipes": 74
  },
  "categories": [
@@ -37,17 +37,11 @@
       },
       {
        "t": "p",
-       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world. Once you have a little, the <a href=\"wiki/terra-crops/terra\">Terra crop</a> gives you a steady supply."
+       "html": "Terra Essence drops now and then from grass and ripe vanilla crops. Once you have a little, the <a href=\"wiki/terra-crops/terra\">Terra crop</a> gives you a steady supply."
       },
       {
        "t": "items",
        "items": [
-        {
-         "name": "Essence Ore",
-         "icon": "img/icons/essence_ore.png",
-         "href": "wiki/essence/essence-ore",
-         "sub": "1–3 Terra Essence per ore"
-        },
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
@@ -282,49 +276,8 @@
    "title": "Essence",
    "group": "Getting started",
    "icon": "img/icons/ignis_essence.png",
-   "blurb": "Essence Ore and the five essence tiers every crop is made from.",
+   "blurb": "The five essence tiers every crop is made from.",
    "entries": [
-    {
-     "slug": "essence-ore",
-     "name": "Essence Ore",
-     "icon": "img/icons/essence_ore.png",
-     "summary": "The main source of Terra Essence.",
-     "blocks": [
-      {
-       "t": "facts",
-       "facts": [
-        [
-         "Found",
-         "Overworld, y −48 to 48"
-        ],
-        [
-         "Drops",
-         "1–3 Terra Essence"
-        ],
-        [
-         "Tool",
-         "Any; mining takes about 3 seconds by hand"
-        ]
-       ]
-      },
-      {
-       "t": "p",
-       "html": "Essence Ore only generates in chunks that are explored after the add-on is installed. In an older world, travel somewhere new or collect Terra Essence from grass and crops."
-      },
-      {
-       "t": "items",
-       "items": [
-        {
-         "name": "Terra Essence",
-         "icon": "img/icons/terra_essence.png",
-         "href": "wiki/essence/terra-essence",
-         "sub": "1–3 per ore"
-        }
-       ]
-      }
-     ],
-     "href": "wiki/essence/essence-ore"
-    },
     {
      "slug": "terra-essence",
      "name": "Terra Essence",
@@ -351,12 +304,6 @@
       {
        "t": "items",
        "items": [
-        {
-         "name": "Essence Ore",
-         "icon": "img/icons/essence_ore.png",
-         "href": "wiki/essence/essence-ore",
-         "sub": "1–3 per ore"
-        },
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
@@ -12233,7 +12180,7 @@
    ]
   },
   {
-   "title": "Growth stages and ore",
+   "title": "Growth stages",
    "items": [
     {
      "name": "Stage 1",
@@ -12246,11 +12193,6 @@
     {
      "name": "Stage 3",
      "icon": "img/icons/crop_2.png"
-    },
-    {
-     "name": "Essence Ore",
-     "icon": "img/icons/essence_ore.png",
-     "href": "wiki/essence/essence-ore"
     }
    ]
   }
