@@ -42,7 +42,7 @@ Before starting: upload the latest `addon/*.mcaddon` to the server, and use crea
 
 ## Terra Essence from grass and Loggers (v0.7.4)
 
-- [ ] Hand-cut grass drops Terra Essence about 5% of the time.
+- [ ] Hand-cut grass drops Terra Essence about 20% of the time (raised in v0.10.2).
 - [ ] A Wildbloom Logger cutting trees drops Terra Essence for about 5% of logs, including logs high up a tall tree.
 - [ ] Chopping logs far from any Logger never drops essence.
 - [ ] Felling a tree causes no noticeable lag.

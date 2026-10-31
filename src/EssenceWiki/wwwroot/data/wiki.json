@@ -1,10 +1,10 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.10.1",
-  "file": "EssenceAndEarth_v0.10.1.mcaddon",
+  "version": "0.10.2",
+  "file": "EssenceAndEarth_v0.10.2.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.10.1.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.10.2.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
@@ -45,7 +45,7 @@
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
-         "sub": "Grass and ferns: 5% chance"
+         "sub": "Grass and ferns: 20% chance"
         },
         {
          "name": "Wheat Crops",
@@ -307,7 +307,7 @@
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
-         "sub": "Grass and ferns: 5% chance"
+         "sub": "Grass and ferns: 20% chance"
         },
         {
          "name": "Wheat Crops",
