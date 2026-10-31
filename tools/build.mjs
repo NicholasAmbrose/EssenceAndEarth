@@ -28,7 +28,8 @@ for (const c of cfg.crops) {
   if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
   if (c.essenceColor && !/^#[0-9a-f]{6}$/i.test(c.essenceColor)) problems.push(`${c.id}: essenceColor must look like #a1b2c3`);
   if (c.face && !(c.face.length === 8 && c.face.every((r) => r.length === 8) && [...c.face.join("")].every((ch) => ch === "." || c.faceColors?.[ch]))) problems.push(`${c.id}: face must be 8 rows of 8, using . or a faceColors key`);
-  if (c.alt && !/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c.alt.output ?? "")) problems.push(`${c.id}: alt.output must be an item id like minecraft:iron_ingot`);
+  if (c.essenceCrop && !cfg.tiers.some((t) => t.id === c.id)) problems.push(`${c.id}: an essenceCrop's id must match a tier, because it drops that tier's essence`);
+  if (c.alt && !/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c.alt.output ?? ""))problems.push(`${c.id}: alt.output must be an item id like minecraft:iron_ingot`);
   if (c.alt && !(Number.isInteger(c.alt.count) && c.alt.count >= 1 && c.alt.count <= 64)) problems.push(`${c.id}: alt.count must be 1-64`);
 }
 const BAL = cfg.balance;
@@ -442,8 +443,8 @@ const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
 const tierTitle = (t) => title(t.id);
 const GUIDE_PAGES = [
   { title: "Getting Started", body: `Mine Essence Ore underground, between y -48 and 48, in newly explored chunks. Each ore drops ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence.\n\n${tierTitle(cfg.tiers[0])} Essence also drops now and then from grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
-  { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds only grow on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed, with a ${pct(BAL.secondSeedChance)} chance of a second seed.\n\nEight essence in a ring craft the resource. Each use of bone meal has a ${pct(BAL.boneMealChance)} chance to advance a crop one stage.` },
-  { title: "Essence Farmland", body: `Crops need essence farmland, of any tier. It never dries out and needs no water.\n\n5 dirt + 4 ${tierTitle(cfg.tiers[0])} Essence make ${tierTitle(cfg.tiers[0])} Farmland. Each later tier takes 5 of the tier below + 4 of its essence.\n\nChance of +1 essence per ripe harvest:\n${cfg.tiers.map((t, i) => `${tierTitle(t)} ${pct(BAL.farmlandBonus[i])}`).join("\n")}` },
+  { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds only grow on essence farmland of their own tier or higher.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed, with a ${pct(BAL.secondSeedChance)} chance of a second seed.\n\nEight essence in a ring craft the resource. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly. Each use of bone meal has a ${pct(BAL.boneMealChance)} chance to advance a crop one stage.` },
+  { title: "Essence Farmland", body: `A crop needs essence farmland of its own tier or higher. It never dries out and needs no water.\n\n1 dirt + 4 ${tierTitle(cfg.tiers[0])} Essence make ${tierTitle(cfg.tiers[0])} Farmland. Each later tier takes 1 of the tier below + 4 of its essence.\n\nChance of +1 essence per ripe harvest:\n${cfg.tiers.map((t, i) => `${tierTitle(t)} ${pct(BAL.farmlandBonus[i])}`).join("\n")}` },
   { title: "Growth Accelerators", body: `Stack up to ${BAL.maxAccelerators} directly under essence farmland to make the crop above grow faster.\n\nTiers can be mixed in any order. Any other block in the stack cuts off the accelerators below it.\n\n5 cobblestone + 4 ${tierTitle(cfg.tiers[0])} Essence make the first. Each later tier takes 5 of the tier below + 4 of its essence.` },
   { title: "Tools", body: `Essence Sickle: break a ripe crop to harvest every ripe crop in the 3x3 around it. It won't break unripe crops.\n\nEssence Hoe: right-click a ripe crop to harvest and replant it. The replant takes one seed from the drops.\n\nBoth last ${BAL.toolDurability} uses and repair with ${tierTitle(cfg.tiers[1])} Essence in an anvil.` },
   { title: "Crops by Tier", body: `${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
@@ -458,6 +459,8 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__FARMLAND_BONUS__", JSON.stringify(bonus))
       .replaceAll("__ACCELERATOR_ROLLS__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_accelerator`, BAL.acceleratorRolls[i]]))))
       .replaceAll("__GUIDE_PAGES__", JSON.stringify(GUIDE_PAGES))
+      .replaceAll("__FARMLAND_TIER__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, i + 1]))))
+      .replaceAll("__CROP_TIER__", JSON.stringify(Object.fromEntries(cfg.crops.map((c) => [`${NS}:${c.id}_crop`, c.retired ? 1 : c.tier]))))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
       .replaceAll("__NS__", NS));
 }
@@ -518,7 +521,7 @@ cfg.tiers.forEach((t, i) => {
 });
 
 // Essence farmland: never dries out, and gives ripe crops a chance of extra essence (see scripts/main.js).
-// Our crops grow on nothing else. 5 dirt + 4 Terra make 1 Terra farmland; 5 of the tier below + 4 of its essence make 1 of each later tier.
+// Our crops grow on nothing else, and only on their own tier or higher. 1 dirt + 4 Terra make 1 Terra farmland; 1 of the tier below + 4 of its essence make 1 of each later tier.
 const FARMLANDS = cfg.tiers.map((t) => `${NS}:${t.id}_farmland`);
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_farmland`;
@@ -532,7 +535,7 @@ cfg.tiers.forEach((t, i) => {
     "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
   });
   recipe(id, "shaped", {
-    pattern: ["BEB", "EBE", "BEB"],
+    pattern: [" E ", "EBE", " E "],
     key: { B: { item: i ? FARMLANDS[i - 1] : "minecraft:dirt" }, E: { item: tierEssence(i + 1) } },
     result: { item: `${NS}:${id}`, count: BAL.farmlandYield },
   }, tierEssence(i + 1));
@@ -615,6 +618,8 @@ const cropMaterial = (tex) => ({ "*": { texture: `${NS}_${tex}`, render_method: 
 
 for (const c of cfg.crops) {
   const seeds = `${NS}:${c.id}_seeds`, essence = `${NS}:${c.id}_essence`, growth = `${NS}:growth`;
+  // Retired crops stay plantable anywhere, so what's already in the ground keeps working.
+  const soils = FARMLANDS.slice(c.retired ? 0 : c.tier - 1);
   blockTexture(`${c.id}_crop`, STAGES[3], c.color);
 
   block(
@@ -629,7 +634,7 @@ for (const c of cfg.crops) {
       "minecraft:destructible_by_mining": { seconds_to_destroy: 0 },
       "minecraft:light_dampening": 0,
       // Also pops the crop when the farmland under it is broken.
-      "minecraft:placement_filter": { conditions: [{ allowed_faces: ["up"], block_filter: FARMLANDS }] },
+      "minecraft:placement_filter": { conditions: [{ allowed_faces: ["up"], block_filter: soils }] },
       "minecraft:loot": loot(`${c.id}_crop`, [drop(seeds)]),
       [`${NS}:crop`]: {},
     },
@@ -642,8 +647,9 @@ for (const c of cfg.crops) {
     })),
   );
 
-  item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: FARMLANDS } });
-  item(`${c.id}_essence`, c.face ? faceMask(c.face) : WISP, c.essenceColor ?? c.color, {}, c.faceColors);
+  item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: soils } });
+  // An essence crop drops its tier's essence directly, so it has no essence item or ring recipe of its own.
+  if (!c.essenceCrop) item(`${c.id}_essence`, c.face ? faceMask(c.face) : WISP, c.essenceColor ?? c.color, {}, c.faceColors);
 
   // A retired crop can't be started any more, but what's already planted keeps working.
   if (!c.retired)
@@ -652,11 +658,12 @@ for (const c of cfg.crops) {
       key: { E: { item: tierEssence(c.tier) }, R: { item: c.ingredient }, S: { item: "minecraft:wheat_seeds" } },
       result: { item: seeds },
     }, tierEssence(c.tier));
-  recipe(`${c.id}_from_essence`, "shaped", {
-    pattern: ["EEE", "E E", "EEE"],
-    key: { E: { item: essence } },
-    result: { item: c.output, count: c.count },
-  }, essence);
+  if (!c.essenceCrop)
+    recipe(`${c.id}_from_essence`, "shaped", {
+      pattern: ["EEE", "E E", "EEE"],
+      key: { E: { item: essence } },
+      result: { item: c.output, count: c.count },
+    }, essence);
   // A second drop needs its own shape: the ring with its gap at the top instead of the middle.
   if (c.alt)
     recipe(`${c.id}_alt_from_essence`, "shaped", {

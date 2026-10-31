@@ -1,7 +1,7 @@
 import { system, world, BlockVolume, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
-// NS, ESSENCE (the tier-1 essence), BALANCE, FARMLAND_BONUS, ACCELERATOR_ROLLS and GUIDE_PAGES placeholders are filled in from crops.json at build time.
+// NS, ESSENCE (the tier-1 essence), BALANCE, FARMLAND_BONUS, ACCELERATOR_ROLLS, GUIDE_PAGES, FARMLAND_TIER and CROP_TIER placeholders are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const {
@@ -191,9 +191,13 @@ world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
   }
 });
 
+// Farmland id -> its tier, and crop id -> the lowest farmland tier it grows on.
+const FARMLAND_TIER = __FARMLAND_TIER__;
+const CROP_TIER = __CROP_TIER__;
+
 function canGrow(block) {
   // Machines can setType a crop onto any soil, past the placement filter. It just won't grow there.
-  return block.below()?.typeId in FARMLAND_BONUS && block.permutation.getState(GROWTH) < MAX_STAGE;
+  return FARMLAND_TIER[block.below()?.typeId] >= CROP_TIER[block.typeId] && block.permutation.getState(GROWTH) < MAX_STAGE;
 }
 
 function grow(block) {

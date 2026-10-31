@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.9.0",
-  "file": "EssenceAndEarth_v0.9.0.mcaddon",
+  "version": "0.10.0",
+  "file": "EssenceAndEarth_v0.10.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.9.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.10.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
-  "crops": 27,
+  "crops": 28,
   "tiers": 5,
-  "items": 73,
-  "recipes": 73
+  "items": 74,
+  "recipes": 74
  },
  "categories": [
   {
@@ -37,7 +37,7 @@
       },
       {
        "t": "p",
-       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world."
+       "html": "Mine <a href=\"wiki/essence/essence-ore\">Essence Ore</a> underground, between y −48 and 48 in newly explored chunks. Terra Essence also drops now and then from grass and ripe vanilla crops, so you can start in an old world. Once you have a little, the <a href=\"wiki/terra-crops/terra\">Terra crop</a> gives you a steady supply."
       },
       {
        "t": "items",
@@ -57,6 +57,12 @@
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
+        },
+        {
+         "name": "Terra Crop",
+         "icon": "img/icons/terra_crop.png",
+         "href": "wiki/terra-crops/terra",
+         "sub": "1–2 per ripe harvest"
         }
        ]
       },
@@ -74,7 +80,7 @@
       },
       {
        "t": "p",
-       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on <a href=\"wiki/farmland\">essence farmland</a> and wait. Bone meal can help: each use has a 25% chance to advance a stage."
+       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on <a href=\"wiki/farmland\">essence farmland</a> of their tier or higher and wait. Bone meal can help: each use has a 25% chance to advance a stage."
       },
       {
        "t": "h2",
@@ -98,7 +104,7 @@
        "facts": [
         [
          "Plant on",
-         "Essence farmland only"
+         "Essence farmland of the crop's tier or higher"
         ],
         [
          "Growth",
@@ -145,7 +151,7 @@
       },
       {
        "t": "p",
-       "html": "Seeds won't plant on vanilla farmland. Every crop needs <a href=\"wiki/farmland\">essence farmland</a>, of any tier, so each plot in your garden has to be crafted. It never dries out and can't be trampled."
+       "html": "Seeds won't plant on vanilla farmland. Every crop needs <a href=\"wiki/farmland\">essence farmland</a> of its own tier or higher, so each plot in your garden has to be crafted, and better crops need better farmland. It never dries out and can't be trampled."
       },
       {
        "t": "h2",
@@ -323,7 +329,7 @@
      "slug": "terra-essence",
      "name": "Terra Essence",
      "icon": "img/icons/terra_essence.png",
-     "summary": "Tier 1. 8 crops use it.",
+     "summary": "Tier 1. 9 crops use it.",
      "blocks": [
       {
        "t": "facts",
@@ -334,7 +340,7 @@
         ],
         [
          "Crops",
-         "8"
+         "9"
         ]
        ]
       },
@@ -360,6 +366,12 @@
          "name": "Wheat Crops",
          "icon": "img/vanilla/wheat.png",
          "sub": "Ripe wheat, carrots, potatoes, beetroot: 15% chance"
+        },
+        {
+         "name": "Terra Crop",
+         "icon": "img/icons/terra_crop.png",
+         "href": "wiki/terra-crops/terra",
+         "sub": "1–2 per ripe harvest"
         }
        ]
       },
@@ -370,6 +382,12 @@
       {
        "t": "items",
        "items": [
+        {
+         "name": "Terra Seeds",
+         "icon": "img/icons/terra_seeds.png",
+         "href": "wiki/terra-crops/terra",
+         "sub": "Drops Terra Essence directly"
+        },
         {
          "name": "Coal Seeds",
          "icon": "img/icons/coal_seeds.png",
@@ -881,7 +899,7 @@
         ],
         [
          "Grows",
-         "Every crop"
+         "Tier 1 crops"
         ]
        ]
       },
@@ -906,7 +924,7 @@
       },
       {
        "t": "p",
-       "html": "Five dirt and four Terra Essence make 1."
+       "html": "One dirt and four Terra Essence make 1."
       },
       {
        "t": "grid",
@@ -918,19 +936,13 @@
        },
        "rows": [
         [
-         {
-          "name": "Dirt",
-          "icon": "img/vanilla/dirt.png"
-         },
+         null,
          {
           "name": "Terra Essence",
           "icon": "img/icons/terra_essence.png",
           "href": "wiki/essence/terra-essence"
          },
-         {
-          "name": "Dirt",
-          "icon": "img/vanilla/dirt.png"
-         }
+         null
         ],
         [
          {
@@ -949,19 +961,13 @@
          }
         ],
         [
-         {
-          "name": "Dirt",
-          "icon": "img/vanilla/dirt.png"
-         },
+         null,
          {
           "name": "Terra Essence",
           "icon": "img/icons/terra_essence.png",
           "href": "wiki/essence/terra-essence"
          },
-         {
-          "name": "Dirt",
-          "icon": "img/vanilla/dirt.png"
-         }
+         null
         ]
        ]
       }
@@ -991,7 +997,7 @@
         ],
         [
          "Grows",
-         "Every crop"
+         "Crops of tiers 1–2"
         ]
        ]
       },
@@ -1016,7 +1022,7 @@
       },
       {
        "t": "p",
-       "html": "Five Terra Farmland and four Aqua Essence make 1."
+       "html": "One Terra Farmland and four Aqua Essence make 1."
       },
       {
        "t": "grid",
@@ -1028,21 +1034,13 @@
        },
        "rows": [
         [
-         {
-          "name": "Terra Farmland",
-          "icon": "img/icons/terra_farmland_top.png",
-          "href": "wiki/farmland/terra-farmland"
-         },
+         null,
          {
           "name": "Aqua Essence",
           "icon": "img/icons/aqua_essence.png",
           "href": "wiki/essence/aqua-essence"
          },
-         {
-          "name": "Terra Farmland",
-          "icon": "img/icons/terra_farmland_top.png",
-          "href": "wiki/farmland/terra-farmland"
-         }
+         null
         ],
         [
          {
@@ -1062,21 +1060,13 @@
          }
         ],
         [
-         {
-          "name": "Terra Farmland",
-          "icon": "img/icons/terra_farmland_top.png",
-          "href": "wiki/farmland/terra-farmland"
-         },
+         null,
          {
           "name": "Aqua Essence",
           "icon": "img/icons/aqua_essence.png",
           "href": "wiki/essence/aqua-essence"
          },
-         {
-          "name": "Terra Farmland",
-          "icon": "img/icons/terra_farmland_top.png",
-          "href": "wiki/farmland/terra-farmland"
-         }
+         null
         ]
        ]
       }
@@ -1106,7 +1096,7 @@
         ],
         [
          "Grows",
-         "Every crop"
+         "Crops of tiers 1–3"
         ]
        ]
       },
@@ -1131,7 +1121,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aqua Farmland and four Ignis Essence make 1."
+       "html": "One Aqua Farmland and four Ignis Essence make 1."
       },
       {
        "t": "grid",
@@ -1143,21 +1133,13 @@
        },
        "rows": [
         [
-         {
-          "name": "Aqua Farmland",
-          "icon": "img/icons/aqua_farmland_top.png",
-          "href": "wiki/farmland/aqua-farmland"
-         },
+         null,
          {
           "name": "Ignis Essence",
           "icon": "img/icons/ignis_essence.png",
           "href": "wiki/essence/ignis-essence"
          },
-         {
-          "name": "Aqua Farmland",
-          "icon": "img/icons/aqua_farmland_top.png",
-          "href": "wiki/farmland/aqua-farmland"
-         }
+         null
         ],
         [
          {
@@ -1177,21 +1159,13 @@
          }
         ],
         [
-         {
-          "name": "Aqua Farmland",
-          "icon": "img/icons/aqua_farmland_top.png",
-          "href": "wiki/farmland/aqua-farmland"
-         },
+         null,
          {
           "name": "Ignis Essence",
           "icon": "img/icons/ignis_essence.png",
           "href": "wiki/essence/ignis-essence"
          },
-         {
-          "name": "Aqua Farmland",
-          "icon": "img/icons/aqua_farmland_top.png",
-          "href": "wiki/farmland/aqua-farmland"
-         }
+         null
         ]
        ]
       }
@@ -1221,7 +1195,7 @@
         ],
         [
          "Grows",
-         "Every crop"
+         "Crops of tiers 1–4"
         ]
        ]
       },
@@ -1246,7 +1220,7 @@
       },
       {
        "t": "p",
-       "html": "Five Ignis Farmland and four Aether Essence make 1."
+       "html": "One Ignis Farmland and four Aether Essence make 1."
       },
       {
        "t": "grid",
@@ -1258,21 +1232,13 @@
        },
        "rows": [
         [
-         {
-          "name": "Ignis Farmland",
-          "icon": "img/icons/ignis_farmland_top.png",
-          "href": "wiki/farmland/ignis-farmland"
-         },
+         null,
          {
           "name": "Aether Essence",
           "icon": "img/icons/aether_essence.png",
           "href": "wiki/essence/aether-essence"
          },
-         {
-          "name": "Ignis Farmland",
-          "icon": "img/icons/ignis_farmland_top.png",
-          "href": "wiki/farmland/ignis-farmland"
-         }
+         null
         ],
         [
          {
@@ -1292,21 +1258,13 @@
          }
         ],
         [
-         {
-          "name": "Ignis Farmland",
-          "icon": "img/icons/ignis_farmland_top.png",
-          "href": "wiki/farmland/ignis-farmland"
-         },
+         null,
          {
           "name": "Aether Essence",
           "icon": "img/icons/aether_essence.png",
           "href": "wiki/essence/aether-essence"
          },
-         {
-          "name": "Ignis Farmland",
-          "icon": "img/icons/ignis_farmland_top.png",
-          "href": "wiki/farmland/ignis-farmland"
-         }
+         null
         ]
        ]
       }
@@ -1336,7 +1294,7 @@
         ],
         [
          "Grows",
-         "Every crop"
+         "Crops of tiers 1–5"
         ]
        ]
       },
@@ -1361,7 +1319,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aether Farmland and four Astra Essence make 1."
+       "html": "One Aether Farmland and four Astra Essence make 1."
       },
       {
        "t": "grid",
@@ -1373,21 +1331,13 @@
        },
        "rows": [
         [
-         {
-          "name": "Aether Farmland",
-          "icon": "img/icons/aether_farmland_top.png",
-          "href": "wiki/farmland/aether-farmland"
-         },
+         null,
          {
           "name": "Astra Essence",
           "icon": "img/icons/astra_essence.png",
           "href": "wiki/essence/astra-essence"
          },
-         {
-          "name": "Aether Farmland",
-          "icon": "img/icons/aether_farmland_top.png",
-          "href": "wiki/farmland/aether-farmland"
-         }
+         null
         ],
         [
          {
@@ -1407,21 +1357,13 @@
          }
         ],
         [
-         {
-          "name": "Aether Farmland",
-          "icon": "img/icons/aether_farmland_top.png",
-          "href": "wiki/farmland/aether-farmland"
-         },
+         null,
          {
           "name": "Astra Essence",
           "icon": "img/icons/astra_essence.png",
           "href": "wiki/essence/astra-essence"
          },
-         {
-          "name": "Aether Farmland",
-          "icon": "img/icons/aether_farmland_top.png",
-          "href": "wiki/farmland/aether-farmland"
-         }
+         null
         ]
        ]
       }
@@ -2213,6 +2155,139 @@
    "blurb": "Tier 1 crops. Their seeds are made with Terra Essence.",
    "entries": [
     {
+     "slug": "terra",
+     "name": "Terra Crop",
+     "icon": "img/icons/terra_crop.png",
+     "summary": "Drops Terra Essence directly",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "1 · Terra Essence"
+        ],
+        [
+         "Plant on",
+         "Terra Farmland or higher"
+        ],
+        [
+         "Seeds use",
+         "Dirt"
+        ],
+        [
+         "Makes",
+         "Terra Essence"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/terra_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Seeds",
+        "icon": "img/icons/terra_seeds.png",
+        "href": "wiki/terra-crops/terra",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Dirt",
+          "icon": "img/vanilla/dirt.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Terra Essence",
+         "icon": "img/icons/terra_essence.png",
+         "href": "wiki/essence/terra-essence",
+         "sub": "1–2 when ripe"
+        },
+        {
+         "name": "Terra Seeds",
+         "icon": "img/icons/terra_seeds.png",
+         "href": "wiki/terra-crops/terra",
+         "sub": "1, plus a 5% chance of a second"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/terra-crops/terra"
+    },
+    {
      "slug": "coal",
      "name": "Coal Crop",
      "icon": "img/icons/coal_crop.png",
@@ -2224,6 +2299,10 @@
         [
          "Tier",
          "1 · Terra Essence"
+        ],
+        [
+         "Plant on",
+         "Terra Farmland or higher"
         ],
         [
          "Seeds use",
@@ -2416,6 +2495,10 @@
          "1 · Terra Essence"
         ],
         [
+         "Plant on",
+         "Terra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Copper Ingot"
         ],
@@ -2604,6 +2687,10 @@
         [
          "Tier",
          "1 · Terra Essence"
+        ],
+        [
+         "Plant on",
+         "Terra Farmland or higher"
         ],
         [
          "Seeds use",
@@ -2796,6 +2883,10 @@
          "1 · Terra Essence"
         ],
         [
+         "Plant on",
+         "Terra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Oak Log"
         ],
@@ -2984,6 +3075,10 @@
         [
          "Tier",
          "1 · Terra Essence"
+        ],
+        [
+         "Plant on",
+         "Terra Farmland or higher"
         ],
         [
          "Seeds use",
@@ -3176,6 +3271,10 @@
          "1 · Terra Essence"
         ],
         [
+         "Plant on",
+         "Terra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Clay Ball"
         ],
@@ -3366,6 +3465,10 @@
          "1 · Terra Essence"
         ],
         [
+         "Plant on",
+         "Terra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Rotten Flesh"
         ],
@@ -3554,6 +3657,10 @@
         [
          "Tier",
          "1 · Terra Essence"
+        ],
+        [
+         "Plant on",
+         "Terra Farmland or higher"
         ],
         [
          "Seeds use",
@@ -3817,6 +3924,10 @@
          "2 · Aqua Essence"
         ],
         [
+         "Plant on",
+         "Aqua Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Iron Ingot"
         ],
@@ -4005,6 +4116,10 @@
         [
          "Tier",
          "2 · Aqua Essence"
+        ],
+        [
+         "Plant on",
+         "Aqua Farmland or higher"
         ],
         [
          "Seeds use",
@@ -4197,6 +4312,10 @@
          "2 · Aqua Essence"
         ],
         [
+         "Plant on",
+         "Aqua Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Lapis Lazuli"
         ],
@@ -4385,6 +4504,10 @@
         [
          "Tier",
          "2 · Aqua Essence"
+        ],
+        [
+         "Plant on",
+         "Aqua Farmland or higher"
         ],
         [
          "Seeds use",
@@ -4577,6 +4700,10 @@
          "2 · Aqua Essence"
         ],
         [
+         "Plant on",
+         "Aqua Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Nether Quartz"
         ],
@@ -4765,6 +4892,10 @@
         [
          "Tier",
          "2 · Aqua Essence"
+        ],
+        [
+         "Plant on",
+         "Aqua Farmland or higher"
         ],
         [
          "Seeds use",
@@ -4957,6 +5088,10 @@
          "2 · Aqua Essence"
         ],
         [
+         "Plant on",
+         "Aqua Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Amethyst Shard"
         ],
@@ -5145,6 +5280,10 @@
         [
          "Tier",
          "2 · Aqua Essence"
+        ],
+        [
+         "Plant on",
+         "Aqua Farmland or higher"
         ],
         [
          "Seeds use",
@@ -5399,6 +5538,10 @@
          "2 · Aqua Essence"
         ],
         [
+         "Plant on",
+         "Aqua Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Gunpowder"
         ],
@@ -5587,6 +5730,10 @@
         [
          "Tier",
          "2 · Aqua Essence"
+        ],
+        [
+         "Plant on",
+         "Aqua Farmland or higher"
         ],
         [
          "Seeds use",
@@ -5788,6 +5935,10 @@
          "3 · Ignis Essence"
         ],
         [
+         "Plant on",
+         "Ignis Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Gold Ingot"
         ],
@@ -5976,6 +6127,10 @@
         [
          "Tier",
          "3 · Ignis Essence"
+        ],
+        [
+         "Plant on",
+         "Ignis Farmland or higher"
         ],
         [
          "Seeds use",
@@ -6168,6 +6323,10 @@
          "3 · Ignis Essence"
         ],
         [
+         "Plant on",
+         "Ignis Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Blaze Rod"
         ],
@@ -6356,6 +6515,10 @@
         [
          "Tier",
          "3 · Ignis Essence"
+        ],
+        [
+         "Plant on",
+         "Ignis Farmland or higher"
         ],
         [
          "Seeds use",
@@ -6557,6 +6720,10 @@
          "4 · Aether Essence"
         ],
         [
+         "Plant on",
+         "Aether Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Emerald"
         ],
@@ -6745,6 +6912,10 @@
         [
          "Tier",
          "4 · Aether Essence"
+        ],
+        [
+         "Plant on",
+         "Aether Farmland or higher"
         ],
         [
          "Seeds use",
@@ -6946,6 +7117,10 @@
          "5 · Astra Essence"
         ],
         [
+         "Plant on",
+         "Astra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Netherite Scrap"
         ],
@@ -7136,6 +7311,10 @@
          "5 · Astra Essence"
         ],
         [
+         "Plant on",
+         "Astra Farmland or higher"
+        ],
+        [
          "Seeds use",
          "Wither Skeleton Skull"
         ],
@@ -7324,6 +7503,10 @@
         [
          "Tier",
          "5 · Astra Essence"
+        ],
+        [
+         "Plant on",
+         "Astra Farmland or higher"
         ],
         [
          "Seeds use",
@@ -7716,19 +7899,13 @@
    },
    "rows": [
     [
-     {
-      "name": "Dirt",
-      "icon": "img/vanilla/dirt.png"
-     },
+     null,
      {
       "name": "Terra Essence",
       "icon": "img/icons/terra_essence.png",
       "href": "wiki/essence/terra-essence"
      },
-     {
-      "name": "Dirt",
-      "icon": "img/vanilla/dirt.png"
-     }
+     null
     ],
     [
      {
@@ -7747,19 +7924,13 @@
      }
     ],
     [
-     {
-      "name": "Dirt",
-      "icon": "img/vanilla/dirt.png"
-     },
+     null,
      {
       "name": "Terra Essence",
       "icon": "img/icons/terra_essence.png",
       "href": "wiki/essence/terra-essence"
      },
-     {
-      "name": "Dirt",
-      "icon": "img/vanilla/dirt.png"
-     }
+     null
     ]
    ]
   },
@@ -7772,21 +7943,13 @@
    },
    "rows": [
     [
-     {
-      "name": "Terra Farmland",
-      "icon": "img/icons/terra_farmland_top.png",
-      "href": "wiki/farmland/terra-farmland"
-     },
+     null,
      {
       "name": "Aqua Essence",
       "icon": "img/icons/aqua_essence.png",
       "href": "wiki/essence/aqua-essence"
      },
-     {
-      "name": "Terra Farmland",
-      "icon": "img/icons/terra_farmland_top.png",
-      "href": "wiki/farmland/terra-farmland"
-     }
+     null
     ],
     [
      {
@@ -7806,21 +7969,13 @@
      }
     ],
     [
-     {
-      "name": "Terra Farmland",
-      "icon": "img/icons/terra_farmland_top.png",
-      "href": "wiki/farmland/terra-farmland"
-     },
+     null,
      {
       "name": "Aqua Essence",
       "icon": "img/icons/aqua_essence.png",
       "href": "wiki/essence/aqua-essence"
      },
-     {
-      "name": "Terra Farmland",
-      "icon": "img/icons/terra_farmland_top.png",
-      "href": "wiki/farmland/terra-farmland"
-     }
+     null
     ]
    ]
   },
@@ -7833,21 +7988,13 @@
    },
    "rows": [
     [
-     {
-      "name": "Aqua Farmland",
-      "icon": "img/icons/aqua_farmland_top.png",
-      "href": "wiki/farmland/aqua-farmland"
-     },
+     null,
      {
       "name": "Ignis Essence",
       "icon": "img/icons/ignis_essence.png",
       "href": "wiki/essence/ignis-essence"
      },
-     {
-      "name": "Aqua Farmland",
-      "icon": "img/icons/aqua_farmland_top.png",
-      "href": "wiki/farmland/aqua-farmland"
-     }
+     null
     ],
     [
      {
@@ -7867,21 +8014,13 @@
      }
     ],
     [
-     {
-      "name": "Aqua Farmland",
-      "icon": "img/icons/aqua_farmland_top.png",
-      "href": "wiki/farmland/aqua-farmland"
-     },
+     null,
      {
       "name": "Ignis Essence",
       "icon": "img/icons/ignis_essence.png",
       "href": "wiki/essence/ignis-essence"
      },
-     {
-      "name": "Aqua Farmland",
-      "icon": "img/icons/aqua_farmland_top.png",
-      "href": "wiki/farmland/aqua-farmland"
-     }
+     null
     ]
    ]
   },
@@ -7894,21 +8033,13 @@
    },
    "rows": [
     [
-     {
-      "name": "Ignis Farmland",
-      "icon": "img/icons/ignis_farmland_top.png",
-      "href": "wiki/farmland/ignis-farmland"
-     },
+     null,
      {
       "name": "Aether Essence",
       "icon": "img/icons/aether_essence.png",
       "href": "wiki/essence/aether-essence"
      },
-     {
-      "name": "Ignis Farmland",
-      "icon": "img/icons/ignis_farmland_top.png",
-      "href": "wiki/farmland/ignis-farmland"
-     }
+     null
     ],
     [
      {
@@ -7928,21 +8059,13 @@
      }
     ],
     [
-     {
-      "name": "Ignis Farmland",
-      "icon": "img/icons/ignis_farmland_top.png",
-      "href": "wiki/farmland/ignis-farmland"
-     },
+     null,
      {
       "name": "Aether Essence",
       "icon": "img/icons/aether_essence.png",
       "href": "wiki/essence/aether-essence"
      },
-     {
-      "name": "Ignis Farmland",
-      "icon": "img/icons/ignis_farmland_top.png",
-      "href": "wiki/farmland/ignis-farmland"
-     }
+     null
     ]
    ]
   },
@@ -7955,21 +8078,13 @@
    },
    "rows": [
     [
-     {
-      "name": "Aether Farmland",
-      "icon": "img/icons/aether_farmland_top.png",
-      "href": "wiki/farmland/aether-farmland"
-     },
+     null,
      {
       "name": "Astra Essence",
       "icon": "img/icons/astra_essence.png",
       "href": "wiki/essence/astra-essence"
      },
-     {
-      "name": "Aether Farmland",
-      "icon": "img/icons/aether_farmland_top.png",
-      "href": "wiki/farmland/aether-farmland"
-     }
+     null
     ],
     [
      {
@@ -7989,21 +8104,13 @@
      }
     ],
     [
-     {
-      "name": "Aether Farmland",
-      "icon": "img/icons/aether_farmland_top.png",
-      "href": "wiki/farmland/aether-farmland"
-     },
+     null,
      {
       "name": "Astra Essence",
       "icon": "img/icons/astra_essence.png",
       "href": "wiki/essence/astra-essence"
      },
-     {
-      "name": "Aether Farmland",
-      "icon": "img/icons/aether_farmland_top.png",
-      "href": "wiki/farmland/aether-farmland"
-     }
+     null
     ]
    ]
   },
@@ -8386,6 +8493,62 @@
       "icon": "img/vanilla/stick.png"
      },
      null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Terra Seeds",
+    "icon": "img/icons/terra_seeds.png",
+    "href": "wiki/terra-crops/terra",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Dirt",
+      "icon": "img/vanilla/dirt.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
     ]
    ]
   },
@@ -11703,6 +11866,11 @@
    "title": "Seeds",
    "items": [
     {
+     "name": "Terra Seeds",
+     "icon": "img/icons/terra_seeds.png",
+     "href": "wiki/terra-crops/terra"
+    },
+    {
      "name": "Coal Seeds",
      "icon": "img/icons/coal_seeds.png",
      "href": "wiki/terra-crops/coal"
@@ -11842,6 +12010,11 @@
   {
    "title": "Ripe crops",
    "items": [
+    {
+     "name": "Terra Crop",
+     "icon": "img/icons/terra_crop.png",
+     "href": "wiki/terra-crops/terra"
+    },
     {
      "name": "Coal Crop",
      "icon": "img/icons/coal_crop.png",

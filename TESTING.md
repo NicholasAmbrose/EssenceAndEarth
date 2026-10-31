@@ -4,6 +4,17 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Terra crop and tier locking (v0.10.0)
+
+- [ ] **Before uploading:** check higher-tier farms on the server, because crops on too-low farmland stop growing and can pop off.
+- [ ] Terra seeds craft from 4 Terra + 4 dirt around wheat seeds, and grow on every farmland tier.
+- [ ] A ripe Terra crop drops 1–2 Terra Essence, its seed, and the farmland bonus. There's no separate essence item.
+- [ ] Each seed plants on farmland of its own tier and higher, and is refused on anything lower. Test iron on Terra and Aqua, and diamond on Ignis and Aether.
+- [ ] All 5 farmland recipes craft with the plus shape: 1 of the tier below (dirt for Terra) in the middle, 4 essence around it.
+- [ ] In an old world, a crop on too-low farmland doesn't grow or take bone meal, and if it pops off it drops items and causes no errors.
+- [ ] A retired bone meal crop still grows on Terra farmland.
+- [ ] The sickle and hoe work on the Terra crop, and the hoe replants correctly on a locked crop.
+
 ## Essence Guide (v0.9.0)
 
 - [ ] **Check this first:** the add-on loads on the server with no script errors in the log, and older features such as bone meal still work. The new `@minecraft/server-ui` dependency could stop all the scripts if its version doesn't match.
@@ -47,9 +58,6 @@ Before starting: upload the latest `addon/*.mcaddon` to the server, and use crea
 ## Farmland (v0.5.0)
 
 - [ ] Seeds won't plant on vanilla farmland, dirt or grass.
-- [ ] Seeds plant on every tier of essence farmland.
-- [ ] Terra farmland crafts from 5 dirt + 4 Terra Essence and makes 1.
-- [ ] Each later farmland crafts from 5 of the tier below + 4 of its essence and makes 1.
 - [ ] Breaking farmland pops the crop on top, and the farmland drops itself.
 - [ ] Crops planted before this update on vanilla farmland stop growing and don't crash anything.
 
