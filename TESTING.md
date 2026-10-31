@@ -108,9 +108,14 @@ Before starting: upload the latest `addon/*.mcaddon` to the server, and use crea
 
 ## Machines (Wildbloom)
 
-- [ ] Wildbloom's harvester breaks ripe crops, and the farmland bonus essence still drops.
-- [ ] Wildbloom's growth machine advances our crops.
-- [ ] The Tiller's known issue: it can place our seeds on vanilla farmland, where they won't grow. See [Wildbloom issue #2](https://github.com/baseballr/Wildbloom/issues/2).
+Read against Wildbloom v0.1.34's code on 2026-10-30. These still need a real run.
+
+- [ ] The Reaper breaks only ripe crops and replants them at stage 0, and the essence, seed and farmland bonus all drop. It keeps the seed too, so expect a surplus of seeds.
+- [ ] Quickbloom advances our crops one stage at a time and stops at ripe.
+- [ ] Harvestbloom resets ripe crops to stage 0 with no drops, in exchange for mana. Keep it away from farms you want to harvest.
+- [ ] The Tiller leaves our seeds and farmland alone ([Wildbloom issue #2](https://github.com/baseballr/Wildbloom/issues/2), fixed in v0.1.34).
+- [ ] **Tier lock:** put a Quickbloom and a Reaper next to a crop on too-low farmland, such as diamond on Terra from before v0.10.0. Their code ignores the soil, so note whether the crop keeps growing and replanting, or pops off when the blocks around it change. If it keeps going, machines can get around the lock.
+- [ ] **Spring ritual:** it looks like it will crash before growing anything, in `growAround` in Wildbloom's `machines.js`, because `c` is used before it's defined. This would affect every crop, including vanilla.
 
 ## Wiki
 
