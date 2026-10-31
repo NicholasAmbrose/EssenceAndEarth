@@ -116,6 +116,7 @@ const grassDrops = list([
   { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
 ]);
 
+const guideItem = { name: "Essence Guide", icon: "img/icons/essence_guide.png", href: "wiki/guide/essence-guide" };
 const guide = {
   slug: "guide", title: "Guide", group: "Getting started", icon: tierItem(cfg.tiers[0]).icon,
   blurb: "How Essence & Earth works, from your first essence to a farm of diamonds.",
@@ -149,6 +150,19 @@ const guide = {
         list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)} chance of +1 essence` }))),
         h2("Growth accelerators"),
         p(`Stack up to ${BAL.maxAccelerators} <a href="wiki/accelerators">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack.`),
+      ],
+    },
+    {
+      slug: "essence-guide", name: guideItem.name, icon: guideItem.icon,
+      summary: "An in-game book covering the basics.",
+      blocks: [
+        facts([["Use", "Hold it and press use to open the menu"], ["Topics", "Getting started, seeds and harvest, farmland, accelerators, tools, crops by tier"], ["Free copy", "Every player gets one, once, when they join"]]),
+        p("The guide's numbers and crop list always match the installed version of the add-on."),
+        h2("Recipe"),
+        (() => {
+          const b = vanilla("minecraft:book"), e = tierItem(cfg.tiers[0]);
+          return recipe(guideItem, 1, [[b, e, null], [null, null, null], [null, null, null]], "Shapeless: any slots");
+        })(),
       ],
     },
   ],
@@ -290,7 +304,7 @@ const gallery = [
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
   { title: "Growth accelerators", items: cfg.tiers.map(acceleratorItem) },
-  { title: "Tools", items: [sickleItem, hoeItem] },
+  { title: "Tools and guide", items: [sickleItem, hoeItem, guideItem] },
   { title: "Growth stages and ore", items: [...stages(cfg.crops[0]).slice(0, 3), oreItem] },
 ];
 
@@ -301,8 +315,8 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: essence + farmland + accelerator per tier, seeds + essence per crop, the ore and 2 tools
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 + 3, recipes: recipes.length },
+  // items: essence + farmland + accelerator per tier, seeds + essence per crop, the ore, 2 tools and the guide
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 + 4, recipes: recipes.length },
   categories,
   recipes,
   gallery,

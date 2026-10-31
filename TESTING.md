@@ -4,6 +4,14 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Essence Guide (v0.9.0)
+
+- [ ] **Check this first:** the add-on loads on the server with no script errors in the log, and older features such as bone meal still work. The new `@minecraft/server-ui` dependency could stop all the scripts if its version doesn't match.
+- [ ] The guide crafts from 1 book + 1 Terra Essence, in any slots, and shows its texture.
+- [ ] Using it from the hand opens the menu, and every topic and Back button works.
+- [ ] Each player gets one free copy on joining, and no second copy after dying or rejoining. With a full inventory, it drops at their feet.
+- [ ] Long pages scroll, and the text reads well on a small screen.
+
 ## Essence tools (v0.8.0)
 
 - [ ] The sickle crafts from 3 Aqua Essence + 2 sticks, and the hoe from 2 Aqua Essence + 2 sticks. Both show their textures and hold as a tool in the hand.

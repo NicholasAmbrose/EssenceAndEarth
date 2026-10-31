@@ -52,7 +52,7 @@ Run it before uploading a new version. Saving is paused during the download so t
 | Path | What |
 |---|---|
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
-| `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth and bone meal). |
+| `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth, bone meal, tools and the Essence Guide menu). |
 | `tools/build.mjs` | Generates blocks, items, recipes, loot tables, ore worldgen and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
 | `tools/wiki.mjs`, `src/EssenceWiki` | The wiki: data generator and Blazor site. |
 | `tools/backup.mjs` | Downloads the server world into `backups/`. |

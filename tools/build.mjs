@@ -205,6 +205,26 @@ const HOE = [
   "................",
 ];
 
+// Essence Guide: c cover, d spine, g gem, p page edges (all palette colours).
+const BOOK = [
+  "................",
+  "..ddcccccccccc..",
+  "..ddcccccccccc..",
+  "..ddcccccccccc..",
+  "..ddccccggcccc..",
+  "..ddcccggggccc..",
+  "..ddcccggggccc..",
+  "..ddccccggcccc..",
+  "..ddcccccccccc..",
+  "..ddcccccccccc..",
+  "..ddcccccccccc..",
+  "..ddcccccccccc..",
+  "..ddpppppppppp..",
+  "..ddcccccccccc..",
+  "................",
+  "................",
+];
+
 const blank = (n) => Array(n).fill("................");
 const STEMS = [
   "..G..gg....G..g.",
@@ -416,6 +436,19 @@ for (const dir of [BP, RP]) {
   m.dependencies?.forEach((dep) => dep.uuid && (dep.version = cfg.version));
   write(file, m);
 }
+// The Essence Guide's pages, so the book always matches the settings and crop list.
+const pct = (v) => `${+(v * 100).toFixed(1)}%`;
+const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
+const tierTitle = (t) => title(t.id);
+const GUIDE_PAGES = [
+  { title: "Getting Started", body: `Mine Essence Ore underground, between y -48 and 48, in newly explored chunks. Each ore drops ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence.\n\n${tierTitle(cfg.tiers[0])} Essence also drops now and then from grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
+  { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds only grow on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed, with a ${pct(BAL.secondSeedChance)} chance of a second seed.\n\nEight essence in a ring craft the resource. Each use of bone meal has a ${pct(BAL.boneMealChance)} chance to advance a crop one stage.` },
+  { title: "Essence Farmland", body: `Crops need essence farmland, of any tier. It never dries out and needs no water.\n\n5 dirt + 4 ${tierTitle(cfg.tiers[0])} Essence make ${tierTitle(cfg.tiers[0])} Farmland. Each later tier takes 5 of the tier below + 4 of its essence.\n\nChance of +1 essence per ripe harvest:\n${cfg.tiers.map((t, i) => `${tierTitle(t)} ${pct(BAL.farmlandBonus[i])}`).join("\n")}` },
+  { title: "Growth Accelerators", body: `Stack up to ${BAL.maxAccelerators} directly under essence farmland to make the crop above grow faster.\n\nTiers can be mixed in any order. Any other block in the stack cuts off the accelerators below it.\n\n5 cobblestone + 4 ${tierTitle(cfg.tiers[0])} Essence make the first. Each later tier takes 5 of the tier below + 4 of its essence.` },
+  { title: "Tools", body: `Essence Sickle: break a ripe crop to harvest every ripe crop in the 3x3 around it. It won't break unripe crops.\n\nEssence Hoe: right-click a ripe crop to harvest and replant it. The replant takes one seed from the drops.\n\nBoth last ${BAL.toolDurability} uses and repair with ${tierTitle(cfg.tiers[1])} Essence in an anvil.` },
+  { title: "Crops by Tier", body: `${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
+];
+
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
   const bonus = Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, BAL.farmlandBonus[i]]));
@@ -424,6 +457,7 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__BALANCE__", JSON.stringify(BAL))
       .replaceAll("__FARMLAND_BONUS__", JSON.stringify(bonus))
       .replaceAll("__ACCELERATOR_ROLLS__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_accelerator`, BAL.acceleratorRolls[i]]))))
+      .replaceAll("__GUIDE_PAGES__", JSON.stringify(GUIDE_PAGES))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
       .replaceAll("__NS__", NS));
 }
@@ -538,6 +572,10 @@ for (const [id, mask, pattern] of [
   }, { b: TOOL_TIER.color, h: "#6b4a2f" });
   recipe(id, "shaped", { pattern, key: { E: { item: toolEssence }, S: { item: "minecraft:stick" } }, result: { item: `${NS}:${id}` } }, toolEssence);
 }
+
+// Essence Guide: using it opens the menu in scripts/main.js.
+item("essence_guide", BOOK, cfg.tiers[0].color, { "minecraft:max_stack_size": 1 }, { c: cfg.tiers[0].color, d: "#2f6e20", g: "#dff5d4", p: "#efe9d8" });
+recipe("essence_guide", "shapeless", { ingredients: [{ item: "minecraft:book" }, { item: tierEssence(1) }], result: { item: `${NS}:essence_guide` } }, tierEssence(1));
 
 // Essence ore: the only source of tier-1 essence.
 blockTexture("essence_ore", ORE, cfg.tiers[0].color);

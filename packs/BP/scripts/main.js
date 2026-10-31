@@ -1,6 +1,7 @@
 import { system, world, BlockVolume, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
+import { ActionFormData } from "@minecraft/server-ui";
 
-// __NS__, __ESSENCE__ (the tier-1 essence), __BALANCE__, __FARMLAND_BONUS__ and __ACCELERATOR_ROLLS__ are filled in from crops.json at build time.
+// NS, ESSENCE (the tier-1 essence), BALANCE, FARMLAND_BONUS, ACCELERATOR_ROLLS and GUIDE_PAGES placeholders are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const {
@@ -103,6 +104,31 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
     if (player.isValid) wear(player, 1);
     system.run(() => takeSeed(dimension, location, seed)); // the drops exist from the next tick
   });
+});
+
+const GUIDE = "__NS__:essence_guide";
+const GUIDE_PAGES = __GUIDE_PAGES__; // [{ title, body }]
+const GOT_GUIDE = "__NS__:got_guide"; // player tag, so the free copy only comes once
+
+async function showGuide(player) {
+  const menu = new ActionFormData().title("Essence Guide").body("Grow your resources. Pick a topic.");
+  for (const { title } of GUIDE_PAGES) menu.button(title);
+  const { canceled, selection } = await menu.show(player);
+  if (canceled) return;
+  const { title, body } = GUIDE_PAGES[selection];
+  const page = await new ActionFormData().title(title).body(body).button("Back").show(player);
+  if (!page.canceled) await showGuide(player);
+}
+
+world.afterEvents.itemUse.subscribe(({ itemStack, source }) => {
+  if (itemStack.typeId === GUIDE) showGuide(source);
+});
+
+world.afterEvents.playerSpawn.subscribe(({ player, initialSpawn }) => {
+  if (!initialSpawn || player.hasTag(GOT_GUIDE)) return;
+  player.addTag(GOT_GUIDE);
+  const left = player.getComponent("minecraft:inventory")?.container.addItem(new ItemStack(GUIDE));
+  if (left) player.dimension.spawnItem(left, player.location); // full inventory
 });
 
 // Grass: only players cut it, and it often drops nothing, so this one stays a player event.

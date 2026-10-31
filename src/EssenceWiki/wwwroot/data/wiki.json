@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.8.0",
-  "file": "EssenceAndEarth_v0.8.0.mcaddon",
+  "version": "0.9.0",
+  "file": "EssenceAndEarth_v0.9.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.8.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.9.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 27,
   "tiers": 5,
-  "items": 72,
-  "recipes": 72
+  "items": 73,
+  "recipes": 73
  },
  "categories": [
   {
@@ -200,6 +200,74 @@
       }
      ],
      "href": "wiki/guide/growing-crops"
+    },
+    {
+     "slug": "essence-guide",
+     "name": "Essence Guide",
+     "icon": "img/icons/essence_guide.png",
+     "summary": "An in-game book covering the basics.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Use",
+         "Hold it and press use to open the menu"
+        ],
+        [
+         "Topics",
+         "Getting started, seeds and harvest, farmland, accelerators, tools, crops by tier"
+        ],
+        [
+         "Free copy",
+         "Every player gets one, once, when they join"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "The guide's numbers and crop list always match the installed version of the add-on."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Essence Guide",
+        "icon": "img/icons/essence_guide.png",
+        "href": "wiki/guide/essence-guide",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Book",
+          "icon": "img/vanilla/book.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      }
+     ],
+     "href": "wiki/guide/essence-guide"
     }
    ]
   },
@@ -7440,6 +7508,39 @@
  "recipes": [
   {
    "result": {
+    "name": "Essence Guide",
+    "icon": "img/icons/essence_guide.png",
+    "href": "wiki/guide/essence-guide",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Book",
+      "icon": "img/vanilla/book.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
     "name": "Aqua Essence",
     "icon": "img/icons/aqua_essence.png",
     "href": "wiki/essence/aqua-essence",
@@ -11939,7 +12040,7 @@
    ]
   },
   {
-   "title": "Tools",
+   "title": "Tools and guide",
    "items": [
     {
      "name": "Essence Sickle",
@@ -11950,6 +12051,11 @@
      "name": "Essence Hoe",
      "icon": "img/icons/essence_hoe.png",
      "href": "wiki/tools/essence-hoe"
+    },
+    {
+     "name": "Essence Guide",
+     "icon": "img/icons/essence_guide.png",
+     "href": "wiki/guide/essence-guide"
     }
    ]
   },
