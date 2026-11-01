@@ -301,11 +301,12 @@ const cropCategories = cfg.tiers
 // Vita and each tier share one layout: their ingots, gemstones, nuggets and storage blocks.
 const nine = (x) => [[x, x, x], [x, x, x], [x, x, x]];
 const plus = (a, b) => [[null, a, null], [a, b, a], [null, a, null]];
-const materialEntry = (id, name, makeIngot, makeGem, source) => ({
+const materialEntry = (id, name, makeIngot, makeGem, source, extra = []) => ({
   slug: slug(id), name: `${name} materials`, icon: `img/icons/${id}_ingot.png`,
   summary: `${name} ingots, gemstones and storage blocks.`,
   blocks: [
     p(source),
+    ...extra,
     h2(`${name} Ingot`), makeIngot,
     h2(`${name} Gemstone`), makeGem,
     h2("Storage"),
@@ -335,7 +336,8 @@ const materials = {
     materialEntry("vita", "Vita",
       recipe(matItem("vita_ingot"), 1, plus(matItem("vita_shard"), vanilla("minecraft:iron_ingot"))),
       recipe(matItem("vita_gemstone"), 1, plus(matItem("vita_shard"), vanilla("minecraft:diamond"))),
-      "Made from the Vita Shards that Vita Ore drops. Every tier's ingot and gemstone starts from these."),
+      "Made from Vita Shards, which drop from Vita Ore or craft from Terra Blocks. Every tier's ingot and gemstone starts from these.",
+      [h2("Vita Shard"), recipe(matItem("vita_shard"), 4, plus(matItem("terra_block"), vanilla("minecraft:flint")))]),
     materialEntry("anima", "Anima",
       recipe(matItem("anima_ingot"), 1, shapelessGrid(matItem("vita_ingot"), { name: "Anima Dust", icon: "img/icons/anima_dust.png" }), "Shapeless: any slots"),
       recipe(matItem("anima_gemstone"), 1, shapelessGrid(matItem("vita_gemstone"), { name: "Anima Dust", icon: "img/icons/anima_dust.png" }), "Shapeless: any slots"),

@@ -4,6 +4,11 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Vita Shards without ore (v0.15.0)
+
+- [ ] 4 Terra Blocks in a plus around a flint makes 4 Vita Shards, and the recipe unlocks once you hold a Terra Block.
+- [ ] The Guide's Materials page mentions the recipe.
+
 ## Altar recipes in the Guide (v0.14.1)
 
 - [ ] The Guide has an Altar Recipes page for each tier and for daggers, and the longest ones scroll.
