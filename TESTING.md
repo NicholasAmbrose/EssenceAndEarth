@@ -4,6 +4,22 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Ores and materials (v0.12.0)
+
+- [ ] **Check this first:** the add-on loads with no script errors or content log errors about features.
+- [ ] New chunks have Essence Ore between y -32 and 64, and Vita Ore between y -60 and 24, each in stone and deepslate. Veins are about 8 blocks.
+- [ ] Essence Ore drops 2–4 Terra Essence, and Vita Ore drops 1–4 Vita Shards. Old ore in the world keeps working.
+- [ ] Most mobs drop Terra Essence about 20% of the time. Slimes, magma cubes, ghasts, phantoms and players never do.
+- [ ] Mob essence that lands on farmland doesn't cause extra drops, and neither does ore essence.
+- [ ] 4 shards + iron ingot makes a Vita Ingot, and 4 shards + diamond makes a Vita Gemstone.
+- [ ] Vita Ingot + 2 tier essence makes that tier's ingot, in any slots, and the same for gemstones.
+- [ ] Nuggets, ingot blocks, gemstone blocks, essence blocks and the Vita Block all craft both ways. Blocks show their textures and names.
+- [ ] 1 tier essence breaks back into 4 of the tier below.
+- [ ] Each accelerator crafts from 4 essence, 4 stone and 1 gemstone, and makes 3.
+- [ ] About 10% of ripe resource crops drop Fertilized Essence. The Terra crop never does.
+- [ ] Fertilized Essence advances an unripe crop 1 or 2 stages, or 2–5 on vanilla crops, and uses one. Essence Fertilizer ripens a crop and uses one. Neither is used on a ripe crop, and creative mode uses none.
+- [ ] Essence Fertilizer crafts from 4 Terra + 4 bone meal + diamond (makes 4), and 4 Terra + 4 Fertilized Essence + diamond (makes 8).
+
 ## Bedrock risk checks (v0.11.1)
 
 Nothing in the add-on uses these yet. They decide how the later gear and machine phases get built.
@@ -43,12 +59,6 @@ Still needs testing in-game:
 - [ ] The sickle and hoe still work, and the hoe's seed removal still takes one seed when a second seed drops.
 - [ ] A retired bone meal crop still grows, and its essence still crafts bone meal.
 - [ ] The Guide's pages and the wiki match what happens in-game.
-
-## Essence ore removed (v0.10.1)
-
-- [ ] Newly explored chunks have no essence ore.
-- [ ] Ore already in the world still shows properly and still drops Terra Essence when mined.
-- [ ] Getting the first 8 Terra Essence from grass and vanilla crops doesn't feel like too much of a grind.
 
 ## Terra crop (v0.10.0)
 
@@ -101,7 +111,6 @@ Still needs testing in-game:
 
 ## Growth accelerators (v0.6.0)
 
-- [ ] All 5 accelerators craft: 5 cobblestone + 4 Terra for the first, then 5 of the tier below + 4 of its essence.
 - [ ] Each shows the right name and tier colour, with white sparks around the roots.
 - [ ] Each drops itself when mined.
 

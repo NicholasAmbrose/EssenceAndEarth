@@ -35,10 +35,10 @@ for (const c of cfg.crops) {
   if (c.alt && (c.alt.shape ?? "ring") === (c.shape ?? "ring")) problems.push(`${c.id}: alt needs a different shape, or one recipe hides the other`);
 }
 const BAL = cfg.balance;
-for (const k of ["grassEssenceChance", "cropEssenceChance", "logEssenceChance", "secondaryChance", "matchingFarmlandChance", "farmlandRefundChance"])
+for (const k of ["grassEssenceChance", "cropEssenceChance", "logEssenceChance", "mobEssenceChance", "fertilizedEssenceChance", "secondaryChance", "matchingFarmlandChance", "farmlandRefundChance"])
   if (!(BAL[k] >= 0 && BAL[k] <= 1)) problems.push(`balance.${k} must be 0-1`);
 if (!(BAL.growChance > 0 && BAL.growChance <= 1)) problems.push("balance.growChance must be above 0, up to 1");
-for (const k of ["harvestEssence", "oreEssence"]) {
+for (const k of ["harvestEssence", "oreEssence", "vitaShards"]) {
   const [min, max] = BAL[k] ?? [];
   if (!(Number.isInteger(min) && Number.isInteger(max) && min >= 1 && min <= max)) problems.push(`balance.${k} must be [min, max], whole numbers from 1`);
 }
@@ -63,7 +63,7 @@ function write(file, data) {
 // ---------- textures ----------
 // 16x16 masks, shaded automatically in the tint colour:
 //   # body (outlined, lit from the top-left)   * highlight   ~ shadow   + sparkle   : faint haze
-//   g/G/l stem green, dark green, leaf green   s stone   v vein   w white   . transparent
+//   g/G/l stem green, dark green, leaf green   s stone   d deepslate   v vein   w white   . transparent
 //   any key of the palette passed to render(): that exact colour, counted as body
 
 // Tier essence: a cut gem. Higher tiers get more sparkles around it.
@@ -228,6 +228,128 @@ const BOOK = [
   "................",
 ];
 
+const grid = (fn) => Array.from({ length: 16 }, (_, y) => Array.from({ length: 16 }, (_, x) => fn(x, y)).join(""));
+
+// Materials. Tier essence is already a cut gem, so the gemstone is a wide brilliant-cut stone.
+const INGOT = [
+  "................",
+  "................",
+  "................",
+  "................",
+  ".........####...",
+  ".......##****#..",
+  ".....##**####~#.",
+  "...##**#####~~#.",
+  ".##*#######~~#..",
+  ".#*######~~~##..",
+  ".#####~~~~##....",
+  "..###~~~##......",
+  "...###.#........",
+  "................",
+  "................",
+  "................",
+];
+const NUGGET = [
+  "................",
+  "................",
+  "................",
+  "................",
+  "................",
+  "......###.......",
+  ".....#***#......",
+  "....#*###~#.....",
+  "...##*###~##....",
+  "..#*#####~~~#...",
+  "..#*####~~~~#...",
+  "...##~~~~~~#....",
+  ".....#####......",
+  "................",
+  "................",
+  "................",
+];
+const GEMSTONE = [
+  "................",
+  "................",
+  "...##########...",
+  "..#**##**##~~#..",
+  ".#**##****##~~#.",
+  "#############~~#",
+  ".#**#*##**#~~~#.",
+  "..#*##*##*#~~#..",
+  "...#*#*##*#~#...",
+  "....#*#*##~#....",
+  ".....#*#*~#.....",
+  "......#*~#......",
+  ".......##.......",
+  "................",
+  "................",
+  "................",
+];
+const SHARD = [
+  "................",
+  "..........##....",
+  ".........#*#....",
+  "........#**#....",
+  ".......#**#~#...",
+  "......#**##~#...",
+  ".....#**###~#...",
+  "....#**###~#....",
+  "....#*###~~#....",
+  "...#*###~~#.....",
+  "...#*##~~#......",
+  "..#*##~~#.......",
+  "..#*#~~#........",
+  "..##~##.........",
+  "...##...........",
+  "................",
+];
+// Fertilized Essence is a glowing seed-pod; Essence Fertilizer is a full sack.
+const POD = [
+  "................",
+  ".......gg.......",
+  "......gGg.......",
+  ".......G..+.....",
+  "......###.......",
+  "..+..#***#......",
+  "....#*####~.....",
+  "....#*####~.....",
+  "....#*####~..+..",
+  "....##*##~~.....",
+  ".....##~~~......",
+  "......###.......",
+  "................",
+  "..+.......+.....",
+  "................",
+  "................",
+];
+const SACK = [
+  "................",
+  "......G..G......",
+  ".......GG.......",
+  "......####......",
+  ".....#*###~.....",
+  "....#*#####~....",
+  "...#*#######~...",
+  "...#*#ggg###~...",
+  "..#*##gGg####~..",
+  "..#*###g#####~..",
+  "..#*##gGg####~..",
+  "..##*#ggg###~~..",
+  "...##*#####~~...",
+  "....#########...",
+  "................",
+  "................",
+];
+// Storage blocks: a raw essence block, an ingot block with bands, and a gem block with facets.
+const ESSENCE_BLOCK = grid((x, y) => (x === 0 || y === 0 ? "*" : x === 15 || y === 15 ? "~" : (x + y) % 8 === 0 ? "*" : (x - y + 16) % 8 === 0 ? "~" : "b"));
+const INGOT_BLOCK = grid((x, y) => (y === 0 || x === 0 ? "*" : y === 15 || x === 15 ? "~" : y % 5 === 0 ? "~" : y % 5 === 1 ? "*" : "b"));
+const GEM_BLOCK = grid((x, y) => {
+  if (x === 0 || y === 0) return "*";
+  if (x === 15 || y === 15) return "~";
+  const d = Math.abs(x - 7.5) + Math.abs(y - 7.5);
+  return d < 3 ? "*" : d < 6 ? "b" : d < 7.5 ? "~" : "b";
+});
+
 const blank = (n) => Array(n).fill("................");
 const STEMS = [
   "..G..gg....G..g.",
@@ -269,6 +391,7 @@ const STAGES = [
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const shade = (rgb, f) => rgb.map((v) => Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)));
+const shadeHex = (h, f) => `#${shade(hex(h), f).map((v) => v.toString(16).padStart(2, "0")).join("")}`;
 const GREEN = { g: hex("#5aa83a"), G: hex("#3d7a28"), l: hex("#7cc44e") };
 const noise = (x, y, seed = 0) => {
   let h = (x * 374761393 + y * 668265263 + seed * 2246822519) >>> 0;
@@ -280,7 +403,6 @@ const soilTint = (c) => shade(c.map((v, i) => Math.round(v * 0.5 + [107, 74, 50]
 
 // Essence farmland: tinted tilled soil. The top has long furrows (lit ridge, soil, groove) with the odd break;
 // the side is speckled soil under a tilled edge.
-const grid = (fn) => Array.from({ length: 16 }, (_, y) => Array.from({ length: 16 }, (_, x) => fn(x, y)).join(""));
 const FARMLAND_TOP = grid((x, y) => {
   const row = y % 4;
   if (row === 3) return noise(x, y, 8) < 0.2 ? "t" : "k";
@@ -309,6 +431,7 @@ function render(mask, color, palette = {}) {
       else if (ch in palette) rgb = hex(palette[ch]);
       else if (ch === ":") (rgb = shade(c, 0.2)), (alpha = 110);
       else if (ch === "s") rgb = Array(3).fill(105 + grain(x, y));
+      else if (ch === "d") rgb = Array(3).fill(55 + grain(x, y));
       else if (ch === "v") rgb = shade(c, (grain(x, y) - 20) / 150);
       else if (ch === "w") rgb = [255, 255, 255];
       else if (ch in GREEN) rgb = GREEN[ch];
@@ -444,10 +567,12 @@ const pct = (v) => `${+(v * 100).toFixed(1)}%`;
 const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
 const tierTitle = (t) => title(t.id);
 const GUIDE_PAGES = [
-  { title: "Getting Started", body: `${tierTitle(cfg.tiers[0])} Essence drops now and then from grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nOnce you have a little, plant the ${tierTitle(cfg.tiers[0])} crop for a steady supply.\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
+  { title: "Getting Started", body: `Mine Essence Ore underground, between y -32 and 64, for ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence each. It also drops from most mobs (${pct(BAL.mobEssenceChance)}), grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nOnce you have a little, plant the ${tierTitle(cfg.tiers[0])} crop for a steady supply.\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
   { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds grow on any farmland, but give extras only on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly, and more on higher tiers of farmland.\n\nEach crop's essence crafts its resource. Common resources use a ring of 8 or a row of 3 and make a lot. Rare ones take a full grid of 9 and make 1. The wiki lists every recipe.\n\nBone meal doesn't work on these crops.` },
   { title: "Essence Farmland", body: `Use tier essence on farmland to turn it into that tier, or craft 1 dirt + 1 tier essence. It never dries out and needs no water.\n\nOn any essence farmland, a ripe crop has a ${pct(BAL.secondaryChance)} chance of a second essence and of a second seed. Farmland matching the crop's tier raises each to ${pct(BAL.secondaryChance + BAL.matchingFarmlandChance)}.\n\nUsing a different tier's essence swaps the farmland, with a ${pct(BAL.farmlandRefundChance)} chance of getting one of the old essence back.` },
-  { title: "Growth Accelerators", body: `Place below a crop to give it an extra growth chance about every ${BAL.acceleratorSeconds} seconds. Each one works on its own, so more means faster.\n\nThey work through other blocks, on the first crop above them. The block directly above an accelerator is skipped, because that's where the farmland goes.\n\nReach by tier:\n${cfg.tiers.map((t, i) => `${tierTitle(t)}: ${BAL.acceleratorRange[i]} blocks`).join("\n")}\n\n5 cobblestone + 4 ${tierTitle(cfg.tiers[0])} Essence make the first. Each later tier takes 5 of the tier below + 4 of its essence.` },
+  { title: "Growth Accelerators", body: `Place below a crop to give it an extra growth chance about every ${BAL.acceleratorSeconds} seconds. Each one works on its own, so more means faster.\n\nThey work through other blocks, on the first crop above them. The block directly above an accelerator is skipped, because that's where the farmland goes.\n\nReach by tier:\n${cfg.tiers.map((t, i) => `${tierTitle(t)}: ${BAL.acceleratorRange[i]} blocks`).join("\n")}\n\n4 tier essence, 4 stone and 1 tier gemstone make ${BAL.acceleratorYield}.` },
+  { title: "Materials", body: `Vita Ore, between y -60 and 24, drops ${range(BAL.vitaShards)} Vita Shards.\n\n4 shards around an iron ingot make a Vita Ingot, and around a diamond a Vita Gemstone. Add 2 tier essence to either for that tier's version.\n\nNine of anything stores in a block, and ingots break down into 9 nuggets.` },
+  { title: "Fertilizer", body: `Ripe crops have a ${pct(BAL.fertilizedEssenceChance)} chance of dropping Fertilized Essence, which advances a crop a stage or two.\n\nEssence Fertilizer ripens a crop at once. 4 Terra Essence, 4 bone meal and a diamond make 4, or use Fertilized Essence instead of bone meal to make 8.` },
   { title: "Tools", body: `Essence Sickle: break a ripe crop to harvest every ripe crop in the 3x3 around it. It won't break unripe crops.\n\nEssence Hoe: right-click a ripe crop to harvest and replant it. The replant takes one seed from the drops.\n\nBoth last ${BAL.toolDurability} uses and repair with ${tierTitle(cfg.tiers[1])} Essence in an anvil.` },
   { title: "Crops by Tier", body: `${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
 ];
@@ -481,8 +606,8 @@ function item(id, mask, color, components = {}, palette) {
   });
 }
 
-function blockTexture(id, mask, color) {
-  texture(`textures/blocks/${id}`, mask, color);
+function blockTexture(id, mask, color, palette) {
+  texture(`textures/blocks/${id}`, mask, color, palette);
   terrain[`${NS}_${id}`] = { textures: `textures/blocks/${id}` };
 }
 
@@ -513,12 +638,14 @@ function recipe(id, type, body, unlock) {
   });
 }
 
-// Essence tiers: 4 of the previous tier make 1 of the next.
+// Essence tiers: 4 of the previous tier make 1 of the next, and 1 breaks back down into 4.
 const tierEssence = (n) => `${NS}:${cfg.tiers[n - 1].id}_essence`;
 cfg.tiers.forEach((t, i) => {
   item(`${t.id}_essence`, withSparkles(GEM, i), t.color);
   if (i > 0)
     recipe(`${t.id}_essence`, "shapeless", { ingredients: [{ item: tierEssence(i), count: 4 }], result: { item: tierEssence(i + 1) } }, tierEssence(i));
+  if (i > 0)
+    recipe(`${t.id}_essence_uncraft`, "shapeless", { ingredients: [{ item: tierEssence(i + 1) }], result: { item: tierEssence(i), count: 4 } }, tierEssence(i + 1));
 });
 
 // Essence farmland: never dries out, and gives ripe crops a chance of extras (see scripts/main.js).
@@ -542,7 +669,7 @@ cfg.tiers.forEach((t, i) => {
 });
 
 // Growth accelerators: each gives the first crop above it an extra growth roll on a timer (see scripts/main.js).
-// 5 cobblestone + 4 Terra make 1 Terra accelerator; 5 of the tier below + 4 of its essence make 1 of each later tier.
+// 4 essence, 4 stone and 1 gemstone of a tier make 3.
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_accelerator`;
   blockTexture(id, ACCELERATOR, t.color);
@@ -556,8 +683,8 @@ cfg.tiers.forEach((t, i) => {
     [`${NS}:accelerator`]: {},
   });
   recipe(id, "shaped", {
-    pattern: ["BEB", "EBE", "BEB"],
-    key: { B: { item: i ? `${NS}:${cfg.tiers[i - 1].id}_accelerator` : "minecraft:cobblestone" }, E: { item: tierEssence(i + 1) } },
+    pattern: ["ESE", "SGS", "ESE"],
+    key: { E: { item: tierEssence(i + 1) }, S: { item: "minecraft:stone" }, G: { item: `${NS}:${t.id}_gemstone` } },
     result: { item: `${NS}:${id}`, count: BAL.acceleratorYield },
   }, tierEssence(i + 1));
 });
@@ -582,15 +709,91 @@ for (const [id, mask, pattern] of [
 item("essence_guide", BOOK, cfg.tiers[0].color, { "minecraft:max_stack_size": 1 }, { c: cfg.tiers[0].color, d: "#2f6e20", g: "#dff5d4", p: "#efe9d8" });
 recipe("essence_guide", "shapeless", { ingredients: [{ item: "minecraft:book" }, { item: tierEssence(1) }], result: { item: `${NS}:essence_guide` } }, tierEssence(1));
 
-// Essence ore: no longer generates, but the block stays so veins already in worlds don't become unknown blocks.
-blockTexture("essence_ore", ORE, cfg.tiers[0].color);
-block("essence_ore", "stone", { menu_category: { category: "none" } }, {
-  "minecraft:display_name": "Essence Ore",
-  "minecraft:geometry": "minecraft:geometry.full_block",
-  "minecraft:destructible_by_mining": { seconds_to_destroy: 3 },
-  "minecraft:material_instances": { "*": { texture: `${NS}_essence_ore` } },
-  "minecraft:loot": loot("essence_ore", [drop(tierEssence(1), ...BAL.oreEssence)]),
+// Ores: each has stone and deepslate versions, in one vein feature that replaces whichever rock it's generating in.
+const STONES = ["minecraft:stone", "minecraft:granite", "minecraft:diorite", "minecraft:andesite"];
+const DEEPSLATES = ["minecraft:deepslate", "minecraft:tuff"];
+const DEEPSLATE_ORE = ORE.map((row) => row.replaceAll("s", "d"));
+function ore(id, name, color, [min, max], item, veins, [low, high]) {
+  for (const [variant, mask, label, seconds] of [[id, ORE, name, 3], [`deepslate_${id}`, DEEPSLATE_ORE, `Deepslate ${name}`, 4.5]]) {
+    blockTexture(variant, mask, color);
+    block(variant, variant === id ? "stone" : "deepslate", { menu_category: { category: "nature" } }, {
+      "minecraft:display_name": label,
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:destructible_by_mining": { seconds_to_destroy: seconds },
+      "minecraft:material_instances": { "*": { texture: `${NS}_${variant}` } },
+      "minecraft:loot": loot(variant, [drop(item, min, max)]),
+    });
+  }
+  write(path.join(BP, "features", `${id}_feature.json`), {
+    format_version: "1.13.0",
+    "minecraft:ore_feature": {
+      description: { identifier: `${NS}:${id}_feature` },
+      count: 8,
+      replace_rules: [{ places_block: `${NS}:${id}`, may_replace: STONES }, { places_block: `${NS}:deepslate_${id}`, may_replace: DEEPSLATES }],
+    },
+  });
+  write(path.join(BP, "feature_rules", `${id}_rule.json`), {
+    format_version: "1.13.0",
+    "minecraft:feature_rules": {
+      description: { identifier: `${NS}:${id}_rule`, places_feature: `${NS}:${id}_feature` },
+      conditions: { placement_pass: "underground_pass", "minecraft:biome_filter": [{ test: "has_biome_tag", operator: "==", value: "overworld" }] },
+      distribution: {
+        iterations: veins,
+        coordinate_eval_order: "zyx",
+        x: { distribution: "uniform", extent: [0, 16] },
+        y: { distribution: "uniform", extent: [low, high] },
+        z: { distribution: "uniform", extent: [0, 16] },
+      },
+    },
+  });
+}
+ore("essence_ore", "Essence Ore", cfg.tiers[0].color, BAL.oreEssence, tierEssence(1), 16, [-32, 64]);
+ore("vita_ore", "Vita Ore", cfg.vita.color, BAL.vitaShards, `${NS}:vita_shard`, 12, [-60, 24]);
+
+// Materials: a nugget, ingot and gemstone for Vita and each tier, and storage blocks of each.
+const packs = (id, into, unlock) => {
+  recipe(`${into}_craft`, "shaped", { pattern: ["###", "###", "###"], key: { "#": { item: `${NS}:${id}` } }, result: { item: `${NS}:${into}` } }, unlock ?? `${NS}:${id}`);
+  recipe(`${into}_uncraft`, "shapeless", { ingredients: [{ item: `${NS}:${into}` }], result: { item: `${NS}:${id}`, count: 9 } }, `${NS}:${into}`);
+};
+function storageBlock(id, name, mask, color, sound) {
+  blockTexture(id, mask, color, { b: shadeHex(color, 0.08) });
+  block(id, sound, { menu_category: { category: "construction" } }, {
+    "minecraft:display_name": name,
+    "minecraft:geometry": "minecraft:geometry.full_block",
+    "minecraft:destructible_by_mining": { seconds_to_destroy: 2.5 },
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}` } },
+    "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
+  });
+}
+function materials(id, color) {
+  item(`${id}_ingot`, INGOT, color);
+  item(`${id}_nugget`, NUGGET, color);
+  item(`${id}_gemstone`, GEMSTONE, color);
+  storageBlock(`${id}_ingot_block`, `${title(id)} Ingot Block`, INGOT_BLOCK, color, "metal");
+  storageBlock(`${id}_gemstone_block`, `${title(id)} Gemstone Block`, GEM_BLOCK, color, "metal");
+  packs(`${id}_nugget`, `${id}_ingot`);
+  packs(`${id}_ingot`, `${id}_ingot_block`);
+  packs(`${id}_gemstone`, `${id}_gemstone_block`);
+}
+item("vita_shard", SHARD, cfg.vita.color);
+materials("vita", cfg.vita.color);
+storageBlock("vita_block", "Vita Block", ESSENCE_BLOCK, cfg.vita.color, "stone");
+packs("vita_shard", "vita_block");
+for (const [out, center] of [["vita_ingot", "minecraft:iron_ingot"], ["vita_gemstone", "minecraft:diamond"]])
+  recipe(out, "shaped", { pattern: [" # ", "#X#", " # "], key: { "#": { item: `${NS}:vita_shard` }, X: { item: center } }, result: { item: `${NS}:${out}` } }, `${NS}:vita_shard`);
+cfg.tiers.forEach((t, i) => {
+  materials(t.id, t.color);
+  storageBlock(`${t.id}_block`, `${title(t.id)} Block`, ESSENCE_BLOCK, t.color, "stone");
+  packs(`${t.id}_essence`, `${t.id}_block`);
+  for (const kind of ["ingot", "gemstone"])
+    recipe(`${t.id}_${kind}`, "shapeless", { ingredients: [{ item: `${NS}:vita_${kind}` }, { item: tierEssence(i + 1), count: 2 }], result: { item: `${NS}:${t.id}_${kind}` } }, tierEssence(i + 1));
 });
+
+// Fertilizers: Fertilized Essence advances a crop a stage or two, and Essence Fertilizer ripens it (see scripts/main.js).
+item("fertilized_essence", POD, "#7cc44e");
+item("essence_fertilizer", SACK, "#b39a6b");
+for (const [id, side, count] of [["essence_fertilizer", "minecraft:bone_meal", 4], ["essence_fertilizer_better", `${NS}:fertilized_essence`, 8]])
+  recipe(id, "shaped", { pattern: ["E#E", "#D#", "E#E"], key: { E: { item: tierEssence(1) }, "#": { item: side }, D: { item: "minecraft:diamond" } }, result: { item: `${NS}:essence_fertilizer`, count } }, tierEssence(1));
 
 // Crops. Stages 0-2 share green textures; the ripe stage is tinted per crop.
 [0, 1, 2].forEach((s) => blockTexture(`crop_${s}`, STAGES[s]));
@@ -622,7 +825,7 @@ for (const c of cfg.crops) {
       components: {
         "minecraft:material_instances": cropMaterial(s < 3 ? `crop_${s}` : `${c.id}_crop`),
         // The second essence and seed depend on the farmland, so scripts/main.js rolls them.
-        ...(s === 3 && { "minecraft:loot": loot(`${c.id}_crop_ripe`, [drop(essence, ...BAL.harvestEssence), drop(seeds)]) }),
+        ...(s === 3 && { "minecraft:loot": loot(`${c.id}_crop_ripe`, [drop(essence, ...BAL.harvestEssence), drop(seeds), ...(c.essenceCrop ? [] : [drop(`${NS}:fertilized_essence`, 1, 1, BAL.fertilizedEssenceChance)])]) }),
       },
     })),
   );

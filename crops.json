@@ -1,7 +1,7 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 11, 1],
+  "version": [0, 12, 0],
   "balance": {
     "growChance": 0.43,
     "grassEssenceChance": 0.2,
@@ -11,12 +11,15 @@
     "secondaryChance": 0.1,
     "matchingFarmlandChance": 0.1,
     "terraCropYield": [1, 1.5, 2, 2.5, 3],
-    "oreEssence": [1, 3],
+    "oreEssence": [2, 4],
+    "vitaShards": [1, 4],
+    "mobEssenceChance": 0.2,
+    "fertilizedEssenceChance": 0.1,
     "farmlandYield": 1,
     "farmlandRefundChance": 0.25,
     "acceleratorSeconds": 30,
     "acceleratorRange": [9, 18, 27, 36, 45],
-    "acceleratorYield": 1,
+    "acceleratorYield": 3,
     "toolDurability": 250
   },
   "shapes": {
@@ -25,6 +28,7 @@
     "row": ["EEE"],
     "square": ["EE", "EE"]
   },
+  "vita": { "color": "#e0569a" },
   "tiers": [
     { "id": "terra", "color": "#5fbf3f" },
     { "id": "aqua", "color": "#3f8fdf" },

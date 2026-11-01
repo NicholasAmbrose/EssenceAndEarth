@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.11.1",
-  "file": "EssenceAndEarth_v0.11.1.mcaddon",
+  "version": "0.12.0",
+  "file": "EssenceAndEarth_v0.12.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.11.1.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.12.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 28,
   "tiers": 5,
-  "items": 73,
-  "recipes": 74
+  "items": 116,
+  "recipes": 88
  },
  "categories": [
   {
@@ -37,11 +37,22 @@
       },
       {
        "t": "p",
-       "html": "Terra Essence drops now and then from grass and ripe vanilla crops. Once you have a little, the <a href=\"wiki/terra-crops/terra\">Terra crop</a> gives you a steady supply."
+       "html": "Mine <a href=\"wiki/materials/ores\">Essence Ore</a> underground, or collect Terra Essence from mobs, grass and ripe vanilla crops. Once you have a little, the <a href=\"wiki/terra-crops/terra\">Terra crop</a> gives you a steady supply."
       },
       {
        "t": "items",
        "items": [
+        {
+         "name": "Essence Ore",
+         "icon": "img/icons/essence_ore.png",
+         "href": "wiki/materials/ores",
+         "sub": "Underground, y -32 to 64: 2–4 each"
+        },
+        {
+         "name": "Mobs",
+         "icon": "img/vanilla/rotten_flesh.png",
+         "sub": "Most mobs: 20% chance"
+        },
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
@@ -261,6 +272,17 @@
       {
        "t": "items",
        "items": [
+        {
+         "name": "Essence Ore",
+         "icon": "img/icons/essence_ore.png",
+         "href": "wiki/materials/ores",
+         "sub": "Underground, y -32 to 64: 2–4 each"
+        },
+        {
+         "name": "Mobs",
+         "icon": "img/vanilla/rotten_flesh.png",
+         "sub": "Most mobs: 20% chance"
+        },
         {
          "name": "Short Grass",
          "icon": "img/vanilla/short_grass.png",
@@ -770,6 +792,973 @@
       }
      ],
      "href": "wiki/essence/astra-essence"
+    }
+   ]
+  },
+  {
+   "slug": "materials",
+   "title": "Ores and materials",
+   "group": "Getting started",
+   "icon": "img/icons/vita_ingot.png",
+   "blurb": "Ores, ingots, gemstones and fertilizer.",
+   "entries": [
+    {
+     "slug": "ores",
+     "name": "Ores",
+     "icon": "img/icons/essence_ore.png",
+     "summary": "Essence Ore and Vita Ore, in stone and deepslate.",
+     "blocks": [
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Essence Ore",
+         "icon": "img/icons/essence_ore.png",
+         "sub": "y -32 to 64. Drops 2–4 Terra Essence"
+        },
+        {
+         "name": "Deepslate Essence Ore",
+         "icon": "img/icons/deepslate_essence_ore.png",
+         "sub": "The same, in deepslate"
+        },
+        {
+         "name": "Vita Ore",
+         "icon": "img/icons/vita_ore.png",
+         "sub": "y -60 to 24. Drops 1–4 Vita Shards"
+        },
+        {
+         "name": "Deepslate Vita Ore",
+         "icon": "img/icons/deepslate_vita_ore.png",
+         "sub": "The same, in deepslate"
+        }
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Ore only generates in chunks explored after it was added."
+      }
+     ],
+     "href": "wiki/materials/ores"
+    },
+    {
+     "slug": "vita",
+     "name": "Vita materials",
+     "icon": "img/icons/vita_ingot.png",
+     "summary": "Vita ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Made from the Vita Shards that Vita Ore drops. Every tier's ingot and gemstone starts from these."
+      },
+      {
+       "t": "h2",
+       "text": "Vita Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Vita Ingot",
+        "icon": "img/icons/vita_ingot.png",
+        "href": "wiki/materials/vita",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Vita Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Vita Gemstone",
+        "icon": "img/icons/vita_gemstone.png",
+        "href": "wiki/materials/vita",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Vita Nugget",
+         "icon": "img/icons/vita_nugget.png",
+         "href": "wiki/materials/vita",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Vita Ingot Block",
+         "icon": "img/icons/vita_ingot_block.png",
+         "href": "wiki/materials/vita",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Vita Gemstone Block",
+         "icon": "img/icons/vita_gemstone_block.png",
+         "href": "wiki/materials/vita",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/vita"
+    },
+    {
+     "slug": "terra",
+     "name": "Terra materials",
+     "icon": "img/icons/terra_ingot.png",
+     "summary": "Terra ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Terra Essence. Nine Terra Essence also store in a Terra Block."
+      },
+      {
+       "t": "h2",
+       "text": "Terra Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Ingot",
+        "icon": "img/icons/terra_ingot.png",
+        "href": "wiki/materials/terra",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Terra Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Gemstone",
+        "icon": "img/icons/terra_gemstone.png",
+        "href": "wiki/materials/terra",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Terra Nugget",
+         "icon": "img/icons/terra_nugget.png",
+         "href": "wiki/materials/terra",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Terra Ingot Block",
+         "icon": "img/icons/terra_ingot_block.png",
+         "href": "wiki/materials/terra",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Terra Gemstone Block",
+         "icon": "img/icons/terra_gemstone_block.png",
+         "href": "wiki/materials/terra",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/terra"
+    },
+    {
+     "slug": "aqua",
+     "name": "Aqua materials",
+     "icon": "img/icons/aqua_ingot.png",
+     "summary": "Aqua ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Aqua Essence. Nine Aqua Essence also store in a Aqua Block."
+      },
+      {
+       "t": "h2",
+       "text": "Aqua Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Ingot",
+        "icon": "img/icons/aqua_ingot.png",
+        "href": "wiki/materials/aqua",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Aqua Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Gemstone",
+        "icon": "img/icons/aqua_gemstone.png",
+        "href": "wiki/materials/aqua",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Aqua Nugget",
+         "icon": "img/icons/aqua_nugget.png",
+         "href": "wiki/materials/aqua",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Aqua Ingot Block",
+         "icon": "img/icons/aqua_ingot_block.png",
+         "href": "wiki/materials/aqua",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Aqua Gemstone Block",
+         "icon": "img/icons/aqua_gemstone_block.png",
+         "href": "wiki/materials/aqua",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "slug": "ignis",
+     "name": "Ignis materials",
+     "icon": "img/icons/ignis_ingot.png",
+     "summary": "Ignis ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Ignis Essence. Nine Ignis Essence also store in a Ignis Block."
+      },
+      {
+       "t": "h2",
+       "text": "Ignis Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Ingot",
+        "icon": "img/icons/ignis_ingot.png",
+        "href": "wiki/materials/ignis",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Ignis Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Gemstone",
+        "icon": "img/icons/ignis_gemstone.png",
+        "href": "wiki/materials/ignis",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Ignis Nugget",
+         "icon": "img/icons/ignis_nugget.png",
+         "href": "wiki/materials/ignis",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Ignis Ingot Block",
+         "icon": "img/icons/ignis_ingot_block.png",
+         "href": "wiki/materials/ignis",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Ignis Gemstone Block",
+         "icon": "img/icons/ignis_gemstone_block.png",
+         "href": "wiki/materials/ignis",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "slug": "aether",
+     "name": "Aether materials",
+     "icon": "img/icons/aether_ingot.png",
+     "summary": "Aether ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Aether Essence. Nine Aether Essence also store in a Aether Block."
+      },
+      {
+       "t": "h2",
+       "text": "Aether Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Ingot",
+        "icon": "img/icons/aether_ingot.png",
+        "href": "wiki/materials/aether",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Aether Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Gemstone",
+        "icon": "img/icons/aether_gemstone.png",
+        "href": "wiki/materials/aether",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Aether Nugget",
+         "icon": "img/icons/aether_nugget.png",
+         "href": "wiki/materials/aether",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Aether Ingot Block",
+         "icon": "img/icons/aether_ingot_block.png",
+         "href": "wiki/materials/aether",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Aether Gemstone Block",
+         "icon": "img/icons/aether_gemstone_block.png",
+         "href": "wiki/materials/aether",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/aether"
+    },
+    {
+     "slug": "astra",
+     "name": "Astra materials",
+     "icon": "img/icons/astra_ingot.png",
+     "summary": "Astra ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Astra Essence. Nine Astra Essence also store in a Astra Block."
+      },
+      {
+       "t": "h2",
+       "text": "Astra Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Ingot",
+        "icon": "img/icons/astra_ingot.png",
+        "href": "wiki/materials/astra",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Astra Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Gemstone",
+        "icon": "img/icons/astra_gemstone.png",
+        "href": "wiki/materials/astra",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Astra Nugget",
+         "icon": "img/icons/astra_nugget.png",
+         "href": "wiki/materials/astra",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Astra Ingot Block",
+         "icon": "img/icons/astra_ingot_block.png",
+         "href": "wiki/materials/astra",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Astra Gemstone Block",
+         "icon": "img/icons/astra_gemstone_block.png",
+         "href": "wiki/materials/astra",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/astra"
+    },
+    {
+     "slug": "fertilizer",
+     "name": "Fertilizer",
+     "icon": "img/icons/essence_fertilizer.png",
+     "summary": "Speed up one crop at a time.",
+     "blocks": [
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Fertilized Essence",
+         "icon": "img/icons/fertilized_essence.png",
+         "href": "wiki/materials/fertilizer",
+         "sub": "10% chance from ripe crops. Advances a crop a stage or two"
+        },
+        {
+         "name": "Essence Fertilizer",
+         "icon": "img/icons/essence_fertilizer.png",
+         "href": "wiki/materials/fertilizer",
+         "sub": "Ripens a crop at once"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Essence Fertilizer"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Essence Fertilizer",
+        "icon": "img/icons/essence_fertilizer.png",
+        "href": "wiki/materials/fertilizer",
+        "count": 4
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Bone Meal",
+          "icon": "img/vanilla/bone_meal.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Bone Meal",
+          "icon": "img/vanilla/bone_meal.png"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Bone Meal",
+          "icon": "img/vanilla/bone_meal.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Bone Meal",
+          "icon": "img/vanilla/bone_meal.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Better recipe"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Essence Fertilizer",
+        "icon": "img/icons/essence_fertilizer.png",
+        "href": "wiki/materials/fertilizer",
+        "count": 8
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Fertilized Essence",
+          "icon": "img/icons/fertilized_essence.png",
+          "href": "wiki/materials/fertilizer"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Fertilized Essence",
+          "icon": "img/icons/fertilized_essence.png",
+          "href": "wiki/materials/fertilizer"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Fertilized Essence",
+          "icon": "img/icons/fertilized_essence.png",
+          "href": "wiki/materials/fertilizer"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Fertilized Essence",
+          "icon": "img/icons/fertilized_essence.png",
+          "href": "wiki/materials/fertilizer"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/materials/fertilizer"
     }
    ]
   },
@@ -1295,7 +2284,7 @@
       },
       {
        "t": "p",
-       "html": "Five cobblestone and four Terra Essence make 1."
+       "html": "Four Terra Essence, four stone and one Terra Gemstone make 3."
       },
       {
        "t": "grid",
@@ -1303,33 +2292,18 @@
         "name": "Terra Growth Accelerator",
         "icon": "img/icons/terra_accelerator.png",
         "href": "wiki/accelerators/terra-accelerator",
-        "count": 1
+        "count": 3
        },
        "rows": [
         [
          {
-          "name": "Cobblestone",
-          "icon": "img/vanilla/cobblestone.png"
-         },
-         {
           "name": "Terra Essence",
           "icon": "img/icons/terra_essence.png",
           "href": "wiki/essence/terra-essence"
          },
          {
-          "name": "Cobblestone",
-          "icon": "img/vanilla/cobblestone.png"
-         }
-        ],
-        [
-         {
-          "name": "Terra Essence",
-          "icon": "img/icons/terra_essence.png",
-          "href": "wiki/essence/terra-essence"
-         },
-         {
-          "name": "Cobblestone",
-          "icon": "img/vanilla/cobblestone.png"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
          {
           "name": "Terra Essence",
@@ -1339,17 +2313,33 @@
         ],
         [
          {
-          "name": "Cobblestone",
-          "icon": "img/vanilla/cobblestone.png"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
+         {
+          "name": "Terra Gemstone",
+          "icon": "img/icons/terra_gemstone.png",
+          "href": "wiki/materials/terra"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ],
+        [
          {
           "name": "Terra Essence",
           "icon": "img/icons/terra_essence.png",
           "href": "wiki/essence/terra-essence"
          },
          {
-          "name": "Cobblestone",
-          "icon": "img/vanilla/cobblestone.png"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
          }
         ]
        ]
@@ -1408,7 +2398,7 @@
       },
       {
        "t": "p",
-       "html": "Five Terra Growth Accelerators and four Aqua Essence make 1."
+       "html": "Four Aqua Essence, four stone and one Aqua Gemstone make 3."
       },
       {
        "t": "grid",
@@ -1416,36 +2406,18 @@
         "name": "Aqua Growth Accelerator",
         "icon": "img/icons/aqua_accelerator.png",
         "href": "wiki/accelerators/aqua-accelerator",
-        "count": 1
+        "count": 3
        },
        "rows": [
         [
          {
-          "name": "Terra Growth Accelerator",
-          "icon": "img/icons/terra_accelerator.png",
-          "href": "wiki/accelerators/terra-accelerator"
-         },
-         {
           "name": "Aqua Essence",
           "icon": "img/icons/aqua_essence.png",
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Terra Growth Accelerator",
-          "icon": "img/icons/terra_accelerator.png",
-          "href": "wiki/accelerators/terra-accelerator"
-         }
-        ],
-        [
-         {
-          "name": "Aqua Essence",
-          "icon": "img/icons/aqua_essence.png",
-          "href": "wiki/essence/aqua-essence"
-         },
-         {
-          "name": "Terra Growth Accelerator",
-          "icon": "img/icons/terra_accelerator.png",
-          "href": "wiki/accelerators/terra-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
          {
           "name": "Aqua Essence",
@@ -1455,19 +2427,33 @@
         ],
         [
          {
-          "name": "Terra Growth Accelerator",
-          "icon": "img/icons/terra_accelerator.png",
-          "href": "wiki/accelerators/terra-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
+         {
+          "name": "Aqua Gemstone",
+          "icon": "img/icons/aqua_gemstone.png",
+          "href": "wiki/materials/aqua"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ],
+        [
          {
           "name": "Aqua Essence",
           "icon": "img/icons/aqua_essence.png",
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Terra Growth Accelerator",
-          "icon": "img/icons/terra_accelerator.png",
-          "href": "wiki/accelerators/terra-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
          }
         ]
        ]
@@ -1526,7 +2512,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aqua Growth Accelerators and four Ignis Essence make 1."
+       "html": "Four Ignis Essence, four stone and one Ignis Gemstone make 3."
       },
       {
        "t": "grid",
@@ -1534,36 +2520,18 @@
         "name": "Ignis Growth Accelerator",
         "icon": "img/icons/ignis_accelerator.png",
         "href": "wiki/accelerators/ignis-accelerator",
-        "count": 1
+        "count": 3
        },
        "rows": [
         [
          {
-          "name": "Aqua Growth Accelerator",
-          "icon": "img/icons/aqua_accelerator.png",
-          "href": "wiki/accelerators/aqua-accelerator"
-         },
-         {
           "name": "Ignis Essence",
           "icon": "img/icons/ignis_essence.png",
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Aqua Growth Accelerator",
-          "icon": "img/icons/aqua_accelerator.png",
-          "href": "wiki/accelerators/aqua-accelerator"
-         }
-        ],
-        [
-         {
-          "name": "Ignis Essence",
-          "icon": "img/icons/ignis_essence.png",
-          "href": "wiki/essence/ignis-essence"
-         },
-         {
-          "name": "Aqua Growth Accelerator",
-          "icon": "img/icons/aqua_accelerator.png",
-          "href": "wiki/accelerators/aqua-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
          {
           "name": "Ignis Essence",
@@ -1573,19 +2541,33 @@
         ],
         [
          {
-          "name": "Aqua Growth Accelerator",
-          "icon": "img/icons/aqua_accelerator.png",
-          "href": "wiki/accelerators/aqua-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
+         {
+          "name": "Ignis Gemstone",
+          "icon": "img/icons/ignis_gemstone.png",
+          "href": "wiki/materials/ignis"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ],
+        [
          {
           "name": "Ignis Essence",
           "icon": "img/icons/ignis_essence.png",
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Aqua Growth Accelerator",
-          "icon": "img/icons/aqua_accelerator.png",
-          "href": "wiki/accelerators/aqua-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
          }
         ]
        ]
@@ -1644,7 +2626,7 @@
       },
       {
        "t": "p",
-       "html": "Five Ignis Growth Accelerators and four Aether Essence make 1."
+       "html": "Four Aether Essence, four stone and one Aether Gemstone make 3."
       },
       {
        "t": "grid",
@@ -1652,36 +2634,18 @@
         "name": "Aether Growth Accelerator",
         "icon": "img/icons/aether_accelerator.png",
         "href": "wiki/accelerators/aether-accelerator",
-        "count": 1
+        "count": 3
        },
        "rows": [
         [
          {
-          "name": "Ignis Growth Accelerator",
-          "icon": "img/icons/ignis_accelerator.png",
-          "href": "wiki/accelerators/ignis-accelerator"
-         },
-         {
           "name": "Aether Essence",
           "icon": "img/icons/aether_essence.png",
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ignis Growth Accelerator",
-          "icon": "img/icons/ignis_accelerator.png",
-          "href": "wiki/accelerators/ignis-accelerator"
-         }
-        ],
-        [
-         {
-          "name": "Aether Essence",
-          "icon": "img/icons/aether_essence.png",
-          "href": "wiki/essence/aether-essence"
-         },
-         {
-          "name": "Ignis Growth Accelerator",
-          "icon": "img/icons/ignis_accelerator.png",
-          "href": "wiki/accelerators/ignis-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
          {
           "name": "Aether Essence",
@@ -1691,19 +2655,33 @@
         ],
         [
          {
-          "name": "Ignis Growth Accelerator",
-          "icon": "img/icons/ignis_accelerator.png",
-          "href": "wiki/accelerators/ignis-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
+         {
+          "name": "Aether Gemstone",
+          "icon": "img/icons/aether_gemstone.png",
+          "href": "wiki/materials/aether"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ],
+        [
          {
           "name": "Aether Essence",
           "icon": "img/icons/aether_essence.png",
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ignis Growth Accelerator",
-          "icon": "img/icons/ignis_accelerator.png",
-          "href": "wiki/accelerators/ignis-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
          }
         ]
        ]
@@ -1762,7 +2740,7 @@
       },
       {
        "t": "p",
-       "html": "Five Aether Growth Accelerators and four Astra Essence make 1."
+       "html": "Four Astra Essence, four stone and one Astra Gemstone make 3."
       },
       {
        "t": "grid",
@@ -1770,36 +2748,18 @@
         "name": "Astra Growth Accelerator",
         "icon": "img/icons/astra_accelerator.png",
         "href": "wiki/accelerators/astra-accelerator",
-        "count": 1
+        "count": 3
        },
        "rows": [
         [
          {
-          "name": "Aether Growth Accelerator",
-          "icon": "img/icons/aether_accelerator.png",
-          "href": "wiki/accelerators/aether-accelerator"
-         },
-         {
           "name": "Astra Essence",
           "icon": "img/icons/astra_essence.png",
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Aether Growth Accelerator",
-          "icon": "img/icons/aether_accelerator.png",
-          "href": "wiki/accelerators/aether-accelerator"
-         }
-        ],
-        [
-         {
-          "name": "Astra Essence",
-          "icon": "img/icons/astra_essence.png",
-          "href": "wiki/essence/astra-essence"
-         },
-         {
-          "name": "Aether Growth Accelerator",
-          "icon": "img/icons/aether_accelerator.png",
-          "href": "wiki/accelerators/aether-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
          {
           "name": "Astra Essence",
@@ -1809,19 +2769,33 @@
         ],
         [
          {
-          "name": "Aether Growth Accelerator",
-          "icon": "img/icons/aether_accelerator.png",
-          "href": "wiki/accelerators/aether-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
          },
+         {
+          "name": "Astra Gemstone",
+          "icon": "img/icons/astra_gemstone.png",
+          "href": "wiki/materials/astra"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ],
+        [
          {
           "name": "Astra Essence",
           "icon": "img/icons/astra_essence.png",
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Aether Growth Accelerator",
-          "icon": "img/icons/aether_accelerator.png",
-          "href": "wiki/accelerators/aether-accelerator"
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
          }
         ]
        ]
@@ -7796,33 +8770,18 @@
     "name": "Terra Growth Accelerator",
     "icon": "img/icons/terra_accelerator.png",
     "href": "wiki/accelerators/terra-accelerator",
-    "count": 1
+    "count": 3
    },
    "rows": [
     [
      {
-      "name": "Cobblestone",
-      "icon": "img/vanilla/cobblestone.png"
-     },
-     {
       "name": "Terra Essence",
       "icon": "img/icons/terra_essence.png",
       "href": "wiki/essence/terra-essence"
      },
      {
-      "name": "Cobblestone",
-      "icon": "img/vanilla/cobblestone.png"
-     }
-    ],
-    [
-     {
-      "name": "Terra Essence",
-      "icon": "img/icons/terra_essence.png",
-      "href": "wiki/essence/terra-essence"
-     },
-     {
-      "name": "Cobblestone",
-      "icon": "img/vanilla/cobblestone.png"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
      {
       "name": "Terra Essence",
@@ -7832,17 +8791,33 @@
     ],
     [
      {
-      "name": "Cobblestone",
-      "icon": "img/vanilla/cobblestone.png"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
+     {
+      "name": "Terra Gemstone",
+      "icon": "img/icons/terra_gemstone.png",
+      "href": "wiki/materials/terra"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ],
+    [
      {
       "name": "Terra Essence",
       "icon": "img/icons/terra_essence.png",
       "href": "wiki/essence/terra-essence"
      },
      {
-      "name": "Cobblestone",
-      "icon": "img/vanilla/cobblestone.png"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
      }
     ]
    ]
@@ -7852,36 +8827,18 @@
     "name": "Aqua Growth Accelerator",
     "icon": "img/icons/aqua_accelerator.png",
     "href": "wiki/accelerators/aqua-accelerator",
-    "count": 1
+    "count": 3
    },
    "rows": [
     [
      {
-      "name": "Terra Growth Accelerator",
-      "icon": "img/icons/terra_accelerator.png",
-      "href": "wiki/accelerators/terra-accelerator"
-     },
-     {
       "name": "Aqua Essence",
       "icon": "img/icons/aqua_essence.png",
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Terra Growth Accelerator",
-      "icon": "img/icons/terra_accelerator.png",
-      "href": "wiki/accelerators/terra-accelerator"
-     }
-    ],
-    [
-     {
-      "name": "Aqua Essence",
-      "icon": "img/icons/aqua_essence.png",
-      "href": "wiki/essence/aqua-essence"
-     },
-     {
-      "name": "Terra Growth Accelerator",
-      "icon": "img/icons/terra_accelerator.png",
-      "href": "wiki/accelerators/terra-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
      {
       "name": "Aqua Essence",
@@ -7891,19 +8848,33 @@
     ],
     [
      {
-      "name": "Terra Growth Accelerator",
-      "icon": "img/icons/terra_accelerator.png",
-      "href": "wiki/accelerators/terra-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
+     {
+      "name": "Aqua Gemstone",
+      "icon": "img/icons/aqua_gemstone.png",
+      "href": "wiki/materials/aqua"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ],
+    [
      {
       "name": "Aqua Essence",
       "icon": "img/icons/aqua_essence.png",
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Terra Growth Accelerator",
-      "icon": "img/icons/terra_accelerator.png",
-      "href": "wiki/accelerators/terra-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
      }
     ]
    ]
@@ -7913,36 +8884,18 @@
     "name": "Ignis Growth Accelerator",
     "icon": "img/icons/ignis_accelerator.png",
     "href": "wiki/accelerators/ignis-accelerator",
-    "count": 1
+    "count": 3
    },
    "rows": [
     [
      {
-      "name": "Aqua Growth Accelerator",
-      "icon": "img/icons/aqua_accelerator.png",
-      "href": "wiki/accelerators/aqua-accelerator"
-     },
-     {
       "name": "Ignis Essence",
       "icon": "img/icons/ignis_essence.png",
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Aqua Growth Accelerator",
-      "icon": "img/icons/aqua_accelerator.png",
-      "href": "wiki/accelerators/aqua-accelerator"
-     }
-    ],
-    [
-     {
-      "name": "Ignis Essence",
-      "icon": "img/icons/ignis_essence.png",
-      "href": "wiki/essence/ignis-essence"
-     },
-     {
-      "name": "Aqua Growth Accelerator",
-      "icon": "img/icons/aqua_accelerator.png",
-      "href": "wiki/accelerators/aqua-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
      {
       "name": "Ignis Essence",
@@ -7952,19 +8905,33 @@
     ],
     [
      {
-      "name": "Aqua Growth Accelerator",
-      "icon": "img/icons/aqua_accelerator.png",
-      "href": "wiki/accelerators/aqua-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
+     {
+      "name": "Ignis Gemstone",
+      "icon": "img/icons/ignis_gemstone.png",
+      "href": "wiki/materials/ignis"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ],
+    [
      {
       "name": "Ignis Essence",
       "icon": "img/icons/ignis_essence.png",
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Aqua Growth Accelerator",
-      "icon": "img/icons/aqua_accelerator.png",
-      "href": "wiki/accelerators/aqua-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
      }
     ]
    ]
@@ -7974,36 +8941,18 @@
     "name": "Aether Growth Accelerator",
     "icon": "img/icons/aether_accelerator.png",
     "href": "wiki/accelerators/aether-accelerator",
-    "count": 1
+    "count": 3
    },
    "rows": [
     [
      {
-      "name": "Ignis Growth Accelerator",
-      "icon": "img/icons/ignis_accelerator.png",
-      "href": "wiki/accelerators/ignis-accelerator"
-     },
-     {
       "name": "Aether Essence",
       "icon": "img/icons/aether_essence.png",
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ignis Growth Accelerator",
-      "icon": "img/icons/ignis_accelerator.png",
-      "href": "wiki/accelerators/ignis-accelerator"
-     }
-    ],
-    [
-     {
-      "name": "Aether Essence",
-      "icon": "img/icons/aether_essence.png",
-      "href": "wiki/essence/aether-essence"
-     },
-     {
-      "name": "Ignis Growth Accelerator",
-      "icon": "img/icons/ignis_accelerator.png",
-      "href": "wiki/accelerators/ignis-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
      {
       "name": "Aether Essence",
@@ -8013,19 +8962,33 @@
     ],
     [
      {
-      "name": "Ignis Growth Accelerator",
-      "icon": "img/icons/ignis_accelerator.png",
-      "href": "wiki/accelerators/ignis-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
+     {
+      "name": "Aether Gemstone",
+      "icon": "img/icons/aether_gemstone.png",
+      "href": "wiki/materials/aether"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ],
+    [
      {
       "name": "Aether Essence",
       "icon": "img/icons/aether_essence.png",
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ignis Growth Accelerator",
-      "icon": "img/icons/ignis_accelerator.png",
-      "href": "wiki/accelerators/ignis-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
      }
     ]
    ]
@@ -8035,36 +8998,18 @@
     "name": "Astra Growth Accelerator",
     "icon": "img/icons/astra_accelerator.png",
     "href": "wiki/accelerators/astra-accelerator",
-    "count": 1
+    "count": 3
    },
    "rows": [
     [
      {
-      "name": "Aether Growth Accelerator",
-      "icon": "img/icons/aether_accelerator.png",
-      "href": "wiki/accelerators/aether-accelerator"
-     },
-     {
       "name": "Astra Essence",
       "icon": "img/icons/astra_essence.png",
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Aether Growth Accelerator",
-      "icon": "img/icons/aether_accelerator.png",
-      "href": "wiki/accelerators/aether-accelerator"
-     }
-    ],
-    [
-     {
-      "name": "Astra Essence",
-      "icon": "img/icons/astra_essence.png",
-      "href": "wiki/essence/astra-essence"
-     },
-     {
-      "name": "Aether Growth Accelerator",
-      "icon": "img/icons/aether_accelerator.png",
-      "href": "wiki/accelerators/aether-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
      {
       "name": "Astra Essence",
@@ -8074,19 +9019,33 @@
     ],
     [
      {
-      "name": "Aether Growth Accelerator",
-      "icon": "img/icons/aether_accelerator.png",
-      "href": "wiki/accelerators/aether-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
      },
+     {
+      "name": "Astra Gemstone",
+      "icon": "img/icons/astra_gemstone.png",
+      "href": "wiki/materials/astra"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ],
+    [
      {
       "name": "Astra Essence",
       "icon": "img/icons/astra_essence.png",
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Aether Growth Accelerator",
-      "icon": "img/icons/aether_accelerator.png",
-      "href": "wiki/accelerators/aether-accelerator"
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
      }
     ]
    ]
@@ -11237,6 +12196,590 @@
     ]
    ],
    "note": "Full grid of 9"
+  },
+  {
+   "result": {
+    "name": "Vita Ingot",
+    "icon": "img/icons/vita_ingot.png",
+    "href": "wiki/materials/vita",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Vita Gemstone",
+    "icon": "img/icons/vita_gemstone.png",
+    "href": "wiki/materials/vita",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Terra Ingot",
+    "icon": "img/icons/terra_ingot.png",
+    "href": "wiki/materials/terra",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Terra Gemstone",
+    "icon": "img/icons/terra_gemstone.png",
+    "href": "wiki/materials/terra",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Aqua Ingot",
+    "icon": "img/icons/aqua_ingot.png",
+    "href": "wiki/materials/aqua",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Aqua Gemstone",
+    "icon": "img/icons/aqua_gemstone.png",
+    "href": "wiki/materials/aqua",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Ignis Ingot",
+    "icon": "img/icons/ignis_ingot.png",
+    "href": "wiki/materials/ignis",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Ignis Gemstone",
+    "icon": "img/icons/ignis_gemstone.png",
+    "href": "wiki/materials/ignis",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Aether Ingot",
+    "icon": "img/icons/aether_ingot.png",
+    "href": "wiki/materials/aether",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Aether Gemstone",
+    "icon": "img/icons/aether_gemstone.png",
+    "href": "wiki/materials/aether",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Astra Ingot",
+    "icon": "img/icons/astra_ingot.png",
+    "href": "wiki/materials/astra",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Astra Gemstone",
+    "icon": "img/icons/astra_gemstone.png",
+    "href": "wiki/materials/astra",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Essence Fertilizer",
+    "icon": "img/icons/essence_fertilizer.png",
+    "href": "wiki/materials/fertilizer",
+    "count": 4
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Bone Meal",
+      "icon": "img/vanilla/bone_meal.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Bone Meal",
+      "icon": "img/vanilla/bone_meal.png"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Bone Meal",
+      "icon": "img/vanilla/bone_meal.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Bone Meal",
+      "icon": "img/vanilla/bone_meal.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Essence Fertilizer",
+    "icon": "img/icons/essence_fertilizer.png",
+    "href": "wiki/materials/fertilizer",
+    "count": 8
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Fertilized Essence",
+      "icon": "img/icons/fertilized_essence.png",
+      "href": "wiki/materials/fertilizer"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Fertilized Essence",
+      "icon": "img/icons/fertilized_essence.png",
+      "href": "wiki/materials/fertilizer"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Fertilized Essence",
+      "icon": "img/icons/fertilized_essence.png",
+      "href": "wiki/materials/fertilizer"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Fertilized Essence",
+      "icon": "img/icons/fertilized_essence.png",
+      "href": "wiki/materials/fertilizer"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
   }
  ],
  "gallery": [
@@ -11757,6 +13300,197 @@
      "name": "Astra Growth Accelerator",
      "icon": "img/icons/astra_accelerator.png",
      "href": "wiki/accelerators/astra-accelerator"
+    }
+   ]
+  },
+  {
+   "title": "Ores",
+   "items": [
+    {
+     "name": "Essence Ore",
+     "icon": "img/icons/essence_ore.png"
+    },
+    {
+     "name": "Deepslate Essence Ore",
+     "icon": "img/icons/deepslate_essence_ore.png"
+    },
+    {
+     "name": "Vita Ore",
+     "icon": "img/icons/vita_ore.png"
+    },
+    {
+     "name": "Deepslate Vita Ore",
+     "icon": "img/icons/deepslate_vita_ore.png"
+    }
+   ]
+  },
+  {
+   "title": "Materials",
+   "items": [
+    {
+     "name": "Vita Ingot",
+     "icon": "img/icons/vita_ingot.png",
+     "href": "wiki/materials/vita"
+    },
+    {
+     "name": "Vita Gemstone",
+     "icon": "img/icons/vita_gemstone.png",
+     "href": "wiki/materials/vita"
+    },
+    {
+     "name": "Vita Nugget",
+     "icon": "img/icons/vita_nugget.png",
+     "href": "wiki/materials/vita"
+    },
+    {
+     "name": "Vita Ingot Block",
+     "icon": "img/icons/vita_ingot_block.png",
+     "href": "wiki/materials/vita"
+    },
+    {
+     "name": "Vita Gemstone Block",
+     "icon": "img/icons/vita_gemstone_block.png",
+     "href": "wiki/materials/vita"
+    },
+    {
+     "name": "Terra Ingot",
+     "icon": "img/icons/terra_ingot.png",
+     "href": "wiki/materials/terra"
+    },
+    {
+     "name": "Terra Gemstone",
+     "icon": "img/icons/terra_gemstone.png",
+     "href": "wiki/materials/terra"
+    },
+    {
+     "name": "Terra Nugget",
+     "icon": "img/icons/terra_nugget.png",
+     "href": "wiki/materials/terra"
+    },
+    {
+     "name": "Terra Ingot Block",
+     "icon": "img/icons/terra_ingot_block.png",
+     "href": "wiki/materials/terra"
+    },
+    {
+     "name": "Terra Gemstone Block",
+     "icon": "img/icons/terra_gemstone_block.png",
+     "href": "wiki/materials/terra"
+    },
+    {
+     "name": "Aqua Ingot",
+     "icon": "img/icons/aqua_ingot.png",
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "name": "Aqua Gemstone",
+     "icon": "img/icons/aqua_gemstone.png",
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "name": "Aqua Nugget",
+     "icon": "img/icons/aqua_nugget.png",
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "name": "Aqua Ingot Block",
+     "icon": "img/icons/aqua_ingot_block.png",
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "name": "Aqua Gemstone Block",
+     "icon": "img/icons/aqua_gemstone_block.png",
+     "href": "wiki/materials/aqua"
+    },
+    {
+     "name": "Ignis Ingot",
+     "icon": "img/icons/ignis_ingot.png",
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "name": "Ignis Gemstone",
+     "icon": "img/icons/ignis_gemstone.png",
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "name": "Ignis Nugget",
+     "icon": "img/icons/ignis_nugget.png",
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "name": "Ignis Ingot Block",
+     "icon": "img/icons/ignis_ingot_block.png",
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "name": "Ignis Gemstone Block",
+     "icon": "img/icons/ignis_gemstone_block.png",
+     "href": "wiki/materials/ignis"
+    },
+    {
+     "name": "Aether Ingot",
+     "icon": "img/icons/aether_ingot.png",
+     "href": "wiki/materials/aether"
+    },
+    {
+     "name": "Aether Gemstone",
+     "icon": "img/icons/aether_gemstone.png",
+     "href": "wiki/materials/aether"
+    },
+    {
+     "name": "Aether Nugget",
+     "icon": "img/icons/aether_nugget.png",
+     "href": "wiki/materials/aether"
+    },
+    {
+     "name": "Aether Ingot Block",
+     "icon": "img/icons/aether_ingot_block.png",
+     "href": "wiki/materials/aether"
+    },
+    {
+     "name": "Aether Gemstone Block",
+     "icon": "img/icons/aether_gemstone_block.png",
+     "href": "wiki/materials/aether"
+    },
+    {
+     "name": "Astra Ingot",
+     "icon": "img/icons/astra_ingot.png",
+     "href": "wiki/materials/astra"
+    },
+    {
+     "name": "Astra Gemstone",
+     "icon": "img/icons/astra_gemstone.png",
+     "href": "wiki/materials/astra"
+    },
+    {
+     "name": "Astra Nugget",
+     "icon": "img/icons/astra_nugget.png",
+     "href": "wiki/materials/astra"
+    },
+    {
+     "name": "Astra Ingot Block",
+     "icon": "img/icons/astra_ingot_block.png",
+     "href": "wiki/materials/astra"
+    },
+    {
+     "name": "Astra Gemstone Block",
+     "icon": "img/icons/astra_gemstone_block.png",
+     "href": "wiki/materials/astra"
+    }
+   ]
+  },
+  {
+   "title": "Fertilizer",
+   "items": [
+    {
+     "name": "Fertilized Essence",
+     "icon": "img/icons/fertilized_essence.png",
+     "href": "wiki/materials/fertilizer"
+    },
+    {
+     "name": "Essence Fertilizer",
+     "icon": "img/icons/essence_fertilizer.png",
+     "href": "wiki/materials/fertilizer"
     }
    ]
   },

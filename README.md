@@ -89,7 +89,8 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 |---|---|
 | `growChance` | Chance per random tick or accelerator tick to advance a stage |
 | `grassEssenceChance`, `cropEssenceChance`, `logEssenceChance` | Chance of Terra Essence from grass, ripe vanilla crops, and each log dropped near a Wildbloom Logger |
-| `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from old essence ore, which no longer generates |
+| `harvestEssence`, `oreEssence`, `vitaShards` | `[min, max]` essence from a ripe crop and Essence Ore, and shards from Vita Ore |
+| `mobEssenceChance`, `fertilizedEssenceChance` | Chance of Terra Essence from a mob, and of Fertilized Essence from a ripe crop |
 | `secondaryChance` | Chance of a second essence, and of a second seed, on essence farmland |
 | `matchingFarmlandChance` | Added to `secondaryChance` when the farmland's tier matches the crop's |
 | `terraCropYield` | Per farmland tier: average essence from a ripe Terra crop |
@@ -116,6 +117,5 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 
 ## Known limits
 
-- Essence ore no longer generates. Veins already in a world stay and can still be mined, because removing the block would
-  turn them into unknown blocks. New players get Terra essence (tier 1) as a chance drop from grass, ripe wheat, carrots,
-  potatoes and beetroot, and logs cut by a Wildbloom Logger.
+- Ores always drop their items, because Bedrock's block loot can't check for Silk Touch.
+- Tier upgrades take 4 essence with no Infusion Crystal, until crafting is confirmed to be able to wear a crystal down.

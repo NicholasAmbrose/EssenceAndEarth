@@ -9,6 +9,7 @@ const {
   grassEssenceChance: GRASS_CHANCE,
   cropEssenceChance: CROP_CHANCE,
   logEssenceChance: LOG_CHANCE,
+  mobEssenceChance: MOB_CHANCE,
   secondaryChance: SECONDARY_CHANCE, // second essence and second seed, on any essence farmland
   matchingFarmlandChance: MATCHING_CHANCE, // added when the farmland's tier matches the crop's
   terraCropYield: TERRA_YIELD, // average essence per harvest, by farmland tier
@@ -124,6 +125,27 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
   });
 });
 
+// Fertilized Essence advances a crop 1-2 stages (vanilla crops 2-5 of their 7), and Essence Fertilizer ripens it.
+const FERTILIZERS = { "__NS__:fertilized_essence": false, "__NS__:essence_fertilizer": true };
+world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
+  const { block, itemStack, player, isFirstEvent } = event;
+  const ripens = FERTILIZERS[itemStack?.typeId];
+  if (ripens === undefined || !isCrop(block.typeId) || isRipe(block.permutation)) return;
+  event.cancel = true;
+  if (!isFirstEvent) return; // holding the button repeats the event
+  const { dimension, location } = block;
+  system.run(() => {
+    const crop = dimension.getBlock(location);
+    if (!crop || !isCrop(crop.typeId) || isRipe(crop.permutation)) return;
+    const state = growthState(crop.typeId);
+    const top = isOurCrop(crop.typeId) ? MAX_STAGE : 7;
+    const step = isOurCrop(crop.typeId) ? 1 + Math.floor(Math.random() * 2) : 2 + Math.floor(Math.random() * 4);
+    crop.setPermutation(crop.permutation.withState(state, ripens ? top : Math.min(crop.permutation.getState(state) + step, top)));
+    dimension.spawnParticle("minecraft:crop_growth_emitter", crop.center());
+    if (player.isValid) useOne(player);
+  });
+});
+
 world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
   const { block, itemStack, player, isFirstEvent } = event;
   if (itemStack?.typeId !== HOE || !isRipe(block.permutation)) return;
@@ -170,6 +192,17 @@ world.afterEvents.playerBreakBlock.subscribe(({ block, brokenBlockPermutation: b
   if (tool?.typeId === SICKLE && isRipe(broken)) sweep(player, dimension, block.location);
   if (player.getGameMode() === GameMode.Creative) return;
   if (GRASS.has(broken.type.id) && Math.random() < GRASS_CHANCE) drop(dimension, "__ESSENCE__", block.center());
+});
+
+// Mobs that drop Terra Essence: every walking or swimming mob, as bosses and flyers don't count.
+const NO_MOB_ESSENCE = new Set(["minecraft:player", "minecraft:slime", "minecraft:magma_cube", "minecraft:ghast", "minecraft:phantom", "minecraft:ender_dragon"]);
+world.afterEvents.entityDie.subscribe(({ deadEntity }) => {
+  if (NO_MOB_ESSENCE.has(deadEntity.typeId) || Math.random() >= MOB_CHANCE) return;
+  try {
+    drop(deadEntity.dimension, "__ESSENCE__", deadEntity.location);
+  } catch {
+    // already gone, or an unloaded chunk
+  }
 });
 
 // Crops are judged by what they drop rather than who broke them, so harvesting machines

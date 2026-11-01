@@ -87,9 +87,10 @@ const makesOne = (o) => `${cost(o)} essence → ${o.count} × ${vanilla(o.output
 const yields = (c) => (c.essenceCrop ? `Drops ${tierName(cfg.tiers[c.tier - 1])} directly` : [c, c.alt].filter(Boolean).map(makesOne).join(", or "));
 const farmlandRecipe = (t) => recipe(farmlandItem(t), BAL.farmlandYield, [[vanilla("minecraft:dirt"), tierItem(t), null], [null, null, null], [null, null, null]], "Shapeless: any slots");
 
-const acceleratorRecipe = (t, i) => {
-  const b = i ? acceleratorItem(cfg.tiers[i - 1]) : vanilla("minecraft:cobblestone"), e = tierItem(t);
-  return recipe(acceleratorItem(t), BAL.acceleratorYield, [[b, e, b], [e, b, e], [b, e, b]]);
+const matItem = (id) => ({ name: title(id), icon: `img/icons/${id}.png`, href: "wiki/materials/" + slug(id.replace(/_(ingot|nugget|gemstone|shard|ingot_block|gemstone_block|block)$/, "")) });
+const acceleratorRecipe = (t) => {
+  const e = tierItem(t), s = vanilla("minecraft:stone"), g = matItem(`${t.id}_gemstone`);
+  return recipe(acceleratorItem(t), BAL.acceleratorYield, [[e, s, e], [s, g, s], [e, s, e]]);
 };
 
 // ---------- pages ----------
@@ -102,6 +103,8 @@ const terraCrop = cfg.crops.find((c) => c.essenceCrop);
 const terraYield = `${BAL.terraCropYield[0]} to ${BAL.terraCropYield.at(-1)} per ripe harvest on average, by farmland tier`;
 const terraCropDrop = { ...seedsItem(terraCrop), name: "Terra Crop", icon: `img/icons/${terraCrop.id}_crop.png`, sub: terraYield };
 const grassDrops = list([
+  { name: "Essence Ore", icon: "img/icons/essence_ore.png", href: "wiki/materials/ores", sub: `Underground, y -32 to 64: ${range(BAL.oreEssence)} each` },
+  { name: "Mobs", icon: vanilla("minecraft:rotten_flesh").icon, sub: `Most mobs: ${pct(BAL.mobEssenceChance)} chance` },
   { ...vanilla("minecraft:short_grass"), sub: `Grass and ferns: ${pct(BAL.grassEssenceChance)} chance` },
   { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
 ]);
@@ -117,7 +120,7 @@ const guide = {
       blocks: [
         p("Essence & Earth lets you grow resources. Every crop starts as essence: you combine essence with the resource you want, plant the seeds, and harvest essence that crafts back into that resource."),
         h2("1. Collect Terra Essence"),
-        p(`Terra Essence drops now and then from grass and ripe vanilla crops. Once you have a little, the <a href="${cropHref(terraCrop)}">Terra crop</a> gives you a steady supply.`),
+        p(`Mine <a href="wiki/materials/ores">Essence Ore</a> underground, or collect Terra Essence from mobs, grass and ripe vanilla crops. Once you have a little, the <a href="${cropHref(terraCrop)}">Terra crop</a> gives you a steady supply.`),
         list([...grassDrops.items, terraCropDrop]),
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
@@ -203,8 +206,8 @@ const accelerators = {
       list([acceleratorItem(t)]),
       p("Every tier grows crops at the same speed, and higher tiers only reach further. Each accelerator works on its own, so more of them means faster, and it works on the first crop above it, through any blocks in between."),
       h2("Recipe"),
-      p(`${i ? `Five ${title(cfg.tiers[i - 1].id)} Growth Accelerators and four ${tierName(t)}` : "Five cobblestone and four Terra Essence"} make ${BAL.acceleratorYield}.`),
-      acceleratorRecipe(t, i),
+      p(`Four ${tierName(t)}, four stone and one ${title(t.id)} Gemstone make ${BAL.acceleratorYield}.`),
+      acceleratorRecipe(t),
     ],
   })),
 };
@@ -270,7 +273,69 @@ const cropCategories = cfg.tiers
     }),
   }));
 
-const categories = [guide, essence, farmland, accelerators, tools, ...cropCategories];
+// Vita and each tier share one layout: their ingots, gemstones, nuggets and storage blocks.
+const nine = (x) => [[x, x, x], [x, x, x], [x, x, x]];
+const plus = (a, b) => [[null, a, null], [a, b, a], [null, a, null]];
+const materialEntry = (id, name, makeIngot, makeGem, source) => ({
+  slug: slug(id), name: `${name} materials`, icon: `img/icons/${id}_ingot.png`,
+  summary: `${name} ingots, gemstones and storage blocks.`,
+  blocks: [
+    p(source),
+    h2(`${name} Ingot`), makeIngot,
+    h2(`${name} Gemstone`), makeGem,
+    h2("Storage"),
+    list([`${id}_nugget`, `${id}_ingot_block`, `${id}_gemstone_block`].map((m) => ({ ...matItem(m), sub: "9 of the smaller item, and back again" }))),
+  ],
+});
+const shapelessGrid = (a, b) => [[a, b, b], [null, null, null], [null, null, null]];
+const fertilized = { name: "Fertilized Essence", icon: "img/icons/fertilized_essence.png", href: "wiki/materials/fertilizer" };
+const fertilizer = { name: "Essence Fertilizer", icon: "img/icons/essence_fertilizer.png", href: "wiki/materials/fertilizer" };
+const materials = {
+  slug: "materials", title: "Ores and materials", group: "Getting started", icon: "img/icons/vita_ingot.png",
+  blurb: "Ores, ingots, gemstones and fertilizer.",
+  entries: [
+    {
+      slug: "ores", name: "Ores", icon: "img/icons/essence_ore.png",
+      summary: "Essence Ore and Vita Ore, in stone and deepslate.",
+      blocks: [
+        list([
+          { name: "Essence Ore", icon: "img/icons/essence_ore.png", sub: `y -32 to 64. Drops ${range(BAL.oreEssence)} Terra Essence` },
+          { name: "Deepslate Essence Ore", icon: "img/icons/deepslate_essence_ore.png", sub: "The same, in deepslate" },
+          { name: "Vita Ore", icon: "img/icons/vita_ore.png", sub: `y -60 to 24. Drops ${range(BAL.vitaShards)} Vita Shards` },
+          { name: "Deepslate Vita Ore", icon: "img/icons/deepslate_vita_ore.png", sub: "The same, in deepslate" },
+        ]),
+        p("Ore only generates in chunks explored after it was added."),
+      ],
+    },
+    materialEntry("vita", "Vita",
+      recipe(matItem("vita_ingot"), 1, plus(matItem("vita_shard"), vanilla("minecraft:iron_ingot"))),
+      recipe(matItem("vita_gemstone"), 1, plus(matItem("vita_shard"), vanilla("minecraft:diamond"))),
+      "Made from the Vita Shards that Vita Ore drops. Every tier's ingot and gemstone starts from these."),
+    ...cfg.tiers.map((t) => materialEntry(t.id, title(t.id),
+      recipe(matItem(`${t.id}_ingot`), 1, shapelessGrid(matItem("vita_ingot"), tierItem(t)), "Shapeless: any slots"),
+      recipe(matItem(`${t.id}_gemstone`), 1, shapelessGrid(matItem("vita_gemstone"), tierItem(t)), "Shapeless: any slots"),
+      `Vita materials plus two ${tierName(t)}. Nine ${tierName(t)} also store in a ${title(t.id)} Block.`)),
+    {
+      slug: "fertilizer", name: "Fertilizer", icon: fertilizer.icon,
+      summary: "Speed up one crop at a time.",
+      blocks: [
+        list([{ ...fertilized, sub: `${pct(BAL.fertilizedEssenceChance)} chance from ripe crops. Advances a crop a stage or two` }, { ...fertilizer, sub: "Ripens a crop at once" }]),
+        h2("Essence Fertilizer"),
+        (() => {
+          const e = tierItem(cfg.tiers[0]), b = vanilla("minecraft:bone_meal"), d = vanilla("minecraft:diamond");
+          return recipe(fertilizer, 4, [[e, b, e], [b, d, b], [e, b, e]]);
+        })(),
+        h2("Better recipe"),
+        (() => {
+          const e = tierItem(cfg.tiers[0]), d = vanilla("minecraft:diamond");
+          return recipe(fertilizer, 8, [[e, fertilized, e], [fertilized, d, fertilized], [e, fertilized, e]]);
+        })(),
+      ],
+    },
+  ],
+};
+
+const categories = [guide, essence, materials, farmland, accelerators, tools, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -280,6 +345,9 @@ const gallery = [
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
   { title: "Growth accelerators", items: cfg.tiers.map(acceleratorItem) },
+  { title: "Ores", items: ["essence_ore", "deepslate_essence_ore", "vita_ore", "deepslate_vita_ore"].map((id) => ({ name: title(id), icon: `img/icons/${id}.png` })) },
+  { title: "Materials", items: ["vita", ...cfg.tiers.map((t) => t.id)].flatMap((id) => [`${id}_ingot`, `${id}_gemstone`, `${id}_nugget`, `${id}_ingot_block`, `${id}_gemstone_block`].map(matItem)) },
+  { title: "Fertilizer", items: [fertilized, fertilizer] },
   { title: "Tools and guide", items: [sickleItem, hoeItem, guideItem] },
   { title: "Growth stages", items: stages(cfg.crops[0]).slice(0, 3) },
 ];
@@ -291,8 +359,9 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: essence + farmland + accelerator per tier, seeds + essence per crop (essence crops share their tier's essence), 2 tools and the guide
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 3 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 3, recipes: recipes.length },
+  // items: per tier essence, farmland, accelerator, 3 materials, 3 storage blocks; per crop seeds and essence (essence crops share their tier's essence);
+  // 4 ores, Vita's shard, 3 materials and 3 blocks, 2 fertilizers, 2 tools and the guide
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 9 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 16, recipes: recipes.length },
   categories,
   recipes,
   gallery,
