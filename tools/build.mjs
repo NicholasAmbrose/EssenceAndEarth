@@ -8,6 +8,7 @@ import zlib from "node:zlib";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
+const RECIPES = JSON.parse(fs.readFileSync(path.join(ROOT, "recipes.json"), "utf8"));
 const NS = cfg.namespace;
 const FMT = "1.21.90";
 const SLUG = cfg.name.replaceAll("&", "And").replace(/\W/g, "");
@@ -24,15 +25,22 @@ for (const c of cfg.crops) {
   if (!/^[a-z0-9_]+$/.test(c.id)) problems.push(`${c.id}: id must be lowercase letters, digits and _`);
   if (!(c.tier >= 1 && c.tier <= cfg.tiers.length)) problems.push(`${c.id}: tier must be 1-${cfg.tiers.length}`);
   if (!/^#[0-9a-f]{6}$/i.test(c.color)) problems.push(`${c.id}: color must look like #a1b2c3`);
-  for (const k of ["ingredient", "output"]) if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c[k] ?? "")) problems.push(`${c.id}: ${k} must be an item id like minecraft:iron_ingot`);
-  if (!(Number.isInteger(c.count) && c.count >= 1 && c.count <= 64)) problems.push(`${c.id}: count must be 1-64`);
+  if (!/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c.ingredient ?? "")) problems.push(`${c.id}: ingredient must be an item id like minecraft:iron_ingot`);
   if (c.essenceColor && !/^#[0-9a-f]{6}$/i.test(c.essenceColor)) problems.push(`${c.id}: essenceColor must look like #a1b2c3`);
   if (c.face && !(c.face.length === 8 && c.face.every((r) => r.length === 8) && [...c.face.join("")].every((ch) => ch === "." || c.faceColors?.[ch]))) problems.push(`${c.id}: face must be 8 rows of 8, using . or a faceColors key`);
   if (c.essenceCrop && !cfg.tiers.some((t) => t.id === c.id)) problems.push(`${c.id}: an essenceCrop's id must match a tier, because it drops that tier's essence`);
-  if (c.alt && !/^[a-z0-9_]+:[a-z0-9_.]+$/.test(c.alt.output ?? ""))problems.push(`${c.id}: alt.output must be an item id like minecraft:iron_ingot`);
-  if (c.alt && !(Number.isInteger(c.alt.count) && c.alt.count >= 1 && c.alt.count <= 64)) problems.push(`${c.id}: alt.count must be 1-64`);
-  for (const o of [c, c.alt]) if (o?.shape && !cfg.shapes[o.shape]) problems.push(`${c.id}: shape "${o.shape}" isn't in shapes`);
-  if (c.alt && (c.alt.shape ?? "ring") === (c.shape ?? "ring")) problems.push(`${c.id}: alt needs a different shape, or one recipe hides the other`);
+}
+// Every recipe needs a crop's essence, and two recipes with the same grid would hide each other.
+const recipeGrid = (r) => (r.pattern ? r.pattern.map((row) => [...row].map((ch) => r.key[ch] ?? "-").join(",")).join("/") : [...r.ingredients].sort().join("+"));
+const grids = new Set();
+for (const r of RECIPES) {
+  const parts = r.ingredients ?? Object.values(r.key);
+  for (const id of parts) if (id.startsWith(`${NS}:`) && id.endsWith("_essence") && !seen.has(id.slice(NS.length + 1, -8))) problems.push(`recipe for ${r.result}: no crop for ${id}`);
+  if (!parts.some((id) => id.endsWith("_essence"))) problems.push(`recipe for ${r.result}: uses no essence`);
+  if (r.pattern && [...r.pattern.join("")].some((ch) => ch !== " " && !r.key[ch])) problems.push(`recipe for ${r.result}: pattern letter missing from key`);
+  if (!(Number.isInteger(r.count) && r.count >= 1 && r.count <= 64)) problems.push(`recipe for ${r.result}: count must be 1-64`);
+  if (grids.has(recipeGrid(r))) problems.push(`recipe for ${r.result}: another recipe has the same grid`);
+  grids.add(recipeGrid(r));
 }
 const BAL = cfg.balance;
 for (const k of ["grassEssenceChance", "cropEssenceChance", "logEssenceChance", "mobEssenceChance", "fertilizedEssenceChance", "secondaryChance", "matchingFarmlandChance", "farmlandRefundChance"])
@@ -831,30 +839,127 @@ for (const c of cfg.crops) {
   );
 
   item(`${c.id}_seeds`, SEEDS, c.color, { "minecraft:block_placer": { block: `${NS}:${c.id}_crop`, use_on: soils } });
-  // An essence crop drops its tier's essence directly, so it has no essence item or output recipe of its own.
+  // An essence crop drops its tier's essence directly, so it has no essence item of its own.
   if (!c.essenceCrop) item(`${c.id}_essence`, c.face ? faceMask(c.face) : WISP, c.essenceColor ?? c.color, {}, c.faceColors);
 
   // A retired crop can't be started any more, but what's already planted keeps working.
   if (!c.retired)
     recipe(`${c.id}_seeds`, "shaped", {
-      pattern: ["ERE", "RSR", "ERE"],
-      key: { E: { item: tierEssence(c.tier) }, R: { item: c.ingredient }, S: { item: "minecraft:wheat_seeds" } },
+      pattern: c.essenceCrop ? ["EEE", "ESE", "EEE"] : ["ERE", "RSR", "ERE"],
+      key: { E: { item: tierEssence(c.tier) }, ...(!c.essenceCrop && { R: { item: c.ingredient } }), S: { item: "minecraft:wheat_seeds" } },
       result: { item: seeds },
     }, tierEssence(c.tier));
-  if (!c.essenceCrop)
-    recipe(`${c.id}_from_essence`, "shaped", {
-      pattern: cfg.shapes[c.shape ?? "ring"],
-      key: { E: { item: essence } },
-      result: { item: c.output, count: c.count },
-    }, essence);
-  // A second drop needs its own shape.
-  if (c.alt)
-    recipe(`${c.id}_alt_from_essence`, "shaped", {
-      pattern: cfg.shapes[c.alt.shape ?? "ring"],
-      key: { E: { item: essence } },
-      result: { item: c.alt.output, count: c.alt.count },
-    }, essence);
 }
+
+// Essence recipes, from recipes.json.
+RECIPES.forEach((r, i) => {
+  const parts = r.ingredients ?? Object.values(r.key);
+  const unlock = parts.find((id) => id.endsWith("_essence"));
+  const name = `essence_${i}_${r.result.split(":")[1]}`;
+  const result = { item: r.result, count: r.count };
+  if (r.pattern) recipe(name, "shaped", { pattern: r.pattern, key: Object.fromEntries(Object.entries(r.key).map(([k, id]) => [k, { item: id }])), result }, unlock);
+  else recipe(name, "shapeless", { ingredients: r.ingredients.map((id) => ({ item: id })), result }, unlock);
+});
+
+// Clusters: four themed items pressed together, used as the seed ingredient for crops that make a whole family of things.
+const CLUSTER = [
+  "................",
+  "................",
+  "....####.###....",
+  "...#*###~*##~...",
+  "...#*###~###~...",
+  "....####~###~...",
+  "...###.#####....",
+  "..#*###~*###~...",
+  "..#*###~*###~...",
+  "..######~###~...",
+  "...####.###~....",
+  ".....#*##~......",
+  ".....####~......",
+  "................",
+  "................",
+  "................",
+];
+const v = (id) => `minecraft:${id}`;
+for (const [id, color, pattern, key] of [
+  ["air", "#dad64d", ["IG", "DC"], { I: v("glass_bottle"), G: v("gravel"), D: v("dirt"), C: v("clay_ball") }],
+  ["earth", "#54da4d", ["IG", "DC"], { I: v("short_grass"), G: v("gravel"), D: v("dirt"), C: v("clay_ball") }],
+  ["water", "#4d7eda", ["IG", "DC"], { I: v("water_bucket"), G: v("gravel"), D: v("dirt"), C: v("clay_ball") }],
+  ["fire", "#da4d4d", ["IG", "DC"], { I: v("lava_bucket"), G: v("gravel"), D: v("dirt"), C: v("clay_ball") }],
+  ["nature", "#3fa63a", ["PO", "CS"], { P: v("pumpkin"), O: v("potato"), C: v("cactus"), S: v("sugar_cane") }],
+  ["dye", "#d94fa0", ["CO", "PL"], { C: v("cyan_dye"), O: v("orange_dye"), P: v("pink_dye"), L: v("lime_dye") }],
+  ["nether", "#8a2f2f", ["NS", "BW"], { N: v("netherrack"), S: v("soul_sand"), B: v("nether_brick"), W: v("nether_wart") }],
+  ["coral", "#e0607a", ["CO", "PL"], { C: v("brain_coral_block"), O: v("tube_coral_block"), P: v("fire_coral_block"), L: v("horn_coral_block") }],
+  ["honey", "#e8a424", ["BC", "CB"], { B: v("honey_bottle"), C: v("honeycomb") }],
+  ["prismarine", "#63b5a5", ["CS", "SC"], { C: v("prismarine_crystals"), S: v("prismarine_shard") }],
+  ["end", "#d8d68f", ["SC", "PS"], { S: v("end_stone"), C: v("chorus_fruit"), P: v("purpur_block") }],
+]) {
+  item(`${id}_cluster`, CLUSTER, color);
+  recipe(`${id}_cluster`, "shaped", { pattern, key: Object.fromEntries(Object.entries(key).map(([k, i]) => [k, { item: i }])), result: { item: `${NS}:${id}_cluster` } }, key[Object.keys(key)[0]]);
+}
+
+// Blanks for skulls and music discs, and the droplet the experience crop makes.
+const BLANK_SKULL = [
+  "................",
+  "....########....",
+  "...#*#######~...",
+  "..#*#########~..",
+  "..#*#########~..",
+  "..#*##dd##dd#~..",
+  "..#*##dd##dd#~..",
+  "..#*#########~..",
+  "...#*##d#d##~...",
+  "....##dddd##....",
+  ".....#*###~.....",
+  ".....#d#d#~.....",
+  ".....#####......",
+  "................",
+  "................",
+  "................",
+];
+const BLANK_RECORD = [
+  "................",
+  ".....######.....",
+  "...##*#####~#...",
+  "..#*#######~~#..",
+  "..#*####*###~#..",
+  ".#*###*###*##~#.",
+  ".#*##*#wwww#*~#.",
+  ".#*##*#wwww#*~#.",
+  ".#*##*#wwww#*~#.",
+  ".#*##*#wwww#*~#.",
+  ".#*###*###*##~#.",
+  "..#*####*###~#..",
+  "..#*#######~~#..",
+  "...##*#####~#...",
+  ".....######.....",
+  "................",
+];
+const DROPLET = [
+  "................",
+  ".......#........",
+  ".......#........",
+  "......#*#.......",
+  "......#*#.......",
+  ".....#*###......",
+  ".....#*##~......",
+  "....#*####~.....",
+  "....#*####~.....",
+  "....#*####~.....",
+  "....##*##~~.....",
+  ".....##~~~......",
+  "......###.......",
+  "................",
+  "................",
+  "................",
+];
+item("blank_skull", BLANK_SKULL, "#d8d4c4", {}, { d: "#2c2c2c" });
+item("blank_record", BLANK_RECORD, "#3a3a3a");
+item("experience_droplet", DROPLET, "#9fe04d");
+// ponytail: bone meal stands in for Soul Dust, which arrives with the Infusion Altar.
+recipe("blank_skull", "shaped", { pattern: [" S ", "SBS", " S "], key: { S: { item: "minecraft:bone_meal" }, B: { item: "minecraft:bone_block" } }, result: { item: `${NS}:blank_skull`, count: 4 } }, "minecraft:bone_block");
+recipe("blank_record", "shaped", { pattern: ["CSC", "SIS", "CSC"], key: { C: { item: `${NS}:creeper_essence` }, S: { item: `${NS}:skeleton_essence` }, I: { item: "minecraft:iron_ingot" } }, result: { item: `${NS}:blank_record` } }, `${NS}:creeper_essence`);
+recipe("experience_bottle", "shapeless", { ingredients: [{ item: "minecraft:glass_bottle" }, { item: `${NS}:experience_droplet` }], result: { item: "minecraft:experience_bottle" } }, `${NS}:experience_droplet`);
 
 // Crop geometry: four planes in a # shape, like vanilla wheat. One face each: alpha_test draws both sides, and a second face would z-fight.
 const plane = (origin, size, faces) => ({ origin, size, uv: Object.fromEntries(faces.map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });

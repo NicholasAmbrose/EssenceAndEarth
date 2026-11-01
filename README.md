@@ -52,6 +52,7 @@ Run it before uploading a new version. Saving is paused during the download so t
 | Path | What |
 |---|---|
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
+| `recipes.json` | What each crop's essence crafts, one recipe per line. |
 | `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth, accelerators, farmland conversion, tools and the Essence Guide menu). |
 | `tools/build.mjs` | Generates blocks, items, recipes, loot tables and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
 | `tools/wiki.mjs`, `src/EssenceWiki` | The wiki: data generator and Blazor site. |
@@ -62,20 +63,19 @@ Run it before uploading a new version. Saving is paused during the download so t
 
 ## Adding a crop
 
-Add an entry to `crops.json`:
+Add an entry to `crops.json`, and its recipes to `recipes.json`:
 
 ```json
-{ "id": "lapis", "tier": 2, "color": "#2a4fbf", "ingredient": "minecraft:lapis_lazuli", "output": "minecraft:lapis_lazuli", "count": 8 }
+{ "id": "lapis", "tier": 4, "color": "#2a4fbf", "ingredient": "minecraft:lapis_lazuli" }
 ```
 
-Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks. To take a crop out of the game, add `"retired": true`: its seeds can no longer be crafted and it leaves the wiki, but planted crops keep working.
+Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks. To take a crop out of the game, add `"retired": true`: its seeds can no longer be crafted and it leaves the wiki, but planted crops keep working and its essence still crafts.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
 - **Crop:** plants on any farmland and grows in 4 stages. Ripe crops drop crop essence and a seed. Essence farmland adds a chance of a second of each, which is higher if its tier matches the crop's.
-- **Output:** crop essence in the crop's `shape` crafts `count` × `output`. Shapes are listed under `shapes` in `crops.json`, and the default is `ring`.
+- **Output:** each line of `recipes.json` is a shaped (`pattern` and `key`) or shapeless (`ingredients`) recipe with a `result` and `count`. Recipes can mix several crops' essence, and the build rejects two with the same grid. The first essence in a recipe decides which crop's wiki page shows it. Use Bedrock's item ids, and add any id the texture package files under a different Java name to `tools/vanilla/java_ids.json`.
 - **Essence crop (optional):** `"essenceCrop": true`, on a crop whose `id` matches a tier, drops that tier's essence directly, with no crop essence or ring recipe. The Terra crop uses this.
 - **Face (optional):** `face` is 8 rows of 8 characters drawn on the essence, and `faceColors` gives each character's colour. `essenceColor` optionally gives the essence a different body colour from its seeds and crop. Mob crops use these. See [the fallbacks](reference/mob-essence-fallbacks/README.md) for the plain versions.
-- **Second output (optional):** add `"alt": { "output": "minecraft:arrow", "count": 8, "shape": "row" }`. It needs a different shape from the main output.
 
 Growth accelerators (`ee:<tier>_accelerator`) go below a crop. On a timer, each gives the first crop above it (from 2 blocks up, within its tier's range) one extra growth roll.
 

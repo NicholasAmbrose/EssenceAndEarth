@@ -10,7 +10,9 @@ const MIN_BEDROCK = "1.21.90";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
+const RECIPES = JSON.parse(fs.readFileSync(path.join(ROOT, "recipes.json"), "utf8"));
 const BAL = cfg.balance;
+const ALL_CROPS = cfg.crops;
 cfg.crops = cfg.crops.filter((c) => !c.retired);
 const SLUG = cfg.name.replaceAll("&", "And").replace(/\W/g, "");
 const RP = path.join(ROOT, "build", `${SLUG}_RP`);
@@ -25,9 +27,6 @@ const slug = (id) => id.replaceAll("_", "-");
 const pct = (v) => `${+(v * 100).toFixed(1)}%`;
 const range = ([min, max]) => (min === max ? `${min}` : `${min}–${max}`);
 const harvest = range(BAL.harvestEssence), secondary = pct(BAL.secondaryChance), matching = pct(BAL.secondaryChance + BAL.matchingFarmlandChance);
-const SHAPE_NAMES = { ring: "Ring of 8", full: "Full grid of 9", row: "Row of 3, in any row", square: "Square of 4, in any corner" };
-const cost = (o) => cfg.shapes[o.shape ?? "ring"].join("").replaceAll(" ", "").length;
-const shapeNote = (o) => SHAPE_NAMES[o.shape ?? "ring"];
 
 // ---------- images ----------
 
@@ -73,18 +72,41 @@ const upgrade = (t, i) => {
   const p = tierItem(cfg.tiers[i - 1]);
   return recipe(tierItem(t), 1, [[p, p, null], [p, p, null], [null, null, null]], "Shapeless: 4 in any slots");
 };
+// An item in a recipe: a crop essence, one of our materials, or a vanilla item.
+const ourCrops = new Map(ALL_CROPS.map((c) => [c.id, c]));
+const anyItem = (id) => {
+  const [ns, name] = id.split(":");
+  if (ns !== "ee") return vanilla(id);
+  const crop = name.endsWith("_essence") && ourCrops.get(name.slice(0, -8));
+  return crop ? (crop.retired ? { name: title(name), icon: `img/icons/${name}.png` } : essenceItem(crop)) : { name: title(name), icon: `img/icons/${name}.png` };
+};
 const seedsRecipe = (c) => {
-  const e = tierItem(cfg.tiers[c.tier - 1]), r = vanilla(c.ingredient), w = vanilla("minecraft:wheat_seeds");
+  const e = tierItem(cfg.tiers[c.tier - 1]), w = vanilla("minecraft:wheat_seeds");
+  if (c.essenceCrop) return recipe(seedsItem(c), 1, [[e, e, e], [e, w, e], [e, e, e]]);
+  const r = anyItem(c.ingredient);
   return recipe(seedsItem(c), 1, [[e, r, e], [r, w, r], [e, r, e]]);
 };
-// o is a crop or its alt: its shape, padded to the 3×3 grid and filled with the crop's essence.
-const essenceRecipe = (c, o) => {
-  const e = essenceItem(c);
-  const rows = [0, 1, 2].map((y) => [0, 1, 2].map((x) => (cfg.shapes[o.shape ?? "ring"][y]?.[x] === "E" ? e : null)));
-  return recipe({ ...vanilla(o.output) }, o.count, rows, shapeNote(o));
+// A recipe belongs to the crop of the first essence in it, so each shows on one crop's page.
+const recipeParts = (r) => r.ingredients ?? Object.values(r.key);
+const recipesOf = (c) => RECIPES.filter((r) => recipeParts(r).find((id) => id.endsWith("_essence")) === `ee:${c.id}_essence`);
+const essenceRecipe = (r) => {
+  if (r.ingredients) {
+    const items = r.ingredients.map(anyItem);
+    return recipe(anyItem(r.result), r.count, [[items[0] ?? null, items[1] ?? null, items[2] ?? null], [null, null, null], [null, null, null]], "Shapeless: any slots");
+  }
+  const rows = [0, 1, 2].map((y) => [0, 1, 2].map((x) => {
+    const id = r.key[r.pattern[y]?.[x]];
+    return id ? anyItem(id) : null;
+  }));
+  return recipe(anyItem(r.result), r.count, rows);
 };
-const makesOne = (o) => `${cost(o)} essence → ${o.count} × ${vanilla(o.output).name}`;
-const yields = (c) => (c.essenceCrop ? `Drops ${tierName(cfg.tiers[c.tier - 1])} directly` : [c, c.alt].filter(Boolean).map(makesOne).join(", or "));
+const makesOne = (r) => `${r.count} × ${anyItem(r.result).name}`;
+const yields = (c) => {
+  if (c.essenceCrop) return `Drops ${tierName(cfg.tiers[c.tier - 1])} directly`;
+  const all = recipesOf(c);
+  if (!all.length) return "No recipes of its own yet";
+  return all.length > 3 ? `${all.slice(0, 2).map(makesOne).join(", ")} and ${all.length - 2} more` : all.map(makesOne).join(", or ");
+};
 const farmlandRecipe = (t) => recipe(farmlandItem(t), BAL.farmlandYield, [[vanilla("minecraft:dirt"), tierItem(t), null], [null, null, null], [null, null, null]], "Shapeless: any slots");
 
 const matItem = (id) => ({ name: title(id), icon: `img/icons/${id}.png`, href: "wiki/materials/" + slug(id.replace(/_(ingot|nugget|gemstone|shard|ingot_block|gemstone_block|block)$/, "")) });
@@ -260,14 +282,13 @@ const cropCategories = cfg.tiers
         slug: slug(c.id), name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`,
         summary: yields(c),
         blocks: [
-          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Best on", `${title(t.id)} Farmland`], ["Seeds use", vanilla(c.ingredient).name], ["Makes", c.essenceCrop ? tierName(t) : yields(c)]]),
+          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Best on", `${title(t.id)} Farmland`], ...(c.essenceCrop ? [] : [["Seeds use", anyItem(c.ingredient).name]]), ["Makes", c.essenceCrop ? tierName(t) : yields(c)]]),
           list(stages(c)),
           h2("Seeds"),
           seedsRecipe(c),
           h2("Harvest"),
           list([{ ...(c.essenceCrop ? tierItem(t) : essenceItem(c)), sub: c.essenceCrop ? terraYield : `${harvest} when ripe, ${secondary} to ${matching} chance of a second` }, { ...seedsItem(c), sub: `1, plus a ${secondary} to ${matching} chance of a second` }]),
-          ...(c.essenceCrop ? [] : [h2(vanilla(c.output).name), essenceRecipe(c, c)]),
-          ...(c.alt ? [h2(vanilla(c.alt.output).name), essenceRecipe(c, c.alt)] : []),
+          ...recipesOf(c).flatMap((r) => [h2(anyItem(r.result).name), essenceRecipe(r)]),
         ],
       };
     }),
@@ -341,6 +362,7 @@ for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/
 const gallery = [
   { title: "Essence tiers", items: cfg.tiers.map(tierItem) },
   { title: "Crop essence", items: cfg.crops.filter((c) => !c.essenceCrop).map(essenceItem) },
+  { title: "Clusters and blanks", items: ["air", "earth", "water", "fire", "nature", "dye", "nether", "coral", "honey", "prismarine", "end"].map((id) => `${id}_cluster`).concat("blank_skull", "blank_record", "experience_droplet").map((id) => ({ name: title(id), icon: `img/icons/${id}.png` })) },
   { title: "Seeds", items: cfg.crops.map(seedsItem) },
   { title: "Ripe crops", items: cfg.crops.map(ripeItem) },
   { title: "Essence farmland", items: cfg.tiers.map(farmlandItem) },
@@ -360,8 +382,8 @@ const wiki = {
     repo: `https://github.com/${REPO}`,
   },
   // items: per tier essence, farmland, accelerator, 3 materials, 3 storage blocks; per crop seeds and essence (essence crops share their tier's essence);
-  // 4 ores, Vita's shard, 3 materials and 3 blocks, 2 fertilizers, 2 tools and the guide
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 9 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 16, recipes: recipes.length },
+  // 4 ores, Vita's shard, 3 materials and 3 blocks, 2 fertilizers, 2 tools, the guide, 11 clusters, 2 blanks and the droplet
+  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 9 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 30, recipes: recipes.length },
   categories,
   recipes,
   gallery,

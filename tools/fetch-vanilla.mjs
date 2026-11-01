@@ -7,12 +7,14 @@ const PKG = "https://cdn.jsdelivr.net/npm/minecraft-textures@26.3.0/dist/texture
 const ROOT = path.resolve(import.meta.dirname, "..");
 const OUT = path.join(ROOT, "tools", "vanilla");
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
+const RECIPES = JSON.parse(fs.readFileSync(path.join(ROOT, "recipes.json"), "utf8"));
+// Bedrock item id -> the Java id the texture package files it under.
+const JAVA_ID = JSON.parse(fs.readFileSync(path.join(ROOT, "tools", "vanilla", "java_ids.json"), "utf8"));
 
 const wanted = new Set(["minecraft:wheat_seeds", "minecraft:farmland", "minecraft:short_grass", "minecraft:bone_meal", "minecraft:wheat", "minecraft:dirt", "minecraft:stick", "minecraft:book", "minecraft:stone"]);
-for (const c of cfg.crops) {
-  wanted.add(c.ingredient).add(c.output);
-  if (c.alt) wanted.add(c.alt.output);
-}
+for (const c of cfg.crops) wanted.add(c.ingredient);
+for (const r of RECIPES) for (const id of [r.result, ...(r.ingredients ?? Object.values(r.key))]) wanted.add(id);
+for (const id of [...wanted]) if (!id.startsWith("minecraft:")) wanted.delete(id);
 
 const manifest = await (await fetch(`${PKG}/manifest/26.3.json`)).json();
 const byId = new Map(manifest.items.map((i) => [i.id, i]));
@@ -21,7 +23,7 @@ const names = fs.existsSync(namesFile) ? JSON.parse(fs.readFileSync(namesFile, "
 fs.mkdirSync(OUT, { recursive: true });
 
 for (const id of wanted) {
-  const item = byId.get(id);
+  const item = byId.get(JAVA_ID[id] ?? id);
   if (!item) {
     console.warn(`no texture for ${id}`);
     continue;

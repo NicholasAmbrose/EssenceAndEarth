@@ -4,6 +4,21 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Full crop list (v0.13.0)
+
+- [ ] **Check this first:** read the content log after loading. Any recipe with a wrong Bedrock item id shows up here, and those are what to fix. The ones most likely to be wrong are `melon_block`, `waterlily`, `nether_brick`, `snow`, the coral fans, the music discs, and the three head items.
+- [ ] The 29 new crops' seeds craft: air, earth, water, fire, stone, dirt, ice, deepslate, nature, dye, nether, coral, honey, prismarine, sculk, end, experience, pig, chicken, cow, sheep, squid, fish, turtle, armadillo, phantom, rabbit, breeze and ghast.
+- [ ] All 11 clusters craft from their four items. The water and fire clusters give the bucket back, or else note that they don't.
+- [ ] Terra seeds now craft from 8 Terra Essence around wheat seeds.
+- [ ] Mixed recipes craft: sand (fire + dirt), clay (water + dirt), nether wart (nether + nature), andesite, a sapling, a coral, a dye, a concrete, a log.
+- [ ] The buckets (water, lava, milk) use up an empty bucket and give back a full one.
+- [ ] A Blank Skull recipe makes 4, and 8 essence around one makes each head and skull.
+- [ ] A Blank Record crafts, and at least 3 music discs craft from it.
+- [ ] 8 experience essence makes 8 droplets, and a droplet + a glass bottle makes a bottle o' enchanting.
+- [ ] Retired crops (cobblestone, sand, clay, nether wart): seeds no longer craft, planted ones still grow, and their essence still crafts.
+- [ ] Each new mob essence's face reads at normal size.
+- [ ] The recipe book and crafting table stay responsive with this many recipes.
+
 ## Ores and materials (v0.12.0)
 
 - [ ] **Check this first:** the add-on loads with no script errors or content log errors about features.
@@ -53,7 +68,6 @@ Still needs testing in-game:
 - [ ] Using a different tier's essence on essence farmland swaps it, returning the old essence about 25% of the time. The same tier's essence does nothing and isn't used.
 - [ ] 1 dirt + 1 tier essence crafts that tier's farmland, in any slots.
 - [ ] Bone meal does nothing on our crops and isn't used up. It still works on vanilla crops.
-- [ ] Every output recipe shows and crafts its shape: ring 8, full 9 (diamond, emerald, wither skeleton, wither), row 3 in each of the 3 rows (wood, nether wart, zombie, spider string, skeleton arrows, creeper, slime), and square 4 (sand, clay).
 - [ ] Spider and skeleton show both recipes in the recipe book, and each gives the right item.
 - [ ] Copper, iron and gold now craft ingots, and netherite crafts ingots rather than scrap.
 - [ ] The sickle and hoe still work, and the hoe's seed removal still takes one seed when a second seed drops.
@@ -62,7 +76,6 @@ Still needs testing in-game:
 
 ## Terra crop (v0.10.0)
 
-- [ ] Terra seeds craft from 4 Terra + 4 dirt around wheat seeds.
 
 ## Essence Guide (v0.9.0)
 
