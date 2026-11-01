@@ -4,6 +4,12 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Altar recipes in the Guide (v0.14.1)
+
+- [ ] The Guide has an Altar Recipes page for each tier and for daggers, and the longest ones scroll.
+- [ ] Item names read properly, and a recipe made from its page works at the altar.
+- [ ] The Infusion Altar page explains how to make both seed bases.
+
 ## Infusion Altar and souls (v0.14.0)
 
 - [ ] **Check this first:** the add-on loads with no script or content log errors. Then craft a pedestal and place an item on it, since the display entity is the biggest unknown.

@@ -576,7 +576,7 @@ const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
 const tierTitle = (t) => title(t.id);
 const GUIDE_PAGES = [
   { title: "Getting Started", body: `Mine Essence Ore underground, between y -32 and 64, for ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence each. It also drops from most mobs (${pct(BAL.mobEssenceChance)}), grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nOnce you have a little, plant the ${tierTitle(cfg.tiers[0])} crop for a steady supply.\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
-  { title: "Infusion Altar", body: `Seeds are made at an Infusion Altar with 8 Infusion Pedestals around it, at the same height: 3 blocks away on each side, and 2 away on each diagonal.\n\nPut a seed base on the altar, and 4 of the resource and 4 tier essence on the pedestals. Use an item on either block to place it, and an empty hand to take it back. Then use a Wand on the altar, or power it with redstone.` },
+  { title: "Infusion Altar", body: `Seeds are made at an Infusion Altar with 8 Infusion Pedestals around it, at the same height: 3 blocks away on each side, and 2 away on each diagonal.\n\nPut a seed base on the altar, and 4 of the resource and 4 tier essence on the pedestals. Use an item on either block to place it, and an empty hand to take it back. Then use a Wand on the altar, or power it with redstone.\n\nTo make a Vita Seed Base, craft 4 Vita Shards around wheat seeds. Mob seeds need an Anima Seed Base instead: craft a Vita Seed Base with 2 Anima Dust.` },
   { title: "Souls", body: `Mob seeds use Soul Jars instead of the resource. Kill mobs with an Anima Dagger in your hand and a Soul Jar in your inventory to fill it. Each jar holds one mob type, and shows its count on the jar.\n\nThe jar empties when it's used in a recipe, so you keep it.\n\nAttuned daggers, made at the altar, fill jars ${BAL.attunedSoulMultiplier} times as fast from passive or hostile mobs.` },
   { title: "Seeds and Harvest", body: `Seeds come from the Infusion Altar. The ${tierTitle(cfg.tiers[0])} seeds are the exception: craft 8 ${tierTitle(cfg.tiers[0])} Essence around wheat seeds.\n\nSeeds grow on any farmland, but give extras only on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly, and more on higher tiers of farmland.\n\nEach crop's essence crafts its resource. Common resources use a ring of 8 or a row of 3 and make a lot. Rare ones take a full grid of 9 and make 1. The wiki lists every recipe.\n\nBone meal doesn't work on these crops.` },
   { title: "Essence Farmland", body: `Use tier essence on farmland to turn it into that tier, or craft 1 dirt + 1 tier essence. It never dries out and needs no water.\n\nOn any essence farmland, a ripe crop has a ${pct(BAL.secondaryChance)} chance of a second essence and of a second seed. Farmland matching the crop's tier raises each to ${pct(BAL.secondaryChance + BAL.matchingFarmlandChance)}.\n\nUsing a different tier's essence swaps the farmland, with a ${pct(BAL.farmlandRefundChance)} chance of getting one of the old essence back.` },
@@ -589,18 +589,37 @@ const GUIDE_PAGES = [
 
 // Infusion recipes for the script: a seed base on the altar, 4 of the ingredient and 4 tier essence on the pedestals.
 const FULL_JAR = (soul) => ({ soul });
+const ATTUNED_DAGGERS = [["passive", ["pig", "chicken", "cow", "sheep"]], ["hostile", ["zombie", "skeleton", "creeper", "spider"]]];
 const ALTAR_RECIPES = [
   ...cfg.crops.filter((c) => !c.retired && !c.essenceCrop).map((c) => ({
     input: `${NS}:${c.soul ? "anima" : "vita"}_seed_base`,
     ingredients: [...Array(4).fill(c.soul ? FULL_JAR(c.soul) : c.ingredient), ...Array(4).fill(`${NS}:${cfg.tiers[c.tier - 1].id}_essence`)],
     output: `${NS}:${c.id}_seeds`,
   })),
-  ...[["passive", ["pig", "chicken", "cow", "sheep"]], ["hostile", ["zombie", "skeleton", "creeper", "spider"]]].map(([kind, mobs]) => ({
+  ...ATTUNED_DAGGERS.map(([kind, mobs]) => ({
     input: `${NS}:anima_dagger`,
     ingredients: [`${NS}:anima_ingot`, `${NS}:anima_ingot`, `${NS}:anima_gemstone`, `${NS}:anima_gemstone`, ...mobs.map(FULL_JAR)],
     output: `${NS}:${kind}_anima_dagger`,
   })),
 ];
+
+// Guide pages listing every altar recipe, one per tier. There's no recipe viewer on Bedrock, and these don't show in the recipe book.
+cfg.tiers.forEach((t, i) => {
+  const crops = cfg.crops.filter((c) => !c.retired && !c.essenceCrop && c.tier === i + 1);
+  const section = (base, list, line) => (list.length ? [`${base} on the altar:\n${list.map(line).join("\n")}`] : []);
+  if (crops.length) GUIDE_PAGES.push({
+    title: `Altar Recipes: ${tierTitle(t)}`,
+    body: [
+      `Each of these takes 4 ${tierTitle(t)} Essence on the pedestals, plus the 4 items listed.`,
+      ...section("Vita Seed Base", crops.filter((c) => !c.soul), (c) => `${title(c.id)}: 4 ${title(c.ingredient.split(":")[1])}`),
+      ...section("Anima Seed Base", crops.filter((c) => c.soul), (c) => `${title(c.id)}: 4 Soul Jars, each with ${cfg.souls[c.soul].need} ${title(c.soul)} Soul${cfg.souls[c.soul].need === 1 ? "" : "s"}`),
+    ].join("\n\n"),
+  });
+});
+GUIDE_PAGES.push({
+  title: "Altar Recipes: Daggers",
+  body: `Put an Anima Dagger on the altar. On the pedestals, put 2 Anima Ingots, 2 Anima Gemstones and 4 full Soul Jars.\n\n${ATTUNED_DAGGERS.map(([kind, mobs]) => `${title(kind)} dagger: ${mobs.map(title).join(", ")} jars`).join("\n")}`,
+});
 
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
