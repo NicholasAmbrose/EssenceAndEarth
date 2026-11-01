@@ -511,3 +511,11 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
   const attuned = DAGGERS[dagger];
   addSouls(player, soul, attuned !== null && attuned === SOULS[soul].passive ? ATTUNED_SOULS : 1);
 });
+
+// Deepcore's Geo Scanner only counts ores it's told about (github.com/baseballr/Deepcore/issues/8).
+// It keeps them in memory, so they go again on every load. Nothing happens if Deepcore isn't installed or isn't listening.
+const DEEPCORE_ORES = __DEEPCORE_ORES__;
+system.runTimeout(() => {
+  const overworld = world.getDimension("overworld");
+  for (const o of DEEPCORE_ORES) overworld.runCommand(`scriptevent dq:add_ore ${JSON.stringify(o)}`);
+}, 20);

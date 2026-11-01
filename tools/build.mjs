@@ -621,6 +621,14 @@ GUIDE_PAGES.push({
   body: `Put an Anima Dagger on the altar. On the pedestals, put 2 Anima Ingots, 2 Anima Gemstones and 4 full Soul Jars.\n\n${ATTUNED_DAGGERS.map(([kind, mobs]) => `${title(kind)} dagger: ${mobs.map(title).join(", ")} jars`).join("\n")}`,
 });
 
+// Our ores for Deepcore's Geo Scanner (see scripts/main.js). Its hologram wants colours as 0-1.
+const rgb = (hex) => [1, 3, 5].map((i) => +(parseInt(hex.slice(i, i + 2), 16) / 255).toFixed(2));
+const DEEPCORE_ORES = [
+  { k: "essence", name: "Essence", blocks: [`${NS}:essence_ore`, `${NS}:deepslate_essence_ore`], rgb: rgb(cfg.tiers[0].color) },
+  { k: "vita", name: "Vita", blocks: [`${NS}:vita_ore`, `${NS}:deepslate_vita_ore`], rgb: rgb(cfg.vita.color) },
+  { k: "anima", name: "Anima", blocks: [`${NS}:anima_ore`], rgb: rgb(cfg.anima.color) },
+];
+
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
   const f = path.join(BP, "scripts", file);
   if (f.endsWith(".js"))
@@ -631,6 +639,7 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__GUIDE_PAGES__", JSON.stringify(GUIDE_PAGES))
       .replaceAll("__ALTAR_RECIPES__", JSON.stringify(ALTAR_RECIPES))
       .replaceAll("__SOULS__", JSON.stringify(cfg.souls))
+      .replaceAll("__DEEPCORE_ORES__", JSON.stringify(DEEPCORE_ORES))
       .replaceAll("__FARMLAND_TIER__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, i + 1]))))
       .replaceAll("__CROP_TIER__", JSON.stringify(Object.fromEntries(cfg.crops.map((c) => [`${NS}:${c.id}_crop`, c.retired ? 1 : c.tier]))))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)

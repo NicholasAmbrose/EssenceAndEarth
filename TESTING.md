@@ -4,6 +4,16 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Deepcore Geo Scanner
+
+Needs Deepcore to handle `dq:add_ore` (github.com/baseballr/Deepcore/issues/8).
+
+- [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed.
+- [ ] A scan lists Essence and Vita, with stone and deepslate counted together.
+- [ ] A scan in the Nether lists Anima.
+- [ ] The hologram shows each ore in its colour.
+- [ ] Ores still show after a server restart.
+
 ## Vita Shards without ore (v0.15.0)
 
 - [ ] 4 Terra Blocks in a plus around a flint makes 4 Vita Shards, and the recipe unlocks once you hold a Terra Block.
