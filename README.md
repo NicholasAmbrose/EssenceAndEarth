@@ -52,7 +52,7 @@ Run it before uploading a new version. Saving is paused during the download so t
 | Path | What |
 |---|---|
 | `crops.json` | Name, namespace, version, essence tiers and every crop. Most changes happen here. |
-| `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth, bone meal, tools and the Essence Guide menu). |
+| `packs/BP`, `packs/RP` | Hand-written files copied into the build: manifests and `scripts/main.js` (crop growth, accelerators, farmland conversion, tools and the Essence Guide menu). |
 | `tools/build.mjs` | Generates blocks, items, recipes, loot tables and textures from `crops.json`, and checks it for mistakes. Writes `build/preview.png`, a sheet of every generated texture. |
 | `tools/wiki.mjs`, `src/EssenceWiki` | The wiki: data generator and Blazor site. |
 | `tools/backup.mjs` | Downloads the server world into `backups/`. |
@@ -71,13 +71,15 @@ Add an entry to `crops.json`:
 Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks. To take a crop out of the game, add `"retired": true`: its seeds can no longer be crafted and it leaves the wiki, but planted crops keep working.
 
 - **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
-- **Crop:** plant on essence farmland of the crop's tier or higher (vanilla farmland won't take it); grows in 4 stages. Ripe crops drop crop essence and a seed, with a chance of a second.
-- **Output:** 8 crop essence in a ring crafts `count` × `output`.
+- **Crop:** plants on any farmland and grows in 4 stages. Ripe crops drop crop essence and a seed. Essence farmland adds a chance of a second of each, which is higher if its tier matches the crop's.
+- **Output:** crop essence in the crop's `shape` crafts `count` × `output`. Shapes are listed under `shapes` in `crops.json`, and the default is `ring`.
 - **Essence crop (optional):** `"essenceCrop": true`, on a crop whose `id` matches a tier, drops that tier's essence directly, with no crop essence or ring recipe. The Terra crop uses this.
 - **Face (optional):** `face` is 8 rows of 8 characters drawn on the essence, and `faceColors` gives each character's colour. `essenceColor` optionally gives the essence a different body colour from its seeds and crop. Mob crops use these. See [the fallbacks](reference/mob-essence-fallbacks/README.md) for the plain versions.
-- **Second output (optional):** add `"alt": { "output": "minecraft:arrow", "count": 4 }`. 8 essence with the gap in the top middle crafts it.
+- **Second output (optional):** add `"alt": { "output": "minecraft:arrow", "count": 8, "shape": "row" }`. It needs a different shape from the main output.
 
-Growth accelerators (`ee:<tier>_accelerator`) go directly under essence farmland, up to 4 deep with no gaps. Each adds its tier's `acceleratorRolls` value to the crop's growth rolls per random tick.
+Growth accelerators (`ee:<tier>_accelerator`) go below a crop. On a timer, each gives the first crop above it (from 2 blocks up, within its tier's range) one extra growth roll.
+
+Balance, tiers and recipes follow [Mystical Agriculture](https://github.com/BlakeBr0/MysticalAgriculture) by BlakeBr0 (MIT licence, © BlakeBr0), so its players feel at home. No code or art is copied.
 
 ## Balance
 
@@ -85,14 +87,15 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 
 | Setting | What it does |
 |---|---|
-| `growChance` | Chance per growth roll to advance a stage |
-| `boneMealChance` | Chance per bone meal to advance a stage. A miss still uses it |
+| `growChance` | Chance per random tick or accelerator tick to advance a stage |
 | `grassEssenceChance`, `cropEssenceChance`, `logEssenceChance` | Chance of Terra Essence from grass, ripe vanilla crops, and each log dropped near a Wildbloom Logger |
 | `harvestEssence`, `oreEssence` | `[min, max]` essence from a ripe crop and from old essence ore, which no longer generates |
-| `secondSeedChance` | Chance a ripe crop drops a second seed |
-| `farmlandBonus` | Per tier: chance of one extra essence from a ripe crop |
-| `acceleratorRolls` | Per tier: growth rolls each accelerator adds |
-| `maxAccelerators` | How deep a stack counts |
+| `secondaryChance` | Chance of a second essence, and of a second seed, on essence farmland |
+| `matchingFarmlandChance` | Added to `secondaryChance` when the farmland's tier matches the crop's |
+| `terraCropYield` | Per farmland tier: average essence from a ripe Terra crop |
+| `farmlandRefundChance` | Chance of getting one old essence back when swapping a farmland's tier |
+| `acceleratorSeconds` | Average time between an accelerator's growth rolls |
+| `acceleratorRange` | Per tier: how many blocks up an accelerator reaches |
 | `farmlandYield`, `acceleratorYield` | How many blocks one craft makes |
 | `toolDurability` | Uses the Essence Sickle and Essence Hoe last. An anvil repair with Aqua Essence restores a quarter |
 
@@ -103,8 +106,8 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 - **Growth:** each crop is `ee:<id>_crop` with a block state `ee:growth` from 0 to 3. Ripe is 3.
 - **Harvest:** break it with drops (for example `setblock x y z air destroy`). The ripe crop's loot table drops its essence
   and seeds; the farmland bonus essence is added by our script whatever broke the crop.
-- **Replant:** `setType("ee:<id>_crop")` gives a fresh stage-1 crop. Crops grow only on `ee:<tier>_farmland` of their own
-  tier or higher. A crop placed on anything else by script never grows.
+- **Replant:** `setType("ee:<id>_crop")` gives a fresh stage-1 crop. Crops grow on vanilla farmland and any `ee:<tier>_farmland`.
+  A crop placed on anything else by script never grows.
 - **Seeds:** `ee:<id>_seeds` places `ee:<id>_crop`.
 
 ## Testing

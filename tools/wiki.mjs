@@ -24,7 +24,10 @@ const title = (id) => id.replace(/(^|_)(\w)/g, (_, sep, c) => (sep ? " " : "") +
 const slug = (id) => id.replaceAll("_", "-");
 const pct = (v) => `${+(v * 100).toFixed(1)}%`;
 const range = ([min, max]) => (min === max ? `${min}` : `${min}–${max}`);
-const harvest = range(BAL.harvestEssence), secondSeed = pct(BAL.secondSeedChance), boneMeal = pct(BAL.boneMealChance);
+const harvest = range(BAL.harvestEssence), secondary = pct(BAL.secondaryChance), matching = pct(BAL.secondaryChance + BAL.matchingFarmlandChance);
+const SHAPE_NAMES = { ring: "Ring of 8", full: "Full grid of 9", row: "Row of 3, in any row", square: "Square of 4, in any corner" };
+const cost = (o) => cfg.shapes[o.shape ?? "ring"].join("").replaceAll(" ", "").length;
+const shapeNote = (o) => SHAPE_NAMES[o.shape ?? "ring"];
 
 // ---------- images ----------
 
@@ -53,20 +56,9 @@ const seedsItem = (c) => ({ name: `${title(c.id)} Seeds`, icon: `img/icons/${c.i
 const essenceItem = (c) => ({ name: `${title(c.id)} Essence`, icon: `img/icons/${c.id}_essence.png`, href: cropHref(c) });
 const ripeItem = (c) => ({ name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`, href: cropHref(c) });
 const farmlandItem = (t) => ({ name: `${title(t.id)} Farmland`, icon: `img/icons/${t.id}_farmland_top.png`, href: `wiki/farmland/${slug(`${t.id}_farmland`)}` });
-const bonusPct = (i) => pct(BAL.farmlandBonus[i]);
 const acceleratorItem = (t) => ({ name: `${title(t.id)} Growth Accelerator`, icon: `img/icons/${t.id}_accelerator.png`, href: `wiki/accelerators/${slug(`${t.id}_accelerator`)}` });
-// Average random ticks for a crop to ripen with this many rolls per tick, as in scripts/main.js.
-const ripenTicks = (rolls) => {
-  let chance = [1]; // chance[k]: one tick advances k stages
-  for (let r = rolls; r > 0; r--) {
-    const q = BAL.growChance * Math.min(r, 1);
-    chance = [...chance, 0].map((v, k) => v * (1 - q) + (chance[k - 1] ?? 0) * q);
-  }
-  const left = [0]; // left[n]: average ticks with n stages to go
-  for (let n = 1; n <= 3; n++) left[n] = (1 + chance.reduce((sum, v, k) => sum + (k ? v * left[Math.max(n - k, 0)] : 0), 0)) / (1 - chance[0]);
-  return left[3];
-};
-const speed = (rolls) => `×${(ripenTicks(1) / ripenTicks(rolls)).toFixed(1)}`;
+// Average minutes for one accelerator alone to ripen a crop: 3 stages at growChance per timer.
+const acceleratorMinutes = (3 / BAL.growChance * BAL.acceleratorSeconds / 60).toFixed(1);
 const stages = (c) =>[0, 1, 2].map((s) => ({ name: `Stage ${s + 1}`, icon: `img/icons/crop_${s}.png` })).concat({ name: "Ripe", icon: `img/icons/${c.id}_crop.png` });
 
 // ---------- recipes ----------
@@ -85,20 +77,15 @@ const seedsRecipe = (c) => {
   const e = tierItem(cfg.tiers[c.tier - 1]), r = vanilla(c.ingredient), w = vanilla("minecraft:wheat_seeds");
   return recipe(seedsItem(c), 1, [[e, r, e], [r, w, r], [e, r, e]]);
 };
-const outputRecipe = (c) => {
+// o is a crop or its alt: its shape, padded to the 3×3 grid and filled with the crop's essence.
+const essenceRecipe = (c, o) => {
   const e = essenceItem(c);
-  return recipe({ ...vanilla(c.output) }, c.count, [[e, e, e], [e, null, e], [e, e, e]]);
+  const rows = [0, 1, 2].map((y) => [0, 1, 2].map((x) => (cfg.shapes[o.shape ?? "ring"][y]?.[x] === "E" ? e : null)));
+  return recipe({ ...vanilla(o.output) }, o.count, rows, shapeNote(o));
 };
-const altRecipe = (c) => {
-  const e = essenceItem(c);
-  return recipe({ ...vanilla(c.alt.output) }, c.alt.count, [[e, null, e], [e, e, e], [e, e, e]], "The gap goes in the top middle");
-};
-const makes = (c) => [c, c.alt].filter(Boolean).map((o) => `${o.count} × ${vanilla(o.output).name}`).join(" or ");
-const yields = (c) => (c.essenceCrop ? `Drops ${tierName(cfg.tiers[c.tier - 1])} directly` : `8 essence → ${makes(c)}`);
-const farmlandRecipe = (t, i) => {
-  const b = i ? farmlandItem(cfg.tiers[i - 1]) : vanilla("minecraft:dirt"), e = tierItem(t);
-  return recipe(farmlandItem(t), BAL.farmlandYield, [[null, e, null], [e, b, e], [null, e, null]]);
-};
+const makesOne = (o) => `${cost(o)} essence → ${o.count} × ${vanilla(o.output).name}`;
+const yields = (c) => (c.essenceCrop ? `Drops ${tierName(cfg.tiers[c.tier - 1])} directly` : [c, c.alt].filter(Boolean).map(makesOne).join(", or "));
+const farmlandRecipe = (t) => recipe(farmlandItem(t), BAL.farmlandYield, [[vanilla("minecraft:dirt"), tierItem(t), null], [null, null, null], [null, null, null]], "Shapeless: any slots");
 
 const acceleratorRecipe = (t, i) => {
   const b = i ? acceleratorItem(cfg.tiers[i - 1]) : vanilla("minecraft:cobblestone"), e = tierItem(t);
@@ -112,7 +99,8 @@ const h2 = (text) => ({ t: "h2", text });
 const facts = (rows) => ({ t: "facts", facts: rows });
 const list = (items) => ({ t: "items", items });
 const terraCrop = cfg.crops.find((c) => c.essenceCrop);
-const terraCropDrop = { ...seedsItem(terraCrop), name: "Terra Crop", icon: `img/icons/${terraCrop.id}_crop.png`, sub: `${harvest} per ripe harvest` };
+const terraYield = `${BAL.terraCropYield[0]} to ${BAL.terraCropYield.at(-1)} per ripe harvest on average, by farmland tier`;
+const terraCropDrop = { ...seedsItem(terraCrop), name: "Terra Crop", icon: `img/icons/${terraCrop.id}_crop.png`, sub: terraYield };
 const grassDrops = list([
   { ...vanilla("minecraft:short_grass"), sub: `Grass and ferns: ${pct(BAL.grassEssenceChance)} chance` },
   { ...vanilla("minecraft:wheat"), sub: `Ripe wheat, carrots, potatoes, beetroot: ${pct(BAL.cropEssenceChance)} chance` },
@@ -134,24 +122,21 @@ const guide = {
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
-        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on <a href="wiki/farmland">essence farmland</a> of their tier or higher and wait. Bone meal can help: each use has a ${boneMeal} chance to advance a stage.`),
+        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on any farmland and wait. <a href="wiki/farmland">Essence farmland</a> gives extra drops, and <a href="wiki/accelerators">growth accelerators</a> speed them up.`),
         h2("4. Harvest and craft"),
-        p(`A ripe crop drops ${harvest} of its essence and its seed back. Eight essence in a ring craft the resource.`),
+        p(`A ripe crop drops ${harvest} of its essence and its seed back. Each crop page shows the recipe that turns its essence into the resource.`),
       ],
     },
     {
       slug: "growing-crops", name: "Growing crops", icon: "img/icons/crop_2.png",
-      summary: "Planting, growth stages, bone meal and harvesting.",
+      summary: "Planting, growth stages and harvesting.",
       blocks: [
-        facts([["Plant on", "Essence farmland of the crop's tier or higher"], ["Growth", `4 stages, about ${pct(BAL.growChance)} chance per random tick`], ["Bone meal", `${boneMeal} chance to advance one stage per use`], ["Ripe drops", `${harvest} essence, 1 seed, ${secondSeed} chance of a second seed`], ["Unripe drops", "The seed back"]]),
+        facts([["Plant on", "Any farmland"], ["Growth", `4 stages, about ${pct(BAL.growChance)} chance per random tick`], ["Bone meal", "Doesn't work on these crops"], ["Ripe drops", `${harvest} essence and 1 seed, with extras on essence farmland`], ["Unripe drops", "The seed back"]]),
         list(stages(cfg.crops.find((c) => c.id === "iron") ?? cfg.crops[0])),
-        h2("Plant on essence farmland"),
-        p(`Seeds won't plant on vanilla farmland. Every crop needs <a href="wiki/farmland">essence farmland</a> of its own tier or higher, so each plot in your garden has to be crafted, and better crops need better farmland. It never dries out and can't be trampled.`),
         h2("Essence farmland"),
-        p("Ripe crops on essence farmland can drop an extra essence. The higher the farmland's tier, the better the chance."),
-        list(cfg.tiers.map((t, i) => ({ ...farmlandItem(t), sub: `${bonusPct(i)} chance of +1 essence` }))),
+        p(`On any <a href="wiki/farmland">essence farmland</a>, a ripe crop has a ${secondary} chance of a second essence and a ${secondary} chance of a second seed. If the farmland matches the crop's tier, each rises to ${matching}. On vanilla farmland there are no extras.`),
         h2("Growth accelerators"),
-        p(`Stack up to ${BAL.maxAccelerators} <a href="wiki/accelerators">growth accelerators</a> directly under the farmland to make the crop above grow faster. Each one adds growth rolls, tiers can be mixed, and a gap ends the stack.`),
+        p(`Place <a href="wiki/accelerators">growth accelerators</a> below a crop. Each gives it an extra growth chance about every ${BAL.acceleratorSeconds} seconds, so more means faster.`),
       ],
     },
     {
@@ -193,30 +178,30 @@ const essence = {
 
 const farmland = {
   slug: "farmland", title: "Essence farmland", group: "Getting started", icon: farmlandItem(cfg.tiers[0]).icon,
-  blurb: "Farmland that never dries out and gives ripe crops a chance of extra essence.",
+  blurb: "Farmland that never dries out and gives ripe crops a chance of a second essence and seed.",
   entries: cfg.tiers.map((t, i) => ({
     slug: slug(`${t.id}_farmland`), name: `${title(t.id)} Farmland`, icon: farmlandItem(t).icon,
-    summary: `${bonusPct(i)} chance of +1 essence from ripe crops.`,
+    summary: `Best for tier ${i + 1} crops: ${matching} chance of each extra.`,
     blocks: [
-      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Bonus", `${bonusPct(i)} chance of 1 extra essence per ripe harvest`], ["Water", "Not needed; never dries out"], ["Grows", i ? `Crops of tiers 1–${i + 1}` : "Tier 1 crops"]]),
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Tier " + (i + 1) + " crops", `${matching} chance of a second essence, and of a second seed`], ["Other crops", `${secondary} chance of each`], ["Terra crop", `${BAL.terraCropYield[i]} Terra Essence per harvest on average`], ["Water", "Not needed; never dries out"]]),
       list([{ ...farmlandItem(t), name: "Top", sub: "" }, { name: "Side", icon: `img/icons/${t.id}_farmland_side.png` }]),
-      h2("Recipe"),
-      p(`${i ? `One ${title(cfg.tiers[i - 1].id)} Farmland and four ${tierName(t)}` : "One dirt and four Terra Essence"} make ${BAL.farmlandYield}.`),
-      farmlandRecipe(t, i),
+      h2("How to make it"),
+      p(`Use one ${tierName(t)} on placed farmland, or craft one dirt and one ${tierName(t)} to make ${BAL.farmlandYield}. Using it on farmland of another tier swaps the tier, with a ${pct(BAL.farmlandRefundChance)} chance of getting one of the old essence back.`),
+      farmlandRecipe(t),
     ],
   })),
 };
 
 const accelerators = {
   slug: "accelerators", title: "Growth accelerators", group: "Getting started", icon: acceleratorItem(cfg.tiers[0]).icon,
-  blurb: "Blocks that go under essence farmland and make the crop above grow faster.",
+  blurb: "Blocks that go below a crop and make it grow faster. Higher tiers reach further.",
   entries: cfg.tiers.map((t, i) => ({
     slug: slug(`${t.id}_accelerator`), name: `${title(t.id)} Growth Accelerator`, icon: acceleratorItem(t).icon,
-    summary: `Up to ${speed(1 + BAL.acceleratorRolls[i] * BAL.maxAccelerators)} crop speed with a full stack.`,
+    summary: `Reaches a crop up to ${BAL.acceleratorRange[i]} blocks away.`,
     blocks: [
-      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Speed with 1", speed(1 + BAL.acceleratorRolls[i])], [`Speed with ${BAL.maxAccelerators}`, speed(1 + BAL.acceleratorRolls[i] * BAL.maxAccelerators)], ["Growth rolls", `+${BAL.acceleratorRolls[i]} per random tick`], ["Place", `Directly under essence farmland, up to ${BAL.maxAccelerators} deep, with no gaps`]]),
+      facts([["Tier", `${i + 1} of ${cfg.tiers.length}`], ["Reach", `${BAL.acceleratorRange[i]} blocks up`], ["Effect", `1 extra growth chance about every ${BAL.acceleratorSeconds} seconds`], ["Ripens a crop", `In about ${acceleratorMinutes} minutes with one accelerator`], ["Place", "Anywhere below the crop, with room for the farmland"]]),
       list([acceleratorItem(t)]),
-      p("Tiers can be mixed in one stack, in any order. Each block adds its own rolls, and extra rolls help less as a crop nears the fastest it can grow."),
+      p("Every tier grows crops at the same speed, and higher tiers only reach further. Each accelerator works on its own, so more of them means faster, and it works on the first crop above it, through any blocks in between."),
       h2("Recipe"),
       p(`${i ? `Five ${title(cfg.tiers[i - 1].id)} Growth Accelerators and four ${tierName(t)}` : "Five cobblestone and four Terra Essence"} make ${BAL.acceleratorYield}.`),
       acceleratorRecipe(t, i),
@@ -272,14 +257,14 @@ const cropCategories = cfg.tiers
         slug: slug(c.id), name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`,
         summary: yields(c),
         blocks: [
-          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Plant on", `${title(t.id)} Farmland or higher`], ["Seeds use", vanilla(c.ingredient).name], ["Makes", c.essenceCrop ? tierName(t) : `${makes(c)} per 8 essence`]]),
+          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Best on", `${title(t.id)} Farmland`], ["Seeds use", vanilla(c.ingredient).name], ["Makes", c.essenceCrop ? tierName(t) : yields(c)]]),
           list(stages(c)),
           h2("Seeds"),
           seedsRecipe(c),
           h2("Harvest"),
-          list([{ ...(c.essenceCrop ? tierItem(t) : essenceItem(c)), sub: `${harvest} when ripe` }, { ...seedsItem(c), sub: `1, plus a ${secondSeed} chance of a second` }]),
-          ...(c.essenceCrop ? [] : [h2(vanilla(c.output).name), outputRecipe(c)]),
-          ...(c.alt ? [h2(vanilla(c.alt.output).name), altRecipe(c)] : []),
+          list([{ ...(c.essenceCrop ? tierItem(t) : essenceItem(c)), sub: c.essenceCrop ? terraYield : `${harvest} when ripe, ${secondary} to ${matching} chance of a second` }, { ...seedsItem(c), sub: `1, plus a ${secondary} to ${matching} chance of a second` }]),
+          ...(c.essenceCrop ? [] : [h2(vanilla(c.output).name), essenceRecipe(c, c)]),
+          ...(c.alt ? [h2(vanilla(c.alt.output).name), essenceRecipe(c, c.alt)] : []),
         ],
       };
     }),

@@ -1,23 +1,27 @@
 import { system, world, BlockVolume, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
-// NS, ESSENCE (the tier-1 essence), BALANCE, FARMLAND_BONUS, ACCELERATOR_ROLLS, GUIDE_PAGES, FARMLAND_TIER and CROP_TIER placeholders are filled in from crops.json at build time.
+// NS, ESSENCE (the tier-1 essence), BALANCE, ACCELERATOR_RANGE, GUIDE_PAGES, FARMLAND_TIER, CROP_TIER and ESSENCE_FARMLAND placeholders are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const {
-  growChance: GROW_CHANCE, // per random tick
-  boneMealChance: BONE_MEAL_CHANCE,
+  growChance: GROW_CHANCE, // per random tick, and per accelerator tick
   grassEssenceChance: GRASS_CHANCE,
   cropEssenceChance: CROP_CHANCE,
   logEssenceChance: LOG_CHANCE,
-  maxAccelerators: MAX_ACCELERATORS,
+  secondaryChance: SECONDARY_CHANCE, // second essence and second seed, on any essence farmland
+  matchingFarmlandChance: MATCHING_CHANCE, // added when the farmland's tier matches the crop's
+  terraCropYield: TERRA_YIELD, // average essence per harvest, by farmland tier
+  farmlandRefundChance: REFUND_CHANCE,
 } = __BALANCE__;
 
-// Essence farmland id -> chance that a ripe crop on it drops one extra essence.
-const FARMLAND_BONUS = __FARMLAND_BONUS__;
+// Accelerator id -> how many blocks above itself it reaches.
+const ACCELERATOR_RANGE = __ACCELERATOR_RANGE__;
 
-// Accelerator id -> growth rolls it adds per random tick, for an unbroken stack under the farmland.
-const ACCELERATOR_ROLLS = __ACCELERATOR_ROLLS__;
+// Farmland id -> its tier, crop id -> its tier, and tier essence id -> the farmland it makes.
+const FARMLAND_TIER = __FARMLAND_TIER__;
+const CROP_TIER = __CROP_TIER__;
+const ESSENCE_FARMLAND = __ESSENCE_FARMLAND__;
 
 // Tier-1 essence also has a small chance to drop from grass and ripe vanilla crops,
 // which is how every world gets started.
@@ -25,7 +29,7 @@ const GRASS = new Set(["minecraft:short_grass", "minecraft:tall_grass", "minecra
 // Item a harvested vanilla crop drops -> smallest stack that means it was ripe.
 // Unripe wheat and beetroot drop only seeds; unripe carrots and potatoes drop exactly 1.
 const RIPE_DROP = { "minecraft:wheat": 1, "minecraft:beetroot": 1, "minecraft:carrot": 2, "minecraft:potato": 2 };
-const FARMLAND = new Set(["minecraft:farmland", ...Object.keys(FARMLAND_BONUS)]);
+const FARMLAND = new Set(["minecraft:farmland", ...Object.keys(FARMLAND_TIER)]);
 
 const SICKLE = "__NS__:essence_sickle";
 const HOE = "__NS__:essence_hoe";
@@ -89,6 +93,36 @@ function takeSeed(dimension, location, seed) {
     return;
   }
 }
+
+function useOne(player) {
+  if (player.getGameMode() === GameMode.Creative) return;
+  const equip = player.getComponent("minecraft:equippable");
+  const item = equip?.getEquipment(EquipmentSlot.Mainhand);
+  if (!item) return;
+  if (item.amount > 1) {
+    item.amount -= 1;
+    equip.setEquipment(EquipmentSlot.Mainhand, item);
+  } else {
+    equip.setEquipment(EquipmentSlot.Mainhand);
+  }
+}
+
+// Tier essence used on farmland turns it into that tier. Swapping essence farmland can refund some of the old tier's essence.
+world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
+  const { block, itemStack, player, isFirstEvent } = event;
+  const farmland = ESSENCE_FARMLAND[itemStack?.typeId];
+  if (!farmland || !FARMLAND.has(block.typeId) || block.typeId === farmland) return;
+  event.cancel = true;
+  if (!isFirstEvent) return; // holding the button repeats the event
+  const { dimension, location, typeId: old } = block;
+  system.run(() => {
+    dimension.getBlock(location)?.setType(farmland);
+    dimension.playSound("dig.sand", location);
+    if (player.isValid) useOne(player);
+    if (old !== "minecraft:farmland" && Math.random() < REFUND_CHANCE)
+      drop(dimension, old.replace(/_farmland$/, "_essence"), { x: location.x + 0.5, y: location.y + 1.5, z: location.z + 0.5 });
+  });
+});
 
 world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
   const { block, itemStack, player, isFirstEvent } = event;
@@ -186,57 +220,56 @@ world.afterEvents.entitySpawn.subscribe(({ entity, cause }) => {
   if (stack.amount >= (RIPE_DROP[stack.typeId] ?? Infinity)) {
     if (Math.random() < CROP_CHANCE) drop(entity.dimension, "__ESSENCE__", entity.location);
   } else if (stack.typeId.startsWith("__NS__:") && stack.typeId.endsWith("_essence")) {
-    // Our crops only drop essence when ripe, so its appearance on farmland is a ripe harvest.
-    if (Math.random() < (FARMLAND_BONUS[soil] ?? 0)) drop(entity.dimension, stack.typeId, entity.location);
+    // Our crops only drop essence when ripe, so its appearance on essence farmland is a ripe harvest.
+    const tier = FARMLAND_TIER[soil];
+    const id = stack.typeId.replace(/_essence$/, "");
+    const cropTier = CROP_TIER[`${id}_crop`];
+    if (!tier || !cropTier) return; // vanilla farmland gives no extras, and tier essence other than the essence crop's isn't a harvest
+    const chance = SECONDARY_CHANCE + (tier === cropTier ? MATCHING_CHANCE : 0);
+    // The Terra crop's essence scales with the farmland's tier instead of rolling for a second.
+    const extra = stack.typeId === "__ESSENCE__" ? TERRA_YIELD[tier - 1] - 1 + Math.random() : Math.random() < chance ? 1 : 0;
+    if (extra >= 1) drop(entity.dimension, stack.typeId, entity.location, Math.floor(extra));
+    if (Math.random() < chance) drop(entity.dimension, `${id}_seeds`, entity.location);
   }
 });
 
-// Farmland id -> its tier, and crop id -> the lowest farmland tier it grows on.
-const FARMLAND_TIER = __FARMLAND_TIER__;
-const CROP_TIER = __CROP_TIER__;
-
 function canGrow(block) {
   // Machines can setType a crop onto any soil, past the placement filter. It just won't grow there.
-  return FARMLAND_TIER[block.below()?.typeId] >= CROP_TIER[block.typeId] && block.permutation.getState(GROWTH) < MAX_STAGE;
+  return FARMLAND.has(block.below()?.typeId) && block.permutation.getState(GROWTH) < MAX_STAGE;
 }
 
 function grow(block) {
   if (canGrow(block)) block.setPermutation(block.permutation.withState(GROWTH, block.permutation.getState(GROWTH) + 1));
 }
 
-function growthRolls(block) {
-  let rolls = 1;
-  try {
-    for (let i = 0; i < MAX_ACCELERATORS; i++) {
-      const extra = ACCELERATOR_ROLLS[block.below(i + 2)?.typeId]; // +2 skips the farmland
-      if (!extra) break;
-      rolls += extra;
-    }
-  } catch {
-    // below the world or in an unloaded chunk
+// Vanilla crops have 8 stages to our 4, and advance at wheat's best-case chance per tick.
+function acceleratorTick(block) {
+  const id = block.typeId;
+  if (isOurCrop(id)) {
+    if (Math.random() < GROW_CHANCE) grow(block);
+    return;
   }
-  return rolls;
+  const stage = block.permutation.getState("growth");
+  if (stage < 7 && Math.random() < 1 / 3) block.setPermutation(block.permutation.withState("growth", stage + 1));
 }
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent("__NS__:crop", {
     onRandomTick({ block }) {
-      // A fraction of a roll is a last roll at that fraction of the chance.
-      for (let rolls = growthRolls(block); rolls > 0; rolls--) if (Math.random() < GROW_CHANCE * Math.min(rolls, 1)) grow(block);
+      if (Math.random() < GROW_CHANCE) grow(block);
     },
-    onPlayerInteract({ block, player, dimension }) {
-      const equip = player?.getComponent("minecraft:equippable");
-      const item = equip?.getEquipment(EquipmentSlot.Mainhand);
-      if (item?.typeId !== "minecraft:bone_meal" || !canGrow(block)) return;
-      // A failed roll still uses the bone meal, like vanilla saplings.
-      if (Math.random() < BONE_MEAL_CHANCE) grow(block);
-      dimension.spawnParticle("minecraft:crop_growth_emitter", block.center());
-      if (player.getGameMode() === GameMode.Creative) return;
-      if (item.amount > 1) {
-        item.amount -= 1;
-        equip.setEquipment(EquipmentSlot.Mainhand, item);
-      } else {
-        equip.setEquipment(EquipmentSlot.Mainhand);
+  });
+  blockComponentRegistry.registerCustomComponent("__NS__:accelerator", {
+    // Speeds up the first crop above it, within its range.
+    onTick({ block }) {
+      try {
+        for (let up = 2; up <= ACCELERATOR_RANGE[block.typeId] + 2; up++) {
+          const above = block.above(up);
+          if (!above) return;
+          if (isCrop(above.typeId)) return acceleratorTick(above);
+        }
+      } catch {
+        // above the world or in an unloaded chunk
       }
     },
   });
