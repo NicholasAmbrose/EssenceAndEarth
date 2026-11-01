@@ -178,41 +178,41 @@ const ACCELERATOR = [
   "ssssvvvsssssssss",
 ];
 
-// Tools: b blade and h handle are palette colours, * blade highlight.
+// Tools: b blade, o outline, h and H handle are palette colours, * blade highlight, ~ blade shadow.
 const SICKLE = [
   "................",
-  ".....bbbbb......",
-  "...bb***bbbb....",
-  "..bbb....bbbb...",
-  "..b.......bbbb..",
-  "...........bbb..",
-  "...........bbb..",
-  "..........bbbb..",
-  ".........bbbb...",
-  "........hbbb....",
-  ".......hhb......",
-  "......hhh.......",
-  ".....hhh........",
-  "....hhh.........",
-  "...hh...........",
-  "................",
+  ".....oooooo.....",
+  "...oo******oo...",
+  "..o**bbbbbbb~o..",
+  "..o*boooooobb~o.",
+  "...oo......ob~o.",
+  "...........ob~o.",
+  "...........ob~o.",
+  "..........ob~~o.",
+  ".........ob~~o..",
+  "........oob~o...",
+  ".......oHhoo....",
+  "......oHho......",
+  ".....oHho.......",
+  "....ohho........",
+  ".....oo.........",
 ];
 const HOE = [
   "................",
   "................",
-  "........bbbbbb..",
-  ".......b**bbbbb.",
-  ".......bbbbhhbb.",
-  "........bbhhhbb.",
-  "..........hhh.b.",
-  ".........hhh....",
-  "........hhh.....",
-  ".......hhh......",
-  "......hhh.......",
-  ".....hhh........",
-  "....hhh.........",
-  "...hhh..........",
-  "...h............",
+  "........oooooo..",
+  ".......o****bbo.",
+  ".......o*bbbbb~o",
+  "........ooHho~~o",
+  ".........oHhoo~o",
+  "........oHho..oo",
+  ".......oHho.....",
+  "......oHho......",
+  ".....oHho.......",
+  "....oHho........",
+  "...oHho.........",
+  "..ohho..........",
+  "...oo...........",
   "................",
 ];
 
@@ -747,7 +747,7 @@ for (const [id, mask, pattern] of [
     "minecraft:hand_equipped": true,
     "minecraft:durability": { max_durability: BAL.toolDurability },
     "minecraft:repairable": { repair_items: [{ items: [toolEssence], repair_amount: Math.ceil(BAL.toolDurability / 4) }] },
-  }, { b: TOOL_TIER.color, h: "#6b4a2f" });
+  }, { b: TOOL_TIER.color, o: "#12263c", h: "#6b4a2f", H: "#93704a" });
   recipe(id, "shaped", { pattern, key: { E: { item: toolEssence }, S: { item: "minecraft:stick" } }, result: { item: `${NS}:${id}` } }, toolEssence);
 }
 
