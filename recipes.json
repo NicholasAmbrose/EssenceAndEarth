@@ -209,5 +209,6 @@
   {"pattern":["EE","EE"],"key":{"E":"ee:sand_essence"},"result":"minecraft:sand","count":16},
   {"pattern":["EE","EE"],"key":{"E":"ee:clay_essence"},"result":"minecraft:clay_ball","count":24},
   {"pattern":["EEE"],"key":{"E":"ee:nether_wart_essence"},"result":"minecraft:nether_wart","count":8},
-  {"pattern":["EEE","E E","EEE"],"key":{"E":"ee:bone_meal_essence"},"result":"minecraft:bone_meal","count":3}
+  {"pattern":["EEE","E E","EEE"],"key":{"E":"ee:bone_meal_essence"},"result":"minecraft:bone_meal","count":3},
+  {"pattern":["EEE","E E","EEE"],"key":{"E":"ee:anima_essence"},"result":"ee:anima_dust","count":4}
 ]

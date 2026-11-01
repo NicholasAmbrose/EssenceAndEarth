@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.13.0",
-  "file": "EssenceAndEarth_v0.13.0.mcaddon",
+  "version": "0.14.0",
+  "file": "EssenceAndEarth_v0.14.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.13.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.14.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
-  "crops": 53,
+  "crops": 54,
   "tiers": 5,
-  "items": 180,
-  "recipes": 290
+  "recipes": 301,
+  "items": 206
  },
  "categories": [
   {
@@ -85,7 +85,7 @@
       },
       {
        "t": "p",
-       "html": "Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on any farmland and wait. <a href=\"wiki/farmland\">Essence farmland</a> gives extra drops, and <a href=\"wiki/accelerators\">growth accelerators</a> speed them up."
+       "html": "Build an <a href=\"wiki/infusion/infusion-altar\">Infusion Altar</a> with eight pedestals. Put a seed base on the altar, and four tier essence and four of the resource on the pedestals, then use a Wand on the altar. Plant the seeds on any farmland and wait. <a href=\"wiki/farmland\">Essence farmland</a> gives extra drops, and <a href=\"wiki/accelerators\">growth accelerators</a> speed them up."
       },
       {
        "t": "h2",
@@ -184,7 +184,7 @@
         ],
         [
          "Topics",
-         "Getting started, seeds and harvest, farmland, accelerators, tools, crops by tier"
+         "Everything from your first essence to the Infusion Altar, plus crops by tier"
         ],
         [
          "Free copy",
@@ -713,7 +713,7 @@
      "slug": "aether-essence",
      "name": "Aether Essence",
      "icon": "img/icons/aether_essence.png",
-     "summary": "Tier 4. 8 crops use it.",
+     "summary": "Tier 4. 9 crops use it.",
      "blocks": [
       {
        "t": "facts",
@@ -724,7 +724,7 @@
         ],
         [
          "Crops",
-         "8"
+         "9"
         ]
        ]
       },
@@ -829,6 +829,12 @@
          "icon": "img/icons/ghast_seeds.png",
          "href": "wiki/aether-crops/ghast",
          "sub": "2 × Ghast Tear"
+        },
+        {
+         "name": "Anima Seeds",
+         "icon": "img/icons/anima_seeds.png",
+         "href": "wiki/aether-crops/anima",
+         "sub": "4 × Anima Dust"
         }
        ]
       }
@@ -1127,6 +1133,128 @@
       }
      ],
      "href": "wiki/materials/vita"
+    },
+    {
+     "slug": "anima",
+     "name": "Anima materials",
+     "icon": "img/icons/anima_ingot.png",
+     "summary": "Anima ingots, gemstones and storage blocks.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita materials plus two Anima Dust. Dust comes from Anima Ore in the Nether."
+      },
+      {
+       "t": "h2",
+       "text": "Anima Ingot"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Ingot",
+        "icon": "img/icons/anima_ingot.png",
+        "href": "wiki/materials/anima",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Anima Gemstone"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Gemstone",
+        "icon": "img/icons/anima_gemstone.png",
+        "href": "wiki/materials/anima",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Gemstone",
+          "icon": "img/icons/vita_gemstone.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      },
+      {
+       "t": "h2",
+       "text": "Storage"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Anima Nugget",
+         "icon": "img/icons/anima_nugget.png",
+         "href": "wiki/materials/anima",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Anima Ingot Block",
+         "icon": "img/icons/anima_ingot_block.png",
+         "href": "wiki/materials/anima",
+         "sub": "9 of the smaller item, and back again"
+        },
+        {
+         "name": "Anima Gemstone Block",
+         "icon": "img/icons/anima_gemstone_block.png",
+         "href": "wiki/materials/anima",
+         "sub": "9 of the smaller item, and back again"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/materials/anima"
     },
     {
      "slug": "terra",
@@ -1909,6 +2037,579 @@
       }
      ],
      "href": "wiki/materials/fertilizer"
+    }
+   ]
+  },
+  {
+   "slug": "infusion",
+   "title": "Infusion and souls",
+   "group": "Getting started",
+   "icon": "img/icons/infusion_altar.png",
+   "blurb": "The altar that makes seeds, the bases they start from, and the souls mob seeds need.",
+   "entries": [
+    {
+     "slug": "infusion-altar",
+     "name": "Infusion Altar",
+     "icon": "img/icons/infusion_altar.png",
+     "summary": "An altar and eight pedestals that craft seeds.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Layout",
+         "8 pedestals at the altar's height: 3 blocks away on each side, 2 away on each diagonal"
+        ],
+        [
+         "Place items",
+         "Use an item on the block. Each holds one"
+        ],
+        [
+         "Take items",
+         "Use an empty hand"
+        ],
+        [
+         "Start",
+         "Use a Wand on the altar, or power it with redstone"
+        ],
+        [
+         "Time",
+         "5 seconds"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "Pedestal order doesn't matter. Taking an item away stops the craft, and breaking a block drops what it held."
+      },
+      {
+       "t": "h2",
+       "text": "Infusion Altar"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Infusion Altar",
+        "icon": "img/icons/infusion_altar.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         },
+         {
+          "name": "Red Wool",
+          "icon": "img/vanilla/red_wool.png"
+         },
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Infusion Pedestal"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Infusion Pedestal",
+        "icon": "img/icons/infusion_pedestal.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         },
+         {
+          "name": "Red Wool",
+          "icon": "img/vanilla/red_wool.png"
+         },
+         {
+          "name": "Gold Ingot",
+          "icon": "img/vanilla/gold_ingot.png"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         null
+        ],
+        [
+         null,
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Wand"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Wand",
+        "icon": "img/icons/wand.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         null,
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Stick",
+          "icon": "img/vanilla/stick.png"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         null,
+         null
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/infusion/infusion-altar"
+    },
+    {
+     "slug": "seed-bases",
+     "name": "Seed bases",
+     "icon": "img/icons/vita_seed_base.png",
+     "summary": "What goes on the altar to start a seed.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Vita Seed Bases make resource seeds, and Anima Seed Bases make mob seeds."
+      },
+      {
+       "t": "h2",
+       "text": "Vita Seed Base"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Vita Seed Base",
+        "icon": "img/icons/vita_seed_base.png",
+        "href": "wiki/infusion/seed-bases",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         {
+          "name": "Wheat Seeds",
+          "icon": "img/vanilla/wheat_seeds.png"
+         },
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png",
+          "href": "wiki/materials/vita"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Anima Seed Base"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Seed Base",
+        "icon": "img/icons/anima_seed_base.png",
+        "href": "wiki/infusion/seed-bases",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         }
+        ],
+        [
+         null,
+         null,
+         null
+        ],
+        [
+         null,
+         null,
+         null
+        ]
+       ],
+       "note": "Shapeless: any slots"
+      }
+     ],
+     "href": "wiki/infusion/seed-bases"
+    },
+    {
+     "slug": "soulstone",
+     "name": "Soulstone and Anima",
+     "icon": "img/icons/soulstone.png",
+     "summary": "Found in the Nether.",
+     "blocks": [
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Soulstone",
+         "icon": "img/icons/soulstone.png",
+         "sub": "Large veins in the Nether. Mines into Soulstone Cobble"
+        },
+        {
+         "name": "Anima Ore",
+         "icon": "img/icons/anima_ore.png",
+         "sub": "Inside soulstone. Drops 1–3 Anima Dust"
+        },
+        {
+         "name": "Soul Dust",
+         "icon": "img/icons/soul_dust.png",
+         "sub": "Smelt soulstone cobble, then soulstone, then smooth soulstone"
+        },
+        {
+         "name": "Soul Glass",
+         "icon": "img/icons/soul_glass.png",
+         "sub": "4 Soul Dust around glass"
+        },
+        {
+         "name": "Soulstone Bricks",
+         "icon": "img/icons/soulstone_bricks.png",
+         "sub": "4 soulstone make 4"
+        },
+        {
+         "name": "Blank Skull",
+         "icon": "img/icons/blank_skull.png",
+         "sub": "4 Soul Dust around a bone block make 4"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Anima materials"
+      },
+      {
+       "t": "p",
+       "html": "Vita Ingots and Gemstones plus two Anima Dust make Anima Ingots and Gemstones."
+      }
+     ],
+     "href": "wiki/infusion/soulstone"
+    },
+    {
+     "slug": "soul-jars",
+     "name": "Soul Jars",
+     "icon": "img/icons/soul_jar.png",
+     "summary": "Collect mob souls for mob seeds.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Kill mobs with an Anima Dagger in your hand and a Soul Jar anywhere in your inventory. Each jar holds one mob type, and souls spill into the next jar when one fills. A jar empties when used at the altar, and you keep it."
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Soul Jar",
+        "icon": "img/icons/soul_jar.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Anima Ingot",
+          "icon": "img/icons/anima_ingot.png"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Soul Glass",
+          "icon": "img/icons/soul_glass.png"
+         },
+         null,
+         {
+          "name": "Soul Glass",
+          "icon": "img/icons/soul_glass.png"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Soul Glass",
+          "icon": "img/icons/soul_glass.png"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Souls per jar"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Pig",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Chicken",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Cow",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Sheep",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Squid",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Fish",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Slime",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "12 souls"
+        },
+        {
+         "name": "Turtle",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Armadillo",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Zombie",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "10 souls"
+        },
+        {
+         "name": "Skeleton",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "10 souls"
+        },
+        {
+         "name": "Creeper",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "10 souls"
+        },
+        {
+         "name": "Spider",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "10 souls"
+        },
+        {
+         "name": "Phantom",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Rabbit",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "6 souls"
+        },
+        {
+         "name": "Breeze",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "4 souls"
+        },
+        {
+         "name": "Blaze",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "10 souls"
+        },
+        {
+         "name": "Ghast",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "4 souls"
+        },
+        {
+         "name": "Enderman",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Wither Skeleton",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "8 souls"
+        },
+        {
+         "name": "Wither",
+         "icon": "img/icons/soul_jar.png",
+         "sub": "1 souls"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/infusion/soul-jars"
+    },
+    {
+     "slug": "anima-daggers",
+     "name": "Anima Daggers",
+     "icon": "img/icons/anima_dagger.png",
+     "summary": "Fill Soul Jars from your kills.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Anima Dagger",
+         "400 uses, 1 soul per kill"
+        ],
+        [
+         "Passive Anima Dagger",
+         "800 uses, 1.5 souls per passive mob"
+        ],
+        [
+         "Hostile Anima Dagger",
+         "800 uses, 1.5 souls per hostile mob"
+        ]
+       ]
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Dagger",
+        "icon": "img/icons/anima_dagger.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Anima Ingot",
+          "icon": "img/icons/anima_ingot.png"
+         },
+         {
+          "name": "Golden Sword",
+          "icon": "img/vanilla/golden_sword.png"
+         },
+         {
+          "name": "Anima Ingot",
+          "icon": "img/icons/anima_ingot.png"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         null
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Attuning"
+      },
+      {
+       "t": "p",
+       "html": "At the Infusion Altar, put an Anima Dagger on the altar. On the pedestals, put 2 Anima Ingots, 2 Anima Gemstones and 4 full Soul Jars. Pig, chicken, cow and sheep jars make a Passive dagger. Zombie, skeleton, creeper and spider jars make a Hostile one."
+      }
+     ],
+     "href": "wiki/infusion/anima-daggers"
     }
    ]
   },
@@ -3359,8 +4060,9 @@
           "icon": "img/vanilla/oak_log.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Oak Log",
@@ -3383,7 +4085,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -4295,8 +4998,9 @@
           "icon": "img/icons/air_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Air Cluster",
@@ -4319,7 +5023,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -4428,8 +5133,9 @@
           "icon": "img/icons/earth_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Earth Cluster",
@@ -4452,7 +5158,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -4561,8 +5268,9 @@
           "icon": "img/icons/water_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Water Cluster",
@@ -4585,7 +5293,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -5699,8 +6408,9 @@
           "icon": "img/icons/fire_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Fire Cluster",
@@ -5723,7 +6433,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -5970,8 +6681,9 @@
           "icon": "img/vanilla/stone.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Stone",
@@ -5994,7 +6706,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -6720,8 +7433,9 @@
           "icon": "img/vanilla/dirt.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Dirt",
@@ -6744,7 +7458,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -7187,8 +7902,9 @@
           "icon": "img/vanilla/ice.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Ice",
@@ -7211,7 +7927,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -7491,8 +8208,9 @@
           "icon": "img/vanilla/deepslate.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Deepslate",
@@ -7515,7 +8233,8 @@
           "href": "wiki/essence/terra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -7802,8 +8521,9 @@
           "icon": "img/vanilla/coal.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Coal",
@@ -7826,7 +8546,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -7996,8 +8717,9 @@
           "icon": "img/vanilla/amethyst_shard.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Amethyst Shard",
@@ -8020,7 +8742,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -8126,7 +8849,7 @@
         ],
         [
          "Seeds use",
-         "Slimeball"
+         "Soul Jar: 12 Slime Souls"
         ],
         [
          "Makes",
@@ -8175,8 +8898,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Slimeball",
-          "icon": "img/vanilla/slime_ball.png"
+          "name": "Soul Jar: 12 Slime Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -8186,16 +8910,19 @@
         ],
         [
          {
-          "name": "Slimeball",
-          "icon": "img/vanilla/slime_ball.png"
+          "name": "Soul Jar: 12 Slime Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Slimeball",
-          "icon": "img/vanilla/slime_ball.png"
+          "name": "Soul Jar: 12 Slime Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -8205,8 +8932,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Slimeball",
-          "icon": "img/vanilla/slime_ball.png"
+          "name": "Soul Jar: 12 Slime Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -8214,7 +8942,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -8413,8 +9142,9 @@
           "icon": "img/icons/nature_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Nature Cluster",
@@ -8437,7 +9167,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -9408,8 +10139,9 @@
           "icon": "img/icons/dye_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Dye Cluster",
@@ -9432,7 +10164,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -10197,8 +10930,9 @@
           "icon": "img/icons/nether_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Nether Cluster",
@@ -10221,7 +10955,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -10911,8 +11646,9 @@
           "icon": "img/icons/coral_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Coral Cluster",
@@ -10935,7 +11671,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -11844,8 +12581,9 @@
           "icon": "img/icons/honey_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Honey Cluster",
@@ -11868,7 +12606,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -11991,7 +12730,7 @@
         ],
         [
          "Seeds use",
-         "Raw Porkchop"
+         "Soul Jar: 8 Pig Souls"
         ],
         [
          "Makes",
@@ -12040,8 +12779,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Porkchop",
-          "icon": "img/vanilla/porkchop.png"
+          "name": "Soul Jar: 8 Pig Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12051,16 +12791,19 @@
         ],
         [
          {
-          "name": "Raw Porkchop",
-          "icon": "img/vanilla/porkchop.png"
+          "name": "Soul Jar: 8 Pig Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Raw Porkchop",
-          "icon": "img/vanilla/porkchop.png"
+          "name": "Soul Jar: 8 Pig Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -12070,8 +12813,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Porkchop",
-          "icon": "img/vanilla/porkchop.png"
+          "name": "Soul Jar: 8 Pig Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12079,7 +12823,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -12165,7 +12910,7 @@
         ],
         [
          "Seeds use",
-         "Raw Chicken"
+         "Soul Jar: 8 Chicken Souls"
         ],
         [
          "Makes",
@@ -12214,8 +12959,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Chicken",
-          "icon": "img/vanilla/chicken.png"
+          "name": "Soul Jar: 8 Chicken Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12225,16 +12971,19 @@
         ],
         [
          {
-          "name": "Raw Chicken",
-          "icon": "img/vanilla/chicken.png"
+          "name": "Soul Jar: 8 Chicken Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Raw Chicken",
-          "icon": "img/vanilla/chicken.png"
+          "name": "Soul Jar: 8 Chicken Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -12244,8 +12993,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Chicken",
-          "icon": "img/vanilla/chicken.png"
+          "name": "Soul Jar: 8 Chicken Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12253,7 +13003,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -12421,7 +13172,7 @@
         ],
         [
          "Seeds use",
-         "Raw Beef"
+         "Soul Jar: 8 Cow Souls"
         ],
         [
          "Makes",
@@ -12470,8 +13221,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Beef",
-          "icon": "img/vanilla/beef.png"
+          "name": "Soul Jar: 8 Cow Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12481,16 +13233,19 @@
         ],
         [
          {
-          "name": "Raw Beef",
-          "icon": "img/vanilla/beef.png"
+          "name": "Soul Jar: 8 Cow Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Raw Beef",
-          "icon": "img/vanilla/beef.png"
+          "name": "Soul Jar: 8 Cow Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -12500,8 +13255,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Beef",
-          "icon": "img/vanilla/beef.png"
+          "name": "Soul Jar: 8 Cow Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12509,7 +13265,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -12684,7 +13441,7 @@
         ],
         [
          "Seeds use",
-         "Raw Mutton"
+         "Soul Jar: 8 Sheep Souls"
         ],
         [
          "Makes",
@@ -12733,8 +13490,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Mutton",
-          "icon": "img/vanilla/mutton.png"
+          "name": "Soul Jar: 8 Sheep Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12744,16 +13502,19 @@
         ],
         [
          {
-          "name": "Raw Mutton",
-          "icon": "img/vanilla/mutton.png"
+          "name": "Soul Jar: 8 Sheep Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Raw Mutton",
-          "icon": "img/vanilla/mutton.png"
+          "name": "Soul Jar: 8 Sheep Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -12763,8 +13524,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Mutton",
-          "icon": "img/vanilla/mutton.png"
+          "name": "Soul Jar: 8 Sheep Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12772,7 +13534,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -12919,7 +13682,7 @@
         ],
         [
          "Seeds use",
-         "Ink Sac"
+         "Soul Jar: 6 Squid Souls"
         ],
         [
          "Makes",
@@ -12968,8 +13731,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Ink Sac",
-          "icon": "img/vanilla/ink_sac.png"
+          "name": "Soul Jar: 6 Squid Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -12979,16 +13743,19 @@
         ],
         [
          {
-          "name": "Ink Sac",
-          "icon": "img/vanilla/ink_sac.png"
+          "name": "Soul Jar: 6 Squid Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Ink Sac",
-          "icon": "img/vanilla/ink_sac.png"
+          "name": "Soul Jar: 6 Squid Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -12998,8 +13765,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Ink Sac",
-          "icon": "img/vanilla/ink_sac.png"
+          "name": "Soul Jar: 6 Squid Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13007,7 +13775,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -13134,7 +13903,7 @@
         ],
         [
          "Seeds use",
-         "Raw Cod"
+         "Soul Jar: 6 Fish Souls"
         ],
         [
          "Makes",
@@ -13183,8 +13952,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Cod",
-          "icon": "img/vanilla/cod.png"
+          "name": "Soul Jar: 6 Fish Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13194,16 +13964,19 @@
         ],
         [
          {
-          "name": "Raw Cod",
-          "icon": "img/vanilla/cod.png"
+          "name": "Soul Jar: 6 Fish Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Raw Cod",
-          "icon": "img/vanilla/cod.png"
+          "name": "Soul Jar: 6 Fish Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -13213,8 +13986,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Raw Cod",
-          "icon": "img/vanilla/cod.png"
+          "name": "Soul Jar: 6 Fish Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13222,7 +13996,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -13451,7 +14226,7 @@
         ],
         [
          "Seeds use",
-         "Turtle Scute"
+         "Soul Jar: 6 Turtle Souls"
         ],
         [
          "Makes",
@@ -13500,8 +14275,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Turtle Scute",
-          "icon": "img/vanilla/turtle_scute.png"
+          "name": "Soul Jar: 6 Turtle Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13511,16 +14287,19 @@
         ],
         [
          {
-          "name": "Turtle Scute",
-          "icon": "img/vanilla/turtle_scute.png"
+          "name": "Soul Jar: 6 Turtle Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Turtle Scute",
-          "icon": "img/vanilla/turtle_scute.png"
+          "name": "Soul Jar: 6 Turtle Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -13530,8 +14309,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Turtle Scute",
-          "icon": "img/vanilla/turtle_scute.png"
+          "name": "Soul Jar: 6 Turtle Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13539,7 +14319,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -13645,7 +14426,7 @@
         ],
         [
          "Seeds use",
-         "Armadillo Scute"
+         "Soul Jar: 6 Armadillo Souls"
         ],
         [
          "Makes",
@@ -13694,8 +14475,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Armadillo Scute",
-          "icon": "img/vanilla/armadillo_scute.png"
+          "name": "Soul Jar: 6 Armadillo Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13705,16 +14487,19 @@
         ],
         [
          {
-          "name": "Armadillo Scute",
-          "icon": "img/vanilla/armadillo_scute.png"
+          "name": "Soul Jar: 6 Armadillo Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Armadillo Scute",
-          "icon": "img/vanilla/armadillo_scute.png"
+          "name": "Soul Jar: 6 Armadillo Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -13724,8 +14509,9 @@
           "href": "wiki/essence/aqua-essence"
          },
          {
-          "name": "Armadillo Scute",
-          "icon": "img/vanilla/armadillo_scute.png"
+          "name": "Soul Jar: 6 Armadillo Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aqua Essence",
@@ -13733,7 +14519,8 @@
           "href": "wiki/essence/aqua-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -13912,8 +14699,9 @@
           "icon": "img/vanilla/copper_ingot.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Copper Ingot",
@@ -13936,7 +14724,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -14235,8 +15024,9 @@
           "icon": "img/vanilla/iron_ingot.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Iron Ingot",
@@ -14259,7 +15049,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -14429,8 +15220,9 @@
           "icon": "img/vanilla/redstone.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Redstone Dust",
@@ -14453,7 +15245,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -14623,8 +15416,9 @@
           "icon": "img/vanilla/quartz.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Nether Quartz",
@@ -14647,7 +15441,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -14817,8 +15612,9 @@
           "icon": "img/vanilla/glowstone_dust.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Glowstone Dust",
@@ -14841,7 +15637,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -15011,8 +15808,9 @@
           "icon": "img/vanilla/obsidian.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Obsidian",
@@ -15035,7 +15833,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -15141,7 +15940,7 @@
         ],
         [
          "Seeds use",
-         "Rotten Flesh"
+         "Soul Jar: 10 Zombie Souls"
         ],
         [
          "Makes",
@@ -15190,8 +15989,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Rotten Flesh",
-          "icon": "img/vanilla/rotten_flesh.png"
+          "name": "Soul Jar: 10 Zombie Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15201,16 +16001,19 @@
         ],
         [
          {
-          "name": "Rotten Flesh",
-          "icon": "img/vanilla/rotten_flesh.png"
+          "name": "Soul Jar: 10 Zombie Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Rotten Flesh",
-          "icon": "img/vanilla/rotten_flesh.png"
+          "name": "Soul Jar: 10 Zombie Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -15220,8 +16023,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Rotten Flesh",
-          "icon": "img/vanilla/rotten_flesh.png"
+          "name": "Soul Jar: 10 Zombie Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15229,7 +16033,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -15379,7 +16184,7 @@
         ],
         [
          "Seeds use",
-         "Spider Eye"
+         "Soul Jar: 10 Spider Souls"
         ],
         [
          "Makes",
@@ -15428,8 +16233,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Spider Eye",
-          "icon": "img/vanilla/spider_eye.png"
+          "name": "Soul Jar: 10 Spider Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15439,16 +16245,19 @@
         ],
         [
          {
-          "name": "Spider Eye",
-          "icon": "img/vanilla/spider_eye.png"
+          "name": "Soul Jar: 10 Spider Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Spider Eye",
-          "icon": "img/vanilla/spider_eye.png"
+          "name": "Soul Jar: 10 Spider Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -15458,8 +16267,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Spider Eye",
-          "icon": "img/vanilla/spider_eye.png"
+          "name": "Soul Jar: 10 Spider Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15467,7 +16277,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -15614,7 +16425,7 @@
         ],
         [
          "Seeds use",
-         "Bone"
+         "Soul Jar: 10 Skeleton Souls"
         ],
         [
          "Makes",
@@ -15663,8 +16474,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Bone",
-          "icon": "img/vanilla/bone.png"
+          "name": "Soul Jar: 10 Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15674,16 +16486,19 @@
         ],
         [
          {
-          "name": "Bone",
-          "icon": "img/vanilla/bone.png"
+          "name": "Soul Jar: 10 Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Bone",
-          "icon": "img/vanilla/bone.png"
+          "name": "Soul Jar: 10 Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -15693,8 +16508,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Bone",
-          "icon": "img/vanilla/bone.png"
+          "name": "Soul Jar: 10 Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15702,7 +16518,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -15913,7 +16730,7 @@
         ],
         [
          "Seeds use",
-         "Gunpowder"
+         "Soul Jar: 10 Creeper Souls"
         ],
         [
          "Makes",
@@ -15962,8 +16779,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Gunpowder",
-          "icon": "img/vanilla/gunpowder.png"
+          "name": "Soul Jar: 10 Creeper Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -15973,16 +16791,19 @@
         ],
         [
          {
-          "name": "Gunpowder",
-          "icon": "img/vanilla/gunpowder.png"
+          "name": "Soul Jar: 10 Creeper Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Gunpowder",
-          "icon": "img/vanilla/gunpowder.png"
+          "name": "Soul Jar: 10 Creeper Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -15992,8 +16813,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Gunpowder",
-          "icon": "img/vanilla/gunpowder.png"
+          "name": "Soul Jar: 10 Creeper Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -16001,7 +16823,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -16731,8 +17554,9 @@
           "icon": "img/icons/prismarine_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Prismarine Cluster",
@@ -16755,7 +17579,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -17011,8 +17836,9 @@
           "icon": "img/vanilla/sculk.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Sculk",
@@ -17035,7 +17861,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -17337,7 +18164,7 @@
         ],
         [
          "Seeds use",
-         "Phantom Membrane"
+         "Soul Jar: 6 Phantom Souls"
         ],
         [
          "Makes",
@@ -17386,8 +18213,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Phantom Membrane",
-          "icon": "img/vanilla/phantom_membrane.png"
+          "name": "Soul Jar: 6 Phantom Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -17397,16 +18225,19 @@
         ],
         [
          {
-          "name": "Phantom Membrane",
-          "icon": "img/vanilla/phantom_membrane.png"
+          "name": "Soul Jar: 6 Phantom Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Phantom Membrane",
-          "icon": "img/vanilla/phantom_membrane.png"
+          "name": "Soul Jar: 6 Phantom Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -17416,8 +18247,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Phantom Membrane",
-          "icon": "img/vanilla/phantom_membrane.png"
+          "name": "Soul Jar: 6 Phantom Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -17425,7 +18257,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -17531,7 +18364,7 @@
         ],
         [
          "Seeds use",
-         "Rabbit Hide"
+         "Soul Jar: 6 Rabbit Souls"
         ],
         [
          "Makes",
@@ -17580,8 +18413,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Rabbit Hide",
-          "icon": "img/vanilla/rabbit_hide.png"
+          "name": "Soul Jar: 6 Rabbit Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -17591,16 +18425,19 @@
         ],
         [
          {
-          "name": "Rabbit Hide",
-          "icon": "img/vanilla/rabbit_hide.png"
+          "name": "Soul Jar: 6 Rabbit Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Rabbit Hide",
-          "icon": "img/vanilla/rabbit_hide.png"
+          "name": "Soul Jar: 6 Rabbit Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -17610,8 +18447,9 @@
           "href": "wiki/essence/ignis-essence"
          },
          {
-          "name": "Rabbit Hide",
-          "icon": "img/vanilla/rabbit_hide.png"
+          "name": "Soul Jar: 6 Rabbit Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Ignis Essence",
@@ -17619,7 +18457,8 @@
           "href": "wiki/essence/ignis-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -17860,8 +18699,9 @@
           "icon": "img/vanilla/gold_ingot.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Gold Ingot",
@@ -17884,7 +18724,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -18054,8 +18895,9 @@
           "icon": "img/vanilla/lapis_lazuli.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Lapis Lazuli",
@@ -18078,7 +18920,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -18184,7 +19027,7 @@
         ],
         [
          "Seeds use",
-         "Blaze Rod"
+         "Soul Jar: 10 Blaze Souls"
         ],
         [
          "Makes",
@@ -18233,8 +19076,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Blaze Rod",
-          "icon": "img/vanilla/blaze_rod.png"
+          "name": "Soul Jar: 10 Blaze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -18244,16 +19088,19 @@
         ],
         [
          {
-          "name": "Blaze Rod",
-          "icon": "img/vanilla/blaze_rod.png"
+          "name": "Soul Jar: 10 Blaze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Blaze Rod",
-          "icon": "img/vanilla/blaze_rod.png"
+          "name": "Soul Jar: 10 Blaze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -18263,8 +19110,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Blaze Rod",
-          "icon": "img/vanilla/blaze_rod.png"
+          "name": "Soul Jar: 10 Blaze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -18272,7 +19120,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -18378,7 +19227,7 @@
         ],
         [
          "Seeds use",
-         "Ender Pearl"
+         "Soul Jar: 8 Enderman Souls"
         ],
         [
          "Makes",
@@ -18427,8 +19276,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ender Pearl",
-          "icon": "img/vanilla/ender_pearl.png"
+          "name": "Soul Jar: 8 Enderman Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -18438,16 +19288,19 @@
         ],
         [
          {
-          "name": "Ender Pearl",
-          "icon": "img/vanilla/ender_pearl.png"
+          "name": "Soul Jar: 8 Enderman Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Ender Pearl",
-          "icon": "img/vanilla/ender_pearl.png"
+          "name": "Soul Jar: 8 Enderman Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -18457,8 +19310,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ender Pearl",
-          "icon": "img/vanilla/ender_pearl.png"
+          "name": "Soul Jar: 8 Enderman Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -18466,7 +19320,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -18701,8 +19556,9 @@
           "icon": "img/icons/end_cluster.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "End Cluster",
@@ -18725,7 +19581,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -18981,8 +19838,9 @@
           "icon": "img/vanilla/experience_bottle.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Bottle o' Enchanting",
@@ -19005,7 +19863,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -19111,7 +19970,7 @@
         ],
         [
          "Seeds use",
-         "Breeze Rod"
+         "Soul Jar: 4 Breeze Souls"
         ],
         [
          "Makes",
@@ -19160,8 +20019,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Breeze Rod",
-          "icon": "img/vanilla/breeze_rod.png"
+          "name": "Soul Jar: 4 Breeze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -19171,16 +20031,19 @@
         ],
         [
          {
-          "name": "Breeze Rod",
-          "icon": "img/vanilla/breeze_rod.png"
+          "name": "Soul Jar: 4 Breeze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Breeze Rod",
-          "icon": "img/vanilla/breeze_rod.png"
+          "name": "Soul Jar: 4 Breeze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -19190,8 +20053,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Breeze Rod",
-          "icon": "img/vanilla/breeze_rod.png"
+          "name": "Soul Jar: 4 Breeze Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -19199,7 +20063,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -19305,7 +20170,7 @@
         ],
         [
          "Seeds use",
-         "Ghast Tear"
+         "Soul Jar: 4 Ghast Souls"
         ],
         [
          "Makes",
@@ -19354,8 +20219,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ghast Tear",
-          "icon": "img/vanilla/ghast_tear.png"
+          "name": "Soul Jar: 4 Ghast Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -19365,16 +20231,19 @@
         ],
         [
          {
-          "name": "Ghast Tear",
-          "icon": "img/vanilla/ghast_tear.png"
+          "name": "Soul Jar: 4 Ghast Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Ghast Tear",
-          "icon": "img/vanilla/ghast_tear.png"
+          "name": "Soul Jar: 4 Ghast Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -19384,8 +20253,9 @@
           "href": "wiki/essence/aether-essence"
          },
          {
-          "name": "Ghast Tear",
-          "icon": "img/vanilla/ghast_tear.png"
+          "name": "Soul Jar: 4 Ghast Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Aether Essence",
@@ -19393,7 +20263,8 @@
           "href": "wiki/essence/aether-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -19479,6 +20350,202 @@
       }
      ],
      "href": "wiki/aether-crops/ghast"
+    },
+    {
+     "slug": "anima",
+     "name": "Anima Crop",
+     "icon": "img/icons/anima_crop.png",
+     "summary": "4 × Anima Dust",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Tier",
+         "4 · Aether Essence"
+        ],
+        [
+         "Best on",
+         "Aether Farmland"
+        ],
+        [
+         "Seeds use",
+         "Anima Dust"
+        ],
+        [
+         "Makes",
+         "4 × Anima Dust"
+        ]
+       ]
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stage 1",
+         "icon": "img/icons/crop_0.png"
+        },
+        {
+         "name": "Stage 2",
+         "icon": "img/icons/crop_1.png"
+        },
+        {
+         "name": "Stage 3",
+         "icon": "img/icons/crop_2.png"
+        },
+        {
+         "name": "Ripe",
+         "icon": "img/icons/anima_crop.png"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Seeds"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Seeds",
+        "icon": "img/icons/anima_seeds.png",
+        "href": "wiki/aether-crops/anima",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         }
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Anima Dust",
+          "icon": "img/icons/anima_dust.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
+      },
+      {
+       "t": "h2",
+       "text": "Harvest"
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Anima Essence",
+         "icon": "img/icons/anima_essence.png",
+         "href": "wiki/aether-crops/anima",
+         "sub": "1 when ripe, 10% to 20% chance of a second"
+        },
+        {
+         "name": "Anima Seeds",
+         "icon": "img/icons/anima_seeds.png",
+         "href": "wiki/aether-crops/anima",
+         "sub": "1, plus a 10% to 20% chance of a second"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Anima Dust"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Dust",
+        "icon": "img/icons/anima_dust.png",
+        "count": 4
+       },
+       "rows": [
+        [
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         },
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         },
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         }
+        ],
+        [
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         },
+         null,
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         }
+        ],
+        [
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         },
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         },
+         {
+          "name": "Anima Essence",
+          "icon": "img/icons/anima_essence.png",
+          "href": "wiki/aether-crops/anima"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/aether-crops/anima"
     }
    ]
   },
@@ -19572,8 +20639,9 @@
           "icon": "img/vanilla/emerald.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Emerald",
@@ -19596,7 +20664,8 @@
           "href": "wiki/essence/astra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -19770,8 +20839,9 @@
           "icon": "img/vanilla/diamond.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Diamond",
@@ -19794,7 +20864,8 @@
           "href": "wiki/essence/astra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -20032,8 +21103,9 @@
           "icon": "img/vanilla/netherite_scrap.png"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Vita Seed Base",
+          "icon": "img/icons/vita_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
           "name": "Netherite Scrap",
@@ -20056,7 +21128,8 @@
           "href": "wiki/essence/astra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -20162,7 +21235,7 @@
         ],
         [
          "Seeds use",
-         "Wither Skeleton Skull"
+         "Soul Jar: 8 Wither Skeleton Souls"
         ],
         [
          "Makes",
@@ -20211,8 +21284,9 @@
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Wither Skeleton Skull",
-          "icon": "img/vanilla/wither_skeleton_skull.png"
+          "name": "Soul Jar: 8 Wither Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Astra Essence",
@@ -20222,16 +21296,19 @@
         ],
         [
          {
-          "name": "Wither Skeleton Skull",
-          "icon": "img/vanilla/wither_skeleton_skull.png"
+          "name": "Soul Jar: 8 Wither Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Wither Skeleton Skull",
-          "icon": "img/vanilla/wither_skeleton_skull.png"
+          "name": "Soul Jar: 8 Wither Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -20241,8 +21318,9 @@
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Wither Skeleton Skull",
-          "icon": "img/vanilla/wither_skeleton_skull.png"
+          "name": "Soul Jar: 8 Wither Skeleton Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Astra Essence",
@@ -20250,7 +21328,8 @@
           "href": "wiki/essence/astra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -20359,7 +21438,7 @@
         ],
         [
          "Seeds use",
-         "Nether Star"
+         "Soul Jar: 1 Wither Souls"
         ],
         [
          "Makes",
@@ -20408,8 +21487,9 @@
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Nether Star",
-          "icon": "img/vanilla/nether_star.png"
+          "name": "Soul Jar: 1 Wither Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Astra Essence",
@@ -20419,16 +21499,19 @@
         ],
         [
          {
-          "name": "Nether Star",
-          "icon": "img/vanilla/nether_star.png"
+          "name": "Soul Jar: 1 Wither Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
-          "name": "Wheat Seeds",
-          "icon": "img/vanilla/wheat_seeds.png"
+          "name": "Anima Seed Base",
+          "icon": "img/icons/anima_seed_base.png",
+          "href": "wiki/infusion/seed-bases"
          },
          {
-          "name": "Nether Star",
-          "icon": "img/vanilla/nether_star.png"
+          "name": "Soul Jar: 1 Wither Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          }
         ],
         [
@@ -20438,8 +21521,9 @@
           "href": "wiki/essence/astra-essence"
          },
          {
-          "name": "Nether Star",
-          "icon": "img/vanilla/nether_star.png"
+          "name": "Soul Jar: 1 Wither Souls",
+          "icon": "img/icons/soul_jar.png",
+          "href": "wiki/infusion/soul-jars"
          },
          {
           "name": "Astra Essence",
@@ -20447,7 +21531,8 @@
           "href": "wiki/essence/astra-essence"
          }
         ]
-       ]
+       ],
+       "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
       },
       {
        "t": "h2",
@@ -21365,8 +22450,9 @@
       "icon": "img/vanilla/oak_log.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Oak Log",
@@ -21389,7 +22475,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -22129,8 +23216,9 @@
       "icon": "img/icons/air_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Air Cluster",
@@ -22153,7 +23241,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -22185,8 +23274,9 @@
       "icon": "img/icons/earth_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Earth Cluster",
@@ -22209,7 +23299,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -22241,8 +23332,9 @@
       "icon": "img/icons/water_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Water Cluster",
@@ -22265,7 +23357,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -23212,8 +24305,9 @@
       "icon": "img/icons/fire_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Fire Cluster",
@@ -23236,7 +24330,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -23391,8 +24486,9 @@
       "icon": "img/vanilla/stone.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Stone",
@@ -23415,7 +24511,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24004,8 +25101,9 @@
       "icon": "img/vanilla/dirt.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Dirt",
@@ -24028,7 +25126,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24364,8 +25463,9 @@
       "icon": "img/vanilla/ice.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Ice",
@@ -24388,7 +25488,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24576,8 +25677,9 @@
       "icon": "img/vanilla/deepslate.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Deepslate",
@@ -24600,7 +25702,8 @@
       "href": "wiki/essence/terra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24786,8 +25889,9 @@
       "icon": "img/vanilla/coal.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Coal",
@@ -24810,7 +25914,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24898,8 +26003,9 @@
       "icon": "img/vanilla/amethyst_shard.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Amethyst Shard",
@@ -24922,7 +26028,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -24995,8 +26102,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Slimeball",
-      "icon": "img/vanilla/slime_ball.png"
+      "name": "Soul Jar: 12 Slime Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -25006,16 +26114,19 @@
     ],
     [
      {
-      "name": "Slimeball",
-      "icon": "img/vanilla/slime_ball.png"
+      "name": "Soul Jar: 12 Slime Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Slimeball",
-      "icon": "img/vanilla/slime_ball.png"
+      "name": "Soul Jar: 12 Slime Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -25025,8 +26136,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Slimeball",
-      "icon": "img/vanilla/slime_ball.png"
+      "name": "Soul Jar: 12 Slime Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -25034,7 +26146,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -25146,8 +26259,9 @@
       "icon": "img/icons/nature_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Nature Cluster",
@@ -25170,7 +26284,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -25969,8 +27084,9 @@
       "icon": "img/icons/dye_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Dye Cluster",
@@ -25993,7 +27109,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -26601,8 +27718,9 @@
       "icon": "img/icons/nether_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Nether Cluster",
@@ -26625,7 +27743,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -27188,8 +28307,9 @@
       "icon": "img/icons/coral_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Coral Cluster",
@@ -27212,7 +28332,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -27969,8 +29090,9 @@
       "icon": "img/icons/honey_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Honey Cluster",
@@ -27993,7 +29115,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28078,8 +29201,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Porkchop",
-      "icon": "img/vanilla/porkchop.png"
+      "name": "Soul Jar: 8 Pig Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28089,16 +29213,19 @@
     ],
     [
      {
-      "name": "Raw Porkchop",
-      "icon": "img/vanilla/porkchop.png"
+      "name": "Soul Jar: 8 Pig Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Raw Porkchop",
-      "icon": "img/vanilla/porkchop.png"
+      "name": "Soul Jar: 8 Pig Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28108,8 +29235,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Porkchop",
-      "icon": "img/vanilla/porkchop.png"
+      "name": "Soul Jar: 8 Pig Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28117,7 +29245,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28170,8 +29299,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Chicken",
-      "icon": "img/vanilla/chicken.png"
+      "name": "Soul Jar: 8 Chicken Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28181,16 +29311,19 @@
     ],
     [
      {
-      "name": "Raw Chicken",
-      "icon": "img/vanilla/chicken.png"
+      "name": "Soul Jar: 8 Chicken Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Raw Chicken",
-      "icon": "img/vanilla/chicken.png"
+      "name": "Soul Jar: 8 Chicken Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28200,8 +29333,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Chicken",
-      "icon": "img/vanilla/chicken.png"
+      "name": "Soul Jar: 8 Chicken Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28209,7 +29343,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28334,8 +29469,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Beef",
-      "icon": "img/vanilla/beef.png"
+      "name": "Soul Jar: 8 Cow Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28345,16 +29481,19 @@
     ],
     [
      {
-      "name": "Raw Beef",
-      "icon": "img/vanilla/beef.png"
+      "name": "Soul Jar: 8 Cow Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Raw Beef",
-      "icon": "img/vanilla/beef.png"
+      "name": "Soul Jar: 8 Cow Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28364,8 +29503,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Beef",
-      "icon": "img/vanilla/beef.png"
+      "name": "Soul Jar: 8 Cow Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28373,7 +29513,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28505,8 +29646,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Mutton",
-      "icon": "img/vanilla/mutton.png"
+      "name": "Soul Jar: 8 Sheep Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28516,16 +29658,19 @@
     ],
     [
      {
-      "name": "Raw Mutton",
-      "icon": "img/vanilla/mutton.png"
+      "name": "Soul Jar: 8 Sheep Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Raw Mutton",
-      "icon": "img/vanilla/mutton.png"
+      "name": "Soul Jar: 8 Sheep Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28535,8 +29680,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Mutton",
-      "icon": "img/vanilla/mutton.png"
+      "name": "Soul Jar: 8 Sheep Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28544,7 +29690,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28653,8 +29800,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Ink Sac",
-      "icon": "img/vanilla/ink_sac.png"
+      "name": "Soul Jar: 6 Squid Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28664,16 +29812,19 @@
     ],
     [
      {
-      "name": "Ink Sac",
-      "icon": "img/vanilla/ink_sac.png"
+      "name": "Soul Jar: 6 Squid Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Ink Sac",
-      "icon": "img/vanilla/ink_sac.png"
+      "name": "Soul Jar: 6 Squid Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28683,8 +29834,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Ink Sac",
-      "icon": "img/vanilla/ink_sac.png"
+      "name": "Soul Jar: 6 Squid Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28692,7 +29844,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -28781,8 +29934,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Cod",
-      "icon": "img/vanilla/cod.png"
+      "name": "Soul Jar: 6 Fish Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28792,16 +29946,19 @@
     ],
     [
      {
-      "name": "Raw Cod",
-      "icon": "img/vanilla/cod.png"
+      "name": "Soul Jar: 6 Fish Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Raw Cod",
-      "icon": "img/vanilla/cod.png"
+      "name": "Soul Jar: 6 Fish Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -28811,8 +29968,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Raw Cod",
-      "icon": "img/vanilla/cod.png"
+      "name": "Soul Jar: 6 Fish Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -28820,7 +29978,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29001,8 +30160,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Turtle Scute",
-      "icon": "img/vanilla/turtle_scute.png"
+      "name": "Soul Jar: 6 Turtle Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -29012,16 +30172,19 @@
     ],
     [
      {
-      "name": "Turtle Scute",
-      "icon": "img/vanilla/turtle_scute.png"
+      "name": "Soul Jar: 6 Turtle Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Turtle Scute",
-      "icon": "img/vanilla/turtle_scute.png"
+      "name": "Soul Jar: 6 Turtle Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -29031,8 +30194,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Turtle Scute",
-      "icon": "img/vanilla/turtle_scute.png"
+      "name": "Soul Jar: 6 Turtle Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -29040,7 +30204,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29113,8 +30278,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Armadillo Scute",
-      "icon": "img/vanilla/armadillo_scute.png"
+      "name": "Soul Jar: 6 Armadillo Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -29124,16 +30290,19 @@
     ],
     [
      {
-      "name": "Armadillo Scute",
-      "icon": "img/vanilla/armadillo_scute.png"
+      "name": "Soul Jar: 6 Armadillo Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Armadillo Scute",
-      "icon": "img/vanilla/armadillo_scute.png"
+      "name": "Soul Jar: 6 Armadillo Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -29143,8 +30312,9 @@
       "href": "wiki/essence/aqua-essence"
      },
      {
-      "name": "Armadillo Scute",
-      "icon": "img/vanilla/armadillo_scute.png"
+      "name": "Soul Jar: 6 Armadillo Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aqua Essence",
@@ -29152,7 +30322,8 @@
       "href": "wiki/essence/aqua-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29240,8 +30411,9 @@
       "icon": "img/vanilla/copper_ingot.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Copper Ingot",
@@ -29264,7 +30436,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29466,8 +30639,9 @@
       "icon": "img/vanilla/iron_ingot.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Iron Ingot",
@@ -29490,7 +30664,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29578,8 +30753,9 @@
       "icon": "img/vanilla/redstone.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Redstone Dust",
@@ -29602,7 +30778,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29690,8 +30867,9 @@
       "icon": "img/vanilla/quartz.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Nether Quartz",
@@ -29714,7 +30892,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29802,8 +30981,9 @@
       "icon": "img/vanilla/glowstone_dust.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Glowstone Dust",
@@ -29826,7 +31006,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -29914,8 +31095,9 @@
       "icon": "img/vanilla/obsidian.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Obsidian",
@@ -29938,7 +31120,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -30011,8 +31194,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Rotten Flesh",
-      "icon": "img/vanilla/rotten_flesh.png"
+      "name": "Soul Jar: 10 Zombie Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30022,16 +31206,19 @@
     ],
     [
      {
-      "name": "Rotten Flesh",
-      "icon": "img/vanilla/rotten_flesh.png"
+      "name": "Soul Jar: 10 Zombie Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Rotten Flesh",
-      "icon": "img/vanilla/rotten_flesh.png"
+      "name": "Soul Jar: 10 Zombie Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -30041,8 +31228,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Rotten Flesh",
-      "icon": "img/vanilla/rotten_flesh.png"
+      "name": "Soul Jar: 10 Zombie Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30050,7 +31238,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -30162,8 +31351,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Spider Eye",
-      "icon": "img/vanilla/spider_eye.png"
+      "name": "Soul Jar: 10 Spider Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30173,16 +31363,19 @@
     ],
     [
      {
-      "name": "Spider Eye",
-      "icon": "img/vanilla/spider_eye.png"
+      "name": "Soul Jar: 10 Spider Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Spider Eye",
-      "icon": "img/vanilla/spider_eye.png"
+      "name": "Soul Jar: 10 Spider Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -30192,8 +31385,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Spider Eye",
-      "icon": "img/vanilla/spider_eye.png"
+      "name": "Soul Jar: 10 Spider Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30201,7 +31395,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -30310,8 +31505,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Bone",
-      "icon": "img/vanilla/bone.png"
+      "name": "Soul Jar: 10 Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30321,16 +31517,19 @@
     ],
     [
      {
-      "name": "Bone",
-      "icon": "img/vanilla/bone.png"
+      "name": "Soul Jar: 10 Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Bone",
-      "icon": "img/vanilla/bone.png"
+      "name": "Soul Jar: 10 Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -30340,8 +31539,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Bone",
-      "icon": "img/vanilla/bone.png"
+      "name": "Soul Jar: 10 Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30349,7 +31549,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -30517,8 +31718,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Gunpowder",
-      "icon": "img/vanilla/gunpowder.png"
+      "name": "Soul Jar: 10 Creeper Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30528,16 +31730,19 @@
     ],
     [
      {
-      "name": "Gunpowder",
-      "icon": "img/vanilla/gunpowder.png"
+      "name": "Soul Jar: 10 Creeper Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Gunpowder",
-      "icon": "img/vanilla/gunpowder.png"
+      "name": "Soul Jar: 10 Creeper Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -30547,8 +31752,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Gunpowder",
-      "icon": "img/vanilla/gunpowder.png"
+      "name": "Soul Jar: 10 Creeper Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -30556,7 +31762,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -31139,8 +32346,9 @@
       "icon": "img/icons/prismarine_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Prismarine Cluster",
@@ -31163,7 +32371,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -31327,8 +32536,9 @@
       "icon": "img/vanilla/sculk.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Sculk",
@@ -31351,7 +32561,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -31600,8 +32811,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Phantom Membrane",
-      "icon": "img/vanilla/phantom_membrane.png"
+      "name": "Soul Jar: 6 Phantom Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -31611,16 +32823,19 @@
     ],
     [
      {
-      "name": "Phantom Membrane",
-      "icon": "img/vanilla/phantom_membrane.png"
+      "name": "Soul Jar: 6 Phantom Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Phantom Membrane",
-      "icon": "img/vanilla/phantom_membrane.png"
+      "name": "Soul Jar: 6 Phantom Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -31630,8 +32845,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Phantom Membrane",
-      "icon": "img/vanilla/phantom_membrane.png"
+      "name": "Soul Jar: 6 Phantom Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -31639,7 +32855,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -31712,8 +32929,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Rabbit Hide",
-      "icon": "img/vanilla/rabbit_hide.png"
+      "name": "Soul Jar: 6 Rabbit Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -31723,16 +32941,19 @@
     ],
     [
      {
-      "name": "Rabbit Hide",
-      "icon": "img/vanilla/rabbit_hide.png"
+      "name": "Soul Jar: 6 Rabbit Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Rabbit Hide",
-      "icon": "img/vanilla/rabbit_hide.png"
+      "name": "Soul Jar: 6 Rabbit Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -31742,8 +32963,9 @@
       "href": "wiki/essence/ignis-essence"
      },
      {
-      "name": "Rabbit Hide",
-      "icon": "img/vanilla/rabbit_hide.png"
+      "name": "Soul Jar: 6 Rabbit Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Ignis Essence",
@@ -31751,7 +32973,8 @@
       "href": "wiki/essence/ignis-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -31891,8 +33114,9 @@
       "icon": "img/vanilla/gold_ingot.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Gold Ingot",
@@ -31915,7 +33139,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32003,8 +33228,9 @@
       "icon": "img/vanilla/lapis_lazuli.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Lapis Lazuli",
@@ -32027,7 +33253,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32100,8 +33327,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Blaze Rod",
-      "icon": "img/vanilla/blaze_rod.png"
+      "name": "Soul Jar: 10 Blaze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32111,16 +33339,19 @@
     ],
     [
      {
-      "name": "Blaze Rod",
-      "icon": "img/vanilla/blaze_rod.png"
+      "name": "Soul Jar: 10 Blaze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Blaze Rod",
-      "icon": "img/vanilla/blaze_rod.png"
+      "name": "Soul Jar: 10 Blaze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -32130,8 +33361,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Blaze Rod",
-      "icon": "img/vanilla/blaze_rod.png"
+      "name": "Soul Jar: 10 Blaze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32139,7 +33371,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32212,8 +33445,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ender Pearl",
-      "icon": "img/vanilla/ender_pearl.png"
+      "name": "Soul Jar: 8 Enderman Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32223,16 +33457,19 @@
     ],
     [
      {
-      "name": "Ender Pearl",
-      "icon": "img/vanilla/ender_pearl.png"
+      "name": "Soul Jar: 8 Enderman Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Ender Pearl",
-      "icon": "img/vanilla/ender_pearl.png"
+      "name": "Soul Jar: 8 Enderman Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -32242,8 +33479,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ender Pearl",
-      "icon": "img/vanilla/ender_pearl.png"
+      "name": "Soul Jar: 8 Enderman Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32251,7 +33489,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32399,8 +33638,9 @@
       "icon": "img/icons/end_cluster.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "End Cluster",
@@ -32423,7 +33663,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32587,8 +33828,9 @@
       "icon": "img/vanilla/experience_bottle.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Bottle o' Enchanting",
@@ -32611,7 +33853,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32684,8 +33927,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Breeze Rod",
-      "icon": "img/vanilla/breeze_rod.png"
+      "name": "Soul Jar: 4 Breeze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32695,16 +33939,19 @@
     ],
     [
      {
-      "name": "Breeze Rod",
-      "icon": "img/vanilla/breeze_rod.png"
+      "name": "Soul Jar: 4 Breeze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Breeze Rod",
-      "icon": "img/vanilla/breeze_rod.png"
+      "name": "Soul Jar: 4 Breeze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -32714,8 +33961,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Breeze Rod",
-      "icon": "img/vanilla/breeze_rod.png"
+      "name": "Soul Jar: 4 Breeze Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32723,7 +33971,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32796,8 +34045,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ghast Tear",
-      "icon": "img/vanilla/ghast_tear.png"
+      "name": "Soul Jar: 4 Ghast Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32807,16 +34057,19 @@
     ],
     [
      {
-      "name": "Ghast Tear",
-      "icon": "img/vanilla/ghast_tear.png"
+      "name": "Soul Jar: 4 Ghast Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Ghast Tear",
-      "icon": "img/vanilla/ghast_tear.png"
+      "name": "Soul Jar: 4 Ghast Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -32826,8 +34079,9 @@
       "href": "wiki/essence/aether-essence"
      },
      {
-      "name": "Ghast Tear",
-      "icon": "img/vanilla/ghast_tear.png"
+      "name": "Soul Jar: 4 Ghast Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Aether Essence",
@@ -32835,7 +34089,8 @@
       "href": "wiki/essence/aether-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -32895,6 +34150,120 @@
   },
   {
    "result": {
+    "name": "Anima Seeds",
+    "icon": "img/icons/anima_seeds.png",
+    "href": "wiki/aether-crops/anima",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     }
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
+  },
+  {
+   "result": {
+    "name": "Anima Dust",
+    "icon": "img/icons/anima_dust.png",
+    "count": 4
+   },
+   "rows": [
+    [
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     },
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     },
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     }
+    ],
+    [
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     },
+     null,
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     }
+    ],
+    [
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     },
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     },
+     {
+      "name": "Anima Essence",
+      "icon": "img/icons/anima_essence.png",
+      "href": "wiki/aether-crops/anima"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
     "name": "Emerald Seeds",
     "icon": "img/icons/emerald_seeds.png",
     "href": "wiki/astra-crops/emerald",
@@ -32923,8 +34292,9 @@
       "icon": "img/vanilla/emerald.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Emerald",
@@ -32947,7 +34317,8 @@
       "href": "wiki/essence/astra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -33039,8 +34410,9 @@
       "icon": "img/vanilla/diamond.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Diamond",
@@ -33063,7 +34435,8 @@
       "href": "wiki/essence/astra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -33214,8 +34587,9 @@
       "icon": "img/vanilla/netherite_scrap.png"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
       "name": "Netherite Scrap",
@@ -33238,7 +34612,8 @@
       "href": "wiki/essence/astra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -33311,8 +34686,9 @@
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Wither Skeleton Skull",
-      "icon": "img/vanilla/wither_skeleton_skull.png"
+      "name": "Soul Jar: 8 Wither Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Astra Essence",
@@ -33322,16 +34698,19 @@
     ],
     [
      {
-      "name": "Wither Skeleton Skull",
-      "icon": "img/vanilla/wither_skeleton_skull.png"
+      "name": "Soul Jar: 8 Wither Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Wither Skeleton Skull",
-      "icon": "img/vanilla/wither_skeleton_skull.png"
+      "name": "Soul Jar: 8 Wither Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -33341,8 +34720,9 @@
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Wither Skeleton Skull",
-      "icon": "img/vanilla/wither_skeleton_skull.png"
+      "name": "Soul Jar: 8 Wither Skeleton Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Astra Essence",
@@ -33350,7 +34730,8 @@
       "href": "wiki/essence/astra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -33426,8 +34807,9 @@
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Nether Star",
-      "icon": "img/vanilla/nether_star.png"
+      "name": "Soul Jar: 1 Wither Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Astra Essence",
@@ -33437,16 +34819,19 @@
     ],
     [
      {
-      "name": "Nether Star",
-      "icon": "img/vanilla/nether_star.png"
+      "name": "Soul Jar: 1 Wither Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
-      "name": "Wheat Seeds",
-      "icon": "img/vanilla/wheat_seeds.png"
+      "name": "Anima Seed Base",
+      "icon": "img/icons/anima_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
      },
      {
-      "name": "Nether Star",
-      "icon": "img/vanilla/nether_star.png"
+      "name": "Soul Jar: 1 Wither Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      }
     ],
     [
@@ -33456,8 +34841,9 @@
       "href": "wiki/essence/astra-essence"
      },
      {
-      "name": "Nether Star",
-      "icon": "img/vanilla/nether_star.png"
+      "name": "Soul Jar: 1 Wither Souls",
+      "icon": "img/icons/soul_jar.png",
+      "href": "wiki/infusion/soul-jars"
      },
      {
       "name": "Astra Essence",
@@ -33465,7 +34851,8 @@
       "href": "wiki/essence/astra-essence"
      }
     ]
-   ]
+   ],
+   "note": "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals"
   },
   {
    "result": {
@@ -33614,6 +35001,78 @@
      null
     ]
    ]
+  },
+  {
+   "result": {
+    "name": "Anima Ingot",
+    "icon": "img/icons/anima_ingot.png",
+    "href": "wiki/materials/anima",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Anima Gemstone",
+    "icon": "img/icons/anima_gemstone.png",
+    "href": "wiki/materials/anima",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Gemstone",
+      "icon": "img/icons/vita_gemstone.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
   },
   {
    "result": {
@@ -34110,6 +35569,279 @@
      }
     ]
    ]
+  },
+  {
+   "result": {
+    "name": "Infusion Altar",
+    "icon": "img/icons/infusion_altar.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     },
+     {
+      "name": "Red Wool",
+      "icon": "img/vanilla/red_wool.png"
+     },
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Infusion Pedestal",
+    "icon": "img/icons/infusion_pedestal.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     },
+     {
+      "name": "Red Wool",
+      "icon": "img/vanilla/red_wool.png"
+     },
+     {
+      "name": "Gold Ingot",
+      "icon": "img/vanilla/gold_ingot.png"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     null
+    ],
+    [
+     null,
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Wand",
+    "icon": "img/icons/wand.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     null,
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Stick",
+      "icon": "img/vanilla/stick.png"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     null,
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Vita Seed Base",
+    "icon": "img/icons/vita_seed_base.png",
+    "href": "wiki/infusion/seed-bases",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     {
+      "name": "Wheat Seeds",
+      "icon": "img/vanilla/wheat_seeds.png"
+     },
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png",
+      "href": "wiki/materials/vita"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Anima Seed Base",
+    "icon": "img/icons/anima_seed_base.png",
+    "href": "wiki/infusion/seed-bases",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Seed Base",
+      "icon": "img/icons/vita_seed_base.png",
+      "href": "wiki/infusion/seed-bases"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     }
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     null,
+     null
+    ]
+   ],
+   "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Soul Jar",
+    "icon": "img/icons/soul_jar.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Anima Ingot",
+      "icon": "img/icons/anima_ingot.png"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Soul Glass",
+      "icon": "img/icons/soul_glass.png"
+     },
+     null,
+     {
+      "name": "Soul Glass",
+      "icon": "img/icons/soul_glass.png"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Soul Glass",
+      "icon": "img/icons/soul_glass.png"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Anima Dagger",
+    "icon": "img/icons/anima_dagger.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Anima Ingot",
+      "icon": "img/icons/anima_ingot.png"
+     },
+     {
+      "name": "Golden Sword",
+      "icon": "img/vanilla/golden_sword.png"
+     },
+     {
+      "name": "Anima Ingot",
+      "icon": "img/icons/anima_ingot.png"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Anima Dust",
+      "icon": "img/icons/anima_dust.png"
+     },
+     null
+    ]
+   ]
   }
  ],
  "gallery": [
@@ -34405,6 +36137,11 @@
      "name": "Ghast Essence",
      "icon": "img/icons/ghast_essence.png",
      "href": "wiki/aether-crops/ghast"
+    },
+    {
+     "name": "Anima Essence",
+     "icon": "img/icons/anima_essence.png",
+     "href": "wiki/aether-crops/anima"
     }
    ]
   },
@@ -34736,6 +36473,11 @@
      "name": "Ghast Seeds",
      "icon": "img/icons/ghast_seeds.png",
      "href": "wiki/aether-crops/ghast"
+    },
+    {
+     "name": "Anima Seeds",
+     "icon": "img/icons/anima_seeds.png",
+     "href": "wiki/aether-crops/anima"
     }
    ]
   },
@@ -35006,6 +36748,11 @@
      "name": "Ghast Crop",
      "icon": "img/icons/ghast_crop.png",
      "href": "wiki/aether-crops/ghast"
+    },
+    {
+     "name": "Anima Crop",
+     "icon": "img/icons/anima_crop.png",
+     "href": "wiki/aether-crops/anima"
     }
    ]
   },
@@ -35257,6 +37004,83 @@
      "name": "Essence Fertilizer",
      "icon": "img/icons/essence_fertilizer.png",
      "href": "wiki/materials/fertilizer"
+    }
+   ]
+  },
+  {
+   "title": "Infusion and souls",
+   "items": [
+    {
+     "name": "Infusion Altar",
+     "icon": "img/icons/infusion_altar.png"
+    },
+    {
+     "name": "Infusion Pedestal",
+     "icon": "img/icons/infusion_pedestal.png"
+    },
+    {
+     "name": "Wand",
+     "icon": "img/icons/wand.png"
+    },
+    {
+     "name": "Vita Seed Base",
+     "icon": "img/icons/vita_seed_base.png"
+    },
+    {
+     "name": "Anima Seed Base",
+     "icon": "img/icons/anima_seed_base.png"
+    },
+    {
+     "name": "Soul Jar",
+     "icon": "img/icons/soul_jar.png"
+    },
+    {
+     "name": "Anima Dagger",
+     "icon": "img/icons/anima_dagger.png"
+    },
+    {
+     "name": "Passive Anima Dagger",
+     "icon": "img/icons/passive_anima_dagger.png"
+    },
+    {
+     "name": "Hostile Anima Dagger",
+     "icon": "img/icons/hostile_anima_dagger.png"
+    },
+    {
+     "name": "Soul Dust",
+     "icon": "img/icons/soul_dust.png"
+    },
+    {
+     "name": "Anima Dust",
+     "icon": "img/icons/anima_dust.png"
+    },
+    {
+     "name": "Soulstone",
+     "icon": "img/icons/soulstone.png"
+    },
+    {
+     "name": "Soulstone Cobble",
+     "icon": "img/icons/soulstone_cobble.png"
+    },
+    {
+     "name": "Soulstone Smooth",
+     "icon": "img/icons/soulstone_smooth.png"
+    },
+    {
+     "name": "Soulstone Bricks",
+     "icon": "img/icons/soulstone_bricks.png"
+    },
+    {
+     "name": "Soulstone Cracked Bricks",
+     "icon": "img/icons/soulstone_cracked_bricks.png"
+    },
+    {
+     "name": "Soul Glass",
+     "icon": "img/icons/soul_glass.png"
+    },
+    {
+     "name": "Anima Ore",
+     "icon": "img/icons/anima_ore.png"
     }
    ]
   },

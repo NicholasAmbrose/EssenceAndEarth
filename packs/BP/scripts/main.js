@@ -1,7 +1,7 @@
 import { system, world, BlockVolume, EntityInitializationCause, EquipmentSlot, GameMode, ItemStack } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
-// NS, ESSENCE (the tier-1 essence), BALANCE, ACCELERATOR_RANGE, GUIDE_PAGES, FARMLAND_TIER, CROP_TIER and ESSENCE_FARMLAND placeholders are filled in from crops.json at build time.
+// NS, ESSENCE (the tier-1 essence), BALANCE, ALTAR_RECIPES, SOULS, ACCELERATOR_RANGE, GUIDE_PAGES, FARMLAND_TIER, CROP_TIER and ESSENCE_FARMLAND placeholders are filled in from crops.json at build time.
 const GROWTH = "__NS__:growth";
 const MAX_STAGE = 3;
 const {
@@ -14,6 +14,8 @@ const {
   matchingFarmlandChance: MATCHING_CHANCE, // added when the farmland's tier matches the crop's
   terraCropYield: TERRA_YIELD, // average essence per harvest, by farmland tier
   farmlandRefundChance: REFUND_CHANCE,
+  altarTicks: ALTAR_TICKS,
+  attunedSoulMultiplier: ATTUNED_SOULS,
 } = __BALANCE__;
 
 // Accelerator id -> how many blocks above itself it reaches.
@@ -292,6 +294,34 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
       if (Math.random() < GROW_CHANCE) grow(block);
     },
   });
+  // Altar and pedestals: use an item to place it, and an empty hand to take it back.
+  blockComponentRegistry.registerCustomComponent("__NS__:stand", {
+    onPlayerInteract({ block, player }) {
+      if (!player) return;
+      const equip = player.getComponent("minecraft:equippable");
+      const hand = equip?.getEquipment(EquipmentSlot.Mainhand);
+      if (hand?.typeId === WAND) {
+        if (block.typeId === ALTAR) startInfusion(block, player);
+        return;
+      }
+      const held = standItem(block);
+      if (held) {
+        const left = player.getComponent("minecraft:inventory")?.container.addItem(held);
+        if (left) block.dimension.spawnItem(left, block.center());
+        setStandItem(block);
+      } else if (hand) {
+        const one = hand.clone();
+        one.amount = 1;
+        setStandItem(block, one);
+        useOne(player);
+      }
+    },
+  });
+  blockComponentRegistry.registerCustomComponent("__NS__:altar", {
+    onTick({ block }) {
+      if ((block.getRedstonePower?.() ?? 0) > 0) startInfusion(block);
+    },
+  });
   blockComponentRegistry.registerCustomComponent("__NS__:accelerator", {
     // Speeds up the first crop above it, within its range.
     onTick({ block }) {
@@ -306,4 +336,178 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
       }
     },
   });
+});
+
+// ---------- Infusion Altar ----------
+// A stand's item lives in a hidden entity's inventory, so it survives restarts, and the entity draws it above the block.
+const ALTAR = "__NS__:infusion_altar";
+const PEDESTAL = "__NS__:infusion_pedestal";
+const WAND = "__NS__:wand";
+const DISPLAY = "__NS__:item_display";
+const PEDESTAL_OFFSETS = [[3, 0], [0, 3], [-3, 0], [0, -3], [2, 2], [2, -2], [-2, 2], [-2, -2]];
+const ALTAR_RECIPES = __ALTAR_RECIPES__;
+
+const displayLocation = ({ x, y, z }) => ({ x: x + 0.5, y: y + 1, z: z + 0.5 });
+
+function displayOf(block) {
+  return block.dimension.getEntities({ type: DISPLAY, location: displayLocation(block.location), maxDistance: 0.5 })[0];
+}
+
+function standItem(block) {
+  return displayOf(block)?.getComponent("minecraft:inventory")?.container.getItem(0);
+}
+
+function setStandItem(block, stack) {
+  let display = displayOf(block);
+  if (!stack) {
+    display?.remove();
+    return;
+  }
+  display ??= block.dimension.spawnEntity(DISPLAY, displayLocation(block.location));
+  display.getComponent("minecraft:inventory").container.setItem(0, stack);
+  display.nameTag = (stack.nameTag ?? stack.typeId.split(":")[1].replaceAll("_", " ")) + (stack.getLore()[0] ? `\n${stack.getLore()[0]}` : "");
+  display.runCommand(`replaceitem entity @s slot.weapon.mainhand 0 ${stack.typeId}`);
+}
+
+// Breaking a stand by any means leaves its display behind, so this sweep drops the item and clears the entity.
+system.runInterval(() => {
+  for (const name of ["overworld", "nether", "the_end"]) {
+    const dimension = world.getDimension(name);
+    for (const display of dimension.getEntities({ type: DISPLAY })) {
+      try {
+        const { x, y, z } = display.location;
+        const id = dimension.getBlock({ x: Math.floor(x), y: Math.floor(y) - 1, z: Math.floor(z) })?.typeId;
+        if (id === undefined || id === ALTAR || id === PEDESTAL) continue;
+        const item = display.getComponent("minecraft:inventory")?.container.getItem(0);
+        if (item) dimension.spawnItem(item, display.location);
+        display.remove();
+      } catch {
+        // unloaded chunk
+      }
+    }
+  }
+}, 40);
+
+const fullJar = (stack, soul) => stack?.typeId === JAR && stack.getDynamicProperty(SOUL_TYPE) === soul && stack.getDynamicProperty(SOUL_COUNT) >= SOULS[soul].need;
+
+// Pedestal order doesn't matter: each ingredient takes the first unused pedestal that fits it.
+function matchRecipe(recipe, items) {
+  const free = items.map((_, i) => i);
+  for (const ingredient of recipe.ingredients) {
+    const slot = free.findIndex((i) => (typeof ingredient === "string" ? items[i]?.typeId === ingredient : fullJar(items[i], ingredient.soul)));
+    if (slot < 0) return false;
+    free.splice(slot, 1);
+  }
+  return true;
+}
+
+const infusing = new Map(); // altar location key -> { dimension, location, ticks, recipe }
+const locationKey = ({ x, y, z }, dimension) => `${dimension.id}:${x},${y},${z}`;
+const pedestalsOf = (altar) => PEDESTAL_OFFSETS.map(([dx, dz]) => altar.dimension.getBlock({ x: altar.location.x + dx, y: altar.location.y, z: altar.location.z + dz }));
+
+function findRecipe(altar) {
+  const input = standItem(altar);
+  if (!input) return { problem: "Put something on the altar first." };
+  const pedestals = pedestalsOf(altar);
+  const missing = pedestals.filter((b) => b?.typeId !== PEDESTAL).length;
+  if (missing) return { problem: `${missing} of the 8 pedestals are missing or in the wrong place.` };
+  const items = pedestals.map(standItem);
+  const recipe = ALTAR_RECIPES.find((r) => r.input === input.typeId && matchRecipe(r, items));
+  return recipe ? { recipe, pedestals } : { problem: "These items don't make anything." };
+}
+
+function startInfusion(altar, player) {
+  const key = locationKey(altar.location, altar.dimension);
+  if (infusing.has(key)) return;
+  const { recipe, problem } = findRecipe(altar);
+  if (!recipe) {
+    if (player) player.onScreenDisplay.setActionBar(problem);
+    return;
+  }
+  infusing.set(key, { dimension: altar.dimension, location: altar.location, ticks: 0, recipe });
+  altar.dimension.playSound("block.enchanting_table.use", altar.center());
+}
+
+function finishInfusion(altar, recipe, pedestals) {
+  for (const pedestal of pedestals) {
+    const item = standItem(pedestal);
+    // A soul jar goes back on its pedestal, empty.
+    if (item?.typeId === JAR) setStandItem(pedestal, new ItemStack(JAR));
+    else setStandItem(pedestal);
+    pedestal.dimension.spawnParticle("minecraft:basic_smoke_particle", pedestal.center());
+  }
+  setStandItem(altar, new ItemStack(recipe.output));
+  altar.dimension.spawnParticle("minecraft:crop_growth_emitter", altar.center());
+  altar.dimension.playSound("random.levelup", altar.center());
+}
+
+const INFUSION_STEP = 5;
+system.runInterval(() => {
+  for (const [key, job] of infusing) {
+    try {
+      const altar = job.dimension.getBlock(job.location);
+      const found = altar?.typeId === ALTAR ? findRecipe(altar) : {};
+      if (found.recipe !== job.recipe) {
+        infusing.delete(key); // something was taken away, so the craft stops
+        continue;
+      }
+      job.ticks += INFUSION_STEP;
+      for (const pedestal of found.pedestals) job.dimension.spawnParticle("minecraft:villager_happy", { ...pedestal.center(), y: pedestal.location.y + 1.2 });
+      if (job.ticks >= ALTAR_TICKS) {
+        infusing.delete(key);
+        finishInfusion(altar, job.recipe, found.pedestals);
+      }
+    } catch {
+      infusing.delete(key); // the chunk unloaded
+    }
+  }
+}, INFUSION_STEP);
+
+// ---------- Souls ----------
+const JAR = "__NS__:soul_jar";
+const SOUL_TYPE = "__NS__:soul_type";
+const SOUL_COUNT = "__NS__:soul_count";
+const SOULS = __SOULS__;
+const SOUL_OF_MOB = Object.fromEntries(Object.entries(SOULS).flatMap(([soul, { mobs }]) => mobs.map((mob) => [mob, soul])));
+const DAGGERS = { "__NS__:anima_dagger": null, "__NS__:passive_anima_dagger": true, "__NS__:hostile_anima_dagger": false };
+const soulTitle = (soul) => soul.replace(/(^|_)(\w)/g, (_, sep, c) => (sep ? " " : "") + c.toUpperCase());
+
+// Pours souls into the player's jars, starting with ones that already hold this mob type, as far as they'll go.
+function addSouls(player, soul, amount) {
+  const container = player.getComponent("minecraft:inventory")?.container;
+  if (!container) return;
+  const need = SOULS[soul].need;
+  const slots = [];
+  for (let i = 0; i < container.size; i++) {
+    const stack = container.getItem(i);
+    if (stack?.typeId !== JAR) continue;
+    const type = stack.getDynamicProperty(SOUL_TYPE);
+    if (type === soul) slots.unshift(i);
+    else if (type === undefined) slots.push(i);
+  }
+  for (const i of slots) {
+    if (amount <= 0) return;
+    const stack = container.getItem(i);
+    const count = stack.getDynamicProperty(SOUL_COUNT) ?? 0;
+    const added = Math.min(need - count, amount);
+    if (added <= 0) continue;
+    amount -= added;
+    stack.setDynamicProperty(SOUL_TYPE, soul);
+    stack.setDynamicProperty(SOUL_COUNT, count + added);
+    stack.setLore([`${soulTitle(soul)} Souls: ${+(count + added).toFixed(1)} / ${need}`]);
+    container.setItem(i, stack);
+  }
+}
+
+world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
+  const player = damageSource.damagingEntity;
+  if (player?.typeId !== "minecraft:player") return;
+  const dagger = player.getComponent("minecraft:equippable")?.getEquipment(EquipmentSlot.Mainhand)?.typeId;
+  if (!dagger || !(dagger in DAGGERS)) return;
+  // ponytail: wears by one per kill, since scripts can't see each hit; add entityHurt if daggers last too long.
+  wear(player, 1);
+  const soul = SOUL_OF_MOB[deadEntity.typeId];
+  if (!soul) return;
+  const attuned = DAGGERS[dagger];
+  addSouls(player, soul, attuned !== null && attuned === SOULS[soul].passive ? ATTUNED_SOULS : 1);
 });

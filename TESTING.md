@@ -4,10 +4,34 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Infusion Altar and souls (v0.14.0)
+
+- [ ] **Check this first:** the add-on loads with no script or content log errors. Then craft a pedestal and place an item on it, since the display entity is the biggest unknown.
+- [ ] **Item display:** an item on a stand shows above the block, or at least its name shows when you look at it. Note how it looks. Deepcore's notes say an item in a hand bone draws as a tilted 3D model.
+- [ ] Clicking the stand (not the entity) still works from every angle. The display entity can't be hit, pushed or set on fire, and doesn't get in the way of walking.
+- [ ] Altar, pedestal and wand craft and show their textures and shapes.
+- [ ] Use an item on a stand and one goes on, using one from the stack. An empty hand takes it back. Creative mode doesn't use items up.
+- [ ] Items on stands survive leaving the world and coming back, and a server restart.
+- [ ] Breaking a stand drops the block and, within about 2 seconds, the item it held. No display entity stays behind. Explosions do the same.
+- [ ] With 8 pedestals in place, a Vita Seed Base on the altar and 4 iron ingots + 4 Ignis Essence on the pedestals, a wand starts the craft. After 5 seconds iron seeds sit on the altar and the pedestals are empty.
+- [ ] Pedestal order doesn't matter. With a pedestal missing, or items that don't fit, the wand shows a message and nothing happens.
+- [ ] Taking an item away mid-craft stops it and uses nothing.
+- [ ] Redstone power starts the craft, if `getRedstonePower` is available. Note if it isn't.
+- [ ] New seeds no longer craft at a table, except Terra. Old seeds in inventories still plant.
+- [ ] Soulstone and Anima Ore generate in new Nether chunks. **Anima Ore relies on `final_pass` running after the soulstone, so check it actually appears.** Soulstone drops cobble, and Anima Ore drops 1–3 dust.
+- [ ] Furnace chain: cobble → soulstone → smooth → Soul Dust. Bricks → cracked bricks. Soul Glass crafts, and shows see-through.
+- [ ] Anima Ingot and Gemstone craft from Vita plus 2 dust. Anima Seed Base crafts.
+- [ ] Killing a pig with an Anima Dagger in hand and a Soul Jar in your inventory adds 1 soul, shown on the jar. The dagger loses 1 durability per kill. Other weapons add nothing.
+- [ ] A jar holds one mob type, and souls spill into the next jar at the limit. A jar with souls accepts only that type.
+- [ ] 8 pig souls + an Anima Seed Base + 4 Aqua Essence and 4 full jars on pedestals makes pig seeds, and the jars go back empty. A jar that's not full doesn't count.
+- [ ] Passive and Hostile daggers craft at the altar. They give 1.5 souls from their kind of mob and 1 from others, and show as 6 attack damage. Check whether `minecraft:damage` applies.
+- [ ] Zombies, husks, drowned and zombie villagers all count as zombie souls. Cod, salmon, tropical fish and pufferfish count as fish.
+- [ ] The Anima crop's essence makes 4 Anima Dust per ring. A Blank Skull now takes Soul Dust.
+
 ## Full crop list (v0.13.0)
 
 - [ ] **Check this first:** read the content log after loading. Any recipe with a wrong Bedrock item id shows up here, and those are what to fix. The ones most likely to be wrong are `melon_block`, `waterlily`, `nether_brick`, `snow`, the coral fans, the music discs, and the three head items.
-- [ ] The 29 new crops' seeds craft: air, earth, water, fire, stone, dirt, ice, deepslate, nature, dye, nether, coral, honey, prismarine, sculk, end, experience, pig, chicken, cow, sheep, squid, fish, turtle, armadillo, phantom, rabbit, breeze and ghast.
+- [ ] The 29 new crops' seeds craft at the altar: air, earth, water, fire, stone, dirt, ice, deepslate, nature, dye, nether, coral, honey, prismarine, sculk, end, experience, pig, chicken, cow, sheep, squid, fish, turtle, armadillo, phantom, rabbit, breeze and ghast.
 - [ ] All 11 clusters craft from their four items. The water and fire clusters give the bucket back, or else note that they don't.
 - [ ] Terra seeds now craft from 8 Terra Essence around wheat seeds.
 - [ ] Mixed recipes craft: sand (fire + dirt), clay (water + dirt), nether wart (nether + nature), andesite, a sapling, a coral, a dye, a concrete, a log.
@@ -129,11 +153,10 @@ Still needs testing in-game:
 
 ## Mob crops (v0.7.0)
 
-- [ ] All 9 seeds craft from 4 tier essence + 4 of the drop around wheat seeds: zombie, spider (eyes), skeleton (bones), creeper, slime, blaze, enderman, wither skeleton, wither.
 - [ ] Each crop grows, and shows its colour when ripe. Enderman is purple, wither is pale blue, and their essence stays dark.
 - [ ] Each mob essence shows its face in the inventory, and is recognisable at normal size.
 - [ ] Bone meal seeds can no longer be crafted.
-- [ ] Wither skeleton seeds accept real skulls, and the crafted skull works for summoning a wither.
+- [ ] A crafted wither skeleton skull works for summoning a wither.
 
 ## Machines (Wildbloom)
 

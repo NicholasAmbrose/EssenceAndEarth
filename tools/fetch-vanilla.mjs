@@ -11,7 +11,7 @@ const RECIPES = JSON.parse(fs.readFileSync(path.join(ROOT, "recipes.json"), "utf
 // Bedrock item id -> the Java id the texture package files it under.
 const JAVA_ID = JSON.parse(fs.readFileSync(path.join(ROOT, "tools", "vanilla", "java_ids.json"), "utf8"));
 
-const wanted = new Set(["minecraft:wheat_seeds", "minecraft:farmland", "minecraft:short_grass", "minecraft:bone_meal", "minecraft:wheat", "minecraft:dirt", "minecraft:stick", "minecraft:book", "minecraft:stone"]);
+const wanted = new Set(["minecraft:wheat_seeds", "minecraft:farmland", "minecraft:short_grass", "minecraft:bone_meal", "minecraft:wheat", "minecraft:dirt", "minecraft:stick", "minecraft:book", "minecraft:stone", "minecraft:gold_ingot", "minecraft:red_wool", "minecraft:glass", "minecraft:golden_sword", "minecraft:bone_block"]);
 for (const c of cfg.crops) wanted.add(c.ingredient);
 for (const r of RECIPES) for (const id of [r.result, ...(r.ingredients ?? Object.values(r.key))]) wanted.add(id);
 for (const id of [...wanted]) if (!id.startsWith("minecraft:")) wanted.delete(id);

@@ -13,9 +13,11 @@ const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, "crops.json"), "utf8"));
 const RECIPES = JSON.parse(fs.readFileSync(path.join(ROOT, "recipes.json"), "utf8"));
 const BAL = cfg.balance;
 const ALL_CROPS = cfg.crops;
+const RETIRED_FILES = new Set(ALL_CROPS.filter((c) => c.retired).flatMap((c) => [`${c.id}_seeds.json`, `${c.id}_essence.json`]));
 cfg.crops = cfg.crops.filter((c) => !c.retired);
 const SLUG = cfg.name.replaceAll("&", "And").replace(/\W/g, "");
 const RP = path.join(ROOT, "build", `${SLUG}_RP`);
+const BP = path.join(ROOT, "build", `${SLUG}_BP`);
 const WWW = path.join(ROOT, "src", "EssenceWiki", "wwwroot");
 const VANILLA = path.join(ROOT, "tools", "vanilla");
 const vanillaNames = JSON.parse(fs.readFileSync(path.join(VANILLA, "names.json"), "utf8"));
@@ -80,11 +82,13 @@ const anyItem = (id) => {
   const crop = name.endsWith("_essence") && ourCrops.get(name.slice(0, -8));
   return crop ? (crop.retired ? { name: title(name), icon: `img/icons/${name}.png` } : essenceItem(crop)) : { name: title(name), icon: `img/icons/${name}.png` };
 };
+const jarOf = (soul) => ({ name: `Soul Jar: ${cfg.souls[soul].need} ${title(soul)} Souls`, icon: "img/icons/soul_jar.png", href: "wiki/infusion/soul-jars" });
+const seedBase = (kind) => ({ name: `${title(kind)} Seed Base`, icon: `img/icons/${kind}_seed_base.png`, href: "wiki/infusion/seed-bases" });
 const seedsRecipe = (c) => {
-  const e = tierItem(cfg.tiers[c.tier - 1]), w = vanilla("minecraft:wheat_seeds");
-  if (c.essenceCrop) return recipe(seedsItem(c), 1, [[e, e, e], [e, w, e], [e, e, e]]);
-  const r = anyItem(c.ingredient);
-  return recipe(seedsItem(c), 1, [[e, r, e], [r, w, r], [e, r, e]]);
+  const e = tierItem(cfg.tiers[c.tier - 1]);
+  if (c.essenceCrop) return recipe(seedsItem(c), 1, [[e, e, e], [e, vanilla("minecraft:wheat_seeds"), e], [e, e, e]]);
+  const r = c.soul ? jarOf(c.soul) : anyItem(c.ingredient);
+  return recipe(seedsItem(c), 1, [[e, r, e], [r, seedBase(c.soul ? "anima" : "vita"), r], [e, r, e]], "Made at the Infusion Altar: the seed base on the altar, the rest on any pedestals");
 };
 // A recipe belongs to the crop of the first essence in it, so each shows on one crop's page.
 const recipeParts = (r) => r.ingredients ?? Object.values(r.key);
@@ -147,7 +151,7 @@ const guide = {
         h2("2. Upgrade it"),
         p(`Four essence of one tier craft one of the next: ${cfg.tiers.map((t) => `<a href="${essenceHref(`${t.id}_essence`)}">${title(t.id)}</a>`).join(" → ")}. Each crop needs the essence of its tier.`),
         h2("3. Craft seeds and plant them"),
-        p(`Surround wheat seeds with four tier essence and four of the resource. Plant the seeds on any farmland and wait. <a href="wiki/farmland">Essence farmland</a> gives extra drops, and <a href="wiki/accelerators">growth accelerators</a> speed them up.`),
+        p(`Build an <a href="wiki/infusion/infusion-altar">Infusion Altar</a> with eight pedestals. Put a seed base on the altar, and four tier essence and four of the resource on the pedestals, then use a Wand on the altar. Plant the seeds on any farmland and wait. <a href="wiki/farmland">Essence farmland</a> gives extra drops, and <a href="wiki/accelerators">growth accelerators</a> speed them up.`),
         h2("4. Harvest and craft"),
         p(`A ripe crop drops ${harvest} of its essence and its seed back. Each crop page shows the recipe that turns its essence into the resource.`),
       ],
@@ -168,7 +172,7 @@ const guide = {
       slug: "essence-guide", name: guideItem.name, icon: guideItem.icon,
       summary: "An in-game book covering the basics.",
       blocks: [
-        facts([["Use", "Hold it and press use to open the menu"], ["Topics", "Getting started, seeds and harvest, farmland, accelerators, tools, crops by tier"], ["Free copy", "Every player gets one, once, when they join"]]),
+        facts([["Use", "Hold it and press use to open the menu"], ["Topics", "Everything from your first essence to the Infusion Altar, plus crops by tier"], ["Free copy", "Every player gets one, once, when they join"]]),
         p("The guide's numbers and crop list always match the installed version of the add-on."),
         h2("Recipe"),
         (() => {
@@ -282,7 +286,7 @@ const cropCategories = cfg.tiers
         slug: slug(c.id), name: `${title(c.id)} Crop`, icon: `img/icons/${c.id}_crop.png`,
         summary: yields(c),
         blocks: [
-          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Best on", `${title(t.id)} Farmland`], ...(c.essenceCrop ? [] : [["Seeds use", anyItem(c.ingredient).name]]), ["Makes", c.essenceCrop ? tierName(t) : yields(c)]]),
+          facts([["Tier", `${i + 1} · ${tierName(t)}`], ["Best on", `${title(t.id)} Farmland`], ...(c.essenceCrop ? [] : [["Seeds use", c.soul ? jarOf(c.soul).name : anyItem(c.ingredient).name]]), ["Makes", c.essenceCrop ? tierName(t) : yields(c)]]),
           list(stages(c)),
           h2("Seeds"),
           seedsRecipe(c),
@@ -332,6 +336,10 @@ const materials = {
       recipe(matItem("vita_ingot"), 1, plus(matItem("vita_shard"), vanilla("minecraft:iron_ingot"))),
       recipe(matItem("vita_gemstone"), 1, plus(matItem("vita_shard"), vanilla("minecraft:diamond"))),
       "Made from the Vita Shards that Vita Ore drops. Every tier's ingot and gemstone starts from these."),
+    materialEntry("anima", "Anima",
+      recipe(matItem("anima_ingot"), 1, shapelessGrid(matItem("vita_ingot"), { name: "Anima Dust", icon: "img/icons/anima_dust.png" }), "Shapeless: any slots"),
+      recipe(matItem("anima_gemstone"), 1, shapelessGrid(matItem("vita_gemstone"), { name: "Anima Dust", icon: "img/icons/anima_dust.png" }), "Shapeless: any slots"),
+      "Vita materials plus two Anima Dust. Dust comes from Anima Ore in the Nether."),
     ...cfg.tiers.map((t) => materialEntry(t.id, title(t.id),
       recipe(matItem(`${t.id}_ingot`), 1, shapelessGrid(matItem("vita_ingot"), tierItem(t)), "Shapeless: any slots"),
       recipe(matItem(`${t.id}_gemstone`), 1, shapelessGrid(matItem("vita_gemstone"), tierItem(t)), "Shapeless: any slots"),
@@ -356,7 +364,76 @@ const materials = {
   ],
 };
 
-const categories = [guide, essence, materials, farmland, accelerators, tools, ...cropCategories];
+const named = (id) => ({ name: title(id), icon: `img/icons/${id}.png` });
+const infusion = {
+  slug: "infusion", title: "Infusion and souls", group: "Getting started", icon: "img/icons/infusion_altar.png",
+  blurb: "The altar that makes seeds, the bases they start from, and the souls mob seeds need.",
+  entries: [
+    {
+      slug: "infusion-altar", name: "Infusion Altar", icon: "img/icons/infusion_altar.png",
+      summary: "An altar and eight pedestals that craft seeds.",
+      blocks: [
+        facts([["Layout", "8 pedestals at the altar's height: 3 blocks away on each side, 2 away on each diagonal"], ["Place items", "Use an item on the block. Each holds one"], ["Take items", "Use an empty hand"], ["Start", "Use a Wand on the altar, or power it with redstone"], ["Time", `${BAL.altarTicks / 20} seconds`]]),
+        p("Pedestal order doesn't matter. Taking an item away stops the craft, and breaking a block drops what it held."),
+        h2("Infusion Altar"),
+        (() => { const g = vanilla("minecraft:gold_ingot"), c = vanilla("minecraft:red_wool"), s = vanilla("minecraft:stone"); return recipe(named("infusion_altar"), 1, [[g, c, g], [null, s, null], [s, s, s]]); })(),
+        h2("Infusion Pedestal"),
+        (() => { const g = vanilla("minecraft:gold_ingot"), c = vanilla("minecraft:red_wool"), s = vanilla("minecraft:stone"); return recipe(named("infusion_pedestal"), 1, [[g, c, g], [null, s, null], [null, s, null]]); })(),
+        h2("Wand"),
+        (() => { const e = tierItem(cfg.tiers[0]); return recipe(named("wand"), 1, [[null, null, e], [null, vanilla("minecraft:stick"), null], [vanilla("minecraft:stone"), null, null]]); })(),
+      ],
+    },
+    {
+      slug: "seed-bases", name: "Seed bases", icon: "img/icons/vita_seed_base.png",
+      summary: "What goes on the altar to start a seed.",
+      blocks: [
+        p("Vita Seed Bases make resource seeds, and Anima Seed Bases make mob seeds."),
+        h2("Vita Seed Base"),
+        recipe(seedBase("vita"), 1, plus(matItem("vita_shard"), vanilla("minecraft:wheat_seeds"))),
+        h2("Anima Seed Base"),
+        recipe(seedBase("anima"), 1, shapelessGrid(seedBase("vita"), named("anima_dust")), "Shapeless: any slots"),
+      ],
+    },
+    {
+      slug: "soulstone", name: "Soulstone and Anima", icon: "img/icons/soulstone.png",
+      summary: "Found in the Nether.",
+      blocks: [
+        list([
+          { ...named("soulstone"), sub: "Large veins in the Nether. Mines into Soulstone Cobble" },
+          { ...named("anima_ore"), sub: `Inside soulstone. Drops ${range(BAL.animaDust)} Anima Dust` },
+          { ...named("soul_dust"), sub: "Smelt soulstone cobble, then soulstone, then smooth soulstone" },
+          { ...named("soul_glass"), sub: "4 Soul Dust around glass" },
+          { ...named("soulstone_bricks"), sub: "4 soulstone make 4" },
+          { ...named("blank_skull"), sub: "4 Soul Dust around a bone block make 4" },
+        ]),
+        h2("Anima materials"),
+        p("Vita Ingots and Gemstones plus two Anima Dust make Anima Ingots and Gemstones."),
+      ],
+    },
+    {
+      slug: "soul-jars", name: "Soul Jars", icon: "img/icons/soul_jar.png",
+      summary: "Collect mob souls for mob seeds.",
+      blocks: [
+        p("Kill mobs with an Anima Dagger in your hand and a Soul Jar anywhere in your inventory. Each jar holds one mob type, and souls spill into the next jar when one fills. A jar empties when used at the altar, and you keep it."),
+        (() => { const s = named("anima_ingot"), g = named("soul_glass"); return recipe(named("soul_jar"), 1, [[null, s, null], [g, null, g], [null, g, null]]); })(),
+        h2("Souls per jar"),
+        list(Object.entries(cfg.souls).map(([soul, { need }]) => ({ name: title(soul), icon: "img/icons/soul_jar.png", sub: `${need} souls` }))),
+      ],
+    },
+    {
+      slug: "anima-daggers", name: "Anima Daggers", icon: "img/icons/anima_dagger.png",
+      summary: "Fill Soul Jars from your kills.",
+      blocks: [
+        facts([["Anima Dagger", `${BAL.daggerDurability} uses, 1 soul per kill`], ["Passive Anima Dagger", `${BAL.attunedDaggerDurability} uses, ${BAL.attunedSoulMultiplier} souls per passive mob`], ["Hostile Anima Dagger", `${BAL.attunedDaggerDurability} uses, ${BAL.attunedSoulMultiplier} souls per hostile mob`]]),
+        (() => { const d = named("anima_dust"), i = named("anima_ingot"); return recipe(named("anima_dagger"), 1, [[null, d, null], [i, vanilla("minecraft:golden_sword"), i], [null, d, null]]); })(),
+        h2("Attuning"),
+        p("At the Infusion Altar, put an Anima Dagger on the altar. On the pedestals, put 2 Anima Ingots, 2 Anima Gemstones and 4 full Soul Jars. Pig, chicken, cow and sheep jars make a Passive dagger. Zombie, skeleton, creeper and spider jars make a Hostile one."),
+      ],
+    },
+  ],
+};
+
+const categories = [guide, essence, materials, infusion, farmland, accelerators, tools, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -370,6 +447,7 @@ const gallery = [
   { title: "Ores", items: ["essence_ore", "deepslate_essence_ore", "vita_ore", "deepslate_vita_ore"].map((id) => ({ name: title(id), icon: `img/icons/${id}.png` })) },
   { title: "Materials", items: ["vita", ...cfg.tiers.map((t) => t.id)].flatMap((id) => [`${id}_ingot`, `${id}_gemstone`, `${id}_nugget`, `${id}_ingot_block`, `${id}_gemstone_block`].map(matItem)) },
   { title: "Fertilizer", items: [fertilized, fertilizer] },
+  { title: "Infusion and souls", items: ["infusion_altar", "infusion_pedestal", "wand", "vita_seed_base", "anima_seed_base", "soul_jar", "anima_dagger", "passive_anima_dagger", "hostile_anima_dagger", "soul_dust", "anima_dust", "soulstone", "soulstone_cobble", "soulstone_smooth", "soulstone_bricks", "soulstone_cracked_bricks", "soul_glass", "anima_ore"].map((id) => ({ name: title(id), icon: `img/icons/${id}.png` })) },
   { title: "Tools and guide", items: [sickleItem, hoeItem, guideItem] },
   { title: "Growth stages", items: stages(cfg.crops[0]).slice(0, 3) },
 ];
@@ -381,9 +459,11 @@ const wiki = {
     download: `https://github.com/${REPO}/raw/main/addon/${file}`,
     repo: `https://github.com/${REPO}`,
   },
-  // items: per tier essence, farmland, accelerator, 3 materials, 3 storage blocks; per crop seeds and essence (essence crops share their tier's essence);
-  // 4 ores, Vita's shard, 3 materials and 3 blocks, 2 fertilizers, 2 tools, the guide, 11 clusters, 2 blanks and the droplet
-  stats: { crops: cfg.crops.length, tiers: cfg.tiers.length, items: cfg.tiers.length * 9 + cfg.crops.length * 2 - cfg.crops.filter((c) => c.essenceCrop).length + 30, recipes: recipes.length },
+  // items: everything in the pack apart from crop blocks, and retired crops' seeds and essence
+  stats: {
+    crops: cfg.crops.length, tiers: cfg.tiers.length, recipes: recipes.length,
+    items: [...fs.readdirSync(path.join(BP, "items")), ...fs.readdirSync(path.join(BP, "blocks"))].filter((f) => !f.endsWith("_crop.json") && !RETIRED_FILES.has(f)).length,
+  },
   categories,
   recipes,
   gallery,

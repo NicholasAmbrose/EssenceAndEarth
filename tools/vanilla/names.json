@@ -232,5 +232,9 @@
   "minecraft:white_wool": "White Wool",
   "minecraft:yellow_concrete": "Yellow Concrete",
   "minecraft:yellow_concrete_powder": "Yellow Concrete Powder",
-  "minecraft:zombie_head": "Zombie Head"
+  "minecraft:zombie_head": "Zombie Head",
+  "minecraft:red_wool": "Red Wool",
+  "minecraft:glass": "Glass",
+  "minecraft:golden_sword": "Golden Sword",
+  "minecraft:bone_block": "Bone Block"
 }

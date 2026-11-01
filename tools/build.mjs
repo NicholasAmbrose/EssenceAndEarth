@@ -576,13 +576,30 @@ const range = ([min, max]) => (min === max ? `${min}` : `${min}-${max}`);
 const tierTitle = (t) => title(t.id);
 const GUIDE_PAGES = [
   { title: "Getting Started", body: `Mine Essence Ore underground, between y -32 and 64, for ${range(BAL.oreEssence)} ${tierTitle(cfg.tiers[0])} Essence each. It also drops from most mobs (${pct(BAL.mobEssenceChance)}), grass and ferns (${pct(BAL.grassEssenceChance)}) and ripe vanilla crops (${pct(BAL.cropEssenceChance)}).\n\nOnce you have a little, plant the ${tierTitle(cfg.tiers[0])} crop for a steady supply.\n\nFour essence of one tier craft one of the next:\n${cfg.tiers.map(tierTitle).join(" > ")}` },
-  { title: "Seeds and Harvest", body: `Surround wheat seeds with 4 tier essence and 4 of the resource to craft seeds.\n\nSeeds grow on any farmland, but give extras only on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly, and more on higher tiers of farmland.\n\nEach crop's essence crafts its resource. Common resources use a ring of 8 or a row of 3 and make a lot. Rare ones take a full grid of 9 and make 1. The wiki lists every recipe.\n\nBone meal doesn't work on these crops.` },
+  { title: "Infusion Altar", body: `Seeds are made at an Infusion Altar with 8 Infusion Pedestals around it, at the same height: 3 blocks away on each side, and 2 away on each diagonal.\n\nPut a seed base on the altar, and 4 of the resource and 4 tier essence on the pedestals. Use an item on either block to place it, and an empty hand to take it back. Then use a Wand on the altar, or power it with redstone.` },
+  { title: "Souls", body: `Mob seeds use Soul Jars instead of the resource. Kill mobs with an Anima Dagger in your hand and a Soul Jar in your inventory to fill it. Each jar holds one mob type, and shows its count on the jar.\n\nThe jar empties when it's used in a recipe, so you keep it.\n\nAttuned daggers, made at the altar, fill jars ${BAL.attunedSoulMultiplier} times as fast from passive or hostile mobs.` },
+  { title: "Seeds and Harvest", body: `Seeds come from the Infusion Altar. The ${tierTitle(cfg.tiers[0])} seeds are the exception: craft 8 ${tierTitle(cfg.tiers[0])} Essence around wheat seeds.\n\nSeeds grow on any farmland, but give extras only on essence farmland.\n\nA ripe crop drops ${range(BAL.harvestEssence)} essence and its seed. The ${tierTitle(cfg.tiers[0])} crop drops ${tierTitle(cfg.tiers[0])} Essence directly, and more on higher tiers of farmland.\n\nEach crop's essence crafts its resource. Common resources use a ring of 8 or a row of 3 and make a lot. Rare ones take a full grid of 9 and make 1. The wiki lists every recipe.\n\nBone meal doesn't work on these crops.` },
   { title: "Essence Farmland", body: `Use tier essence on farmland to turn it into that tier, or craft 1 dirt + 1 tier essence. It never dries out and needs no water.\n\nOn any essence farmland, a ripe crop has a ${pct(BAL.secondaryChance)} chance of a second essence and of a second seed. Farmland matching the crop's tier raises each to ${pct(BAL.secondaryChance + BAL.matchingFarmlandChance)}.\n\nUsing a different tier's essence swaps the farmland, with a ${pct(BAL.farmlandRefundChance)} chance of getting one of the old essence back.` },
   { title: "Growth Accelerators", body: `Place below a crop to give it an extra growth chance about every ${BAL.acceleratorSeconds} seconds. Each one works on its own, so more means faster.\n\nThey work through other blocks, on the first crop above them. The block directly above an accelerator is skipped, because that's where the farmland goes.\n\nReach by tier:\n${cfg.tiers.map((t, i) => `${tierTitle(t)}: ${BAL.acceleratorRange[i]} blocks`).join("\n")}\n\n4 tier essence, 4 stone and 1 tier gemstone make ${BAL.acceleratorYield}.` },
   { title: "Materials", body: `Vita Ore, between y -60 and 24, drops ${range(BAL.vitaShards)} Vita Shards.\n\n4 shards around an iron ingot make a Vita Ingot, and around a diamond a Vita Gemstone. Add 2 tier essence to either for that tier's version.\n\nNine of anything stores in a block, and ingots break down into 9 nuggets.` },
   { title: "Fertilizer", body: `Ripe crops have a ${pct(BAL.fertilizedEssenceChance)} chance of dropping Fertilized Essence, which advances a crop a stage or two.\n\nEssence Fertilizer ripens a crop at once. 4 Terra Essence, 4 bone meal and a diamond make 4, or use Fertilized Essence instead of bone meal to make 8.` },
   { title: "Tools", body: `Essence Sickle: break a ripe crop to harvest every ripe crop in the 3x3 around it. It won't break unripe crops.\n\nEssence Hoe: right-click a ripe crop to harvest and replant it. The replant takes one seed from the drops.\n\nBoth last ${BAL.toolDurability} uses and repair with ${tierTitle(cfg.tiers[1])} Essence in an anvil.` },
   { title: "Crops by Tier", body: `${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
+];
+
+// Infusion recipes for the script: a seed base on the altar, 4 of the ingredient and 4 tier essence on the pedestals.
+const FULL_JAR = (soul) => ({ soul });
+const ALTAR_RECIPES = [
+  ...cfg.crops.filter((c) => !c.retired && !c.essenceCrop).map((c) => ({
+    input: `${NS}:${c.soul ? "anima" : "vita"}_seed_base`,
+    ingredients: [...Array(4).fill(c.soul ? FULL_JAR(c.soul) : c.ingredient), ...Array(4).fill(`${NS}:${cfg.tiers[c.tier - 1].id}_essence`)],
+    output: `${NS}:${c.id}_seeds`,
+  })),
+  ...[["passive", ["pig", "chicken", "cow", "sheep"]], ["hostile", ["zombie", "skeleton", "creeper", "spider"]]].map(([kind, mobs]) => ({
+    input: `${NS}:anima_dagger`,
+    ingredients: [`${NS}:anima_ingot`, `${NS}:anima_ingot`, `${NS}:anima_gemstone`, `${NS}:anima_gemstone`, ...mobs.map(FULL_JAR)],
+    output: `${NS}:${kind}_anima_dagger`,
+  })),
 ];
 
 for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })) {
@@ -593,6 +610,8 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__ACCELERATOR_RANGE__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_accelerator`, BAL.acceleratorRange[i]]))))
       .replaceAll("__ESSENCE_FARMLAND__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t) => [`${NS}:${t.id}_essence`, `${NS}:${t.id}_farmland`]))))
       .replaceAll("__GUIDE_PAGES__", JSON.stringify(GUIDE_PAGES))
+      .replaceAll("__ALTAR_RECIPES__", JSON.stringify(ALTAR_RECIPES))
+      .replaceAll("__SOULS__", JSON.stringify(cfg.souls))
       .replaceAll("__FARMLAND_TIER__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, i + 1]))))
       .replaceAll("__CROP_TIER__", JSON.stringify(Object.fromEntries(cfg.crops.map((c) => [`${NS}:${c.id}_crop`, c.retired ? 1 : c.tier]))))
       .replaceAll("__ESSENCE__", `${NS}:${cfg.tiers[0].id}_essence`)
@@ -842,11 +861,11 @@ for (const c of cfg.crops) {
   // An essence crop drops its tier's essence directly, so it has no essence item of its own.
   if (!c.essenceCrop) item(`${c.id}_essence`, c.face ? faceMask(c.face) : WISP, c.essenceColor ?? c.color, {}, c.faceColors);
 
-  // A retired crop can't be started any more, but what's already planted keeps working.
-  if (!c.retired)
+  // Every other crop's seeds come from the Infusion Altar (see scripts/main.js).
+  if (c.essenceCrop)
     recipe(`${c.id}_seeds`, "shaped", {
-      pattern: c.essenceCrop ? ["EEE", "ESE", "EEE"] : ["ERE", "RSR", "ERE"],
-      key: { E: { item: tierEssence(c.tier) }, ...(!c.essenceCrop && { R: { item: c.ingredient } }), S: { item: "minecraft:wheat_seeds" } },
+      pattern: ["EEE", "ESE", "EEE"],
+      key: { E: { item: tierEssence(c.tier) }, S: { item: "minecraft:wheat_seeds" } },
       result: { item: seeds },
     }, tierEssence(c.tier));
 }
@@ -956,10 +975,237 @@ const DROPLET = [
 item("blank_skull", BLANK_SKULL, "#d8d4c4", {}, { d: "#2c2c2c" });
 item("blank_record", BLANK_RECORD, "#3a3a3a");
 item("experience_droplet", DROPLET, "#9fe04d");
-// ponytail: bone meal stands in for Soul Dust, which arrives with the Infusion Altar.
-recipe("blank_skull", "shaped", { pattern: [" S ", "SBS", " S "], key: { S: { item: "minecraft:bone_meal" }, B: { item: "minecraft:bone_block" } }, result: { item: `${NS}:blank_skull`, count: 4 } }, "minecraft:bone_block");
+recipe("blank_skull", "shaped", { pattern: [" S ", "SBS", " S "], key: { S: { item: `${NS}:soul_dust` }, B: { item: "minecraft:bone_block" } }, result: { item: `${NS}:blank_skull`, count: 4 } }, `${NS}:soul_dust`);
 recipe("blank_record", "shaped", { pattern: ["CSC", "SIS", "CSC"], key: { C: { item: `${NS}:creeper_essence` }, S: { item: `${NS}:skeleton_essence` }, I: { item: "minecraft:iron_ingot" } }, result: { item: `${NS}:blank_record` } }, `${NS}:creeper_essence`);
 recipe("experience_bottle", "shapeless", { ingredients: [{ item: "minecraft:glass_bottle" }, { item: `${NS}:experience_droplet` }], result: { item: "minecraft:experience_bottle" } }, `${NS}:experience_droplet`);
+
+// Soulstone: generates in the Nether, with Anima Ore inside it. Soul Dust comes from smelting smooth soulstone.
+const speckle = (seed) => grid((x, y) => { const n = noise(x, y, seed); return n < 0.16 ? "k" : n > 0.84 ? "T" : "t"; });
+const BRICKS = grid((x, y) => {
+  const row = Math.floor(y / 4), off = row % 2 ? 4 : 0;
+  if (y % 4 === 3 || (x + off) % 8 === 7) return "k";
+  return noise(x, y, 3) > 0.85 ? "T" : "t";
+});
+const CRACKED = grid((x, y) => (Math.abs(((x * 3 + y * 2) % 13) - 6) < 1 && noise(x, y, 5) > 0.4 ? "k" : BRICKS[y][x]));
+const SMOOTH = grid((x, y) => (x === 0 || y === 0 ? "T" : x === 15 || y === 15 ? "k" : "t"));
+const SOUL_PALETTE = { T: "#5f4a3a", t: "#4a3a2e", k: "#2f251d" };
+function plainBlock(id, name, mask, palette, sound, seconds, drops = id, extra = {}) {
+  blockTexture(id, mask, palette.t, palette);
+  block(id, sound, { menu_category: { category: "construction" } }, {
+    "minecraft:display_name": name,
+    "minecraft:geometry": "minecraft:geometry.full_block",
+    "minecraft:destructible_by_mining": { seconds_to_destroy: seconds },
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}`, ...extra.material } },
+    "minecraft:loot": loot(id, [drop(`${NS}:${drops}`)]),
+    ...extra.components,
+  });
+}
+plainBlock("soulstone", "Soulstone", speckle(1), SOUL_PALETTE, "stone", 1.5, "soulstone_cobble");
+plainBlock("soulstone_cobble", "Soulstone Cobble", grid((x, y) => { const c = (Math.floor(x / 4) + Math.floor(y / 4)) % 2; return x % 4 === 3 || y % 4 === 3 ? "k" : c ? "T" : "t"; }), SOUL_PALETTE, "stone", 2);
+plainBlock("soulstone_smooth", "Smooth Soulstone", SMOOTH, SOUL_PALETTE, "stone", 1.5);
+plainBlock("soulstone_bricks", "Soulstone Bricks", BRICKS, SOUL_PALETTE, "stone", 1.5);
+plainBlock("soulstone_cracked_bricks", "Cracked Soulstone Bricks", CRACKED, SOUL_PALETTE, "stone", 1.5);
+plainBlock("soul_glass", "Soul Glass", grid((x, y) => (x === 0 || y === 0 || x === 15 || y === 15 ? "k" : ".")), { k: "#6a4f3c", t: "#4a3a2e" }, "glass", 0.3, "soul_glass", { material: { render_method: "alpha_test" }, components: { "minecraft:light_dampening": 0 } });
+const ANIMA_ORE = speckle(1).map((row, y) => [...row].map((ch, x) => { const m = ORE[y][x]; return m === "s" ? ch : m === "#" ? "a" : m === "*" ? "A" : ch; }).join(""));
+plainBlock("anima_ore", "Anima Ore", ANIMA_ORE, { ...SOUL_PALETTE, a: cfg.anima.color, A: shadeHex(cfg.anima.color, 0.5) }, "stone", 3, "anima_dust");
+write(path.join(BP, "loot_tables", "blocks", "anima_ore.json"), { pools: [drop(`${NS}:anima_dust`, ...BAL.animaDust)] });
+const NETHER_FEATURES = [
+  ["soulstone", 64, ["minecraft:netherrack"], 4, "underground_pass"],
+  ["anima_ore", 4, [`${NS}:soulstone`], 12, "final_pass"], // runs after the soulstone, so it only lands inside it
+];
+for (const [id, count, may_replace, iterations, pass] of NETHER_FEATURES) {
+  write(path.join(BP, "features", `${id}_feature.json`), {
+    format_version: "1.13.0",
+    "minecraft:ore_feature": { description: { identifier: `${NS}:${id}_feature` }, count, replace_rules: [{ places_block: `${NS}:${id}`, may_replace }] },
+  });
+  write(path.join(BP, "feature_rules", `${id}_rule.json`), {
+    format_version: "1.13.0",
+    "minecraft:feature_rules": {
+      description: { identifier: `${NS}:${id}_rule`, places_feature: `${NS}:${id}_feature` },
+      conditions: { placement_pass: pass, "minecraft:biome_filter": [{ test: "has_biome_tag", operator: "==", value: "nether" }] },
+      distribution: { iterations, coordinate_eval_order: "zyx", x: { distribution: "uniform", extent: [0, 16] }, y: { distribution: "uniform", extent: [0, 128] }, z: { distribution: "uniform", extent: [0, 16] } },
+    },
+  });
+}
+const furnace = (id, input, output) => write(path.join(BP, "recipes", `${id}.json`), {
+  format_version: "1.20.10",
+  "minecraft:recipe_furnace": { description: { identifier: `${NS}:${id}` }, tags: ["furnace", "blast_furnace"], input: `${NS}:${input}`, output: `${NS}:${output}` },
+});
+furnace("soulstone_smelted", "soulstone_cobble", "soulstone");
+furnace("soulstone_smooth_smelted", "soulstone", "soulstone_smooth");
+furnace("soul_dust_smelted", "soulstone_smooth", "soul_dust");
+furnace("soulstone_cracked_smelted", "soulstone_bricks", "soulstone_cracked_bricks");
+const nsItem = (id) => ({ item: `${NS}:${id}` });
+recipe("soulstone_bricks", "shaped", { pattern: ["##", "##"], key: { "#": nsItem("soulstone") }, result: { ...nsItem("soulstone_bricks"), count: 4 } }, `${NS}:soulstone`);
+recipe("soul_glass", "shaped", { pattern: [" E ", "EGE", " E "], key: { E: nsItem("soul_dust"), G: { item: "minecraft:glass" } }, result: nsItem("soul_glass") }, `${NS}:soul_dust`);
+
+// Anima: the second material family, from Anima Ore in the Nether.
+const DUST = [
+  "................",
+  "................",
+  "................",
+  "........#.......",
+  ".......#*#......",
+  "......#*##~.....",
+  ".....#*####~....",
+  "....#*######~...",
+  "...#*########~..",
+  "...#*#~##*##~~..",
+  "..#*####~####~..",
+  "..############..",
+  "................",
+  "................",
+  "................",
+  "................",
+];
+item("anima_dust", DUST, cfg.anima.color);
+item("soul_dust", DUST, "#7a6250");
+materials("anima", cfg.anima.color);
+storageBlock("anima_block", "Anima Block", ESSENCE_BLOCK, cfg.anima.color, "stone");
+packs("anima_dust", "anima_block");
+for (const kind of ["ingot", "gemstone"])
+  recipe(`anima_${kind}`, "shapeless", { ingredients: [nsItem(`vita_${kind}`), { item: `${NS}:anima_dust`, count: 2 }], result: nsItem(`anima_${kind}`) }, `${NS}:anima_dust`);
+
+// Seed bases: what goes on the altar. Anima bases are for mob seeds.
+item("vita_seed_base", SEEDS, cfg.vita.color);
+item("anima_seed_base", SEEDS, cfg.anima.color);
+recipe("vita_seed_base", "shaped", { pattern: [" # ", "#X#", " # "], key: { "#": nsItem("vita_shard"), X: { item: "minecraft:wheat_seeds" } }, result: nsItem("vita_seed_base") }, `${NS}:vita_shard`);
+recipe("anima_seed_base", "shapeless", { ingredients: [nsItem("vita_seed_base"), { item: `${NS}:anima_dust`, count: 2 }], result: nsItem("anima_seed_base") }, `${NS}:anima_dust`);
+
+// Hand items.
+const WAND = [
+  "................",
+  "............+...",
+  "..........+###..",
+  "...........#*#+.",
+  "..........h###..",
+  ".........hh.+...",
+  "........hh......",
+  ".......hh.......",
+  "......hh........",
+  ".....hh.........",
+  "....hh..........",
+  "...hh...........",
+  "..ss............",
+  ".sss............",
+  ".ss.............",
+  "................",
+];
+const JAR = [
+  "................",
+  ".....bbbbbb.....",
+  ".....bbbbbb.....",
+  "......gggg......",
+  ".....g....g.....",
+  "....g......g....",
+  "....g......g....",
+  "....g......g....",
+  "....g......g....",
+  "....g......g....",
+  "....g......g....",
+  "....g......g....",
+  "....gggggggg....",
+  ".....gggggg.....",
+  "................",
+  "................",
+];
+const DAGGER = [
+  "................",
+  ".............bb.",
+  "............b*b.",
+  "...........b*bb.",
+  "..........b*bb..",
+  ".........b*bb...",
+  "........b*bb....",
+  ".......b*bb.....",
+  "......b*bb......",
+  "..gg.b*bb.......",
+  "...ggbbb........",
+  "....ggb.........",
+  "...hhgg.........",
+  "..hh..gg........",
+  ".hh.............",
+  "................",
+];
+item("wand", WAND, cfg.tiers[0].color, { "minecraft:max_stack_size": 1 }, { h: "#6b4a2f", s: "#8a8a8a" });
+item("soul_jar", JAR, "#b8c8d8", { "minecraft:max_stack_size": 1 }, { b: cfg.anima.color, g: "#b8c8d8" });
+recipe("wand", "shaped", { pattern: ["  E", " S ", "R  "], key: { E: { item: tierEssence(1) }, S: { item: "minecraft:stick" }, R: { item: "minecraft:stone" } }, result: nsItem("wand") }, tierEssence(1));
+recipe("soul_jar", "shaped", { pattern: [" S ", "G G", " G "], key: { S: nsItem("anima_ingot"), G: nsItem("soul_glass") }, result: nsItem("soul_jar") }, `${NS}:anima_ingot`);
+for (const [id, color, durability, damage] of [["anima_dagger", cfg.anima.color, BAL.daggerDurability, 3], ["passive_anima_dagger", "#6fbf5a", BAL.attunedDaggerDurability, 6], ["hostile_anima_dagger", "#c84a4a", BAL.attunedDaggerDurability, 6]])
+  item(id, DAGGER, color, { "minecraft:max_stack_size": 1, "minecraft:hand_equipped": true, "minecraft:durability": { max_durability: durability }, "minecraft:damage": { value: damage } }, { b: color, g: "#e0b84a", h: "#6b4a2f" });
+recipe("anima_dagger", "shaped", { pattern: [" D ", "ISI", " D "], key: { D: nsItem("anima_dust"), I: nsItem("anima_ingot"), S: { item: "minecraft:golden_sword" } }, result: nsItem("anima_dagger") }, `${NS}:anima_ingot`);
+
+// Altar and pedestal: shaped blocks that hold one item each, in a hidden display entity (see scripts/main.js).
+const boxFaces = (origin, size) => ({ origin, size, uv: Object.fromEntries(["north", "south", "east", "west", "up", "down"].map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });
+const standGeometry = (id, cubes) => write(path.join(RP, "models", "blocks", `${id}.geo.json`), {
+  format_version: "1.21.0",
+  "minecraft:geometry": [{ description: { identifier: `geometry.${NS}_${id}`, texture_width: 16, texture_height: 16 }, bones: [{ name: "stand", pivot: [0, 0, 0], cubes }] }],
+});
+standGeometry("infusion_altar", [boxFaces([-8, 0, -8], [16, 3, 16]), boxFaces([-3, 3, -3], [6, 7, 6]), boxFaces([-7, 10, -7], [14, 3, 14])]);
+standGeometry("infusion_pedestal", [boxFaces([-5, 0, -5], [10, 2, 10]), boxFaces([-2, 2, -2], [4, 9, 4]), boxFaces([-5, 11, -5], [10, 2, 10])]);
+const STAND = grid((x, y) => {
+  if (y < 3) return x % 5 === 2 ? "o" : "r"; // the gold-trimmed wool top
+  return noise(x, y, 11) > 0.85 ? "T" : noise(x, y, 12) < 0.15 ? "k" : "t";
+});
+for (const [id, name, height] of [["infusion_altar", "Infusion Altar", 13], ["infusion_pedestal", "Infusion Pedestal", 13]]) {
+  blockTexture(id, STAND, "#8f8f8f", { r: "#b02a2a", o: "#e8c14a", T: "#a8a8a8", t: "#8f8f8f", k: "#6e6e6e" });
+  block(id, "stone", { menu_category: { category: "items" } }, {
+    "minecraft:display_name": name,
+    "minecraft:geometry": `geometry.${NS}_${id}`,
+    "minecraft:collision_box": { origin: [-8, 0, -8], size: [16, height, 16] },
+    "minecraft:selection_box": { origin: [-8, 0, -8], size: [16, height, 16] },
+    "minecraft:destructible_by_mining": { seconds_to_destroy: 2 },
+    "minecraft:light_dampening": 0,
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}`, render_method: "alpha_test" } },
+    "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
+    [`${NS}:stand`]: {},
+    ...(id === "infusion_altar" && { "minecraft:tick": { interval_range: [20, 20], looping: true }, [`${NS}:altar`]: {} }),
+  });
+}
+for (const [id, pattern] of [["infusion_altar", ["GCG", " S ", "SSS"]], ["infusion_pedestal", ["GCG", " S ", " S "]]])
+  recipe(id, "shaped", { pattern, key: { S: { item: "minecraft:stone" }, C: { item: "minecraft:red_wool" }, G: { item: "minecraft:gold_ingot" } }, result: nsItem(id) }, "minecraft:gold_ingot");
+
+// The display entity: invisible and untouchable, shows its item in a hand bone, and keeps the item in its own inventory across restarts.
+write(path.join(BP, "entities", "item_display.json"), {
+  format_version: "1.21.0",
+  "minecraft:entity": {
+    description: { identifier: `${NS}:item_display`, is_spawnable: false, is_summonable: true, is_experimental: false },
+    components: {
+      "minecraft:nameable": { always_show: false, allow_name_tag_renaming: false },
+      "minecraft:type_family": { family: ["inanimate", `${NS}_item_display`] },
+      "minecraft:damage_sensor": { triggers: [{ cause: "all", deals_damage: false }] },
+      "minecraft:health": { value: 1, max: 1, min: 1 },
+      "minecraft:knockback_resistance": { value: 1000, max: 1000 },
+      "minecraft:collision_box": { width: 0.1, height: 0.1 },
+      "minecraft:physics": { has_gravity: false, has_collision: false },
+      "minecraft:pushable": { is_pushable: false, is_pushable_by_piston: false },
+      "minecraft:fire_immune": true,
+      "minecraft:inventory": { inventory_size: 1, container_type: "container", private: true },
+    },
+  },
+});
+write(path.join(RP, "entity", "item_display.entity.json"), {
+  format_version: "1.10.0",
+  "minecraft:client_entity": {
+    description: {
+      identifier: `${NS}:item_display`,
+      materials: { default: "entity_alphatest" },
+      textures: { default: "textures/entity/item_display" },
+      geometry: { default: "geometry.item_display" },
+      render_controllers: [`controller.render.${NS}_item_display`],
+      enable_attachables: true,
+    },
+  },
+});
+write(path.join(RP, "models", "entity", "item_display.geo.json"), {
+  format_version: "1.21.0",
+  "minecraft:geometry": [{ description: { identifier: "geometry.item_display", texture_width: 16, texture_height: 16 }, bones: [{ name: "root", pivot: [0, 0, 0] }, { name: "rightItem", parent: "root", pivot: [0, 0, 0] }] }],
+});
+write(path.join(RP, "render_controllers", "item_display.render_controllers.json"), {
+  format_version: "1.8.0",
+  render_controllers: { [`controller.render.${NS}_item_display`]: { geometry: "Geometry.default", materials: [{ "*": "Material.default" }], textures: ["Texture.default"] } },
+});
+write(path.join(RP, "textures", "entity", "item_display.png"), png(16, Buffer.alloc(16 * 16 * 4)));
 
 // Crop geometry: four planes in a # shape, like vanilla wheat. One face each: alpha_test draws both sides, and a second face would z-fight.
 const plane = (origin, size, faces) => ({ origin, size, uv: Object.fromEntries(faces.map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });

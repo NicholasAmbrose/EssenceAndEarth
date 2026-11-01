@@ -71,7 +71,7 @@ Add an entry to `crops.json`, and its recipes to `recipes.json`:
 
 Never rename or remove a crop `id` once it is on a server: crops already planted in the world become unknown blocks. To take a crop out of the game, add `"retired": true`: its seeds can no longer be crafted and it leaves the wiki, but planted crops keep working and its essence still crafts.
 
-- **Seeds:** 4 tier essence + 4 `ingredient` around wheat seeds.
+- **Seeds:** made at the Infusion Altar: a Vita Seed Base on the altar, and 4 tier essence + 4 `ingredient` on the pedestals. With `"soul": "pig"`, from the `souls` table, it uses an Anima Seed Base and 4 full Soul Jars instead.
 - **Crop:** plants on any farmland and grows in 4 stages. Ripe crops drop crop essence and a seed. Essence farmland adds a chance of a second of each, which is higher if its tier matches the crop's.
 - **Output:** each line of `recipes.json` is a shaped (`pattern` and `key`) or shapeless (`ingredients`) recipe with a `result` and `count`. Recipes can mix several crops' essence, and the build rejects two with the same grid. The first essence in a recipe decides which crop's wiki page shows it. Use Bedrock's item ids, and add any id the texture package files under a different Java name to `tools/vanilla/java_ids.json`.
 - **Essence crop (optional):** `"essenceCrop": true`, on a crop whose `id` matches a tier, drops that tier's essence directly, with no crop essence or ring recipe. The Terra crop uses this.
@@ -98,6 +98,9 @@ Every tuning number lives in the `balance` block of `crops.json`. Change one, re
 | `acceleratorSeconds` | Average time between an accelerator's growth rolls |
 | `acceleratorRange` | Per tier: how many blocks up an accelerator reaches |
 | `farmlandYield`, `acceleratorYield` | How many blocks one craft makes |
+| `altarTicks` | How long an infusion takes, in game ticks |
+| `animaDust` | `[min, max]` dust from Anima Ore |
+| `daggerDurability`, `attunedDaggerDurability`, `attunedSoulMultiplier` | Dagger uses, and souls per kill from an attuned dagger's preferred mobs |
 | `toolDurability` | Uses the Essence Sickle and Essence Hoe last. An anvil repair with Aqua Essence restores a quarter |
 
 ## For other add-ons
@@ -119,3 +122,6 @@ Machines that harvest, grow or replant crops can support Essence & Earth like th
 
 - Ores always drop their items, because Bedrock's block loot can't check for Silk Touch.
 - Tier upgrades take 4 essence with no Infusion Crystal, until crafting is confirmed to be able to wear a crystal down.
+- Daggers wear by one per kill rather than per hit.
+- Slabs, stairs, walls and chiseled soulstone aren't included.
+- The Experience Capsule isn't included, so experience seeds use bottles o' enchanting.
