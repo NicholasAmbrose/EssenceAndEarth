@@ -4,6 +4,21 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Bedrock risk checks (v0.11.1)
+
+Nothing in the add-on uses these yet. They decide how the later gear and machine phases get built.
+
+Already answered by reading Deepcore v4.58's package:
+
+- **Machine storage and screens work.** Its `dq:machine_screen` is an invisible, undamageable entity with a `minecraft:inventory`, sitting in the machine's block.
+- **Item displays work.** Its `dq:crate_view` entity shows items. A note in its `crate.js` says an item held in a hand bone draws as a tilted 3D model, so it moved to flat icons picked by entity properties.
+- **Custom armor works.** It ships a wearable suit with attachables.
+
+Still needs testing in-game:
+
+- [ ] **Crystal wear:** can a crafting recipe return a damaged tool? Try a shaped recipe with a damaged item as an ingredient. Until this is settled, tier upgrades stay at 4 essence with no Infusion Crystal.
+- [ ] **Flight:** nothing in Deepcore grants flight, and I found no script call for it. Confirm whether `/ability` works on the server. If not, the flight augment becomes Levitation or Slow Falling.
+
 ## Farming rebalance (v0.11.0)
 
 - [ ] **Check this first:** the add-on loads on the server with no script errors in the log.
