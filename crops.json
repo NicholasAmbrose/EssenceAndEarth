@@ -1,7 +1,7 @@
 {
   "name": "Essence & Earth",
   "namespace": "ee",
-  "version": [0, 18, 0],
+  "version": [0, 18, 1],
   "balance": {
     "growChance": 0.43,
     "grassEssenceChance": 0.2,

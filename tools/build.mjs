@@ -409,15 +409,49 @@ const noise = (x, y, seed = 0) => {
 // Tinted soil (T lit soil, t soil, k groove): the tier colour mixed half and half with brown, darkened a little.
 const soilTint = (c) => shade(c.map((v, i) => Math.round(v * 0.5 + [107, 74, 50][i] * 0.5)), -0.25);
 
-// Essence farmland: tinted tilled soil. The top has long furrows (lit ridge, soil, groove) with the odd break;
-// the side is speckled soil under a tilled edge.
-const FARMLAND_TOP = grid((x, y) => {
-  const row = y % 4;
-  if (row === 3) return noise(x, y, 8) < 0.2 ? "t" : "k";
-  if (row !== 0 && noise(x, Math.floor(y / 4), 9) < 0.08) return "k";
-  return row === 0 ? "T" : "t";
-});
-const FARMLAND_SIDE = grid((x, y) => (y === 0 ? "T" : y === 1 ? "k" : noise(x, y, 4) < 0.07 ? "k" : noise(x, y, 6) > 0.88 ? "T" : "t"));
+// Essence farmland, "Dewy Loam": mottled soil in soft blobs, snapped to five tones so there are no hard lines or stray dots.
+// The furrows are only hinted at, as a light and dark bias that wobbles along the row. The tier colour soaks into the
+// lightest soil and into soft patches. Every noise term repeats every 16 pixels, so neighbouring blocks tile without seams.
+const loamWrap = (v) => ((v % 16) + 16) % 16;
+const loamCell = (x, y, seed) => noise(loamWrap(x), loamWrap(y), seed);
+const loamEase = (t) => t * t * (3 - 2 * t);
+const loamMix = (a, b, t) => a.map((v, i) => Math.round(v * (1 - t) + b[i] * t));
+function loamBlobs(x, y, period, seed) {
+  const size = 16 / period, gx = x / size, gy = y / size;
+  const x0 = Math.floor(gx), y0 = Math.floor(gy), fx = loamEase(gx - x0), fy = loamEase(gy - y0);
+  const at = (i, j) => noise(((i % period) + period) % period, ((j % period) + period) % period, seed);
+  return (at(x0, y0) * (1 - fx) + at(x0 + 1, y0) * fx) * (1 - fy) + (at(x0, y0 + 1) * (1 - fx) + at(x0 + 1, y0 + 1) * fx) * fy;
+}
+const loamField = (x, y) => 0.5 * loamBlobs(x, y, 4, 94) + 0.3 * loamBlobs(x, y, 8, 95) + 0.2 * loamCell(x >> 1, y >> 1, 96);
+
+// Returns the top and side of a farmland block as 16x16 RGBA pixel buffers.
+function dewyFarmland(color) {
+  const c = hex(color), base = shade(soilTint(c), -0.1);
+  const tones = [shade(base, -0.3), shade(base, -0.14), base, shade(base, 0.12), shade(base, 0.24)];
+  const thresholds = [0.24, 0.4, 0.61, 0.74];
+  const furrowBias = [0.1, 0.03, -0.04, -0.12]; // lit edge, ridge, shadow side, groove
+  const colourOf = (v, x, y) => {
+    const i = thresholds.filter((t) => v >= t).length;
+    let rgb = i === 4 ? loamMix(tones[i], c, 0.12) : i === 3 ? loamMix(tones[i], c, 0.042) : tones[i];
+    const dew = loamEase(Math.max(0, Math.min(1, (loamBlobs(x, y, 4, 103) - 0.5) / 0.26))) * 0.3;
+    return dew > 0 ? loamMix(rgb, c, dew) : rgb;
+  };
+  const top = Buffer.alloc(16 * 16 * 4), side = Buffer.alloc(16 * 16 * 4);
+  for (let y = 0; y < 16; y++)
+    for (let x = 0; x < 16; x++) {
+      const wobble = 1.3 * Math.sin((2 * Math.PI * x) / 16) + 0.6 * Math.sin((4 * Math.PI * x) / 16 + 1.1) + (loamBlobs(x, y, 4, 101) - 0.5) * 1.2;
+      const row = ((Math.floor(y + wobble) % 4) + 4) % 4;
+      top.set([...colourOf(loamField(x, y) + furrowBias[row] * 0.8, x, y), 255], (y * 16 + x) * 4);
+      // The side reads the same soil from further down the field, lighter at the lip and darker with depth.
+      let v = loamField(x, y + 5) - 0.1 * (y / 15);
+      if (y === 0) v += 0.22;
+      if (y === 1) v -= 0.06;
+      let rgb = colourOf(v, x, y + 5);
+      if (y >= 14) rgb = shade(rgb, -0.14);
+      side.set([...rgb, 255], (y * 16 + x) * 4);
+    }
+  return { top, side };
+}
 
 const grain = (x, y) => ((x * 31 + y * 17) * 2654435761 >>> 0) % 40;
 
@@ -496,6 +530,14 @@ function texture(rel, mask, color, palette) {
   const art = path.join(ROOT, "art", `${rel}.png`);
   if (fs.existsSync(art)) return write(path.join(RP, `${rel}.png`), fs.readFileSync(art));
   const px = render(mask, color, palette);
+  previews.push(px);
+  write(path.join(RP, `${rel}.png`), png(16, px));
+}
+
+// Like texture(), for a texture that was drawn pixel by pixel instead of from a mask. A PNG in art/ still replaces it.
+function texturePx(rel, px) {
+  const art = path.join(ROOT, "art", `${rel}.png`);
+  if (fs.existsSync(art)) return write(path.join(RP, `${rel}.png`), fs.readFileSync(art));
   previews.push(px);
   write(path.join(RP, `${rel}.png`), png(16, px));
 }
@@ -720,8 +762,11 @@ cfg.tiers.forEach((t, i) => {
 const FARMLANDS = cfg.tiers.map((t) => `${NS}:${t.id}_farmland`);
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_farmland`;
-  blockTexture(`${id}_top`, FARMLAND_TOP, t.color);
-  blockTexture(`${id}_side`, FARMLAND_SIDE, t.color);
+  const soil = dewyFarmland(t.color);
+  for (const [face, px] of [["top", soil.top], ["side", soil.side]]) {
+    texturePx(`textures/blocks/${id}_${face}`, px);
+    terrain[`${NS}_${id}_${face}`] = { textures: `textures/blocks/${id}_${face}` };
+  }
   block(id, "gravel", { menu_category: { category: "nature" } }, {
     "minecraft:display_name": `${title(t.id)} Farmland`,
     "minecraft:geometry": "minecraft:geometry.full_block",

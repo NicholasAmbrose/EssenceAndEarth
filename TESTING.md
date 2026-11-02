@@ -4,6 +4,12 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Dewy Loam farmland texture (v0.18.1)
+
+- [ ] **Check this first:** all five farmlands show the new mottled soil, with the top texture on top and the side texture on the sides.
+- [ ] A large field shows no seams between blocks.
+- [ ] Essence used on placed farmland still swaps its tier, and the new tier's colour shows.
+
 ## Deepcore crate pictures (v0.18.0)
 
 Needs Deepcore v4.65.0 or newer.
