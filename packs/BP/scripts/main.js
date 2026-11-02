@@ -748,6 +748,14 @@ system.runTimeout(() => {
   for (const o of DEEPCORE_ORES) overworld.runCommand(`scriptevent dq:add_ore ${JSON.stringify(o)}`);
 }, 20);
 
+// Deepcore's crates show a ? for our items until we say which picture each one is (ee:dq_icons, built in tools/build.mjs).
+// It keeps them in memory, so they go again on every load. Nothing happens if Deepcore isn't installed.
+const DEEPCORE_ICONS = __DEEPCORE_ICONS__;
+system.runTimeout(() => {
+  const overworld = world.getDimension("overworld");
+  for (const i of DEEPCORE_ICONS) overworld.runCommand(`scriptevent dq:add_icon ${JSON.stringify(i)}`);
+}, 20);
+
 // Deepcore can't read the game's recipes, so its Network Crafter only makes ours if we send them (github.com/baseballr/Deepcore/issues/7).
 // It keeps them in memory, so they go again on every load. Nothing happens if Deepcore isn't installed or isn't listening.
 const DEEPCORE_RECIPES = __DEEPCORE_RECIPES__;

@@ -648,12 +648,13 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__NS__", NS));
 }
 
-const terrain = {}, itemTextures = {}, sounds = {}, lang = [];
+const terrain = {}, itemTextures = {}, sounds = {}, lang = [], crateIconItems = [];
 const TAG = "§9@ESSENCE&EARTH"; // second tooltip line on everything in the inventory, like Deepcore's @DEEPCORE
 
 function item(id, mask, color, components = {}, palette) {
   texture(`textures/items/${id}`, mask, color, palette);
   itemTextures[`${NS}_${id}`] = { textures: `textures/items/${id}` };
+  if (components["minecraft:max_stack_size"] !== 1) crateIconItems.push(id); // Deepcore's crates only hold stackable items
   write(path.join(BP, "items", `${id}.json`), {
     format_version: FMT,
     "minecraft:item": {
@@ -1374,9 +1375,60 @@ const icon = png(128, scale(render(withSparkles(GEM, 4), cfg.tiers[0].color), 8)
 write(path.join(BP, "pack_icon.png"), icon);
 write(path.join(RP, "pack_icon.png"), icon);
 
+// Pictures of our items for the front of Deepcore's crates (see scripts/main.js). The components stop the entity moving, being hit or taking damage.
+write(path.join(BP, "entities", "dq_icons.json"), {
+  format_version: "1.21.0",
+  "minecraft:entity": {
+    description: {
+      identifier: `${NS}:dq_icons`, is_spawnable: false, is_summonable: true, is_experimental: false,
+      properties: { "dq:icon": { type: "int", range: [0, crateIconItems.length], default: 0, client_sync: true } },
+    },
+    components: {
+      "minecraft:type_family": { family: ["inanimate"] },
+      "minecraft:collision_box": { width: 0.01, height: 0.01 },
+      "minecraft:custom_hit_test": { hitboxes: [{ pivot: [0, 0, 0], width: 0, height: 0 }] },
+      "minecraft:physics": { has_gravity: false, has_collision: false },
+      "minecraft:pushable": { is_pushable: false, is_pushable_by_piston: false },
+      "minecraft:damage_sensor": { triggers: [{ cause: "all", deals_damage: false }] },
+      "minecraft:health": { value: 1, max: 1, min: 1 },
+      "minecraft:knockback_resistance": { value: 1000, max: 1000 },
+      "minecraft:fire_immune": true,
+      "minecraft:nameable": { always_show: false, allow_name_tag_renaming: false },
+    },
+  },
+});
+write(path.join(RP, "entity", "dq_icons.entity.json"), {
+  format_version: "1.10.0",
+  "minecraft:client_entity": {
+    description: {
+      identifier: `${NS}:dq_icons`,
+      materials: { default: "entity_alphatest" },
+      textures: Object.fromEntries(crateIconItems.map((id) => [id, `textures/items/${id}`])),
+      geometry: { default: "geometry.dq_crate_icon" }, // comes from Deepcore's pack
+      render_controllers: [`controller.render.${NS}_dq_icons`],
+    },
+  },
+});
+write(path.join(RP, "render_controllers", "dq_icons.render_controllers.json"), {
+  format_version: "1.10.0",
+  render_controllers: {
+    [`controller.render.${NS}_dq_icons`]: {
+      arrays: { textures: { "Array.icon": [crateIconItems[0], ...crateIconItems].map((id) => `Texture.${id}`) } }, // entry 0 is never drawn
+      geometry: "Geometry.default",
+      materials: [{ "*": "Material.default" }],
+      textures: ["Array.icon[q.property('dq:icon')]"],
+      part_visibility: [{ "*": "q.property('dq:icon') > 0" }],
+    },
+  },
+});
+// A command is capped at about 2000 characters, so the list goes in batches. Deepcore adds each batch to the ones before.
+const DEEPCORE_ICONS = [];
+for (let i = 0; i < crateIconItems.length; i += 30)
+  DEEPCORE_ICONS.push({ entity: `${NS}:dq_icons`, icons: Object.fromEntries(crateIconItems.slice(i, i + 30).map((id, j) => [`${NS}:${id}`, i + j + 1])) });
+
 // Filled in here because the other placeholders go in before any recipes exist.
 const mainScript = path.join(BP, "scripts", "main.js");
-write(mainScript, fs.readFileSync(mainScript, "utf8").replaceAll("__DEEPCORE_RECIPES__", JSON.stringify(DEEPCORE_RECIPES)));
+write(mainScript, fs.readFileSync(mainScript, "utf8").replaceAll("__DEEPCORE_RECIPES__", JSON.stringify(DEEPCORE_RECIPES)).replaceAll("__DEEPCORE_ICONS__", JSON.stringify(DEEPCORE_ICONS)));
 
 // ---------- package ----------
 

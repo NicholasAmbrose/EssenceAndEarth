@@ -4,6 +4,16 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Deepcore crate pictures (v0.18.0)
+
+Needs Deepcore v4.65.0 or newer.
+
+- [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed. Note any content log complaint about `geometry.dq_crate_icon` without Deepcore, since that geometry comes from its pack.
+- [ ] An Essence & Earth item in a Deep Storage Crate shows its own picture instead of a **?**. Try the first and last items too, like a tier essence and a machine upgrade base.
+- [ ] The picture goes away when the crate changes item, empties or is mined, and leaves no entity behind.
+- [ ] Pictures still show after a server restart. The content log has no `[DQ] dq:add_icon` lines.
+- [ ] Block items such as ores and storage blocks still show a **?**. They have no item texture to use.
+
 ## Harvester (v0.17.0)
 
 Quickest setup: `/give @s ee:harvester`, `/give @s coal 8`, and a `/give @s ee:ignis_machine_upgrade`. Fertilizer ripens test crops fast.
