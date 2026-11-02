@@ -1,17 +1,17 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.16.0",
-  "file": "EssenceAndEarth_v0.16.0.mcaddon",
+  "version": "0.17.0",
+  "file": "EssenceAndEarth_v0.17.0.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.16.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.17.0.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 54,
   "tiers": 5,
-  "recipes": 302,
-  "items": 206
+  "recipes": 310,
+  "items": 214
  },
  "categories": [
   {
@@ -3883,6 +3883,605 @@
       }
      ],
      "href": "wiki/tools/essence-hoe"
+    }
+   ]
+  },
+  {
+   "slug": "machines",
+   "title": "Machines",
+   "group": "Getting started",
+   "icon": "img/icons/harvester_front.png",
+   "blurb": "A machine that harvests and replants your crops.",
+   "entries": [
+    {
+     "slug": "harvester",
+     "name": "Harvester",
+     "icon": "img/icons/harvester_front.png",
+     "summary": "Harvests and replants ripe crops, and stores what they drop.",
+     "blocks": [
+      {
+       "t": "facts",
+       "facts": [
+        [
+         "Place it",
+         "At the height of your crops, with its front facing them"
+        ],
+        [
+         "Open it",
+         "Tap it with an empty hand"
+        ],
+        [
+         "Mine it",
+         "Hold a tool, or sneak"
+        ],
+        [
+         "Pause it",
+         "Redstone power"
+        ],
+        [
+         "Storage",
+         "25 stacks, or a chest or barrel touching its back"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "html": "It works on a square of blocks in front of it, one block at a time. A ripe crop is harvested and replanted, using one seed from its drops. Farmland bonus essence and second seeds work as normal. It handles every essence crop, plus wheat, carrots, potatoes and beetroot."
+      },
+      {
+       "t": "p",
+       "html": "The first slot of its screen takes fuel and the second takes a Machine Upgrade. Look at the machine to see its upgrade, area and fuel."
+      },
+      {
+       "t": "h2",
+       "text": "Recipe"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Harvester",
+        "icon": "img/icons/harvester_front.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Anima Ingot",
+          "icon": "img/icons/anima_ingot.png"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Essence Sickle",
+          "icon": "img/icons/essence_sickle.png"
+         },
+         {
+          "name": "Machine Frame",
+          "icon": "img/icons/machine_frame.png"
+         },
+         {
+          "name": "Essence Sickle",
+          "icon": "img/icons/essence_sickle.png"
+         }
+        ],
+        [
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Anima Ingot",
+          "icon": "img/icons/anima_ingot.png"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Machine Frame"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Machine Frame",
+        "icon": "img/icons/machine_frame.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Stone",
+          "icon": "img/vanilla/stone.png"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         }
+        ],
+        [
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         },
+         {
+          "name": "Redstone Dust",
+          "icon": "img/vanilla/redstone.png"
+         },
+         {
+          "name": "Iron Ingot",
+          "icon": "img/vanilla/iron_ingot.png"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Fuel"
+      },
+      {
+       "t": "p",
+       "html": "Each fuel item fills the machine's tank. Every 40 fuel is one crop harvested with no upgrade, and checking an unripe crop costs 10."
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "Stick",
+         "icon": "img/vanilla/stick.png",
+         "sub": "2,000 fuel"
+        },
+        {
+         "name": "Coal",
+         "icon": "img/vanilla/coal.png",
+         "sub": "32,000 fuel"
+        },
+        {
+         "name": "Charcoal",
+         "icon": "img/vanilla/charcoal.png",
+         "sub": "32,000 fuel"
+        },
+        {
+         "name": "Blaze Rod",
+         "icon": "img/vanilla/blaze_rod.png",
+         "sub": "48,000 fuel"
+        },
+        {
+         "name": "Block of Coal",
+         "icon": "img/vanilla/coal_block.png",
+         "sub": "320,000 fuel"
+        },
+        {
+         "name": "Lava Bucket",
+         "icon": "img/vanilla/lava_bucket.png",
+         "sub": "400,000 fuel"
+        },
+        {
+         "name": "Oak Log",
+         "icon": "img/vanilla/oak_log.png",
+         "sub": "Logs and planks: 6,000 fuel"
+        }
+       ]
+      }
+     ],
+     "href": "wiki/machines/harvester"
+    },
+    {
+     "slug": "machine-upgrades",
+     "name": "Machine Upgrades",
+     "icon": "img/icons/terra_machine_upgrade.png",
+     "summary": "Make a machine wider and faster, for much more fuel.",
+     "blocks": [
+      {
+       "t": "p",
+       "html": "Each upgrade is crafted from the one before, so you keep the cost of the last. Put one in the machine's second slot."
+      },
+      {
+       "t": "items",
+       "items": [
+        {
+         "name": "No upgrade",
+         "icon": "img/icons/harvester_front.png",
+         "sub": "3×3, 5 s per block, 40 fuel per crop"
+        },
+        {
+         "name": "Terra Machine Upgrade",
+         "icon": "img/icons/terra_machine_upgrade.png",
+         "sub": "5×5, 4.165 s per block, 80 fuel per crop"
+        },
+        {
+         "name": "Aqua Machine Upgrade",
+         "icon": "img/icons/aqua_machine_upgrade.png",
+         "sub": "7×7, 3.125 s per block, 160 fuel per crop"
+        },
+        {
+         "name": "Ignis Machine Upgrade",
+         "icon": "img/icons/ignis_machine_upgrade.png",
+         "sub": "9×9, 2 s per block, 240 fuel per crop"
+        },
+        {
+         "name": "Aether Machine Upgrade",
+         "icon": "img/icons/aether_machine_upgrade.png",
+         "sub": "11×11, 0.625 s per block, 640 fuel per crop"
+        },
+        {
+         "name": "Astra Machine Upgrade",
+         "icon": "img/icons/astra_machine_upgrade.png",
+         "sub": "13×13, 0.125 s per block, 1,920 fuel per crop"
+        }
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Upgrade Base"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Upgrade Base",
+        "icon": "img/icons/upgrade_base.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png"
+         },
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png"
+         },
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png"
+         }
+        ],
+        [
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png"
+         },
+         {
+          "name": "Diamond",
+          "icon": "img/vanilla/diamond.png"
+         },
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png"
+         },
+         {
+          "name": "Vita Ingot",
+          "icon": "img/icons/vita_ingot.png"
+         },
+         {
+          "name": "Vita Shard",
+          "icon": "img/icons/vita_shard.png"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "h2",
+       "text": "Upgrades"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Terra Machine Upgrade",
+        "icon": "img/icons/terra_machine_upgrade.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Ingot",
+          "icon": "img/icons/terra_ingot.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Terra Ingot",
+          "icon": "img/icons/terra_ingot.png"
+         },
+         {
+          "name": "Upgrade Base",
+          "icon": "img/icons/upgrade_base.png"
+         },
+         {
+          "name": "Terra Ingot",
+          "icon": "img/icons/terra_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         },
+         {
+          "name": "Terra Ingot",
+          "icon": "img/icons/terra_ingot.png"
+         },
+         {
+          "name": "Terra Essence",
+          "icon": "img/icons/terra_essence.png",
+          "href": "wiki/essence/terra-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aqua Machine Upgrade",
+        "icon": "img/icons/aqua_machine_upgrade.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Ingot",
+          "icon": "img/icons/aqua_ingot.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Ingot",
+          "icon": "img/icons/aqua_ingot.png"
+         },
+         {
+          "name": "Terra Machine Upgrade",
+          "icon": "img/icons/terra_machine_upgrade.png"
+         },
+         {
+          "name": "Aqua Ingot",
+          "icon": "img/icons/aqua_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         },
+         {
+          "name": "Aqua Ingot",
+          "icon": "img/icons/aqua_ingot.png"
+         },
+         {
+          "name": "Aqua Essence",
+          "icon": "img/icons/aqua_essence.png",
+          "href": "wiki/essence/aqua-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Ignis Machine Upgrade",
+        "icon": "img/icons/ignis_machine_upgrade.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Ingot",
+          "icon": "img/icons/ignis_ingot.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Ingot",
+          "icon": "img/icons/ignis_ingot.png"
+         },
+         {
+          "name": "Aqua Machine Upgrade",
+          "icon": "img/icons/aqua_machine_upgrade.png"
+         },
+         {
+          "name": "Ignis Ingot",
+          "icon": "img/icons/ignis_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         },
+         {
+          "name": "Ignis Ingot",
+          "icon": "img/icons/ignis_ingot.png"
+         },
+         {
+          "name": "Ignis Essence",
+          "icon": "img/icons/ignis_essence.png",
+          "href": "wiki/essence/ignis-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Aether Machine Upgrade",
+        "icon": "img/icons/aether_machine_upgrade.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Ingot",
+          "icon": "img/icons/aether_ingot.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ],
+        [
+         {
+          "name": "Aether Ingot",
+          "icon": "img/icons/aether_ingot.png"
+         },
+         {
+          "name": "Ignis Machine Upgrade",
+          "icon": "img/icons/ignis_machine_upgrade.png"
+         },
+         {
+          "name": "Aether Ingot",
+          "icon": "img/icons/aether_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         },
+         {
+          "name": "Aether Ingot",
+          "icon": "img/icons/aether_ingot.png"
+         },
+         {
+          "name": "Aether Essence",
+          "icon": "img/icons/aether_essence.png",
+          "href": "wiki/essence/aether-essence"
+         }
+        ]
+       ]
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Astra Machine Upgrade",
+        "icon": "img/icons/astra_machine_upgrade.png",
+        "count": 1
+       },
+       "rows": [
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Astra Ingot",
+          "icon": "img/icons/astra_ingot.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ],
+        [
+         {
+          "name": "Astra Ingot",
+          "icon": "img/icons/astra_ingot.png"
+         },
+         {
+          "name": "Aether Machine Upgrade",
+          "icon": "img/icons/aether_machine_upgrade.png"
+         },
+         {
+          "name": "Astra Ingot",
+          "icon": "img/icons/astra_ingot.png"
+         }
+        ],
+        [
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         },
+         {
+          "name": "Astra Ingot",
+          "icon": "img/icons/astra_ingot.png"
+         },
+         {
+          "name": "Astra Essence",
+          "icon": "img/icons/astra_essence.png",
+          "href": "wiki/essence/astra-essence"
+         }
+        ]
+       ]
+      }
+     ],
+     "href": "wiki/machines/machine-upgrades"
     }
    ]
   },
@@ -35935,6 +36534,434 @@
      null
     ]
    ]
+  },
+  {
+   "result": {
+    "name": "Harvester",
+    "icon": "img/icons/harvester_front.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Anima Ingot",
+      "icon": "img/icons/anima_ingot.png"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Essence Sickle",
+      "icon": "img/icons/essence_sickle.png"
+     },
+     {
+      "name": "Machine Frame",
+      "icon": "img/icons/machine_frame.png"
+     },
+     {
+      "name": "Essence Sickle",
+      "icon": "img/icons/essence_sickle.png"
+     }
+    ],
+    [
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Anima Ingot",
+      "icon": "img/icons/anima_ingot.png"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Machine Frame",
+    "icon": "img/icons/machine_frame.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Stone",
+      "icon": "img/vanilla/stone.png"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     }
+    ],
+    [
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     },
+     {
+      "name": "Redstone Dust",
+      "icon": "img/vanilla/redstone.png"
+     },
+     {
+      "name": "Iron Ingot",
+      "icon": "img/vanilla/iron_ingot.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Upgrade Base",
+    "icon": "img/icons/upgrade_base.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png"
+     },
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png"
+     },
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png"
+     }
+    ],
+    [
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png"
+     },
+     {
+      "name": "Diamond",
+      "icon": "img/vanilla/diamond.png"
+     },
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png"
+     },
+     {
+      "name": "Vita Ingot",
+      "icon": "img/icons/vita_ingot.png"
+     },
+     {
+      "name": "Vita Shard",
+      "icon": "img/icons/vita_shard.png"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Terra Machine Upgrade",
+    "icon": "img/icons/terra_machine_upgrade.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Ingot",
+      "icon": "img/icons/terra_ingot.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Terra Ingot",
+      "icon": "img/icons/terra_ingot.png"
+     },
+     {
+      "name": "Upgrade Base",
+      "icon": "img/icons/upgrade_base.png"
+     },
+     {
+      "name": "Terra Ingot",
+      "icon": "img/icons/terra_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     },
+     {
+      "name": "Terra Ingot",
+      "icon": "img/icons/terra_ingot.png"
+     },
+     {
+      "name": "Terra Essence",
+      "icon": "img/icons/terra_essence.png",
+      "href": "wiki/essence/terra-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aqua Machine Upgrade",
+    "icon": "img/icons/aqua_machine_upgrade.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Ingot",
+      "icon": "img/icons/aqua_ingot.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Ingot",
+      "icon": "img/icons/aqua_ingot.png"
+     },
+     {
+      "name": "Terra Machine Upgrade",
+      "icon": "img/icons/terra_machine_upgrade.png"
+     },
+     {
+      "name": "Aqua Ingot",
+      "icon": "img/icons/aqua_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     },
+     {
+      "name": "Aqua Ingot",
+      "icon": "img/icons/aqua_ingot.png"
+     },
+     {
+      "name": "Aqua Essence",
+      "icon": "img/icons/aqua_essence.png",
+      "href": "wiki/essence/aqua-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Ignis Machine Upgrade",
+    "icon": "img/icons/ignis_machine_upgrade.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Ingot",
+      "icon": "img/icons/ignis_ingot.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Ingot",
+      "icon": "img/icons/ignis_ingot.png"
+     },
+     {
+      "name": "Aqua Machine Upgrade",
+      "icon": "img/icons/aqua_machine_upgrade.png"
+     },
+     {
+      "name": "Ignis Ingot",
+      "icon": "img/icons/ignis_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     },
+     {
+      "name": "Ignis Ingot",
+      "icon": "img/icons/ignis_ingot.png"
+     },
+     {
+      "name": "Ignis Essence",
+      "icon": "img/icons/ignis_essence.png",
+      "href": "wiki/essence/ignis-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Aether Machine Upgrade",
+    "icon": "img/icons/aether_machine_upgrade.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Ingot",
+      "icon": "img/icons/aether_ingot.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ],
+    [
+     {
+      "name": "Aether Ingot",
+      "icon": "img/icons/aether_ingot.png"
+     },
+     {
+      "name": "Ignis Machine Upgrade",
+      "icon": "img/icons/ignis_machine_upgrade.png"
+     },
+     {
+      "name": "Aether Ingot",
+      "icon": "img/icons/aether_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     },
+     {
+      "name": "Aether Ingot",
+      "icon": "img/icons/aether_ingot.png"
+     },
+     {
+      "name": "Aether Essence",
+      "icon": "img/icons/aether_essence.png",
+      "href": "wiki/essence/aether-essence"
+     }
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Astra Machine Upgrade",
+    "icon": "img/icons/astra_machine_upgrade.png",
+    "count": 1
+   },
+   "rows": [
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Astra Ingot",
+      "icon": "img/icons/astra_ingot.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ],
+    [
+     {
+      "name": "Astra Ingot",
+      "icon": "img/icons/astra_ingot.png"
+     },
+     {
+      "name": "Aether Machine Upgrade",
+      "icon": "img/icons/aether_machine_upgrade.png"
+     },
+     {
+      "name": "Astra Ingot",
+      "icon": "img/icons/astra_ingot.png"
+     }
+    ],
+    [
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     },
+     {
+      "name": "Astra Ingot",
+      "icon": "img/icons/astra_ingot.png"
+     },
+     {
+      "name": "Astra Essence",
+      "icon": "img/icons/astra_essence.png",
+      "href": "wiki/essence/astra-essence"
+     }
+    ]
+   ]
   }
  ],
  "gallery": [
@@ -37194,6 +38221,43 @@
      "name": "Essence Guide",
      "icon": "img/icons/essence_guide.png",
      "href": "wiki/guide/essence-guide"
+    }
+   ]
+  },
+  {
+   "title": "Machines",
+   "items": [
+    {
+     "name": "Harvester",
+     "icon": "img/icons/harvester_front.png"
+    },
+    {
+     "name": "Machine Frame",
+     "icon": "img/icons/machine_frame.png"
+    },
+    {
+     "name": "Upgrade Base",
+     "icon": "img/icons/upgrade_base.png"
+    },
+    {
+     "name": "Terra Machine Upgrade",
+     "icon": "img/icons/terra_machine_upgrade.png"
+    },
+    {
+     "name": "Aqua Machine Upgrade",
+     "icon": "img/icons/aqua_machine_upgrade.png"
+    },
+    {
+     "name": "Ignis Machine Upgrade",
+     "icon": "img/icons/ignis_machine_upgrade.png"
+    },
+    {
+     "name": "Aether Machine Upgrade",
+     "icon": "img/icons/aether_machine_upgrade.png"
+    },
+    {
+     "name": "Astra Machine Upgrade",
+     "icon": "img/icons/astra_machine_upgrade.png"
     }
    ]
   },

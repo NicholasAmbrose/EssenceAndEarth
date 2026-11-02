@@ -584,7 +584,8 @@ const GUIDE_PAGES = [
   { title: "Materials", body: `Vita Ore, between y -60 and 24, drops ${range(BAL.vitaShards)} Vita Shards. Or craft 4 ${tierTitle(cfg.tiers[0])} Blocks around a flint for 4 shards.\n\n4 shards around an iron ingot make a Vita Ingot, and around a diamond a Vita Gemstone. Add 2 tier essence to either for that tier's version.\n\nNine of anything stores in a block, and ingots break down into 9 nuggets.` },
   { title: "Fertilizer", body: `Ripe crops have a ${pct(BAL.fertilizedEssenceChance)} chance of dropping Fertilized Essence, which advances a crop a stage or two.\n\nEssence Fertilizer ripens a crop at once. 4 Terra Essence, 4 bone meal and a diamond make 4, or use Fertilized Essence instead of bone meal to make 8.` },
   { title: "Tools", body: `Essence Sickle: break a ripe crop to harvest every ripe crop in the 3x3 around it. It won't break unripe crops.\n\nEssence Hoe: right-click a ripe crop to harvest and replant it. The replant takes one seed from the drops.\n\nBoth last ${BAL.toolDurability} uses and repair with ${tierTitle(cfg.tiers[1])} Essence in an anvil.` },
-  { title: "Crops by Tier", body: `${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
+  { title: "Harvester", body: `Harvests and replants ripe crops for you. Place it at the height of your crops, with its front facing them. It works on the square in front of it, one block at a time.\n\nTap it with an empty hand to open it. The first slot takes fuel, the second a Machine Upgrade, and the rest hold the harvest. To mine it, hold a tool or sneak.\n\nFuel: coal, charcoal, coal blocks, lava buckets, blaze rods, logs, planks or sticks. Each one fills an internal tank, and each crop harvested uses some. Look at the machine to see its tank.\n\nA chest or barrel touching its back gets the harvest automatically, and hoppers can take it from there. Redstone power pauses it.\n\nUpgrades make it wider and faster, but it burns much more fuel:\n${["No upgrade", ...cfg.tiers.map(tierTitle)].map((name, i) => { const side = (BAL.harvester.range + (BAL.harvester.upgrades[i - 1]?.range ?? 0)) * 2 + 1; return `${name}: ${side}x${side}`; }).join("\n")}` },
+  { title: "Crops by Tier", body:`${cfg.tiers.map((t, i) => [t, cfg.crops.filter((c) => c.tier === i + 1 && !c.retired)]).filter(([, crops]) => crops.length).map(([t, crops]) => `${tierTitle(t)}: ${crops.map((c) => title(c.id)).join(", ")}`).join("\n\n")}\n\nFull recipes: nicholasambrose.github.io/EssenceAndEarth` },
 ];
 
 // Infusion recipes for the script: a seed base on the altar, 4 of the ingredient and 4 tier essence on the pedestals.
@@ -638,6 +639,7 @@ for (const file of fs.readdirSync(path.join(BP, "scripts"), { recursive: true })
       .replaceAll("__ESSENCE_FARMLAND__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t) => [`${NS}:${t.id}_essence`, `${NS}:${t.id}_farmland`]))))
       .replaceAll("__GUIDE_PAGES__", JSON.stringify(GUIDE_PAGES))
       .replaceAll("__ALTAR_RECIPES__", JSON.stringify(ALTAR_RECIPES))
+      .replaceAll("__MACHINE_UPGRADES__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_machine_upgrade`, { name: tierTitle(t), ...BAL.harvester.upgrades[i] }]))))
       .replaceAll("__SOULS__", JSON.stringify(cfg.souls))
       .replaceAll("__DEEPCORE_ORES__", JSON.stringify(DEEPCORE_ORES))
       .replaceAll("__FARMLAND_TIER__", JSON.stringify(Object.fromEntries(cfg.tiers.map((t, i) => [`${NS}:${t.id}_farmland`, i + 1]))))
@@ -1245,6 +1247,101 @@ write(path.join(RP, "render_controllers", "item_display.render_controllers.json"
   render_controllers: { [`controller.render.${NS}_item_display`]: { geometry: "Geometry.default", materials: [{ "*": "Material.default" }], textures: ["Texture.default"] } },
 });
 write(path.join(RP, "textures", "entity", "item_display.png"), png(16, Buffer.alloc(16 * 16 * 4)));
+
+// Harvester: the front faces where the player stood, the way a furnace does. Its back shows where a chest goes.
+const MACHINE_PALETTE = { b: TOOL_TIER.color, o: "#12263c", h: "#6b4a2f", H: "#93704a", e: "#2a2d33", r: "#9aa0a8", a: "#5c6168", c: "#4d5258", x: "#1c1e22", n: TOOL_TIER.color };
+const machinePlate = (x, y) => {
+  const edge = (v) => v === 0 || v === 15;
+  if (edge(x) && edge(y)) return "r";
+  if (edge(x) || edge(y)) return "e";
+  return noise(x, y, 21) > 0.7 ? "a" : "c";
+};
+const inSquare = (x, y, from, to) => x >= from && x <= to && y >= from && y <= to;
+blockTexture("machine_frame", grid((x, y) => (inSquare(x, y, 3, 12) ? "x" : machinePlate(x, y))), TOOL_TIER.color, MACHINE_PALETTE);
+blockTexture("harvester_side", grid(machinePlate), TOOL_TIER.color, MACHINE_PALETTE);
+blockTexture("harvester_front", grid((x, y) => (SICKLE[y][x] === "." ? machinePlate(x, y) : SICKLE[y][x])), TOOL_TIER.color, MACHINE_PALETTE);
+blockTexture("harvester_back", grid((x, y) => (inSquare(x, y, 5, 10) ? "x" : inSquare(x, y, 4, 11) ? "n" : machinePlate(x, y))), TOOL_TIER.color, MACHINE_PALETTE);
+block("machine_frame", "metal", { menu_category: { category: "items" } }, {
+  "minecraft:display_name": "Machine Frame",
+  "minecraft:geometry": "minecraft:geometry.full_block",
+  "minecraft:destructible_by_mining": { seconds_to_destroy: 2.5 },
+  "minecraft:material_instances": { "*": { texture: `${NS}_machine_frame` } },
+  "minecraft:loot": loot("machine_frame", [drop(`${NS}:machine_frame`)]),
+});
+const FACING_ROTATIONS = { north: 0, south: 180, east: -90, west: 90 };
+block("harvester", "metal", {
+  menu_category: { category: "items" },
+  traits: { "minecraft:placement_direction": { enabled_states: ["minecraft:cardinal_direction"], y_rotation_offset: 180 } },
+}, {
+  "minecraft:display_name": "Harvester",
+  "minecraft:geometry": "minecraft:geometry.full_block",
+  "minecraft:destructible_by_mining": { seconds_to_destroy: 2.5 },
+  "minecraft:material_instances": { "*": { texture: `${NS}_harvester_side` }, north: { texture: `${NS}_harvester_front` }, south: { texture: `${NS}_harvester_back` } },
+  "minecraft:loot": loot("harvester", [drop(`${NS}:harvester`)]),
+  "minecraft:tick": { interval_range: [BAL.harvester.tickEvery, BAL.harvester.tickEvery], looping: true },
+  [`${NS}:harvester`]: {},
+}, Object.entries(FACING_ROTATIONS).map(([facing, y]) => ({
+  condition: `q.block_state('minecraft:cardinal_direction') == '${facing}'`,
+  components: { "minecraft:transformation": { rotation: [0, y, 0] } },
+})));
+const UPGRADE = [
+  "................",
+  "................",
+  "...gggggggggg...",
+  "..gg########gg..",
+  "..g##*****##~g..",
+  "..g#*######~~g..",
+  "..g#*##gg##~~g..",
+  "..g#*##gg##~~g..",
+  "..g#*##gg##~~g..",
+  "..g#*######~~g..",
+  "..g##~~~~~~~~g..",
+  "..gg~~~~~~~~gg..",
+  "...gggggggggg...",
+  "................",
+  "................",
+  "................",
+];
+const v_ = (id) => ({ item: `minecraft:${id}` });
+item("upgrade_base", UPGRADE, cfg.vita.color, {}, { g: "#e0b84a" });
+cfg.tiers.forEach((t) => item(`${t.id}_machine_upgrade`, UPGRADE, t.color, { "minecraft:max_stack_size": 1 }, { g: "#e0b84a" }));
+recipe("machine_frame", "shaped", { pattern: ["IRI", "RSR", "IRI"], key: { I: v_("iron_ingot"), R: v_("redstone"), S: v_("stone") }, result: nsItem("machine_frame") }, "minecraft:redstone");
+recipe("harvester", "shaped", { pattern: ["IAI", "SFS", "IAI"], key: { I: v_("iron_ingot"), A: nsItem("anima_ingot"), S: nsItem("essence_sickle"), F: nsItem("machine_frame") }, result: nsItem("harvester") }, `${NS}:machine_frame`);
+recipe("upgrade_base", "shaped", { pattern: ["SVS", "VDV", "SVS"], key: { S: nsItem("vita_shard"), V: nsItem("vita_ingot"), D: v_("diamond") }, result: nsItem("upgrade_base") }, `${NS}:vita_ingot`);
+cfg.tiers.forEach((t, i) => recipe(`${t.id}_machine_upgrade`, "shaped", {
+  pattern: ["EIE", "IUI", "EIE"],
+  key: { E: nsItem(`${t.id}_essence`), I: nsItem(`${t.id}_ingot`), U: nsItem(i ? `${cfg.tiers[i - 1].id}_machine_upgrade` : "upgrade_base") },
+  result: nsItem(`${t.id}_machine_upgrade`),
+}, `${NS}:${t.id}_ingot`));
+
+// The Harvester's screen: an invisible entity inside the block, opened like a chest. It's only hittable while the "open" group is on (see scripts/main.js).
+lang.push(`entity.${NS}:harvester_screen.name=Harvester`);
+write(path.join(BP, "entities", "harvester_screen.json"), {
+  format_version: "1.21.0",
+  "minecraft:entity": {
+    description: { identifier: `${NS}:harvester_screen`, is_spawnable: false, is_summonable: true, is_experimental: false },
+    component_groups: {
+      [`${NS}:closed`]: { "minecraft:collision_box": { width: 0.1, height: 0.1 } },
+      [`${NS}:open`]: { "minecraft:collision_box": { width: 1.1, height: 1.1 } },
+    },
+    components: {
+      "minecraft:nameable": { always_show: false, allow_name_tag_renaming: false },
+      "minecraft:type_family": { family: ["inanimate", `${NS}_harvester_screen`] },
+      "minecraft:damage_sensor": { triggers: [{ cause: "all", deals_damage: false }] },
+      "minecraft:health": { value: 1, max: 1, min: 1 },
+      "minecraft:knockback_resistance": { value: 1000, max: 1000 },
+      "minecraft:physics": { has_gravity: false, has_collision: false },
+      "minecraft:pushable": { is_pushable: false, is_pushable_by_piston: false },
+      "minecraft:fire_immune": true,
+      "minecraft:inventory": { inventory_size: 27, container_type: "container" },
+    },
+    events: {
+      "minecraft:entity_spawned": { add: { component_groups: [`${NS}:closed`] } },
+      [`${NS}:open`]: { remove: { component_groups: [`${NS}:closed`] }, add: { component_groups: [`${NS}:open`] } },
+      [`${NS}:close`]: { remove: { component_groups: [`${NS}:open`] }, add: { component_groups: [`${NS}:closed`] } },
+    },
+  },
+});
 
 // Crop geometry: four planes in a # shape, like vanilla wheat. One face each: alpha_test draws both sides, and a second face would z-fight.
 const plane = (origin, size, faces) => ({ origin, size, uv: Object.fromEntries(faces.map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });

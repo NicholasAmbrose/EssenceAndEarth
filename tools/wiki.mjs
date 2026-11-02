@@ -435,7 +435,48 @@ const infusion = {
   ],
 };
 
-const categories = [guide, essence, materials, infusion, farmland, accelerators, tools, ...cropCategories];
+const HV = BAL.harvester;
+const machineSide = (i) => (HV.range + (HV.upgrades[i - 1]?.range ?? 0)) * 2 + 1;
+const upgradeItem = (t) => ({ name: `${title(t.id)} Machine Upgrade`, icon: `img/icons/${t.id}_machine_upgrade.png` });
+const machines = {
+  slug: "machines", title: "Machines", group: "Getting started", icon: "img/icons/harvester_front.png",
+  blurb: "A machine that harvests and replants your crops.",
+  entries: [
+    {
+      slug: "harvester", name: "Harvester", icon: "img/icons/harvester_front.png",
+      summary: "Harvests and replants ripe crops, and stores what they drop.",
+      blocks: [
+        facts([["Place it", "At the height of your crops, with its front facing them"], ["Open it", "Tap it with an empty hand"], ["Mine it", "Hold a tool, or sneak"], ["Pause it", "Redstone power"], ["Storage", "25 stacks, or a chest or barrel touching its back"]]),
+        p("It works on a square of blocks in front of it, one block at a time. A ripe crop is harvested and replanted, using one seed from its drops. Farmland bonus essence and second seeds work as normal. It handles every essence crop, plus wheat, carrots, potatoes and beetroot."),
+        p("The first slot of its screen takes fuel and the second takes a Machine Upgrade. Look at the machine to see its upgrade, area and fuel."),
+        h2("Recipe"),
+        (() => { const i = vanilla("minecraft:iron_ingot"), a = named("anima_ingot"), s = named("essence_sickle"); return recipe({ name: "Harvester", icon: "img/icons/harvester_front.png" }, 1, [[i, a, i], [s, { name: "Machine Frame", icon: "img/icons/machine_frame.png" }, s], [i, a, i]]); })(),
+        h2("Machine Frame"),
+        (() => { const i = vanilla("minecraft:iron_ingot"), r = vanilla("minecraft:redstone"); return recipe({ name: "Machine Frame", icon: "img/icons/machine_frame.png" }, 1, [[i, r, i], [r, vanilla("minecraft:stone"), r], [i, r, i]]); })(),
+        h2("Fuel"),
+        p(`Each fuel item fills the machine's tank. Every ${HV.fuelPerHarvest} fuel is one crop harvested with no upgrade, and checking an unripe crop costs ${HV.fuelPerScan}.`),
+        list([...Object.entries(HV.fuels).map(([id, ticks]) => ({ ...vanilla(id), sub: `${(ticks * HV.fuelPerBurnTick).toLocaleString("en-US")} fuel` })), { ...vanilla("minecraft:oak_log"), sub: `Logs and planks: ${(HV.woodBurnTicks * HV.fuelPerBurnTick).toLocaleString("en-US")} fuel` }]),
+      ],
+    },
+    {
+      slug: "machine-upgrades", name: "Machine Upgrades", icon: `img/icons/${cfg.tiers[0].id}_machine_upgrade.png`,
+      summary: "Make a machine wider and faster, for much more fuel.",
+      blocks: [
+        p("Each upgrade is crafted from the one before, so you keep the cost of the last. Put one in the machine's second slot."),
+        list([
+          { name: "No upgrade", icon: "img/icons/harvester_front.png", sub: `${machineSide(0)}×${machineSide(0)}, ${HV.operationTicks / 20} s per block, ${HV.fuelPerHarvest} fuel per crop` },
+          ...cfg.tiers.map((t, i) => ({ ...upgradeItem(t), sub: `${machineSide(i + 1)}×${machineSide(i + 1)}, ${+((HV.operationTicks * HV.upgrades[i].time) / 20).toFixed(3)} s per block, ${(HV.fuelPerHarvest * HV.upgrades[i].fuel).toLocaleString("en-US")} fuel per crop` })),
+        ]),
+        h2("Upgrade Base"),
+        (() => { const s = named("vita_shard"), v = named("vita_ingot"); return recipe(named("upgrade_base"), 1, [[s, v, s], [v, vanilla("minecraft:diamond"), v], [s, v, s]]); })(),
+        h2("Upgrades"),
+        ...cfg.tiers.map((t, i) => { const e = tierItem(t), n = named(`${t.id}_ingot`), u = i ? upgradeItem(cfg.tiers[i - 1]) : named("upgrade_base"); return recipe(upgradeItem(t), 1, [[e, n, e], [n, u, n], [e, n, e]]); }),
+      ],
+    },
+  ],
+};
+
+const categories = [guide, essence, materials, infusion, farmland, accelerators, tools, machines, ...cropCategories];
 for (const c of categories) for (const e of c.entries) e.href = `wiki/${c.slug}/${e.slug}`;
 
 const gallery = [
@@ -451,6 +492,7 @@ const gallery = [
   { title: "Fertilizer", items: [fertilized, fertilizer] },
   { title: "Infusion and souls", items: ["infusion_altar", "infusion_pedestal", "wand", "vita_seed_base", "anima_seed_base", "soul_jar", "anima_dagger", "passive_anima_dagger", "hostile_anima_dagger", "soul_dust", "anima_dust", "soulstone", "soulstone_cobble", "soulstone_smooth", "soulstone_bricks", "soulstone_cracked_bricks", "soul_glass", "anima_ore"].map((id) => ({ name: title(id), icon: `img/icons/${id}.png` })) },
   { title: "Tools and guide", items: [sickleItem, hoeItem, guideItem] },
+  { title: "Machines", items: [{ name: "Harvester", icon: "img/icons/harvester_front.png" }, named("machine_frame"), named("upgrade_base"), ...cfg.tiers.map(upgradeItem)] },
   { title: "Growth stages", items: stages(cfg.crops[0]).slice(0, 3) },
 ];
 

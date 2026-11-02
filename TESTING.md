@@ -4,6 +4,28 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Harvester (v0.17.0)
+
+Quickest setup: `/give @s ee:harvester`, `/give @s coal 8`, and a `/give @s ee:ignis_machine_upgrade`. Fertilizer ripens test crops fast.
+
+- [ ] **Check this first:** place one and tap it with an empty hand. A 27-slot screen titled Harvester should open. **The hitbox switching is the biggest unknown.** Note if the screen won't open, or if the block can't be mined.
+- [ ] A pickaxe mines it from every side, and so does sneaking. Anything held in the hand stops the screen opening.
+- [ ] Its front faces where you stood when you placed it. Check all four directions, and that the back plate is opposite.
+- [ ] With coal in slot 1, looking at it shows its fuel going up. With no fuel it shows "Out of fuel" and does nothing.
+- [ ] With 2 crops ripe in the 3x3 starting one block in front of it, both get harvested and replanted at stage 0. Unripe crops are left alone, and crops at other heights too.
+- [ ] Drops land in the machine, minus one seed. Bonus essence and second seeds still happen on essence farmland. Slots 1 and 2 never fill with harvest.
+- [ ] Vanilla wheat, carrots, potatoes and beetroot work too.
+- [ ] Each upgrade in slot 2 shows the right area and speed. Removing it goes back to 3x3. An item that isn't an upgrade does nothing.
+- [ ] Coal, charcoal, a coal block, a lava bucket (gives the bucket back), a blaze rod, sticks, a log and planks all add fuel. **Logs and planks rely on item tags, so check them.** Other items in slot 1 are ignored.
+- [ ] A chest or barrel touching the back fills from the machine, and a hopper under it carries on from there. Blocks on other sides aren't used.
+- [ ] Once storage is full with no chest, drops stay on the ground and the crops keep replanting.
+- [ ] Redstone power pauses it, and it says so. Note if `getRedstonePower` isn't available.
+- [ ] Items and fuel survive leaving the world and a server restart. After a restart it can still be mined.
+- [ ] Breaking it, or blowing it up, drops the block and everything inside within about 2 seconds, and leaves no entity behind.
+- [ ] Two players can use one together. One holding a tool doesn't stop the other opening it.
+- [ ] Several machines with Astra upgrades don't cause noticeable lag. Note how far away they keep running, and whether Deepcore's chunk loader keeps them running.
+- [ ] The machines recipes all craft, and the Guide and wiki pages match what happens.
+
 ## Deepcore Geo Scanner (v0.16.0)
 
 Needs Deepcore v4.61.0 or newer.

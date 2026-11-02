@@ -16,6 +16,7 @@ const {
   farmlandRefundChance: REFUND_CHANCE,
   altarTicks: ALTAR_TICKS,
   attunedSoulMultiplier: ATTUNED_SOULS,
+  harvester: HARVESTER_BALANCE,
 } = __BALANCE__;
 
 // Accelerator id -> how many blocks above itself it reaches.
@@ -154,15 +155,19 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
   event.cancel = true;
   if (!isFirstEvent) return; // holding the button repeats the event
   const { dimension, location, permutation: ripe } = block;
-  const id = ripe.type.id;
-  const seed = VANILLA_SEEDS[id] ?? id.replace(/_crop$/, "_seeds");
   system.run(() => {
-    harvest(dimension, location);
-    dimension.getBlock(location)?.setPermutation(ripe.withState(growthState(id), 0));
+    harvestAndReplant(dimension, location, ripe);
     if (player.isValid) wear(player, 1);
-    system.run(() => takeSeed(dimension, location, seed)); // the drops exist from the next tick
   });
 });
+
+function harvestAndReplant(dimension, location, ripe) {
+  const id = ripe.type.id;
+  const seed = VANILLA_SEEDS[id] ?? id.replace(/_crop$/, "_seeds");
+  harvest(dimension, location);
+  dimension.getBlock(location)?.setPermutation(ripe.withState(growthState(id), 0));
+  system.run(() => takeSeed(dimension, location, seed)); // the drops exist from the next tick
+}
 
 const GUIDE = "__NS__:essence_guide";
 const GUIDE_PAGES = __GUIDE_PAGES__; // [{ title, body }]
@@ -320,6 +325,15 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent("__NS__:altar", {
     onTick({ block }) {
       if ((block.getRedstonePower?.() ?? 0) > 0) startInfusion(block);
+    },
+  });
+  blockComponentRegistry.registerCustomComponent("__NS__:harvester", {
+    onTick({ block }) {
+      try {
+        harvesterTick(block);
+      } catch {
+        // unloaded chunk
+      }
     },
   });
   blockComponentRegistry.registerCustomComponent("__NS__:accelerator", {
@@ -511,6 +525,220 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
   const attuned = DAGGERS[dagger];
   addSouls(player, soul, attuned !== null && attuned === SOULS[soul].passive ? ATTUNED_SOULS : 1);
 });
+
+// ---------- Harvester ----------
+// Its items live in a hidden entity inside the block, which opens like a chest (the way Deepcore's machine screens do).
+// The entity only has a real hitbox while someone looks at the block with an empty hand, so any tool or a sneak mines the block.
+// ponytail: /kill @e deletes what's stored; keep items in the block's saved state, as Deepcore does, if that ever bites.
+const HARVESTER = "__NS__:harvester";
+const HARVESTER_SCREEN = "__NS__:harvester_screen";
+const MACHINE_UPGRADES = __MACHINE_UPGRADES__; // upgrade item -> { name, time, fuel, tank, range }
+const FUEL_SLOT = 0;
+const UPGRADE_SLOT = 1;
+const FIRST_OUTPUT_SLOT = 2;
+const FUEL = "__NS__:fuel";
+const SCAN = "__NS__:scan";
+const FACING = "minecraft:cardinal_direction";
+const DIRECTIONS = { north: { x: 0, z: -1 }, south: { x: 0, z: 1 }, east: { x: 1, z: 0 }, west: { x: -1, z: 0 } };
+const LOOK_DISTANCE = 6;
+const progress = new Map(); // screen entity id -> ticks towards the next operation
+const screens = new Map(); // block key -> screen entity, so each machine doesn't search for its own every tick
+const openScreens = new Map(); // screen entity id -> screen entity with its hitbox on
+
+const screenKey = ({ dimension, location: { x, y, z } }) => `${dimension.id} ${x} ${y} ${z}`;
+
+function screenOf(block) {
+  const key = screenKey(block);
+  const known = screens.get(key);
+  if (known?.isValid) return known;
+  const { x, y, z } = block.location;
+  const screen = block.dimension.getEntities({ type: HARVESTER_SCREEN, location: { x: x + 0.5, y, z: z + 0.5 }, maxDistance: 0.5 })[0];
+  if (screen) screens.set(key, screen);
+  return screen;
+}
+
+function harvesterSettings(container) {
+  const upgrade = MACHINE_UPGRADES[container.getItem(UPGRADE_SLOT)?.typeId];
+  const range = HARVESTER_BALANCE.range + (upgrade?.range ?? 0);
+  return {
+    name: upgrade?.name ?? "No upgrade",
+    range,
+    ticks: HARVESTER_BALANCE.operationTicks * (upgrade?.time ?? 1),
+    fuel: HARVESTER_BALANCE.fuelPerHarvest * (upgrade?.fuel ?? 1),
+    tank: HARVESTER_BALANCE.tank * (upgrade?.tank ?? 1),
+  };
+}
+
+const burnTicks = (stack) => HARVESTER_BALANCE.fuels[stack.typeId] ?? (stack.hasTag("minecraft:logs") || stack.hasTag("minecraft:planks") ? HARVESTER_BALANCE.woodBurnTicks : 0);
+
+// ponytail: a whole item goes in once the tank has room, so the tank can overfill; MA burns it in slowly, and nothing is lost either way.
+function refuel(screen, container, tank) {
+  const stack = container.getItem(FUEL_SLOT);
+  const fuel = screen.getDynamicProperty(FUEL) ?? 0;
+  if (!stack || fuel >= tank) return;
+  const ticks = burnTicks(stack);
+  if (!ticks) return;
+  screen.setDynamicProperty(FUEL, fuel + ticks * HARVESTER_BALANCE.fuelPerBurnTick);
+  if (stack.typeId === "minecraft:lava_bucket") {
+    container.setItem(FUEL_SLOT, new ItemStack("minecraft:bucket"));
+  } else if (stack.amount > 1) {
+    stack.amount -= 1;
+    container.setItem(FUEL_SLOT, stack);
+  } else {
+    container.setItem(FUEL_SLOT);
+  }
+}
+
+// Puts a stack in the output slots and returns how many didn't fit. addItem would also fill the fuel and upgrade slots.
+function storeOutput(container, stack) {
+  let left = stack.amount;
+  for (let i = FIRST_OUTPUT_SLOT; i < container.size && left; i++) {
+    const item = container.getItem(i);
+    if (!item?.isStackableWith(stack) || item.amount >= item.maxAmount) continue;
+    const moved = Math.min(left, item.maxAmount - item.amount);
+    item.amount += moved;
+    container.setItem(i, item);
+    left -= moved;
+  }
+  for (let i = FIRST_OUTPUT_SLOT; i < container.size && left; i++) {
+    if (container.getItem(i)) continue;
+    const item = stack.clone();
+    item.amount = left;
+    container.setItem(i, item);
+    left = 0;
+  }
+  return left;
+}
+
+// A harvest's drops, including the bonus rolls, all exist two ticks later.
+function collectDrops(dimension, { x, y, z }, screen) {
+  system.runTimeout(() => {
+    if (!screen.isValid) return;
+    const container = screen.getComponent("minecraft:inventory").container;
+    for (const entity of dimension.getEntities({ location: { x: x + 0.5, y: y + 0.5, z: z + 0.5 }, maxDistance: 1.5, type: "minecraft:item" })) {
+      const stack = entity.getComponent("minecraft:item")?.itemStack;
+      if (!stack) continue;
+      const left = storeOutput(container, stack);
+      if (left === stack.amount) continue; // full, so the rest stays on the ground
+      const { location } = entity;
+      entity.remove();
+      if (left) drop(dimension, stack.typeId, location, left);
+    }
+  }, 2);
+}
+
+// A chest or barrel touching the machine's back takes one output stack per tick, which lets hoppers and pipes reach the harvest.
+function emptyIntoChest(block, container, facing) {
+  const { x, y, z } = block.location;
+  const chest = block.dimension.getBlock({ x: x - facing.x, y, z: z - facing.z })?.getComponent("minecraft:inventory")?.container;
+  if (!chest) return;
+  for (let i = FIRST_OUTPUT_SLOT; i < container.size; i++) {
+    const item = container.getItem(i);
+    if (!item) continue;
+    container.setItem(i, chest.addItem(item));
+    return;
+  }
+}
+
+// One block per operation, walking the square in front of the machine at its own height. Returns the fuel it used.
+function harvesterOperation(block, screen, settings, facing) {
+  const { range } = settings;
+  const side = range * 2 + 1;
+  const scan = (screen.getDynamicProperty(SCAN) ?? 0) % (side * side);
+  screen.setDynamicProperty(SCAN, scan + 1);
+  const { x, y, z } = block.location;
+  const location = {
+    x: x + facing.x * (range + 1) + (scan % side) - range,
+    y,
+    z: z + facing.z * (range + 1) + Math.floor(scan / side) - range,
+  };
+  const crop = block.dimension.getBlock(location);
+  if (!crop || !isCrop(crop.typeId)) return 0;
+  if (!isRipe(crop.permutation)) return HARVESTER_BALANCE.fuelPerScan;
+  harvestAndReplant(block.dimension, location, crop.permutation);
+  collectDrops(block.dimension, location, screen);
+  return settings.fuel;
+}
+
+function harvesterTick(block) {
+  const screen = screenOf(block) ?? block.dimension.spawnEntity(HARVESTER_SCREEN, { x: block.location.x + 0.5, y: block.location.y, z: block.location.z + 0.5 });
+  const container = screen.getComponent("minecraft:inventory").container;
+  const settings = harvesterSettings(container);
+  const facing = DIRECTIONS[block.permutation.getState(FACING)];
+  refuel(screen, container, settings.tank);
+  emptyIntoChest(block, container, facing);
+  if (block.getRedstonePower?.() > 0) return;
+
+  let fuel = screen.getDynamicProperty(FUEL) ?? 0;
+  if (fuel < settings.fuel) return;
+  let ticks = (progress.get(screen.id) ?? 0) + HARVESTER_BALANCE.tickEvery;
+  while (ticks >= settings.ticks && fuel >= settings.fuel) {
+    ticks -= settings.ticks;
+    fuel -= harvesterOperation(block, screen, settings, facing);
+  }
+  progress.set(screen.id, ticks);
+  screen.setDynamicProperty(FUEL, fuel);
+}
+
+function harvesterStatus(block, screen) {
+  const settings = harvesterSettings(screen.getComponent("minecraft:inventory").container);
+  const side = settings.range * 2 + 1;
+  const fuel = screen.getDynamicProperty(FUEL) ?? 0;
+  const state = fuel < settings.fuel ? " · §cOut of fuel§r" : block.getRedstonePower?.() > 0 ? " · Paused" : "";
+  return `Harvester · ${settings.name} ${side}×${side} · Fuel ${Math.min(100, Math.floor((fuel / settings.tank) * 100))}%${state}`;
+}
+
+// Shows a machine's status while it's looked at, and gives its screen a hitbox only for an empty hand.
+system.runInterval(() => {
+  const looked = new Map(); // screen entity id -> { screen, open }
+  for (const player of world.getPlayers()) {
+    const block = player.getBlockFromViewDirection({ maxDistance: LOOK_DISTANCE })?.block;
+    if (block?.typeId !== HARVESTER) continue;
+    const screen = screenOf(block);
+    if (!screen) continue;
+    player.onScreenDisplay.setActionBar(harvesterStatus(block, screen));
+    const open = !player.isSneaking && !player.getComponent("minecraft:equippable")?.getEquipment(EquipmentSlot.Mainhand);
+    looked.set(screen.id, { screen, open: open || looked.get(screen.id)?.open });
+  }
+  for (const { screen, open } of looked.values()) {
+    if (open && !openScreens.has(screen.id)) {
+      screen.triggerEvent("__NS__:open");
+      openScreens.set(screen.id, screen);
+    } else if (!open) {
+      // Also runs for a screen left open by a restart, which isn't in openScreens.
+      screen.triggerEvent("__NS__:close");
+      openScreens.delete(screen.id);
+    }
+  }
+  for (const [id, screen] of openScreens) {
+    if (looked.has(id)) continue;
+    if (screen.isValid) screen.triggerEvent("__NS__:close");
+    openScreens.delete(id);
+  }
+}, 4);
+
+// Breaking a Harvester by any means leaves its screen behind, so this sweep drops what it held and clears the entity.
+system.runInterval(() => {
+  for (const name of ["overworld", "nether", "the_end"]) {
+    const dimension = world.getDimension(name);
+    for (const screen of dimension.getEntities({ type: HARVESTER_SCREEN })) {
+      try {
+        const { x, y, z } = screen.location;
+        const id = dimension.getBlock({ x: Math.floor(x), y: Math.floor(y), z: Math.floor(z) })?.typeId;
+        if (id === undefined || id === HARVESTER) continue;
+        const container = screen.getComponent("minecraft:inventory").container;
+        for (let i = 0; i < container.size; i++) {
+          const item = container.getItem(i);
+          if (item) dimension.spawnItem(item, screen.location);
+        }
+        progress.delete(screen.id);
+        screen.remove();
+      } catch {
+        // unloaded chunk
+      }
+    }
+  }
+}, 40);
 
 // Deepcore's Geo Scanner only counts ores it's told about (github.com/baseballr/Deepcore/issues/8).
 // It keeps them in memory, so they go again on every load. Nothing happens if Deepcore isn't installed or isn't listening.
