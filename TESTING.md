@@ -14,6 +14,19 @@ Needs Deepcore to handle `dq:add_ore` (github.com/baseballr/Deepcore/issues/8).
 - [ ] The hologram shows each ore in its colour.
 - [ ] Ores still show after a server restart.
 
+## Deepcore Network Crafter
+
+Needs Deepcore to handle `dq:add_recipe` (github.com/baseballr/Deepcore/issues/7).
+
+- [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed.
+- [ ] With an Assembler on the network, an Essence & Earth item shows in the Network Crafter and can be ordered.
+- [ ] An order that needs a higher tier essence makes it from lower tier essence in storage (4 into 1).
+- [ ] Recipes still show after a server restart.
+
+## Tool textures (v0.15.1)
+
+- [ ] The sickle and hoe show their new outlined look, in the inventory and held in the hand.
+
 ## Vita Shards without ore (v0.15.0)
 
 - [ ] 4 Terra Blocks in a plus around a flint makes 4 Vita Shards, and the recipe unlocks once you hold a Terra Block.

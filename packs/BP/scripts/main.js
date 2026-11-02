@@ -519,3 +519,11 @@ system.runTimeout(() => {
   const overworld = world.getDimension("overworld");
   for (const o of DEEPCORE_ORES) overworld.runCommand(`scriptevent dq:add_ore ${JSON.stringify(o)}`);
 }, 20);
+
+// Deepcore can't read the game's recipes, so its Network Crafter only makes ours if we send them (github.com/baseballr/Deepcore/issues/7).
+// It keeps them in memory, so they go again on every load. Nothing happens if Deepcore isn't installed or isn't listening.
+const DEEPCORE_RECIPES = __DEEPCORE_RECIPES__;
+system.runTimeout(() => {
+  const overworld = world.getDimension("overworld");
+  for (const r of DEEPCORE_RECIPES) overworld.runCommand(`scriptevent dq:add_recipe ${JSON.stringify(r)}`);
+}, 20);

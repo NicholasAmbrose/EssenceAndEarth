@@ -178,41 +178,41 @@ const ACCELERATOR = [
   "ssssvvvsssssssss",
 ];
 
-// Tools: b blade and h handle are palette colours, * blade highlight.
+// Tools: b blade, o outline, h and H handle are palette colours, * blade highlight, ~ blade shadow.
 const SICKLE = [
   "................",
-  ".....bbbbb......",
-  "...bb***bbbb....",
-  "..bbb....bbbb...",
-  "..b.......bbbb..",
-  "...........bbb..",
-  "...........bbb..",
-  "..........bbbb..",
-  ".........bbbb...",
-  "........hbbb....",
-  ".......hhb......",
-  "......hhh.......",
-  ".....hhh........",
-  "....hhh.........",
-  "...hh...........",
-  "................",
+  ".....oooooo.....",
+  "...oo******oo...",
+  "..o**bbbbbbb~o..",
+  "..o*boooooobb~o.",
+  "...oo......ob~o.",
+  "...........ob~o.",
+  "...........ob~o.",
+  "..........ob~~o.",
+  ".........ob~~o..",
+  "........oob~o...",
+  ".......oHhoo....",
+  "......oHho......",
+  ".....oHho.......",
+  "....ohho........",
+  ".....oo.........",
 ];
 const HOE = [
   "................",
   "................",
-  "........bbbbbb..",
-  ".......b**bbbbb.",
-  ".......bbbbhhbb.",
-  "........bbhhhbb.",
-  "..........hhh.b.",
-  ".........hhh....",
-  "........hhh.....",
-  ".......hhh......",
-  "......hhh.......",
-  ".....hhh........",
-  "....hhh.........",
-  "...hhh..........",
-  "...h............",
+  "........oooooo..",
+  ".......o****bbo.",
+  ".......o*bbbbb~o",
+  "........ooHho~~o",
+  ".........oHhoo~o",
+  "........oHho..oo",
+  ".......oHho.....",
+  "......oHho......",
+  ".....oHho.......",
+  "....oHho........",
+  "...oHho.........",
+  "..ohho..........",
+  "...oo...........",
   "................",
 ];
 
@@ -686,7 +686,16 @@ const drop = (name, min = 1, max = min, chance) => ({
   entries: [{ type: "item", name, weight: 1, ...(max > 1 && { functions: [{ function: "set_count", count: { min, max } }] }) }],
 });
 
+// Every crafting recipe in Deepcore's format, so its Network Crafter can make them (see scripts/main.js).
+const DEEPCORE_RECIPES = [];
+function deepcoreRecipe({ pattern, key, ingredients, result }) {
+  const { item: o, count: n = 1 } = result;
+  if (pattern) return { o, n, s: pattern, k: Object.fromEntries(Object.entries(key).map(([ch, v]) => [ch, v.item])) };
+  return { o, n, i: ingredients.flatMap((v) => Array(v.count ?? 1).fill(v.item)) }; // Deepcore lists one entry per grid cell
+}
+
 function recipe(id, type, body, unlock) {
+  DEEPCORE_RECIPES.push(deepcoreRecipe(body));
   write(path.join(BP, "recipes", `${id}.json`), {
     format_version: "1.20.10",
     [`minecraft:recipe_${type}`]: { description: { identifier: `${NS}:${id}` }, tags: ["crafting_table"], unlock: [{ item: unlock }], ...body },
@@ -756,7 +765,7 @@ for (const [id, mask, pattern] of [
     "minecraft:hand_equipped": true,
     "minecraft:durability": { max_durability: BAL.toolDurability },
     "minecraft:repairable": { repair_items: [{ items: [toolEssence], repair_amount: Math.ceil(BAL.toolDurability / 4) }] },
-  }, { b: TOOL_TIER.color, h: "#6b4a2f" });
+  }, { b: TOOL_TIER.color, o: "#12263c", h: "#6b4a2f", H: "#93704a" });
   recipe(id, "shaped", { pattern, key: { E: { item: toolEssence }, S: { item: "minecraft:stick" } }, result: { item: `${NS}:${id}` } }, toolEssence);
 }
 
@@ -1265,6 +1274,10 @@ write(path.join(RP, "texts", "languages.json"), ["en_US"]);
 const icon = png(128, scale(render(withSparkles(GEM, 4), cfg.tiers[0].color), 8));
 write(path.join(BP, "pack_icon.png"), icon);
 write(path.join(RP, "pack_icon.png"), icon);
+
+// Filled in here because the other placeholders go in before any recipes exist.
+const mainScript = path.join(BP, "scripts", "main.js");
+write(mainScript, fs.readFileSync(mainScript, "utf8").replaceAll("__DEEPCORE_RECIPES__", JSON.stringify(DEEPCORE_RECIPES)));
 
 // ---------- package ----------
 
