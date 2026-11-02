@@ -25,6 +25,10 @@ Quickest setup: `/give @s ee:harvester`, `/give @s coal 8`, and a `/give @s ee:i
 - [ ] Two players can use one together. One holding a tool doesn't stop the other opening it.
 - [ ] Several machines with Astra upgrades don't cause noticeable lag. Note how far away they keep running, and whether Deepcore's chunk loader keeps them running.
 - [ ] The machines recipes all craft, and the Guide and wiki pages match what happens.
+## Anima Dust without ore (v0.17.1)
+
+- [ ] 4 Aqua Blocks in a plus around soul sand makes 4 Anima Dust, and the recipe unlocks once you hold an Aqua Block.
+- [ ] The Guide's Materials page mentions the recipe.
 
 ## Deepcore Geo Scanner (v0.16.0)
 

@@ -1,16 +1,16 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.17.0",
-  "file": "EssenceAndEarth_v0.17.0.mcaddon",
+  "version": "0.17.1",
+  "file": "EssenceAndEarth_v0.17.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.17.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.17.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 54,
   "tiers": 5,
-  "recipes": 310,
+  "recipes": 311,
   "items": 214
  },
  "categories": [
@@ -1191,7 +1191,55 @@
      "blocks": [
       {
        "t": "p",
-       "html": "Vita materials plus two Anima Dust. Dust comes from Anima Ore in the Nether."
+       "html": "Vita materials plus two Anima Dust. Dust drops from Anima Ore in the Nether or crafts from Aqua Blocks."
+      },
+      {
+       "t": "h2",
+       "text": "Anima Dust"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Anima Dust",
+        "icon": "img/icons/anima_dust.png",
+        "count": 4
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Aqua Block",
+          "icon": "img/icons/aqua_block.png",
+          "href": "wiki/materials/aqua"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Aqua Block",
+          "icon": "img/icons/aqua_block.png",
+          "href": "wiki/materials/aqua"
+         },
+         {
+          "name": "Soul Sand",
+          "icon": "img/vanilla/soul_sand.png"
+         },
+         {
+          "name": "Aqua Block",
+          "icon": "img/icons/aqua_block.png",
+          "href": "wiki/materials/aqua"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Aqua Block",
+          "icon": "img/icons/aqua_block.png",
+          "href": "wiki/materials/aqua"
+         },
+         null
+        ]
+       ]
       },
       {
        "t": "h2",
@@ -35765,6 +35813,49 @@
     ]
    ],
    "note": "Shapeless: any slots"
+  },
+  {
+   "result": {
+    "name": "Anima Dust",
+    "icon": "img/icons/anima_dust.png",
+    "count": 4
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Aqua Block",
+      "icon": "img/icons/aqua_block.png",
+      "href": "wiki/materials/aqua"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Aqua Block",
+      "icon": "img/icons/aqua_block.png",
+      "href": "wiki/materials/aqua"
+     },
+     {
+      "name": "Soul Sand",
+      "icon": "img/vanilla/soul_sand.png"
+     },
+     {
+      "name": "Aqua Block",
+      "icon": "img/icons/aqua_block.png",
+      "href": "wiki/materials/aqua"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Aqua Block",
+      "icon": "img/icons/aqua_block.png",
+      "href": "wiki/materials/aqua"
+     },
+     null
+    ]
+   ]
   },
   {
    "result": {
