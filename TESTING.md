@@ -13,6 +13,21 @@ Needs Deepcore to handle `dq:add_recipe` (github.com/baseballr/Deepcore/issues/7
 - [ ] An order that needs a higher tier essence makes it from lower tier essence in storage (4 into 1).
 - [ ] Recipes still show after a server restart.
 
+## Tool textures (v0.15.1)
+
+- [ ] The sickle and hoe show their new outlined look, in the inventory and held in the hand.
+
+## Vita Shards without ore (v0.15.0)
+
+- [ ] 4 Terra Blocks in a plus around a flint makes 4 Vita Shards, and the recipe unlocks once you hold a Terra Block.
+- [ ] The Guide's Materials page mentions the recipe.
+
+## Altar recipes in the Guide (v0.14.1)
+
+- [ ] The Guide has an Altar Recipes page for each tier and for daggers, and the longest ones scroll.
+- [ ] Item names read properly, and a recipe made from its page works at the altar.
+- [ ] The Infusion Altar page explains how to make both seed bases.
+
 ## Infusion Altar and souls (v0.14.0)
 
 - [ ] **Check this first:** the add-on loads with no script or content log errors. Then craft a pedestal and place an item on it, since the display entity is the biggest unknown.

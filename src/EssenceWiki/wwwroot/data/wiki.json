@@ -1,16 +1,16 @@
 {
  "name": "Essence & Earth",
  "release": {
-  "version": "0.14.0",
-  "file": "EssenceAndEarth_v0.14.0.mcaddon",
+  "version": "0.15.1",
+  "file": "EssenceAndEarth_v0.15.1.mcaddon",
   "minBedrock": "1.21.90",
-  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.14.0.mcaddon",
+  "download": "https://github.com/NicholasAmbrose/EssenceAndEarth/raw/main/addon/EssenceAndEarth_v0.15.1.mcaddon",
   "repo": "https://github.com/NicholasAmbrose/EssenceAndEarth"
  },
  "stats": {
   "crops": 54,
   "tiers": 5,
-  "recipes": 301,
+  "recipes": 302,
   "items": 206
  },
  "categories": [
@@ -1004,7 +1004,56 @@
      "blocks": [
       {
        "t": "p",
-       "html": "Made from the Vita Shards that Vita Ore drops. Every tier's ingot and gemstone starts from these."
+       "html": "Made from Vita Shards, which drop from Vita Ore or craft from Terra Blocks. Every tier's ingot and gemstone starts from these."
+      },
+      {
+       "t": "h2",
+       "text": "Vita Shard"
+      },
+      {
+       "t": "grid",
+       "result": {
+        "name": "Vita Shard",
+        "icon": "img/icons/vita_shard.png",
+        "href": "wiki/materials/vita",
+        "count": 4
+       },
+       "rows": [
+        [
+         null,
+         {
+          "name": "Terra Block",
+          "icon": "img/icons/terra_block.png",
+          "href": "wiki/materials/terra"
+         },
+         null
+        ],
+        [
+         {
+          "name": "Terra Block",
+          "icon": "img/icons/terra_block.png",
+          "href": "wiki/materials/terra"
+         },
+         {
+          "name": "Flint",
+          "icon": "img/vanilla/flint.png"
+         },
+         {
+          "name": "Terra Block",
+          "icon": "img/icons/terra_block.png",
+          "href": "wiki/materials/terra"
+         }
+        ],
+        [
+         null,
+         {
+          "name": "Terra Block",
+          "icon": "img/icons/terra_block.png",
+          "href": "wiki/materials/terra"
+         },
+         null
+        ]
+       ]
       },
       {
        "t": "h2",
@@ -34997,6 +35046,50 @@
       "name": "Vita Shard",
       "icon": "img/icons/vita_shard.png",
       "href": "wiki/materials/vita"
+     },
+     null
+    ]
+   ]
+  },
+  {
+   "result": {
+    "name": "Vita Shard",
+    "icon": "img/icons/vita_shard.png",
+    "href": "wiki/materials/vita",
+    "count": 4
+   },
+   "rows": [
+    [
+     null,
+     {
+      "name": "Terra Block",
+      "icon": "img/icons/terra_block.png",
+      "href": "wiki/materials/terra"
+     },
+     null
+    ],
+    [
+     {
+      "name": "Terra Block",
+      "icon": "img/icons/terra_block.png",
+      "href": "wiki/materials/terra"
+     },
+     {
+      "name": "Flint",
+      "icon": "img/vanilla/flint.png"
+     },
+     {
+      "name": "Terra Block",
+      "icon": "img/icons/terra_block.png",
+      "href": "wiki/materials/terra"
+     }
+    ],
+    [
+     null,
+     {
+      "name": "Terra Block",
+      "icon": "img/icons/terra_block.png",
+      "href": "wiki/materials/terra"
      },
      null
     ]
