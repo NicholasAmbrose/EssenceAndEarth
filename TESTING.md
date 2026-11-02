@@ -4,6 +4,16 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Shorter farmland (v0.18.2)
+
+The farmland is now 15/16 of a block tall, like vanilla farmland, using a custom model instead of `geometry.full_block`. Crops now sit one pixel lower to meet it.
+
+- [ ] **Check this first:** all five farmlands load, with nothing stretched or missing. The top sits 1/16 lower than a full block next to a normal block, and the selection box matches it.
+- [ ] A full block next to the farmland shows no hole along that top pixel, and blocks under and beside it don't show through.
+- [ ] You can walk and jump across a field without catching on the edge, and stand on it without sinking in.
+- [ ] Crops still plant, grow, ripen and break on every tier, and touch the soil with no gap or overlap. Check them on vanilla farmland too.
+- [ ] Essence farmland next to vanilla farmland is the same height.
+
 ## Dewy Loam farmland texture (v0.18.1)
 
 - [ ] **Check this first:** all five farmlands show the new mottled soil, with the top texture on top and the side texture on the sides.

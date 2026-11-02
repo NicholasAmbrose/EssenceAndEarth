@@ -424,7 +424,8 @@ function loamBlobs(x, y, period, seed) {
 }
 const loamField = (x, y) => 0.5 * loamBlobs(x, y, 4, 94) + 0.3 * loamBlobs(x, y, 8, 95) + 0.2 * loamCell(x >> 1, y >> 1, 96);
 
-// Returns the top and side of a farmland block as 16x16 RGBA pixel buffers.
+// Returns the top and side of a farmland block as 16x16 RGBA pixel buffers. The side is drawn 16 tall, but the block is
+// 15/16 high (like vanilla farmland), so only its top 15 rows ever show.
 function dewyFarmland(color) {
   const c = hex(color), base = shade(soilTint(c), -0.1);
   const tones = [shade(base, -0.3), shade(base, -0.14), base, shade(base, 0.12), shade(base, 0.24)];
@@ -760,6 +761,29 @@ cfg.tiers.forEach((t, i) => {
 // Essence farmland: never dries out, and gives ripe crops a chance of extras (see scripts/main.js).
 // Vanilla farmland has no item to craft with, so 1 dirt + 1 tier essence stands in for it. Essence used on placed farmland converts it too.
 const FARMLANDS = cfg.tiers.map((t) => `${NS}:${t.id}_farmland`);
+// Like vanilla farmland, it is 15/16 of a block tall: a 16x15x16 box whose sides show the top 15 rows of the side texture.
+const FARMLAND_BOX = { origin: [-8, 0, -8], size: [16, 15, 16] };
+write(path.join(RP, "models", "blocks", "farmland.geo.json"), {
+  format_version: "1.21.0",
+  "minecraft:geometry": [{
+    description: { identifier: `geometry.${NS}_farmland`, texture_width: 16, texture_height: 16 },
+    bones: [{
+      name: "farmland",
+      pivot: [0, 0, 0],
+      cubes: [{
+        ...FARMLAND_BOX,
+        uv: {
+          north: { uv: [0, 0], uv_size: [16, 15] },
+          south: { uv: [0, 0], uv_size: [16, 15] },
+          east: { uv: [0, 0], uv_size: [16, 15] },
+          west: { uv: [0, 0], uv_size: [16, 15] },
+          up: { uv: [0, 0], uv_size: [16, 16], material_instance: "up" },
+          down: { uv: [0, 0], uv_size: [16, 16] },
+        },
+      }],
+    }],
+  }],
+});
 cfg.tiers.forEach((t, i) => {
   const id = `${t.id}_farmland`;
   const soil = dewyFarmland(t.color);
@@ -769,9 +793,12 @@ cfg.tiers.forEach((t, i) => {
   }
   block(id, "gravel", { menu_category: { category: "nature" } }, {
     "minecraft:display_name": `${title(t.id)} Farmland`,
-    "minecraft:geometry": "minecraft:geometry.full_block",
+    "minecraft:geometry": `geometry.${NS}_farmland`,
+    "minecraft:collision_box": FARMLAND_BOX,
+    "minecraft:selection_box": FARMLAND_BOX,
     "minecraft:destructible_by_mining": { seconds_to_destroy: 0.6 },
-    "minecraft:material_instances": { "*": { texture: `${NS}_${id}_side` }, up: { texture: `${NS}_${id}_top` } },
+    "minecraft:light_dampening": 0,
+    "minecraft:material_instances": { "*": { texture: `${NS}_${id}_side`, render_method: "alpha_test" }, up: { texture: `${NS}_${id}_top`, render_method: "alpha_test" } },
     "minecraft:loot": loot(id, [drop(`${NS}:${id}`)]),
   });
   recipe(id, "shapeless", {
@@ -1392,6 +1419,7 @@ write(path.join(BP, "entities", "harvester_screen.json"), {
 });
 
 // Crop geometry: four planes in a # shape, like vanilla wheat. One face each: alpha_test draws both sides, and a second face would z-fight.
+// They start one pixel below the block, to meet the top of the 15/16 tall farmland underneath.
 const plane = (origin, size, faces) => ({ origin, size, uv: Object.fromEntries(faces.map((f) => [f, { uv: [0, 0], uv_size: [16, 16] }])) });
 write(path.join(RP, "models", "blocks", "crop.geo.json"), {
   format_version: "1.21.0",
@@ -1401,10 +1429,10 @@ write(path.join(RP, "models", "blocks", "crop.geo.json"), {
       name: "crop",
       pivot: [0, 0, 0],
       cubes: [
-        plane([-8, 0, -4], [16, 16, 0], ["north"]),
-        plane([-8, 0, 4], [16, 16, 0], ["north"]),
-        plane([-4, 0, -8], [0, 16, 16], ["east"]),
-        plane([4, 0, -8], [0, 16, 16], ["east"]),
+        plane([-8, -1, -4], [16, 16, 0], ["north"]),
+        plane([-8, -1, 4], [16, 16, 0], ["north"]),
+        plane([-4, -1, -8], [0, 16, 16], ["east"]),
+        plane([4, -1, -8], [0, 16, 16], ["east"]),
       ],
     }],
   }],
