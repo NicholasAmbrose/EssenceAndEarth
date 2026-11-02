@@ -677,7 +677,16 @@ const drop = (name, min = 1, max = min, chance) => ({
   entries: [{ type: "item", name, weight: 1, ...(max > 1 && { functions: [{ function: "set_count", count: { min, max } }] }) }],
 });
 
+// Every crafting recipe in Deepcore's format, so its Network Crafter can make them (see scripts/main.js).
+const DEEPCORE_RECIPES = [];
+function deepcoreRecipe({ pattern, key, ingredients, result }) {
+  const { item: o, count: n = 1 } = result;
+  if (pattern) return { o, n, s: pattern, k: Object.fromEntries(Object.entries(key).map(([ch, v]) => [ch, v.item])) };
+  return { o, n, i: ingredients.flatMap((v) => Array(v.count ?? 1).fill(v.item)) }; // Deepcore lists one entry per grid cell
+}
+
 function recipe(id, type, body, unlock) {
+  DEEPCORE_RECIPES.push(deepcoreRecipe(body));
   write(path.join(BP, "recipes", `${id}.json`), {
     format_version: "1.20.10",
     [`minecraft:recipe_${type}`]: { description: { identifier: `${NS}:${id}` }, tags: ["crafting_table"], unlock: [{ item: unlock }], ...body },
@@ -1256,6 +1265,10 @@ write(path.join(RP, "texts", "languages.json"), ["en_US"]);
 const icon = png(128, scale(render(withSparkles(GEM, 4), cfg.tiers[0].color), 8));
 write(path.join(BP, "pack_icon.png"), icon);
 write(path.join(RP, "pack_icon.png"), icon);
+
+// Filled in here because the other placeholders go in before any recipes exist.
+const mainScript = path.join(BP, "scripts", "main.js");
+write(mainScript, fs.readFileSync(mainScript, "utf8").replaceAll("__DEEPCORE_RECIPES__", JSON.stringify(DEEPCORE_RECIPES)));
 
 // ---------- package ----------
 

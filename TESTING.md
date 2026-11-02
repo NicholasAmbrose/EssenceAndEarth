@@ -4,6 +4,15 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
+## Deepcore Network Crafter
+
+Needs Deepcore to handle `dq:add_recipe` (github.com/baseballr/Deepcore/issues/7).
+
+- [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed.
+- [ ] With an Assembler on the network, an Essence & Earth item shows in the Network Crafter and can be ordered.
+- [ ] An order that needs a higher tier essence makes it from lower tier essence in storage (4 into 1).
+- [ ] Recipes still show after a server restart.
+
 ## Tool textures (v0.15.1)
 
 - [ ] The sickle and hoe show their new outlined look, in the inventory and held in the hand.
