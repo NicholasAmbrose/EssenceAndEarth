@@ -4,9 +4,9 @@ Everything below is built but not yet checked in-game. Tick items off as they pa
 
 Before starting: upload the latest `addon/*.mcaddon` to the server, and use creative mode or `/give` for anything expensive.
 
-## Deepcore Geo Scanner
+## Deepcore Geo Scanner (v0.16.0)
 
-Needs Deepcore to handle `dq:add_ore` (github.com/baseballr/Deepcore/issues/8).
+Needs Deepcore v4.61.0 or newer.
 
 - [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed.
 - [ ] A scan lists Essence and Vita, with stone and deepslate counted together.
@@ -14,9 +14,9 @@ Needs Deepcore to handle `dq:add_ore` (github.com/baseballr/Deepcore/issues/8).
 - [ ] The hologram shows each ore in its colour.
 - [ ] Ores still show after a server restart.
 
-## Deepcore Network Crafter
+## Deepcore Network Crafter (v0.16.0)
 
-Needs Deepcore to handle `dq:add_recipe` (github.com/baseballr/Deepcore/issues/7).
+Needs Deepcore v4.61.0 or newer.
 
 - [ ] **Check this first:** the add-on loads with no script errors, with and without Deepcore installed.
 - [ ] With an Assembler on the network, an Essence & Earth item shows in the Network Crafter and can be ordered.
